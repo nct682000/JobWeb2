@@ -30,10 +30,9 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      <a class="nav-link" href="/FindJobApp/login/">Đăng nhập <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/FindJobApp/register/">Đăng ký <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/FindJobApp/user">Tài khoản <span class="sr-only">(current)</span></a>
   </div>
 </nav>
 </div>

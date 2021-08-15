@@ -49,4 +49,22 @@ public class Index {
         return "index";
     }
     
+    @RequestMapping("/login")
+    public String login(Model model) {
+       
+        return "login";
+    }
+    
+    @RequestMapping("/register")
+    public String register(Model model) {
+       
+        return "register";
+    }
+    
+    @RequestMapping("/user")
+    public String user(Model model) {
+       
+        return "user";
+    }
+    
 }

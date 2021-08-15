@@ -29,6 +29,21 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
     
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
+    </definition>
+    
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
+    </definition>
+    
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title" value="Trang cá nhân" />
+        <put-attribute name="content" value="/WEB-INF/jsp/user.jsp" />
+    </definition>
+    
     
 </tiles-definitions>
 
