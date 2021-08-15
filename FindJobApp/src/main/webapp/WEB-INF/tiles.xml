@@ -21,12 +21,12 @@ and open the template in the editor.
     
      <definition name="admin" extends="baseLayout">
         <put-attribute name="title" value="Admin" />
-        <put-attribute name="content" value="/WEB-INF/jsp/admintest.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
     </definition>
     
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang Chủ" />
-        <put-attribute name="content" value="/WEB-INF/jsp/clienttest.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
     </definition>
     
     

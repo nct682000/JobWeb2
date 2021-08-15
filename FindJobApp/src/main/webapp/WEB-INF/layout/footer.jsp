@@ -6,6 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="alert alert-primary container">
+<div class="alert alert-primary">
   <strong>@</strong>.......
 </div>
