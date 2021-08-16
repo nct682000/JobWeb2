@@ -33,6 +33,7 @@ public class Index {
     @ModelAttribute
     public void commonAttr(Model model){
         model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("provinces", this.provinceService.getProvinces());
     }
     
     @RequestMapping("/")
@@ -44,7 +45,6 @@ public class Index {
     @RequestMapping("/home")
     public String index(Model model) {
        model.addAttribute("recruitments", this.recruitmentService.getRecruitments(""));
-       model.addAttribute("provinces", this.provinceService.getProvinces());
         
         return "index";
     }

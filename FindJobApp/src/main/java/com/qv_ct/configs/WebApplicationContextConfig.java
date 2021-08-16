@@ -5,10 +5,13 @@
  */
 package com.qv_ct.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -50,5 +53,25 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+    }
+    
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver
+            = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        
+        return resolver;
+    }
+    
+    @Bean
+    public Cloudinary cloudinary(){
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "nct682000",
+                "api_key", "163411336543774",
+                "api_secret", "-Ph9MO7WY4PIQeqf01Yj5xUAyTY",
+                "secure", true
+        ));
+        return c;
     }
 }

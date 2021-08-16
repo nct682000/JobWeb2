@@ -18,8 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -71,6 +73,9 @@ public class User implements Serializable{
     
     @OneToMany(mappedBy = "user")
     private Set<Interaction> interactions;
+    
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
