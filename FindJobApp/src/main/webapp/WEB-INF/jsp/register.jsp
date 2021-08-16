@@ -4,6 +4,7 @@
     Author     : nct68
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,11 +17,11 @@
         <title></title>
     </head>
     <body>
-        
+       
         <div col-md-6>
             <div class="card container w-50 p3">
             <article class="card-body">
-                <h2 class="card-title text-center mb-4 mt-1">Đăng ký</h2>
+                <h2 class="card-title text-center mb-4 mt-1 text-info font-weight-bold">Tạo tài khoản mới</h2>
                 <hr>
                 <p class="text-success text-center">Thông báo........</p>
                 <form>

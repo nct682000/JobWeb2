@@ -20,7 +20,7 @@
         <div col-md-6>
             <div class="card container w-50 p3">
             <article class="card-body">
-                <h2 class="card-title text-center mb-4 mt-1">Đăng nhập</h2>
+                <h2 class="card-title text-center mb-4 mt-1 text-info font-weight-bold">Đăng nhập</h2>
                 <hr>
                 <h5 class="text-success text-center my-4">Thông báo........</h5>
                 <form>

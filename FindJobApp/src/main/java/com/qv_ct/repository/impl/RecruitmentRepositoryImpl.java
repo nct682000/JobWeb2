@@ -13,11 +13,11 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -31,7 +31,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     
     @Override
     public List<Recruitment> getRecruitments(String kw) {
-        Session session = this.sessionFactory.getObject().openSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);

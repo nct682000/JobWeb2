@@ -16,7 +16,7 @@
         <h1 class="text-center text-primary">My Job Website</h1>
         
         <div class="row m-4">
-            <div class="col-xl-5 col-md-12 card">
+            <div class="col-xl-5 col-md-12 card bg-light">
                 <div class="container">
                     <h2 class="text-info">Tìm kiếm</h2>
                     <form>
@@ -54,8 +54,8 @@
                 </div>
             </div>
             
-            <div id="carouselExampleSlidesOnly" class="carousel slide col-xl-7 col-md-12 card" data-ride="carousel">
-                <div class="carousel-inner">
+            <div id="carouselExampleSlidesOnly" class="carousel slide col-xl-7 col-md-12" data-ride="carousel">
+                <div class="carousel-inner" >
                   <div class="carousel-item active">
                       <img class="d-block w-100" src="<c:url value="/images/carousel1.png" />" alt="carousel1" style="height: 320px" >
                   </div>
@@ -73,7 +73,7 @@
             <c:forEach var="r" items="${recruitments}">
 
                 <div class="col-xl-6 col-md-12 mt-4">
-                    <div class="card overflow-hidden">
+                    <div class="card overflow-hidden bg-light">
                       <div class="card-content">
                         <div class="card-body cleartfix">
                           <div class="media align-items-stretch">
@@ -87,7 +87,7 @@
                               <div class="text-success font-weight-bold">
                                   $Lương: đ${r.salaryFrom} - đ${r.salaryTo}
                               </div>
-                                  <div>${r.recruiter.location.province.name}</div>s
+                                  <div>${r.recruiter.location.province.name}</div>
                             </div>
                             <div class="font-weight-bold text-secondary">
                               ${r.updatedDate}
