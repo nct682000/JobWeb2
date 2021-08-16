@@ -37,12 +37,6 @@ public class Index {
     }
     
     @RequestMapping("/")
-    public String index0(Model model) {
-       
-        return "index";
-    }
-    
-    @RequestMapping("/home")
     public String index(Model model) {
        model.addAttribute("recruitments", this.recruitmentService.getRecruitments(""));
         

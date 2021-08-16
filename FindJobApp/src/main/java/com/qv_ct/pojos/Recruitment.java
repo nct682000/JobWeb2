@@ -21,7 +21,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import org.hibernate.engine.spi.IdentifierValue;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -33,12 +37,15 @@ public class Recruitment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotEmpty(message = "{recruitment.message.emptyError}")
     private String title;
     @Column(name = "salary_from")
     private BigDecimal salaryFrom;
     @Column(name = "salary_to")
     private BigDecimal salaryTo;
+    @NotNull(message = "{recruitment.form.nullError}")
     private Form form;
+    @NotEmpty(message = "{recruitment.message.emptyError}")
     private String description;
     @Column(name = "created_date")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -82,6 +89,9 @@ public class Recruitment implements Serializable{
             }
     )
     private Set<Benefit> benefits;
+    
+    @Transient
+    private MultipartFile file;
 
     public Recruitment(String title, Form form, Career career, User recruiter) {
         this.title = title;
@@ -289,5 +299,19 @@ public class Recruitment implements Serializable{
      */
     public void setBenefits(Set<Benefit> benefits) {
         this.benefits = benefits;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }

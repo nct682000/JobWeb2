@@ -176,7 +176,7 @@
                     </div> 
                     
                     <!-- link login -->
-                    <p class="text-center"><a href="/FindJobApp/login" class="btn btn-lg">Đăng nhập</a></p>
+                    <p class="text-center"><a href="/FindJobApp/login" class="btn btn-lg text-primary">Trở về đăng nhập</a></p>
                 </form>
             </article>
             </div>

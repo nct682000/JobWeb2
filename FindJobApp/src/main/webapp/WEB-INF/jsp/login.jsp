@@ -61,7 +61,7 @@
                 </div>
                 
                 <!-- forgot password -->
-                <p class="text-center"><a href="#" class="btn btn-lg">Quên mật khẩu?</a></p>
+                <p class="text-center"><a href="#" class="btn btn-lg text-secondary">Quên mật khẩu?</a></p>
                 
                 <!-- link register -->
                 <p class="text-center"><a href="/FindJobApp/register/" class="btn btn-lg text-info font-weight-bold">Đăng ký mới</a></p>
