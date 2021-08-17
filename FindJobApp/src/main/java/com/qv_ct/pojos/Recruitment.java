@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -41,12 +42,13 @@ public class Recruitment implements Serializable{
     @Size(min = 5, max = 100, message = "{recruitment.title.sizeError}")
     private String title;
     @Column(name = "salary_from")
+    @Min(value = 1000000, message = "{recruitment.salary.minError}")
     private BigDecimal salaryFrom;
     @Column(name = "salary_to")
+    @Min(value = 1000000, message = "{recruitment.salary.minError}")
     private BigDecimal salaryTo;
     @NotNull(message = "{recruitment.form.nullError}")
     private Form form;
-    @NotEmpty(message = "{recruitment.message.emptyError}")
     private String description;
     @Column(name = "created_date")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -58,6 +60,7 @@ public class Recruitment implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "career_id")
+    @NotNull(message = "{recruitment.career.nullError}")
     private Career career;
     
     @ManyToOne

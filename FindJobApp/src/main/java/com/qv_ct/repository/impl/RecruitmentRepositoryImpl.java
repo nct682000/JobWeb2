@@ -59,7 +59,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
             
             return true;
         }catch (Exception ex){
-            System.err.println("==Add Recruitment Error==" + ex.getMessage());
+            System.err.println("-- Add Recruitment Error --" + ex.getMessage());
             ex.printStackTrace();
         }
         return false;

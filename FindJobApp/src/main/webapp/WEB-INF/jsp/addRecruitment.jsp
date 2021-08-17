@@ -24,11 +24,11 @@
             <div class="alert alert-danger">${errMsg}</div>
         </c:if>
 
-            <div class="row justify-content-center">
+<!--            <div class="row justify-content-center">
                 <div class="col-md-4 col-xl-6">
-                    <form:errors path="*" cssClass="alert alert-warning text-danger text-center" element="div" />
+                    <%--<form:errors path="*" cssClass="alert alert-warning text-danger text-center" element="div" />--%>
                 </div>
-            </div>
+            </div>-->
 
         <div class="row">
             <div class="col-md-5 col-xl-4"></div>
@@ -59,13 +59,14 @@
         <div class="form-group">
             <label for="salaryFrom" >Lương từ ...</label>
             <form:input type="number" id="salaryFrom" path="salaryFrom" cssClass="form-control" />
+            <form:errors path="salaryFrom" cssClass="text-danger" element="div" />
         </div>
 
         <!-- input salary to -->
         <div class="form-group">
             <label for="salaryTO" >Lương lên đến ...</label>
             <form:input type="number" id="salaryTO" path="salaryTo" cssClass="form-control" />
-            <form:errors path="salaryTo" cssClass="alert alert-warning" element="div" />
+            <form:errors path="salaryTo" cssClass="text-danger" element="div" />
         </div>
 
         <!-- select form -->
@@ -102,6 +103,26 @@
             <form:textarea id="description" path="description" cssClass="form-control"></form:textarea>
             <form:errors path="description" cssClass="text-danger" element="div" />
         </div>
+        
+         <!-- select form -->
+        <div class="form-group">
+            <label >Nhãn dán</label>
+            <select class="form-control" >
+                <option value="">--Chọn nhãn dán--</option>
+                <c:forEach var="t" items="${tags}">
+                <option value="${t.id}">${t.content}</option>
+                </c:forEach>
+            </select>
+        </div>
+        
+        <!-- input title -->
+        <%--<form:form method="post" action="${action}" modelAttribute="tag"--%>
+           <!--enctype="multipart/form-data" >-->
+<!--            <div class="form-group">
+                <label for="tag" >Nhãn</label>
+                <%--<form:input type="text" id="content" path="content" cssClass="form-control" />--%>
+            </div>-->
+        <%--</form:form>--%>
 
         <!-- Choose Image -->
     <!--    <div class="form-group">

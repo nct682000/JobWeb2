@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Tag implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(min = 2, max = 20, message = "{tag.content.sizeError}")
     private String content;
     
     @ManyToMany(mappedBy = "tags")

@@ -8,7 +8,9 @@ package com.qv_ct.controllers.client;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.Tag;
 import com.qv_ct.service.RecruitmentService;
+import com.qv_ct.service.TagService;
 import com.qv_ct.validator.RecruitmentSalaryFromValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class RecruitmentController {
     private WebAppValidator recruitmentValidator;
     @Autowired
     private RecruitmentService recruitmentService;
+    @Autowired
+    private TagService tagService;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -48,7 +52,8 @@ public class RecruitmentController {
     @GetMapping("/add")
     public String list(Model model){
         model.addAttribute("recruitment", new Recruitment());
-        
+        model.addAttribute("tags", this.tagService.getTags());
+//        model.addAttribute("tag", new Tag());
         return "addRecruitment";
     }
     
@@ -65,5 +70,19 @@ public class RecruitmentController {
         
         return "addRecruitment";
     }
+    
+//    @PostMapping("/add")
+//    public String addTag(Model model, @ModelAttribute(value = "tag")
+//                   @Valid Tag tag,
+//                   BindingResult result){
+//        if(!result.hasErrors()){
+//          if(this.tagService.addOrUpdate(tag) == true)@
+//              return "redirect:/add";
+//          else
+//              model.addAttribute("errMsg", "Something wrong!");
+//       }
+//
+//       return "addRecruitment";
+//    }
     
 }

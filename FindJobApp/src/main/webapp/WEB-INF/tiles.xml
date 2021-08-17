@@ -49,6 +49,11 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
     </definition>
     
+    <definition name="addTag" extends="baseLayout">
+        <put-attribute name="title" value="Thêm nhãn dán" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
+    </definition>
+    
     
 </tiles-definitions>
 

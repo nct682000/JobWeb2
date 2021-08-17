@@ -27,7 +27,7 @@ public class CareerRepositoryImpl implements CareerRepository{
     @Override
     @Transactional
     public List<Career> getCareers() {
-        Session s = sessionFactory.getObject().openSession();
+        Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Career");
         
         return q.getResultList();
