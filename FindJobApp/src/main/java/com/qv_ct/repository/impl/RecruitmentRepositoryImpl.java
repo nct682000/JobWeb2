@@ -30,7 +30,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public List<Recruitment> getRecruitments(String kw) {
+    public List<Recruitment> getRecruitments(String kw, int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
@@ -44,7 +44,33 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         
         Query q = session.createQuery(query);
         
+        int max = 4;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addOrUpdate(Recruitment r) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try{
+            session.save(r);
+            
+            return true;
+        }catch (Exception ex){
+            System.err.println("==Add Recruitment Error==" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public long countRecruitment() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("Select Count(*) From Recruitment");
+        
+        return Long.parseLong(q.getSingleResult().toString());
     }
     
 }

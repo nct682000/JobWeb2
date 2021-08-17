@@ -5,15 +5,13 @@
  */
 package com.qv_ct.service;
 
-import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.User;
 import java.util.List;
 
 /**
  *
  * @author nct68
  */
-public interface RecruitmentService {
-    List<Recruitment> getRecruitments(String kw, int page);
-    boolean addOrUpdate(Recruitment r);
-    long countRecruitment();
+public interface UserService {
+    List<User> getUsers();
 }

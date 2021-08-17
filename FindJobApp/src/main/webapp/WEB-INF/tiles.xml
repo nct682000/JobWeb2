@@ -44,9 +44,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/user.jsp" />
     </definition>
     
-    <definition name="uploadtest" extends="baseLayout">
-        <put-attribute name="title" value="Test" />
-        <put-attribute name="content" value="/WEB-INF/jsp/uploadtest.jsp" />
+    <definition name="addRecruitment" extends="baseLayout">
+        <put-attribute name="title" value="Đăng tin tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
     </definition>
     
     

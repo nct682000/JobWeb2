@@ -8,6 +8,9 @@ package com.qv_ct.controllers.client;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.service.RecruitmentService;
+import com.qv_ct.validator.RecruitmentSalaryFromValidator;
+import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
@@ -18,7 +21,9 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,33 +33,37 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class RecruitmentController {
+//    @Autowired
+//    private Cloudinary cloudinary;
     @Autowired
-    private Cloudinary cloudinary;
+    private WebAppValidator recruitmentValidator;
+    @Autowired
+    private RecruitmentService recruitmentService;
     
-    @GetMapping("/uploadtest")
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.setValidator(recruitmentValidator);
+    }
+    
+    @GetMapping("/add")
     public String list(Model model){
         model.addAttribute("recruitment", new Recruitment());
         
-        return "uploadtest";
+        return "addRecruitment";
     }
     
-    @PostMapping("/uploadtest")
-    public String add(@ModelAttribute(value = "recruitment")
+    @PostMapping("/add")
+    public String add(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result){
         if(!result.hasErrors()){
-            try {
-                Map r = this.cloudinary.uploader().upload(recruitment.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-                String img = (String) r.get("secure_url");
-                
-                return "redirect:/";
-            } catch (IOException ex) {
-                System.err.println("-----Add Error-----" + ex.getMessage());
-            }
+           if(this.recruitmentService.addOrUpdate(recruitment) == true)
+               return "redirect:/";
+           else
+               model.addAttribute("errMsg", "Something wrong!");
         }
         
-        return "uploadtest";
+        return "addRecruitment";
     }
     
 }

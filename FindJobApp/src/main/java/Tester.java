@@ -13,7 +13,7 @@ import com.qv_ct.pojos.Form;
  */
 public class Tester{
     public static void main(String[] args) {
-        String f = Form.INTERN.toString();
+        Form f = Form.INTERN;
         System.out.println(f);
     }
 }

@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.qv_ct.service;
+package com.qv_ct.repository;
 
-import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.User;
 import java.util.List;
 
 /**
  *
  * @author nct68
  */
-public interface RecruitmentService {
-    List<Recruitment> getRecruitments(String kw, int page);
-    boolean addOrUpdate(Recruitment r);
-    long countRecruitment();
+public interface UserRepository {
+    List<User> getUsers();
 }

@@ -18,7 +18,7 @@
     <body>
         
         <div col-md-6>
-            <div class="card container w-50 p3">
+            <div class="card container w-50 p-3">
             <article class="card-body">
                 
                 <!-- Text -->

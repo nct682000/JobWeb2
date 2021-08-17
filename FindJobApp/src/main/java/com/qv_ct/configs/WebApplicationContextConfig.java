@@ -7,11 +7,19 @@ package com.qv_ct.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.qv_ct.formatter.CareerFormatter;
+import com.qv_ct.formatter.RecruiterFormatter;
+import com.qv_ct.validator.RecruitmentSalaryFromValidator;
+import com.qv_ct.validator.WebAppValidator;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.Formatter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -35,6 +43,7 @@ import org.springframework.web.servlet.view.JstlView;
     "com.qv_ct.controllers.client",
     "com.qv_ct.repository",
     "com.qv_ct.service",
+    "com.qv_ct.validator",
 })
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
@@ -50,6 +59,12 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resource.setPrefix("/WEB-INF/jsp/");        
         resource.setSuffix(".jsp");
         return resource;
+    }
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry){
+        registry.addFormatter(new CareerFormatter());
+        registry.addFormatter(new RecruiterFormatter());
     }
     
     @Override
@@ -91,6 +106,17 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
+    
+    @Bean
+    public WebAppValidator recruitmentValidator(){
+        Set<Validator> springValidators =new HashSet<>();
+        springValidators.add(new RecruitmentSalaryFromValidator());
+        
+        WebAppValidator v =new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
 
     @Bean
     public MessageSource messageSource() {
@@ -100,4 +126,5 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         // resource.setBasenames("messages1", "messages2");
         return resource;
     }
+    
 }
