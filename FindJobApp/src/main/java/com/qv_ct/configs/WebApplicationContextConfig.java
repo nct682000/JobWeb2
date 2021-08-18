@@ -9,6 +9,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.formatter.CareerFormatter;
 import com.qv_ct.formatter.RecruiterFormatter;
+import com.qv_ct.formatter.RecruitmentFormatter;
 import com.qv_ct.validator.RecruitmentSalaryFromValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.util.HashSet;
@@ -18,7 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
@@ -65,6 +65,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new CareerFormatter());
         registry.addFormatter(new RecruiterFormatter());
+        registry.addFormatter(new RecruitmentFormatter());
     }
     
     @Override

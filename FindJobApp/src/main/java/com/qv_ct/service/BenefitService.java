@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.qv_ct.repository;
+package com.qv_ct.service;
 
-import com.qv_ct.pojos.User;
+import com.qv_ct.pojos.Benefit;
 import java.util.List;
 
 /**
  *
  * @author nct68
  */
-public interface UserRepository {
-    List<User> getUsers();
-    List<User> getCadidates();
-    List<User> getRecruiters();
+public interface BenefitService {
+    List<Benefit> getBenefits();
+    boolean addOrUpdate(Benefit b);
 }

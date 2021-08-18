@@ -5,7 +5,7 @@
  */
 package com.qv_ct.formatter;
 
-import com.qv_ct.pojos.User;
+import com.qv_ct.pojos.Recruitment;
 import java.text.ParseException;
 import java.util.Locale;
 import org.springframework.format.Formatter;
@@ -14,19 +14,19 @@ import org.springframework.format.Formatter;
  *
  * @author nct68
  */
-public class RecruiterFormatter implements Formatter<User>{
+public class RecruitmentFormatter implements Formatter<Recruitment>{
 
     @Override
-    public String print(User u, Locale locale) {
-        return String.valueOf(u.getId());
+    public String print(Recruitment r, Locale locale) {
+        return String.valueOf(r.getId());
     }
 
     @Override
-    public User parse(String recruiterId, Locale locale) throws ParseException {
-        User u = new User();
-        u.setId(Integer.parseInt(recruiterId));
+    public Recruitment parse(String rId, Locale locale) throws ParseException {
+        Recruitment r = new Recruitment();
+        r.setId(Integer.parseInt(rId));
         
-        return u;
+        return r;
     }
     
 }

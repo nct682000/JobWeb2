@@ -17,6 +17,12 @@
         <!-- Page name -->
         <h1 class="text-center text-primary">My Job Website</h1>
         
+        <a href="/FindJobApp/add/recruitment">Thêm tin</a>
+        <br>
+        <a href="/FindJobApp/add/tag">Thêm nhãn & quyền lợi</a>
+         <br>
+        <a href="/FindJobApp/add/apply">Ứng tuyển</a>
+        
         <div class="row m-4">
             
             <!-- Find Job card -->

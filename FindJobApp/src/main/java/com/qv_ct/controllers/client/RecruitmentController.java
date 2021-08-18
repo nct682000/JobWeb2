@@ -49,7 +49,7 @@ public class RecruitmentController {
         binder.setValidator(recruitmentValidator);
     }
     
-    @GetMapping("/add")
+    @GetMapping("/add/recruitment")
     public String list(Model model){
         model.addAttribute("recruitment", new Recruitment());
         model.addAttribute("tags", this.tagService.getTags());
@@ -57,7 +57,7 @@ public class RecruitmentController {
         return "addRecruitment";
     }
     
-    @PostMapping("/add")
+    @PostMapping("/add/recruitment")
     public String add(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result){

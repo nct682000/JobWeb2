@@ -19,8 +19,8 @@ import org.springframework.format.Formatter;
 public class CareerFormatter implements Formatter<Career>{
 
     @Override
-    public String print(Career t, Locale locale) {
-        return String.valueOf(t.getId());
+    public String print(Career c, Locale locale) {
+        return String.valueOf(c.getId());
     }
 
     @Override

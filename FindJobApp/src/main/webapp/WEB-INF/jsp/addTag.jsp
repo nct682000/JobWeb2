@@ -14,21 +14,58 @@
 
 <h1>THÊM NHÃN DÁN</h1>
 
-<c:url value="/addtag" var="action" />
+<c:url value="/add/tag" var="action" />
 
-<form:form method="post" action="${action}" modelAttribute="tag"
-           enctype="multipart/form-data">
-    
-      <!-- input title -->
-        <div class="form-group">
-            <label for="title" >Nhãn</label>
-            <form:input type="text" id="content" path="content" cssClass="form-control" />
-            <form:errors path="content" cssClass="text-danger" element="div" />
-        </div>
+<div class="row">
+    <div class="col-md-6 col-xl-6 ">
         
-        <!-- Submit button -->
-        <div class="form-group">
-            <input type="submit" value="Thêm nhãn" class="btn btn-info" />
-        </div>
-            
-</form:form>
+        <!-- Form tag -->
+        <form:form method="post" action="${action}" modelAttribute="tag"
+                   enctype="multipart/form-data">
+
+            <!-- input title -->
+            <div class="form-group">
+                <label for="content" >Nhãn</label>
+                <form:input type="text" id="content" path="content" cssClass="form-control" />
+                <form:errors path="content" cssClass="text-danger" element="div" />
+            </div>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <input type="submit" value="Thêm nhãn" class="btn btn-info" />
+            </div>
+
+        </form:form>
+
+            <c:forEach var="tags" items="${tags}" >
+                <div>${tags.content}</div>
+            </c:forEach>
+        
+    </div>
+    
+    <div class="col-md-6 col-xl-6 ">
+        <!-- Form tag -->
+        <%--<form:form method="post" action="${action}" modelAttribute="benefit"--%>
+                   enctype="multipart/form-data">
+
+            <!-- input title -->
+            <div class="form-group">
+                <label for="name" >Quyền lợi</label>
+                <%--<form:input type="text" id="name" path="name" cssClass="form-control" />--%>
+                <%--<form:errors path="name" cssClass="text-danger" element="div" />--%>
+            </div>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <input type="submit" value="Thêm quyền lợi" class="btn btn-info" />
+            </div>
+
+        <%--</form:form>--%>
+
+            <c:forEach var="b" items="${benefits}" >
+                <div>${b.name}</div>
+            </c:forEach>
+    </div>
+</div>
+
+        

@@ -25,5 +25,15 @@ public class UserServiceImpl implements UserService{
     public List<User> getUsers() {
         return this.userRepository.getUsers();
     }
+
+    @Override
+    public List<User> getCadidates() {
+        return this.userRepository.getCadidates();
+    }
+
+    @Override
+    public List<User> getRecruiters() {
+        return this.userRepository.getRecruiters();
+    }
     
 }

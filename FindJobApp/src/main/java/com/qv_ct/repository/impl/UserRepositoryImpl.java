@@ -39,6 +39,22 @@ public class UserRepositoryImpl implements UserRepository{
 //        
 //        Query q = session.createQuery(query);
 
+        Query q = session.createQuery("From User");
+        
+        return q.getResultList();
+    }
+
+    @Override
+    public List<User> getCadidates() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From User U Where U.role = 2");
+        
+        return q.getResultList();
+    }
+
+    @Override
+    public List<User> getRecruiters() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From User U Where U.role = 1");
         
         return q.getResultList();

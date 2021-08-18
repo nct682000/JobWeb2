@@ -14,7 +14,7 @@
 
 <h1 class="text-center text-danger">ĐĂNG TIN TUYỂN DỤNG</h1>
 
-<c:url value="/add" var="action" />
+<c:url value="/add/recruitment" var="action" />
 
 <div class="container">
     <form:form method="post" action="${action}" modelAttribute="recruitment"

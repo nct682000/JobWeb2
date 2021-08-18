@@ -24,8 +24,8 @@ import org.springframework.stereotype.Service;
 public class RecruitmentServiceImpl implements RecruitmentService{
     @Autowired
     private RecruitmentRepository recruitmentRepository;
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
     
     @Override
     public List<Recruitment> getRecruitments(String kw, int page) {

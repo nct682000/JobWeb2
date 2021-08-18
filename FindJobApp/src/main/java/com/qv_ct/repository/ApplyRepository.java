@@ -5,15 +5,14 @@
  */
 package com.qv_ct.repository;
 
-import com.qv_ct.pojos.User;
+import com.qv_ct.pojos.Apply;
 import java.util.List;
 
 /**
  *
  * @author nct68
  */
-public interface UserRepository {
-    List<User> getUsers();
-    List<User> getCadidates();
-    List<User> getRecruiters();
+public interface ApplyRepository {
+    List<Apply> getApplies();
+    boolean addOrUpdate(Apply a);
 }
