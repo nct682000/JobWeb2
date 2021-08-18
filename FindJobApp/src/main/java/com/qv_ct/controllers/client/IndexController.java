@@ -61,10 +61,16 @@ public class IndexController {
         return "login";
     }
     
-    @RequestMapping("/register")
-    public String register(Model model) {
+    @RequestMapping("/register/candidate")
+    public String cRegister(Model model) {
        
-        return "register";
+        return "cRegister";
+    }
+    
+    @RequestMapping("/register/recruiter")
+    public String rRegister(Model model) {
+       
+        return "rRegister";
     }
     
     @RequestMapping("/user")

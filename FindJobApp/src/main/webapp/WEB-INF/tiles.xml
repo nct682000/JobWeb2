@@ -34,9 +34,14 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
     </definition>
     
-    <definition name="register" extends="baseLayout">
+    <definition name="cRegister" extends="baseLayout">
         <put-attribute name="title" value="Đăng ký" />
-        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cRegister.jsp" />
+    </definition>
+    
+    <definition name="rRegister" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
     </definition>
     
     <definition name="user" extends="baseLayout">

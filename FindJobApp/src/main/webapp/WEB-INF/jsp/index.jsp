@@ -104,7 +104,7 @@
                                 <div style="width:120px">Image</div>   <!-- image -->
                             </div>
                             <div class="media-body">
-                                <h5><a href="/FindJobApp/home/" target="target" class="text-dark">${r.title}</a></h5>   <!-- title -->
+                                <h5><a href="/FindJobApp/" class="text-dark">${r.title}</a></h5>   <!-- title -->
                               <div>${r.recruiter.companyName}</div>         <!-- company name -->
                               <div>Chức vụ: ${r.form.toString()}</div>            <!-- form -->
                               <div class="text-success font-weight-bold">
@@ -120,12 +120,14 @@
                       </div>
                     </div>
                 </div>
+                            
             </c:forEach>
+            
         </div>
         
         <ul class="pagination">
             <c:forEach begin="1" end="${Math.ceil(countR / 4)}" var="i">
-            <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
+                <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
             </c:forEach>
         </ul>
         

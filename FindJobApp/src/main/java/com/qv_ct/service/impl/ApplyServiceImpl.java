@@ -36,12 +36,13 @@ public class ApplyServiceImpl implements ApplyService{
     @Override
     public boolean addOrUpdate(Apply a) {
         try {
-            Map map = this.cloudinary.uploader().upload(a.getFile().getBytes(),
-                    ObjectUtils.asMap("resource_type", "auto"));
+            if(!a.getFile().isEmpty()){
+                Map map = this.cloudinary.uploader().upload(a.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+
+                a.setCv((String) map.get("secure_url"));
+            }
             
-            String file = (String) map.get("secure_url");
-            a.setCv(file);
-            System.out.println(a.getCv());
             return this.applyRepository.addOrUpdate(a);
 
         } catch (IOException ex) {

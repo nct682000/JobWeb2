@@ -39,7 +39,7 @@
           <!-- right item -->
           </ul>
             <a class="nav-link" href="/FindJobApp/login/">Đăng nhập <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="/FindJobApp/register/">Đăng ký <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/FindJobApp/register/candidate/">Đăng ký <span class="sr-only">(current)</span></a>
             <a class="nav-link" href="/FindJobApp/user">Tài khoản <span class="sr-only">(current)</span></a>
         </div>
     </nav>

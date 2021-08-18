@@ -46,7 +46,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                              </div>
-                        <input class="form-control" placeholder="********" type="password">
+                        <input class="form-control" placeholder="Mật khẩu" type="password">
                     </div> 
                 </div>
                 
@@ -64,7 +64,7 @@
                 <p class="text-center"><a href="#" class="btn btn-lg text-secondary">Quên mật khẩu?</a></p>
                 
                 <!-- link register -->
-                <p class="text-center"><a href="/FindJobApp/register/" class="btn btn-lg text-info font-weight-bold">Đăng ký mới</a></p>
+                <p class="text-center"><a href="/FindJobApp/register/candidate" class="btn btn-lg text-info font-weight-bold">Đăng ký mới</a></p>
                 </form>
             </article>
             </div>
