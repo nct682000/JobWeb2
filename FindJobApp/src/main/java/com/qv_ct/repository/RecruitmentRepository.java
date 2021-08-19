@@ -13,7 +13,8 @@ import java.util.List;
  * @author nct68
  */
 public interface RecruitmentRepository {
-    List<Recruitment> getRecruitments(String kw, int page);
+    List<Recruitment> getRecruitments(int page);
+    List<Recruitment> searchRecruitment(String kw);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
 }

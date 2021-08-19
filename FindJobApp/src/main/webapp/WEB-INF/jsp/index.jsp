@@ -29,8 +29,8 @@
             <div class="col-xl-5 col-md-12 card bg-light">
                 <div class="container">
                     <h2 class="text-info">Tìm kiếm</h2>
-                    <form>
-                        <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh" id="kw">
+                    <form action="/FindJobApp/recruitments/">
+                        <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh"  name="kw">
                         <div class="row m-2 mb-3">
                             
                             <!-- province search -->
@@ -42,7 +42,7 @@
                             </select>
                             
                             <!-- career search -->
-                            <select class="form-control col ml-2" aria-label=".form-select-sm example" id="career">
+                            <select class="form-control col ml-2" aria-label=".form-select-sm example">
                                 <option selected>Ngành nghề</option>
                                 <c:forEach var="c" items="${careers}">
                                 <option value="${c.id}">${c.name}</option>
@@ -56,8 +56,8 @@
                             <input type="number" class="form-control col mr-2 " placeholder="Nhập mức lương" id="salary">
                             
                             <!-- form search -->
-                            <select class="form-control col ml-2" aria-label=".form-select-sm example" id="form">
-                                <option selected>Chức vụ</option>
+                            <select class="form-control col ml-2" aria-label=".form-select-sm example">
+                                <option value="">--Chức vụ--</option>
                                 <option value="0">Thực tập sinh</option>
                                 <option value="1">Mới ra trường</option>
                                 <option value="2">Nhân viên</option>

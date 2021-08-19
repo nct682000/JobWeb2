@@ -38,8 +38,8 @@
                     <label for="recruiter" >Nhà tuyển dụng</label>
                     <form:select id="recruiter" path="recruiter" cssClass="form-control" >
                         <option value="">----</option>
-                        <c:forEach var="u" items="${users}">
-                        <option value="${u.id}">${u.companyName}</option>
+                        <c:forEach var="ur" items="${recruiters}">
+                        <option value="${ur.id}">${ur.companyName}</option>
                         </c:forEach>
                     </form:select>
                     <form:errors path="recruiter" cssClass="text-danger" element="div" />

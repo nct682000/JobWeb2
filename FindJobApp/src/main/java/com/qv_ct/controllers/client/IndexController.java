@@ -47,9 +47,8 @@ public class IndexController {
             @RequestParam(required = false) Map<String, String> params){
         
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        String kw = params.getOrDefault("kw", "");
         model.addAttribute("recruitments", 
-                this.recruitmentService.getRecruitments(kw, page));
+                this.recruitmentService.getRecruitments(page));
         model.addAttribute("countR", this.recruitmentService.countRecruitment());
         
         return "index";

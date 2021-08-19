@@ -28,8 +28,13 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 //    private Cloudinary cloudinary;
     
     @Override
-    public List<Recruitment> getRecruitments(String kw, int page) {
-        return this.recruitmentRepository.getRecruitments(kw, page);
+    public List<Recruitment> getRecruitments(int page) {
+        return this.recruitmentRepository.getRecruitments(page);
+    }
+    
+    @Override
+    public List<Recruitment> searchRecruitments(String kw) {
+        return this.recruitmentRepository.searchRecruitment(kw);
     }
 
     @Override

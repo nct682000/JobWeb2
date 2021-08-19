@@ -8,10 +8,10 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
 import java.util.List;
-import java.util.function.Predicate;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,23 +30,37 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public List<Recruitment> getRecruitments(String kw, int page) {
+    public List<Recruitment> getRecruitments(int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
+        
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
-        
-        if (!kw.isEmpty() && kw != null){
-            Predicate p = (Predicate) builder.like(root.get("title").as(String.class),
-                    String.format("%%%s%%", kw));
-        }
         
         Query q = session.createQuery(query);
         
         int max = 4;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
+        
+        return q.getResultList();
+    }
+    
+     @Override
+    public List<Recruitment> searchRecruitment(String kw) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        query = query.select(root);
+        
+
+        Predicate p = builder.like(root.get("title").as(String.class)
+                ,String.format("%%%s%%", kw));
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
         
         return q.getResultList();
     }

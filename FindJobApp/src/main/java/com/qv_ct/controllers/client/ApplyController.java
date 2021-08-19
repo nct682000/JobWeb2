@@ -37,7 +37,7 @@ public class ApplyController {
         model.addAttribute("applies", this.applyService.getApplies());
         model.addAttribute("apply", new Apply());
         model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.getRecruitments("", 1));
+        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments(""));
         
         return "addApply";
     }
@@ -48,7 +48,7 @@ public class ApplyController {
             BindingResult result){
         
         model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.getRecruitments("", 1));
+        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments(""));
         
         if(!result.hasErrors()){
            if(this.applyService.addOrUpdate(apply) == true)

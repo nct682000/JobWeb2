@@ -11,6 +11,7 @@ import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Tag;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.TagService;
+import com.qv_ct.service.UserService;
 import com.qv_ct.validator.RecruitmentSalaryFromValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -43,6 +46,8 @@ public class RecruitmentController {
     private RecruitmentService recruitmentService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private UserService userService;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -53,6 +58,7 @@ public class RecruitmentController {
     public String list(Model model){
         model.addAttribute("recruitment", new Recruitment());
         model.addAttribute("tags", this.tagService.getTags());
+        model.addAttribute("recruiters", this.userService.getRecruiters());
 //        model.addAttribute("tag", new Tag());
         return "addRecruitment";
     }
@@ -61,6 +67,8 @@ public class RecruitmentController {
     public String add(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result){
+        model.addAttribute("recruiters", this.userService.getRecruiters());
+        
         if(!result.hasErrors()){
            if(this.recruitmentService.addOrUpdate(recruitment) == true)
                return "redirect:/";
@@ -69,6 +77,17 @@ public class RecruitmentController {
         }
         
         return "addRecruitment";
+    }
+    
+    @RequestMapping("/recruitments")
+    public String searchS(Model model, 
+            @RequestParam(required = false) Map<String, String> params){
+        
+        String s = params.getOrDefault("kw", "kw");
+        model.addAttribute("recruitments", 
+                this.recruitmentService.searchRecruitments(s));
+        
+        return "searchRecruitment";
     }
     
 //    @PostMapping("/add")
