@@ -33,6 +33,11 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     }
     
     @Override
+    public Recruitment getRecruitmentById(int id) {
+        return this.recruitmentRepository.getRecruitmentById(id);
+    }
+    
+    @Override
     public List<Recruitment> searchRecruitments(String kw) {
         return this.recruitmentRepository.searchRecruitment(kw);
     }
@@ -58,5 +63,6 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     public long countRecruitment() {
         return this.recruitmentRepository.countRecruitment();
     }
+    
     
 }

@@ -47,6 +47,15 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         return q.getResultList();
     }
     
+    @Override
+    public Recruitment getRecruitmentById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From Recruitment R Where R.id = id");
+        
+        return (Recruitment) q.getSingleResult();
+    }
+
+    
      @Override
     public List<Recruitment> searchRecruitment(String kw) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -86,5 +95,6 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         
         return Long.parseLong(q.getSingleResult().toString());
     }
-    
+
+        
 }

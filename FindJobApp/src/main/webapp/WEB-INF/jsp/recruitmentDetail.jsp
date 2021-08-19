@@ -1,6 +1,6 @@
 <%-- 
-    Document   : searchRecruitment
-    Created on : Aug 19, 2021, 1:49:10 PM
+    Document   : recruitmentDetail
+    Created on : Aug 19, 2021, 8:36:44 PM
     Author     : nct68
 --%>
 
@@ -10,10 +10,8 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<h1>Tin tuyển dụng</h1>
-<c:forEach var="rs" items="${recruitments}">
-
-    <div class="card overflow-hidden bg-light container my-3">
+<c:forEach var="r" items="recruitment" >
+<div class="card overflow-hidden bg-light container my-3">
       <div class="card-content">
         <div class="card-body cleartfix">
           <div class="media align-items-stretch">
@@ -21,22 +19,19 @@
                 <div style="width:120px">Image</div>   <!-- image -->
             </div>
             <div class="media-body">
-                <h5><a href="#" class="text-dark">${rs.title}</a></h5>   <!-- title -->
-              <div>
-                  <a href="/FindJobApp/recruitment/">${rs.recruiter.companyName}</a>
-              </div>         <!-- company name -->
-              <div>Chức vụ: ${rs.form.toString()}</div>            <!-- form -->
+                <h5><a href="#" class="text-dark">${r.title}</a></h5>   <!-- title -->
+              <div>${r.recruiter.companyName}</div>         <!-- company name -->
+              <div>Chức vụ: ${r.form.toString()}</div>            <!-- form -->
               <div class="text-success font-weight-bold">
-                  $Lương: đ${rs.salaryFrom} - đ${rs.salaryTo}         <!-- salary -->
+                  $Lương: đ${r.salaryFrom} - đ${r.salaryTo}         <!-- salary -->
               </div>
-                  <div>${rs.recruiter.location.province.name}</div>     <!-- province -->
+                  <div>${r.recruiter.location.province.name}</div>     <!-- province -->
             </div>
             <div class="font-weight-bold text-secondary">
-              ${rs.updatedDate}                      <!-- updated date -->
+              ${r.updatedDate}                      <!-- updated date -->
             </div>
           </div>
         </div>
       </div>
     </div>
-
 </c:forEach>

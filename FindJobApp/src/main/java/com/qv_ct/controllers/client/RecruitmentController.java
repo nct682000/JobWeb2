@@ -80,12 +80,23 @@ public class RecruitmentController {
     }
     
     @RequestMapping("/recruitments")
-    public String searchS(Model model, 
+    public String search(Model model, 
             @RequestParam(required = false) Map<String, String> params){
         
         String s = params.getOrDefault("kw", "kw");
         model.addAttribute("recruitments", 
                 this.recruitmentService.searchRecruitments(s));
+        
+        return "searchRecruitment";
+    }
+    
+    @RequestMapping("/recruitment")
+    public String getRecruitment(Model model, 
+            @RequestParam(required = false) Map<String, String> params){
+        
+//        String id = params.getOrDefault("id", "id");
+//        model.addAttribute("recruitment", 
+//                this.recruitmentService.getRecruitmentById(Integer.parseInt(id)));
         
         return "searchRecruitment";
     }

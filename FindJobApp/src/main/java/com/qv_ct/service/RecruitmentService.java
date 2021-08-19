@@ -15,6 +15,7 @@ import java.util.List;
 public interface RecruitmentService {
     List<Recruitment> getRecruitments(int page);
     List<Recruitment> searchRecruitments(String kw);
+    Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
 }
