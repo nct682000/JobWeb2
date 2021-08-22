@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -100,20 +101,47 @@
                       <div class="card-content">
                         <div class="card-body cleartfix">
                           <div class="media align-items-stretch">
+                              
+                              <!-- image -->
                             <div class="align-self-center f">
-                                <div style="width:120px">Image</div>   <!-- image -->
+                                <div style="width:120px">Image</div>
                             </div>
+                              
                             <div class="media-body">
-                                <h5><a href="/FindJobApp/" class="text-dark">${r.title}</a></h5>   <!-- title -->
-                              <div>${r.recruiter.companyName}</div>         <!-- company name -->
-                              <div>Chức vụ: ${r.form.toString()}</div>            <!-- form -->
-                              <div class="text-success font-weight-bold">
-                                  $Lương: đ${r.salaryFrom} - đ${r.salaryTo}         <!-- salary -->
-                              </div>
-                                  <div>${r.recruiter.location.province.name}</div>     <!-- province -->
+                                
+                                <!-- title -->
+                                <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
+                                
+                                <!-- company_name -->
+                                <div>${r.recruiter.companyName}</div> 
+                                
+                                <!-- form -->
+                                <div>Chức vụ: ${r.form.toString()}</div>
+                              
+                                <!-- salary -->
+                                <div class="text-success font-weight-bold">
+                                  <c:if test="${r.salaryFrom != null && r.salaryTo != null}">
+                                      $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
+                                      $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
+                                      $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
+                                      $Lương: thỏa thuận
+                                  </c:if>
+                                </div>
+                            
+                                <!-- Province -->
+                                <div>${r.recruiter.location.province.name}</div>
+                                
                             </div>
+                                
+                                <!-- updated_date -->
                             <div class="font-weight-bold text-secondary">
-                              ${r.updatedDate}                      <!-- updated date -->
+                              ${r.updatedDate}                      
                             </div>
                           </div>
                         </div>

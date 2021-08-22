@@ -50,7 +50,21 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     @Override
     public Recruitment getRecruitmentById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From Recruitment R Where R.id = id");
+//        Query q = session.createQuery("From Recruitment R Where R.id = id");
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        query = query.select(root);
+        
+        Predicate p = builder.equal(root.get("id"), id);
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        
+        System.out.println("---------------------------------------------");
+        System.out.println(q.getHints());
+        System.out.println("---------------------------------------------");
         
         return (Recruitment) q.getSingleResult();
     }
@@ -95,6 +109,5 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         
         return Long.parseLong(q.getSingleResult().toString());
     }
-
         
 }

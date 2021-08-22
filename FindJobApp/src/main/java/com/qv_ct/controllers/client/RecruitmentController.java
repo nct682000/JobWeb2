@@ -28,6 +28,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,15 +91,14 @@ public class RecruitmentController {
         return "searchRecruitment";
     }
     
-    @RequestMapping("/recruitment")
+    @RequestMapping("/recruitment/{id}")
     public String getRecruitment(Model model, 
-            @RequestParam(required = false) Map<String, String> params){
+            @PathVariable int id){
         
-//        String id = params.getOrDefault("id", "id");
-//        model.addAttribute("recruitment", 
-//                this.recruitmentService.getRecruitmentById(Integer.parseInt(id)));
+        model.addAttribute("recDetail", 
+                this.recruitmentService.getRecruitmentById(id));
         
-        return "searchRecruitment";
+        return "recruitmentDetail";
     }
     
 //    @PostMapping("/add")
