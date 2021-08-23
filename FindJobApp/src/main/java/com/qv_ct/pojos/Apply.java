@@ -31,7 +31,7 @@ public class Apply implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(min = 5, max = 100, message = "{recruitment.title.sizeError}")
+    @Size(min = 5, max = 50, message = "{apply.title.sizeError}")
     private String title;
     @NotEmpty(message = "{apply.message.emptyError}")
     private String content;

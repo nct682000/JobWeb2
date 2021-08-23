@@ -62,10 +62,6 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         query = query.where(p);
         Query q = session.createQuery(query);
         
-        System.out.println("---------------------------------------------");
-        System.out.println(q.getHints());
-        System.out.println("---------------------------------------------");
-        
         return (Recruitment) q.getSingleResult();
     }
 

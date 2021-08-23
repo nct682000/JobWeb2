@@ -8,7 +8,7 @@ package com.qv_ct.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.formatter.CareerFormatter;
-import com.qv_ct.formatter.RecruiterFormatter;
+import com.qv_ct.formatter.UserFormatter;
 import com.qv_ct.formatter.RecruitmentFormatter;
 import com.qv_ct.validator.RecruitmentSalaryFromValidator;
 import com.qv_ct.validator.WebAppValidator;
@@ -64,7 +64,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new CareerFormatter());
-        registry.addFormatter(new RecruiterFormatter());
+        registry.addFormatter(new UserFormatter());
         registry.addFormatter(new RecruitmentFormatter());
     }
     

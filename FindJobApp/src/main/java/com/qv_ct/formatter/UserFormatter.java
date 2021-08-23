@@ -14,7 +14,7 @@ import org.springframework.format.Formatter;
  *
  * @author nct68
  */
-public class RecruiterFormatter implements Formatter<User>{
+public class UserFormatter implements Formatter<User>{
 
     @Override
     public String print(User u, Locale locale) {

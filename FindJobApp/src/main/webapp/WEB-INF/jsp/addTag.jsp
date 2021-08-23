@@ -46,19 +46,19 @@
     <div class="col-md-6 col-xl-6 ">
         <!-- Form tag -->
         <%--<form:form method="post" action="${action}" modelAttribute="benefit"--%>
-                   enctype="multipart/form-data">
+                   <!--enctype="multipart/form-data">-->
 
             <!-- input title -->
-            <div class="form-group">
-                <label for="name" >Quyền lợi</label>
+<!--            <div class="form-group">
+                <label for="name" >Quyền lợi</label>-->
                 <%--<form:input type="text" id="name" path="name" cssClass="form-control" />--%>
                 <%--<form:errors path="name" cssClass="text-danger" element="div" />--%>
-            </div>
+            <!--</div>-->
 
             <!-- Submit button -->
-            <div class="form-group">
+<!--            <div class="form-group">
                 <input type="submit" value="Thêm quyền lợi" class="btn btn-info" />
-            </div>
+            </div>-->
 
         <%--</form:form>--%>
 

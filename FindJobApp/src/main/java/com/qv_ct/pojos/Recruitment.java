@@ -39,7 +39,7 @@ public class Recruitment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(min = 5, max = 100, message = "{recruitment.title.sizeError}")
+    @Size(min = 5, max = 50, message = "{recruitment.title.sizeError}")
     private String title;
     @Column(name = "salary_from")
     @Min(value = 1000000, message = "{recruitment.salary.minError}")

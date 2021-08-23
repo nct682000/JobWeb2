@@ -41,12 +41,8 @@ public class Comment implements Serializable{
     @JoinColumn(name = "commented_id")
     private User commented;
     
-    @ManyToOne
-    @JoinColumn(name = "comment_id", nullable = true)
-    private Comment comment;
-    
     @OneToMany(mappedBy = "comment")
-    private Set<Comment> comments;
+    private Set<Reply> replys;
     
     @OneToMany(mappedBy = "comment")
     private Set<Interaction> interactions;
@@ -59,7 +55,14 @@ public class Comment implements Serializable{
         this.commenter = commenter;
         this.commented = commented;
     }
-    
+
+    public Set<Reply> getReplys() {
+        return replys;
+    }
+
+    public void setReplys(Set<Reply> replys) {
+        this.replys = replys;
+    }
     
 
     /**
@@ -144,34 +147,6 @@ public class Comment implements Serializable{
      */
     public void setCommented(User commented) {
         this.commented = commented;
-    }
-
-    /**
-     * @return the comment
-     */
-    public Comment getComment() {
-        return comment;
-    }
-
-    /**
-     * @param comment the comment to set
-     */
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
-
-    /**
-     * @return the comments
-     */
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    /**
-     * @param comments the comments to set
-     */
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 
     /**
