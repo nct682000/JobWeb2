@@ -39,7 +39,6 @@ public class IndexController {
     public void commonAttr(Model model){
         model.addAttribute("careers", this.careerService.getCareers());
         model.addAttribute("provinces", this.provinceService.getProvinces());
-        model.addAttribute("users", this.userService.getUsers());
     }
     
     @RequestMapping("/")
@@ -52,24 +51,6 @@ public class IndexController {
         model.addAttribute("countR", this.recruitmentService.countRecruitment());
         
         return "index";
-    }
-    
-    @RequestMapping("/login")
-    public String login(Model model) {
-       
-        return "login";
-    }
-    
-    @RequestMapping("/register/candidate")
-    public String cRegister(Model model) {
-       
-        return "cRegister";
-    }
-    
-    @RequestMapping("/register/recruiter")
-    public String rRegister(Model model) {
-       
-        return "rRegister";
     }
     
     @RequestMapping("/user")

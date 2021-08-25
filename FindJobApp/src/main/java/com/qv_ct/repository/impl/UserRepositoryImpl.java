@@ -5,6 +5,7 @@
  */
 package com.qv_ct.repository.impl;
 
+import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
 import java.util.List;
@@ -30,16 +31,19 @@ public class UserRepositoryImpl implements UserRepository{
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<User> getUsers() {
+    public List<User> getUsers(String username) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<User> query = builder.createQuery(User.class);
-//        Root root = query.from(User.class);
-//        query = query.select(root);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        
+        if(!username.isEmpty()){
+            Predicate p = builder.equal(root.get("username").as(String.class), username);
+            query = query.where(p);
+        }
 //        
-//        Query q = session.createQuery(query);
-
-        Query q = session.createQuery("From User");
+        Query q = session.createQuery(query);
         
         return q.getResultList();
     }
@@ -58,6 +62,18 @@ public class UserRepositoryImpl implements UserRepository{
         Query q = session.createQuery("From User U Where U.role = 1");
         
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addOrUpdate(User user, Role role) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try{
+            session.save(user);
+            return true;
+        }catch (Exception ex){
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
     
 }

@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,16 +35,24 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+//    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
+//    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
+    @Transient
+    private String confirmPassword;
     @Column(name = "first_name")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
     @Column(name = "last_name")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
     @Column(name = "company_name")
     private String companyName;
     private Sex sex;
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String mail;
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
     private Role role;
@@ -380,6 +390,34 @@ public class User implements Serializable{
      */
     public void setInteractions(Set<Interaction> interactions) {
         this.interactions = interactions;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
     
     
