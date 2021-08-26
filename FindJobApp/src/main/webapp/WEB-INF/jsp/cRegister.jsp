@@ -26,7 +26,7 @@
     <c:if test="${errMsg != null}" >
         <p class="text-success text-center">${errMsg}</p>
     </c:if>
-    <form:form action="${action}" modelAttribute="user">
+        <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
 
         <!-- input username -->
         <div class="form-group">
@@ -117,9 +117,9 @@
                          </div>
                         <form:select class="form-control" aria-label=".form-select-sm example" path="sex" id="sex">
                             <option selected>Giới tính</option>
-                            <option value="0">Nam</option>
-                            <option value="1">Nữ</option>
-                            <option value="2">Giới tính khác</option>
+                            <option value="MALE">Nam</option>
+                            <option value="FEMALE">Nữ</option>
+                            <option value="NEUTRAL">Giới tính khác</option>
                         </form:select>
                 </div>
             </div>
@@ -127,28 +127,28 @@
         </div>
 
         <div class="row">
-            <!-- input address -->
+             <!--input address--> 
             <div class="form-group col-md-8 col-xl-8">
                 <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-location-arrow " style="width: 15px"></i> </span>
                          </div>
-                    <input class="form-control" placeholder="Nhập địa chỉ" type="text">
+                        <form:input path="address" class="form-control" placeholder="Nhập địa chỉ" type="text" />
                 </div>
             </div>
 
-            <!-- select province -->
+             <!--select province--> 
             <div class="form-group col-md-4 col-xl-4">
                 <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
                          </div>
-                    <select class="form-control" aria-label=".form-select-sm example" id="province">
-                        <option selected>Tỉnh thành</option>
-                        <c:forEach var="p" items="${provinces}">
-                            <option value="${p.id}">${p.name}</option>
-                        </c:forEach>
-                    </select>
+                        <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
+                            <option selected>Tỉnh thành</option>
+                            <c:forEach var="p" items="${provinces}">
+                                <option value="${p.id}">${p.name}</option>
+                            </c:forEach>
+                        </form:select>
                 </div>
             </div>
 
@@ -161,7 +161,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
                          </div>
-                    <input class="form-control" type="file">
+                        <form:input path="file" id="file" class="form-control" type="file" />
                 </div>
             </div>
 
@@ -171,6 +171,20 @@
                     <img src="" style="height: 100px" />
                 </div>
             </div> 
+
+        </div>
+                
+        <div class="row mt-4">
+            <!-- input company name -->
+            <div class="form-group col-md-7 col-xl-7">
+                <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                         </div>
+                        <form:input path="companyName" id="companyName" class="form-control" placeholder="Nhập tên công ty" type="text"/>
+                        <form:errors path="companyName" cssClass="text-danger" element="div" />
+                </div>
+            </div>
 
         </div>
 

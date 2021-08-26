@@ -54,7 +54,7 @@ public class ApplyController {
            if(this.applyService.addOrUpdate(apply) == true)
                return "redirect:/";
            else
-               model.addAttribute("errMsg", "Something wrong!");
+               model.addAttribute("errMsg", "Đã có lỗi xảy ra trong quá trình thêm tin");
         }
         
         return "addApply";

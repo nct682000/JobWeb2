@@ -5,13 +5,19 @@
  */
 package com.qv_ct.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
 import com.qv_ct.service.UserService;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +36,8 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public List<User> getUsers(String username) {
@@ -48,10 +56,24 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean addOrUpdate(User user, Role role) {
-        String pass = user.getPassword();
-        user.setPassword(this.passwordEncoder.encode(pass));
-        user.setRole(role);
-        return this.userRepository.addOrUpdate(user, role);
+            try {
+                if(!user.getFile().isEmpty()){
+                    Map map = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                            ObjectUtils.asMap("resource_type", "auto"));
+
+                    user.setAvatar((String) map.get("secure_url"));
+                }
+                String pass = user.getPassword();
+                user.setPassword(this.passwordEncoder.encode(pass));
+                user.setRole(role);
+                return this.userRepository.addOrUpdate(user, role);
+                
+            } catch (IOException ex) {
+                System.err.println("-----Add Error-----" + ex.getMessage());
+                ex.printStackTrace();
+            }
+            
+       return false;
     }
 
     @Override

@@ -5,29 +5,28 @@
  */
 package com.qv_ct.formatter;
 
-import com.qv_ct.pojos.Career;
+import com.qv_ct.pojos.Province;
 import java.text.ParseException;
 import java.util.Locale;
 import org.springframework.format.Formatter;
-
 
 /**
  *
  * @author nct68
  */
-public class CareerFormatter implements Formatter<Career>{
+public class ProvinceFormatter implements Formatter<Province>{
 
     @Override
-    public String print(Career c, Locale locale) {
-        return String.valueOf(c.getId());
+    public String print(Province p, Locale locale) {
+        return String.valueOf(p.getId());
     }
 
     @Override
-    public Career parse(String careerId, Locale locale) throws ParseException {
-        Career c = new Career();
-        c.setId(Integer.parseInt(careerId));
+    public Province parse(String id, Locale locale) throws ParseException {
+        Province p = new Province();
+        p.setId(Integer.parseInt(id));
         
-        return  c;
+        return p;
     }
     
 }

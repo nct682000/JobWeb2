@@ -5,7 +5,9 @@
  */
 package com.qv_ct.validator;
 
-import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.User;
+import com.qv_ct.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -15,22 +17,24 @@ import org.springframework.validation.Validator;
  * @author nct68
  */
 @Component
-public class RecruitmentSalaryFromValidator implements Validator{
+public class UserValidator implements Validator{
+//    @Autowired
+//    private UserService userService;
 
     @Override
     public boolean supports(Class<?> type) {
-        return  Recruitment.class.isAssignableFrom(type);
+        return User.class.isAssignableFrom(type);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        Recruitment r = (Recruitment) o;
-        if (r.getSalaryFrom() != null && r.getSalaryTo() != null){
-             if(r.getSalaryFrom().compareTo(r.getSalaryTo()) == 1){
-                errors.rejectValue("salaryFrom", "recruitment.salaryForm.myError");
-            }
+        User u = (User) o;
+        
+        //Unique
+        if(!u.getUsername().isEmpty()){
+             errors.rejectValue("username", "user.unique.myError");
         }
-            
+        
     }
     
 }

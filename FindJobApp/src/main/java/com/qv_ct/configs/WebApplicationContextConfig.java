@@ -5,12 +5,13 @@
  */
 package com.qv_ct.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.formatter.CareerFormatter;
+import com.qv_ct.formatter.LocationFormatter;
+import com.qv_ct.formatter.ProvinceFormatter;
 import com.qv_ct.formatter.UserFormatter;
 import com.qv_ct.formatter.RecruitmentFormatter;
-import com.qv_ct.validator.RecruitmentSalaryFromValidator;
+import com.qv_ct.validator.RecruitmentValidator;
+import com.qv_ct.validator.UserValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +67,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new CareerFormatter());
         registry.addFormatter(new UserFormatter());
         registry.addFormatter(new RecruitmentFormatter());
+        registry.addFormatter(new LocationFormatter());
+        registry.addFormatter(new ProvinceFormatter());
     }
     
     @Override
@@ -100,7 +103,18 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Bean
     public WebAppValidator recruitmentValidator(){
         Set<Validator> springValidators =new HashSet<>();
-        springValidators.add(new RecruitmentSalaryFromValidator());
+        springValidators.add(new RecruitmentValidator());
+        
+        WebAppValidator v =new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
+    
+     @Bean
+    public WebAppValidator userValidator(){
+        Set<Validator> springValidators =new HashSet<>();
+        springValidators.add(new UserValidator());
         
         WebAppValidator v =new WebAppValidator();
         v.setSpringValidators(springValidators);

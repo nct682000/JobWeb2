@@ -6,6 +6,7 @@
 package com.qv_ct.validator;
 
 import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.User;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import org.apache.commons.lang.Validate;
@@ -27,7 +28,7 @@ public class WebAppValidator implements Validator{
 
     @Override
     public boolean supports(Class<?> type) {
-        return Recruitment.class.isAssignableFrom(type);
+        return Recruitment.class.isAssignableFrom(type) || User.class.isAssignableFrom(type);
     }
 
     @Override

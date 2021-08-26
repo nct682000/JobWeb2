@@ -35,27 +35,28 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
+    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
-//    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
+    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
     @Transient
     private String confirmPassword;
     @Column(name = "first_name")
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
     @Column(name = "last_name")
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = true)
     private String companyName;
+    @Column(nullable = true)
     private Sex sex;
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String mail;
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
-    private Role role;
+    private Role role = Role.CANDIDATE;
     @Column(name = "web_master")
     private Boolean webMaster = false;
     
@@ -86,6 +87,11 @@ public class User implements Serializable{
     
     @Transient
     private MultipartFile file;
+    
+    @Transient
+    private String address;
+    @Transient
+    private Province province;
 
     public User() {
     }
@@ -398,6 +404,7 @@ public class User implements Serializable{
     public MultipartFile getFile() {
         return file;
     }
+    
 
     /**
      * @param file the file to set
@@ -418,6 +425,34 @@ public class User implements Serializable{
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @return the province
+     */
+    public Province getProvince() {
+        return province;
+    }
+
+    /**
+     * @param province the province to set
+     */
+    public void setProvince(Province province) {
+        this.province = province;
     }
     
     

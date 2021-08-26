@@ -12,7 +12,7 @@ import com.qv_ct.pojos.Tag;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.TagService;
 import com.qv_ct.service.UserService;
-import com.qv_ct.validator.RecruitmentSalaryFromValidator;
+import com.qv_ct.validator.RecruitmentValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
 import java.util.Map;

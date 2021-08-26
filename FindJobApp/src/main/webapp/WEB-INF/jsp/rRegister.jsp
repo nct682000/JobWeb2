@@ -28,7 +28,7 @@
     <c:if test="${errMsg != null}" >
         <p class="text-success text-center">${errMsg}</p>
     </c:if>
-    <form:form action="${action}" modelAttribute="user">
+        <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
 
         <!-- input username -->
         <div class="form-group">
@@ -105,7 +105,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-location-arrow " style="width: 15px"></i> </span>
                          </div>
-                    <input class="form-control" placeholder="Nhập địa chỉ" type="text">
+                        <form:input path="address" class="form-control" placeholder="Nhập địa chỉ" type="text"/>
                 </div>
             </div>
 
@@ -115,12 +115,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
                          </div>
-                    <select class="form-control" aria-label=".form-select-sm example" id="province">
-                        <option selected>Tỉnh thành</option>
-                        <c:forEach var="p" items="${provinces}">
-                            <option value="${p.id}">${p.name}</option>
-                        </c:forEach>
-                    </select>
+                        <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
+                            <option selected>Tỉnh thành</option>
+                            <c:forEach var="p" items="${provinces}">
+                                <option value="${p.id}">${p.name}</option>
+                            </c:forEach>
+                        </form:select>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
                          </div>
-                    <input class="form-control" type="file">
+                        <form:input path="file" id="file" class="form-control" type="file"/>
                 </div>
             </div>
 

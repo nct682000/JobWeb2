@@ -5,6 +5,7 @@
  */
 package com.qv_ct.repository.impl;
 
+import com.qv_ct.pojos.Location;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
@@ -68,6 +69,10 @@ public class UserRepositoryImpl implements UserRepository{
     public boolean addOrUpdate(User user, Role role) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
+            Location l = new Location(user.getAddress(), user.getProvince());
+            user.setLocation(l);
+            
+            session.save(l);
             session.save(user);
             return true;
         }catch (Exception ex){

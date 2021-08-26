@@ -21,8 +21,11 @@
         <hr>
 
         <!-- Notification -->
+        <c:if test="${param.accessDenied != null}">
+            <h5 class="text-danger text-center my-4">Bạn không đủ quyền truy cập tài nguyên</h5>
+        </c:if>
         <c:if test="${param.error != null}">
-            <h5 class="text-danger text-center my-4">~~~Lỗi~~~</h5>
+            <h5 class="text-danger text-center my-4">Đăng nhập không thành công</h5>
         </c:if>
         
         <form method="post" action="${action}">
