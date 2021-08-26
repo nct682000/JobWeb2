@@ -4,29 +4,25 @@
  * and open the template in the editor.
  */
 package com.qv_ct.controllers.admin;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
+import com.qv_ct.service.RecruitmentService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
 
 /**
  *
  * @author DELL
  */
 @Controller
-public class AdminHome {
-
-    @Autowired
-    private LocalSessionFactoryBean sessionFactory;
-
-    @RequestMapping("/admin")
-    public String index() {
-        return "admin";
-    }
+public class Ad_RecruitmentController {
+    @Autowired 
+    private RecruitmentService recruitmentService;
     
-    @RequestMapping("/admin/test")
-    public String test() {
-        return "test";
+    @RequestMapping("/admin/recruitment")
+    public String index(Model model) {
+        model.addAttribute("recruitments", this.recruitmentService.getRecruitmentsAll());
+
+        return "ad_recruitment";
     }
 }

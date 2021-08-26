@@ -7,6 +7,7 @@ package com.qv_ct.pojos;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +16,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,7 +49,7 @@ public class User implements Serializable{
     @Column(name = "web_master")
     private Boolean webMaster = false;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "location_id", nullable = true)
     private Location location;
     
@@ -69,6 +73,9 @@ public class User implements Serializable{
     
     @OneToMany(mappedBy = "user")
     private Set<Interaction> interactions;
+    
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }

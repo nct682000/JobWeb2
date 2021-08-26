@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+            Software Foundation//DTD Tiles Configuration 3.0//EN"
+            "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title"     value="Trang Chủ" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/index.jsp" />
+    </definition>
+    
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title"     value="Đăng nhập" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/login.jsp" />
+    </definition>
+    
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title"     value="Đăng ký" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/register.jsp" />
+    </definition>
+    
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title"     value="Trang cá nhân" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/user.jsp" />
+    </definition>
+    
+    <definition name="addRecruitment" extends="baseLayout">
+        <put-attribute name="title"     value="Đăng tin tuyển dụng" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/addRecruitment.jsp" />
+    </definition>
+    
+    
+    <!--    admin     -->
+    <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <!--<put-attribute name="drawer"    value="/WEB-INF/layoutAdmin/drawer.jsp" />-->
+        <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
+    </definition>
+    
+<!--    <definition name="drawer" extends="baseAdmin">
+        <put-attribute name="title"     value="Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+            </definition>-->
+    
+<!--    <definition name="admin" extends="drawer">
+        <put-attribute name="title"     value="Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jsp/admin.jsp" />
+    </definition>-->
+    
+    <definition name="user" extends="baseAdmin">
+        <put-attribute name="title"     value="customers" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="ad_recruitment" extends="baseAdmin">
+        <put-attribute name="title"     value="info_recruitment" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
+    </definition>
+    <definition name="test" extends="baseAdmin">
+        <put-attribute name="title"     value="test view admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/test.jsp" />
+    </definition>
+    
+    
+    
+    
+    
+    <!--     asd            -->
+<!--    <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <put-attribute name="drawer"    value="/WEB-INF/layoutAdmin/drawer.jsp" />
+        <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
+    </definition>-->
+    
+</tiles-definitions>
+
+

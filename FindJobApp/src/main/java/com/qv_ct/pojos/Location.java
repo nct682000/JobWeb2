@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,8 +33,8 @@ public class Location implements Serializable{
     @JoinColumn(name = "province_id")
     private Province province;
     
-    @OneToMany(mappedBy = "location")
-    private Set<User> users;
+    @OneToOne(mappedBy = "location")
+    private User users;
 
     public Location() {
     }
@@ -86,18 +87,5 @@ public class Location implements Serializable{
     public void setProvince(Province province) {
         this.province = province;
     }
-
-    /**
-     * @return the users
-     */
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    /**
-     * @param users the users to set
-     */
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+    
 }
