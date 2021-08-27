@@ -103,8 +103,8 @@
                           <div class="media align-items-stretch">
                               
                               <!-- image -->
-                            <div class="align-self-center f">
-                                <div style="width:120px">Image</div>
+                            <div class="align-self-center mr-3">
+                                <a href="/FindJobApp/recruitment/${r.id}"><image src="${r.recruiter.avatar}" alt="Ảnh" style="width:150px; height: 150px"/></a>
                             </div>
                               
                             <div class="media-body">
@@ -113,7 +113,7 @@
                                 <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
                                 
                                 <!-- company_name -->
-                                <div>${r.recruiter.companyName}</div> 
+                                <div><a href="/FindJobApp/recruiter/${r.recruiter.id}">${r.recruiter.companyName}</a></div> 
                                 
                                 <!-- form -->
                                 <div>Chức vụ: ${r.form.toString()}</div>
@@ -135,13 +135,13 @@
                                 </div>
                             
                                 <!-- Province -->
-                                <div>${r.recruiter.location.province.name}</div>
+                                <div>Khu vực: ${r.recruiter.location.province.name}</div>
                                 
                             </div>
                                 
                                 <!-- updated_date -->
                             <div class="font-weight-bold text-secondary">
-                              ${r.updatedDate}                      
+                                <fmt:formatDate type="date" value="${r.updatedDate}" />                      
                             </div>
                           </div>
                         </div>

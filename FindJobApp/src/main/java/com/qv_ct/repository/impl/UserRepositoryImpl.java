@@ -48,6 +48,23 @@ public class UserRepositoryImpl implements UserRepository{
         
         return q.getResultList();
     }
+    
+    @Override
+    public User getUserbyId(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        
+        Predicate p = builder.equal(root.get("id"), id);
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        
+        return (User) q.getSingleResult();
+    }
 
     @Override
     public List<User> getCadidates() {

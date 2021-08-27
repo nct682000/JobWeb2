@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Comment implements Serializable{
     private String content;
     private String file;
     @Column(name = "created_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
     
     @ManyToOne

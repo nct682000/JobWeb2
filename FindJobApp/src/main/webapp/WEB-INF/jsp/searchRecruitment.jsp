@@ -21,8 +21,8 @@
               <div class="media align-items-stretch">
 
                   <!-- image -->
-                <div class="align-self-center f">
-                    <div style="width:120px">Image</div>
+                <div class="align-self-center f mr-3">
+                    <image src="${r.recruiter.avatar}" alt="Ảnh" style="width:150px; height: 150px"/>
                 </div>
 
                 <div class="media-body">
@@ -53,13 +53,13 @@
                     </div>
 
                     <!-- Province -->
-                    <div>${r.recruiter.location.province.name}</div>
+                    <div>Khu vực: ${r.recruiter.location.province.name}</div>
 
                 </div>
 
                     <!-- updated_date -->
                 <div class="font-weight-bold text-secondary">
-                  ${r.updatedDate}                      
+                  <fmt:formatDate type="date" value="${r.updatedDate}" />                   
                 </div>
               </div>
             </div>

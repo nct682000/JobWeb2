@@ -18,4 +18,5 @@ public interface UserRepository {
     List<User> getRecruiters();
     List<User> getUsers(String username);
     boolean addOrUpdate(User user, Role role);
+    User getUserbyId(int id);
 }

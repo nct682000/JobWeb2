@@ -77,6 +77,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserById(int id) {
+        return this.userRepository.getUserbyId(id);
+    }
+    
+    
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.getUsers(username);
         if(users.isEmpty())

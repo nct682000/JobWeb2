@@ -69,9 +69,14 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
     </definition>
     
-     <definition name="addApply" extends="baseLayout">
+    <definition name="addApply" extends="baseLayout">
         <put-attribute name="title" value="Ứng tuyển" />
         <put-attribute name="content" value="/WEB-INF/jsp/addApply.jsp" />
+    </definition>
+    
+    <definition name="recruiter" extends="baseLayout">
+        <put-attribute name="title" value="Nhà tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruiter.jsp" />
     </definition>
     
     
