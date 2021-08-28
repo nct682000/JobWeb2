@@ -52,5 +52,10 @@ public class ApplyServiceImpl implements ApplyService{
         
         return false;
     }
+
+    @Override
+    public List<Apply> getAppliesByUserId(int id) {
+        return this.applyRepository.getAppliesByUserId(id);
+    }
     
 }

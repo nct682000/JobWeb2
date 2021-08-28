@@ -10,5 +10,23 @@ package com.qv_ct.pojos;
  * @author nct68
  */
 public enum Sex {
-    MALE, FEMALE, NEUTRAL;
+    MALE{
+        @Override
+        public String toString() {
+            return "Nam";
+        }
+        
+    }, FEMALE{
+        @Override
+        public String toString() {
+            return "Nữ";
+        }
+        
+    }, NEUTRAL{
+        @Override
+        public String toString() {
+            return "Giới tính khác";
+        }
+        
+    };
 }

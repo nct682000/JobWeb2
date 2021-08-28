@@ -31,7 +31,7 @@
                     <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
 
                     <!-- company_name -->
-                    <div>${r.recruiter.companyName}</div> 
+                    <div><a href="/FindJobApp/recruiter/${r.recruiter.id}">${r.recruiter.companyName}</a></div>
 
                     <!-- form -->
                     <div>Chức vụ: ${r.form.toString()}</div>

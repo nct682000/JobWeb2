@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface ApplyRepository {
     List<Apply> getApplies();
+    List<Apply> getAppliesByUserId(int id);
     boolean addOrUpdate(Apply a);
 }

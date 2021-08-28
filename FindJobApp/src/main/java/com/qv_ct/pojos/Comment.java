@@ -65,7 +65,6 @@ public class Comment implements Serializable{
     public void setReplys(Set<Reply> replys) {
         this.replys = replys;
     }
-    
 
     /**
      * @return the id

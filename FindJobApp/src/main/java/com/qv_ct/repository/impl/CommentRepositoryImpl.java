@@ -32,7 +32,7 @@ public class CommentRepositoryImpl implements CommentRepository{
     @Override
     public List<Comment> getCommentByRecruiterId(int id) {
         Session session = sessionFactory.getObject().getCurrentSession();
-//        Query q = session.createQuery("From Comment C Where C.commented = id");
+//        Query q = session.createQuery("From Comment");
         
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Comment> query = builder.createQuery(Comment.class);

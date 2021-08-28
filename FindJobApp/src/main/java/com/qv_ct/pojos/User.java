@@ -35,25 +35,25 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
+//    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
-    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
+//    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
     @Transient
     private String confirmPassword;
     @Column(name = "first_name")
-    @NotEmpty(message = "{user.name.emptyError}")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
     @Column(name = "last_name")
-    @NotEmpty(message = "{user.name.emptyError}")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
     @Column(name = "company_name", nullable = true)
     private String companyName;
     @Column(nullable = true)
     private Sex sex;
-    @NotEmpty(message = "{user.name.emptyError}")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String mail;
-    @NotEmpty(message = "{user.name.emptyError}")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
     private Role role = Role.CANDIDATE;

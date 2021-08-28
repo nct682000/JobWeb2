@@ -8,6 +8,10 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.repository.ApplyRepository;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +51,22 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         }
         
         return false;
+    }
+
+    @Override
+    public List<Apply> getAppliesByUserId(int id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
+        Root root = query.from(Apply.class);
+        query = query.select(root);
+        
+        Predicate p =builder.equal(root.get("candidate"), id);
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        
+        return q.getResultList();
     }
 }
 

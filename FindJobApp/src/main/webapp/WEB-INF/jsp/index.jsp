@@ -158,6 +158,11 @@
                 <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
             </c:forEach>
         </ul>
-        
+        <!-- TEst -->
+        <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
+            <c:forEach var="cmt" items="${comments}">
+                <div>text</div>
+            </c:forEach>
+                
     </body>
 </html>

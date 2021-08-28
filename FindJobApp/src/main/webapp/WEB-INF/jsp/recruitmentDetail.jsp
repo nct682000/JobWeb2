@@ -14,7 +14,7 @@
 <h1 class="text-primary text-center">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
 <div class="container-fluid" style="width: 95%">
     <h3 class="text-info font-weight-bold">${recDetail.title}</h3>
-    <h4><a href="#" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
+    <h4><a href="/FindJobApp/recruiter/${recDetail.recruiter.id}" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
     <!-- Card info -->
     <div class="card overflow-hidden bg-light my-3">
         <div class="card-content">

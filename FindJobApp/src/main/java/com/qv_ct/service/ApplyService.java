@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface ApplyService {
     List<Apply> getApplies();
+    List<Apply> getAppliesByUserId(int id);
     boolean addOrUpdate(Apply a);
 }

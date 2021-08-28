@@ -5,7 +5,8 @@
  */
 package com.qv_ct.controllers.client;
 
-import com.qv_ct.service.CommentService;
+import com.qv_ct.pojos.User;
+import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,18 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author nct68
  */
 @Controller
-public class RecruiterController {
+public class CandidateController {
     @Autowired
     private UserService userService;
     @Autowired
-    private CommentService commentService;
+    private ApplyService applyService;
     
-    @RequestMapping("/recruiter/{id}")
-    public String recruiter(Model model, @PathVariable int id){
+    @RequestMapping("/candidate/{name}")
+    public String candidate(Model model, @PathVariable String name) {
+       model.addAttribute("user", this.userService.getUsers(name));
+       User u = this.userService.getUsers(name).get(0);
+       int id = u.getId();
+       System.out.println(id);
+       model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
         
-        model.addAttribute("ru", this.userService.getUserById(id));
-        model.addAttribute("comments", this.commentService.getCommentByRecruiterId(id));
-        
-        return "recruiter";
+       return "candidate";
     }
 }

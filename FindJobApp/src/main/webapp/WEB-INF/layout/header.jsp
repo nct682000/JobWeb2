@@ -43,7 +43,7 @@
             <a class="nav-link" href="/FindJobApp/register/candidate/">Đăng ký<span class="sr-only">(current)</span></a>
           </c:if>
           <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <a class="nav-link" href="/FindJobApp/user">${pageContext.request.userPrincipal.name}<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/FindJobApp/candidate/${pageContext.request.userPrincipal.name}">${pageContext.request.userPrincipal.name}<span class="sr-only">(current)</span></a>
             <a class="nav-link" href="/FindJobApp/logout">Đăng xuất<span class="sr-only">(current)</span></a>
           </c:if>
             
