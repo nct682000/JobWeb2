@@ -57,6 +57,7 @@ public class User implements Serializable{
     private String phone;
     private String avatar;
     private Role role = Role.CANDIDATE;
+    private boolean active = true;
     @Column(name = "web_master")
     private Boolean webMaster = false;
     

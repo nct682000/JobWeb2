@@ -28,7 +28,7 @@ public class RecruiterController {
     public String recruiter(Model model, @PathVariable int id){
         
         model.addAttribute("ru", this.userService.getUserById(id));
-        model.addAttribute("comments", this.commentService.getCommentByRecruiterId(id));
+//        model.addAttribute("comments", this.commentService.getCommentByRecruiterId(id));
         
         return "recruiter";
     }
