@@ -9,6 +9,7 @@ import com.qv_ct.pojos.Comment;
 import com.qv_ct.repository.CommentRepository;
 import com.qv_ct.service.CommentService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

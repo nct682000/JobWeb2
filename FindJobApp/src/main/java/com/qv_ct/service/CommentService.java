@@ -7,6 +7,7 @@ package com.qv_ct.service;
 
 import com.qv_ct.pojos.Comment;
 import java.util.List;
+import java.util.Set;
 
 /**
  *

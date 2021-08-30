@@ -6,8 +6,10 @@
 package com.qv_ct.repository.impl;
 
 import com.qv_ct.pojos.Comment;
+import com.qv_ct.pojos.User;
 import com.qv_ct.repository.CommentRepository;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -31,7 +33,9 @@ public class CommentRepositoryImpl implements CommentRepository{
 
     @Override
     public List<Comment> getCommentByRecruiterId(int id) {
+        
         Session session = sessionFactory.getObject().getCurrentSession();
+        
 //        Query q = session.createQuery("From Comment");
         
         CriteriaBuilder builder = session.getCriteriaBuilder();

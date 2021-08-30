@@ -41,10 +41,10 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         Query q = session.createQuery(query);
         
         int max = 4;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
+        //q.setMaxResults(max);
+        //q.setFirstResult((page - 1) * max);
         
-        return q.getResultList();
+        return q.getResultList();// bi loi cho nay nne, kop phai cai ham kia
     }
     
     @Override

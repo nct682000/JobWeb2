@@ -50,7 +50,7 @@
             <!-- COmment -->
             <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <c:forEach var="cmt" items="${comments}">
-                <div>text</div>
+                <div>${cmt.content}</div>
             </c:forEach>
             <input type="text" placeholder="Nhập bình luận..." class="form-control p-2" />
             <div class="ml-2"><input type="submit" value="Bình luận" class="btn btn-info" /></div>
