@@ -9,7 +9,7 @@
     crossOrigin="anonymous"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+
 
 <div class="content" id="main">
     <div class="container-fluid">
@@ -18,6 +18,8 @@
                 <div class="card">
                     <div class="card-header card-header-primary row">
                         <h4 class="card-title col">Thông tin khách hàng</h4>
+
+                        <!--    lọc người ứng tuyển || người tuyển chọn     -->
                         <div class="col">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
@@ -28,10 +30,14 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <!--    tìm kiếm    -->
                         <div class="simple-search col">
                             <input type="email" placeholder="name . . ."/>
                             <button class="fa fa-search"></button>
                         </div>
+
+                        <!--    lọc theo công ty    -->
                         <div class="col">
                             <select class="form-select" aria-label="Default select example">
                                 <option selected>Công ty</option>
@@ -40,26 +46,40 @@
                                 <option value="3">Three</option>
                             </select>
                         </div>
+
+                        <!--    phân trang      -->
                         <div class="col">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <div class="row">
+                                <div class="col-9">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                                <!--    btn add     -->
+                                <div class="col-3">
+                                    <a href="/FindJobApp/admin/customers/add-user" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="table-dark">
@@ -122,7 +142,13 @@
                                                 </td>
                                                 <td>
                                                     <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-secondary">Enable</button>
+                                                    <div class="d-flex">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                        </div>
+                                                        <button class="bi bi-pencil-fill btn"></button>
+                                                        <button class="bi bi-trash-fill btn"></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </c:when>
@@ -155,6 +181,8 @@
                                                 <td>
                                                     <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
                                                     <button class="btn btn-success">Enable</button>
+                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>
                                         </c:when>

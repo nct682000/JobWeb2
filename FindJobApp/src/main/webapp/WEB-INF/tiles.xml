@@ -52,42 +52,27 @@ and open the template in the editor.
         <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
     </definition>
     
-<!--    <definition name="drawer" extends="baseAdmin">
-        <put-attribute name="title"     value="Admin" />
-        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
-            </definition>-->
-    
-<!--    <definition name="admin" extends="drawer">
-        <put-attribute name="title"     value="Admin" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/admin.jsp" />
-    </definition>-->
-    
     <definition name="user" extends="baseAdmin">
         <put-attribute name="title"     value="customers" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    <definition name="edit-user" extends="baseAdmin">
+        <put-attribute name="title"     value="edit user" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
     </definition>
     
     <definition name="ad_recruitment" extends="baseAdmin">
         <put-attribute name="title"     value="info_recruitment" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
     </definition>
+    
+    
+    
     <definition name="test" extends="baseAdmin">
         <put-attribute name="title"     value="test view admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/test.jsp" />
     </definition>
-    
-    
-    
-    
-    
-    <!--     asd            -->
-<!--    <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
-        <put-attribute name="title"     value="..." />
-        <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
-        <put-attribute name="content"   value="BASE" />
-        <put-attribute name="drawer"    value="/WEB-INF/layoutAdmin/drawer.jsp" />
-        <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
-    </definition>-->
+
     
 </tiles-definitions>
 

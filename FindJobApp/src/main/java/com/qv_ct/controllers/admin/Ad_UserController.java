@@ -33,4 +33,11 @@ public class Ad_UserController {
 
         return "user";
     }
+    
+    @RequestMapping("/admin/customers/add-user")
+    public String editUser() {
+
+        return "edit-user";
+    }
+    
 }

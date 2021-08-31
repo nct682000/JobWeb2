@@ -6,13 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
     <div class="row justify-content-md-center">
-        <div class="" style="border-color: blue;border-radius: 50%;width: 50px;height: 50px;background-color: red;margin: 20px 0 20px 0;">image</div>
+        <img class="" 
+             style="border-color: blue;border-radius: 50%;width: 120px;height: 100%;margin: 25px 0 10px 0;"
+             src="<c:url value="/images/userDefaul.jpg" />" alt="avatar">
     </div>
-    <p>quan tri vien</p>
+    <div class="" style="margin-bottom: 30px;text-align: center;">
+        <h4>quan tri vien</h4>
+    </div>
     <a href="/FindJobApp/admin/customers" class="w3-bar-item w3-button">Customers</a>
     <a href="/FindJobApp/admin/recruitment" class="w3-bar-item w3-button">Recruitments</a>
     <a href="/FindJobApp/admin/test" class="w3-bar-item w3-button">test</a>
@@ -98,4 +103,3 @@
         }
     </script>
 </div>
-

@@ -1,12 +1,13 @@
 <%-- 
-    Document   : test
-    Created on : Aug 25, 2021, 2:17:14 PM
+    Document   : ad_edit_user
+    Created on : Aug 30, 2021, 3:17:09 PM
     Author     : DELL
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<form class="container bg-info col-md-8" style="margin-bottom: 30px;margin-top: 30px;">
+
+<form class="container bg-info col-md-8" style="margin-bottom: 30px;margin-top: 30px;" method="POST">
     <div class="row" style="padding: 20px;">
 
         <div class="col-md-5  " style="padding: 20px 20px 0;" >
@@ -114,5 +115,4 @@
             </div>
         </div>
     </div>
-
 </form>
