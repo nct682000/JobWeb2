@@ -50,7 +50,29 @@
             <!-- COmment -->
             <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <c:forEach var="cmt" items="${comments}">
-                <div>${cmt.content}</div>
+                <div class="mb-2 row">
+                    <div class="col-md-auto text-center" style="width: 50px">
+                        <img alt="Avatar" src="${cmt[4].avatar}" style="width: 40px; height: 40px"/>
+                    </div>
+                    <div class="col-md ml-2">
+                        <div class="card bg-light">
+                            <div class="font-weight-bold">
+                                <c:if test="${cmt[4].role == 'CANDIDATE'}">
+                                    ${cmt[4].firstName} ${cmt[4].lastName}
+                                </c:if>
+                                <c:if test="${cmt[4].role == 'RECRUITER'}">
+                                   ${cmt[4].companyName}
+                                </c:if>
+                            </div>
+                            <div class="ml-3">${cmt[1]}</div>
+                        </div>
+                        <div>
+                            <span><a href="#">Thích</a> . </span>
+                            <span><a href="#">Trả lời</a> . </span>
+                            <span class="text-secondary">Lúc: ${cmt[3]}</span>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
             <input type="text" placeholder="Nhập bình luận..." class="form-control p-2" />
             <div class="ml-2"><input type="submit" value="Bình luận" class="btn btn-info" /></div>

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class Comment implements Serializable{
     @JoinColumn(name = "commented_id")
     private User commented;
     
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
     private Set<Reply> replys;
     
     @OneToMany(mappedBy = "comment")
