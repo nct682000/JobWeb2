@@ -10,5 +10,5 @@ package com.qv_ct.pojos;
  * @author nct68
  */
 public enum Role {
-    ADMIN, RECRUITER, CANDIDATE;
+    ADMIN, RECRUITER, CANDIDATE, MANAGER;
 }

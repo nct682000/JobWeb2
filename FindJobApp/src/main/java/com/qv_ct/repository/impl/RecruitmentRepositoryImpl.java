@@ -7,6 +7,8 @@ package com.qv_ct.repository.impl;
 
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -88,6 +90,8 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     public boolean addOrUpdate(Recruitment r) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
+            r.setCreatedDate(Date.from(Instant.now()));
+            r.setUpdatedDate(Date.from(Instant.now()));
             session.save(r);
             
             return true;

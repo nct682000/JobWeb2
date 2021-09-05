@@ -10,7 +10,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,8 +58,6 @@ public class User implements Serializable{
     private String avatar;
     private Role role = Role.CANDIDATE;
     private boolean active = true;
-    @Column(name = "web_master")
-    private Boolean webMaster = false;
     
     @OneToOne
     @JoinColumn(name = "location_id", nullable = true)
@@ -261,20 +258,6 @@ public class User implements Serializable{
     }
 
     /**
-     * @return the webMaster
-     */
-    public Boolean getWebMaster() {
-        return webMaster;
-    }
-
-    /**
-     * @param webMaster the webMaster to set
-     */
-    public void setWebMaster(Boolean webMaster) {
-        this.webMaster = webMaster;
-    }
-
-    /**
      * @return the location
      */
     public Location getLocation() {
@@ -455,6 +438,20 @@ public class User implements Serializable{
      */
     public void setProvince(Province province) {
         this.province = province;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
     
     
