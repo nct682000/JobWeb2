@@ -36,20 +36,20 @@ public class CommentRepositoryImpl implements CommentRepository{
         
         Session session = sessionFactory.getObject().getCurrentSession();
         
-        Query q = session.createQuery("Select C.id, C.content, C.file, C.createdDate, C.commenter " +
-                                    "From Comment " + 
-                                    "C Where C.commented =:id");
-        q.setInteger("id", id);
+//        Query q = session.createQuery("Select C.id, C.content, C.file, C.createdDate, C.commenter " +
+//                                    "From Comment " + 
+//                                    "C Where C.commented =:id");
+//        q.setInteger("id", id);
         
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
-//        Root root = query.from(Comment.class);
-//        query = query.select(root);
-//        
-//        Predicate p =builder.equal(root.get("commented"), id);
-//        
-//        query = query.where(p);
-//        Query q = session.createQuery(query);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
+        Root root = query.from(Comment.class);
+        query = query.select(root);
+        
+        Predicate p =builder.equal(root.get("commented"), id);
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
         
         return q.getResultList();
     }

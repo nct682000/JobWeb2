@@ -45,7 +45,7 @@ public class Comment implements Serializable{
     private User commented;
     
     @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
-    private Set<Reply> replys;
+    private Set<Reply> replies;
     
     @OneToMany(mappedBy = "comment")
     private Set<Interaction> interactions;
@@ -60,11 +60,11 @@ public class Comment implements Serializable{
     }
 
     public Set<Reply> getReplys() {
-        return replys;
+        return replies;
     }
 
     public void setReplys(Set<Reply> replys) {
-        this.replys = replys;
+        this.replies = replys;
     }
 
     /**

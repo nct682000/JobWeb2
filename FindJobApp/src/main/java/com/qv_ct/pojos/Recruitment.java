@@ -49,6 +49,7 @@ public class Recruitment implements Serializable{
     private BigDecimal salaryTo;
     @NotNull(message = "{recruitment.form.nullError}")
     private Form form;
+    @NotEmpty(message = "{recruitment.message.emptyError}")
     private String description;
     @Column(name = "created_date")
     @Temporal(javax.persistence.TemporalType.DATE)

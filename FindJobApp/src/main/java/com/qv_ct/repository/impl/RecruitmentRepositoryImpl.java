@@ -40,6 +40,8 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         Root root = query.from(Recruitment.class);
         query = query.select(root);
         
+//        query.orderBy(builder.desc(root.get("createdDate")));
+        
         Query q = session.createQuery(query);
         
         int max = 4;
