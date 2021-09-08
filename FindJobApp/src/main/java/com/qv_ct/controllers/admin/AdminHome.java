@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -20,7 +21,7 @@ public class AdminHome {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String index() {
         return "admin";
     }

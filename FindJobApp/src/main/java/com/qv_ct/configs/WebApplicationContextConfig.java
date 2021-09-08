@@ -5,11 +5,13 @@
  */
 package com.qv_ct.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.formatter.CareerFormatter;
-import com.qv_ct.formatter.RecruiterFormatter;
-import com.qv_ct.validator.RecruitmentSalaryFromValidator;
+import com.qv_ct.formatter.LocationFormatter;
+import com.qv_ct.formatter.ProvinceFormatter;
+import com.qv_ct.formatter.UserFormatter;
+import com.qv_ct.formatter.RecruitmentFormatter;
+import com.qv_ct.validator.RecruitmentValidator;
+import com.qv_ct.validator.UserValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +20,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
@@ -64,7 +65,10 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new CareerFormatter());
-        registry.addFormatter(new RecruiterFormatter());
+        registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new RecruitmentFormatter());
+        registry.addFormatter(new LocationFormatter());
+        registry.addFormatter(new ProvinceFormatter());
     }
     
     @Override
@@ -81,17 +85,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resolver.setDefaultEncoding("UTF-8");
         
         return resolver;
-    }
-    
-    @Bean
-    public Cloudinary cloudinary(){
-        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "nct682000",
-                "api_key", "163411336543774",
-                "api_secret", "-Ph9MO7WY4PIQeqf01Yj5xUAyTY",
-                "secure", true
-        ));
-        return c;
     }
 
     @Override
@@ -110,7 +103,18 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Bean
     public WebAppValidator recruitmentValidator(){
         Set<Validator> springValidators =new HashSet<>();
-        springValidators.add(new RecruitmentSalaryFromValidator());
+        springValidators.add(new RecruitmentValidator());
+        
+        WebAppValidator v =new WebAppValidator();
+        v.setSpringValidators(springValidators);
+        
+        return v;
+    }
+    
+     @Bean
+    public WebAppValidator userValidator(){
+        Set<Validator> springValidators =new HashSet<>();
+        springValidators.add(new UserValidator());
         
         WebAppValidator v =new WebAppValidator();
         v.setSpringValidators(springValidators);

@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -17,14 +18,20 @@
         <!-- Page name -->
         <h1 class="text-center text-primary">My Job Website</h1>
         
+        <a href="/FindJobApp/add/recruitment">Thêm tin</a>
+        <br>
+        <a href="/FindJobApp/add/tag">Thêm nhãn & quyền lợi</a>
+         <br>
+        <a href="/FindJobApp/add/apply">Ứng tuyển</a>
+        
         <div class="row m-4">
             
             <!-- Find Job card -->
             <div class="col-xl-5 col-md-12 card bg-light">
                 <div class="container">
                     <h2 class="text-info">Tìm kiếm</h2>
-                    <form>
-                        <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh" id="kw">
+                    <form action="/FindJobApp/recruitments/">
+                        <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh"  name="kw">
                         <div class="row m-2 mb-3">
                             
                             <!-- province search -->
@@ -36,7 +43,7 @@
                             </select>
                             
                             <!-- career search -->
-                            <select class="form-control col ml-2" aria-label=".form-select-sm example" id="career">
+                            <select class="form-control col ml-2" aria-label=".form-select-sm example">
                                 <option selected>Ngành nghề</option>
                                 <c:forEach var="c" items="${careers}">
                                 <option value="${c.id}">${c.name}</option>
@@ -50,8 +57,8 @@
                             <input type="number" class="form-control col mr-2 " placeholder="Nhập mức lương" id="salary">
                             
                             <!-- form search -->
-                            <select class="form-control col ml-2" aria-label=".form-select-sm example" id="form">
-                                <option selected>Chức vụ</option>
+                            <select class="form-control col ml-2" aria-label=".form-select-sm example">
+                                <option value="">--Chức vụ--</option>
                                 <option value="0">Thực tập sinh</option>
                                 <option value="1">Mới ra trường</option>
                                 <option value="2">Nhân viên</option>
@@ -94,34 +101,63 @@
                       <div class="card-content">
                         <div class="card-body cleartfix">
                           <div class="media align-items-stretch">
-                            <div class="align-self-center f">
-                                <div style="width:120px">Image</div>   <!-- image -->
+                              
+                              <!-- image -->
+                            <div class="align-self-center mr-3">
+                                <a href="/FindJobApp/recruitment/${r.id}"><image src="${r.recruiter.avatar}" alt="Ảnh" style="width:150px; height: 150px"/></a>
                             </div>
+                              
                             <div class="media-body">
-                                <h5><a href="/FindJobApp/home/" target="target" class="text-dark">${r.title}</a></h5>   <!-- title -->
-                              <div>${r.recruiter.companyName}</div>         <!-- company name -->
-                              <div>Chức vụ: ${r.form.toString()}</div>            <!-- form -->
-                              <div class="text-success font-weight-bold">
-                                  $Lương: đ${r.salaryFrom} - đ${r.salaryTo}         <!-- salary -->
-                              </div>
-                                  <div>${r.recruiter.location.province.name}</div>     <!-- province -->
+                                
+                                <!-- title -->
+                                <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
+                                
+                                <!-- company_name -->
+                                <div><a href="/FindJobApp/recruiter/${r.recruiter.id}">${r.recruiter.companyName}</a></div> 
+                                
+                                <!-- form -->
+                                <div>Chức vụ: ${r.form.toString()}</div>
+                              
+                                <!-- salary -->
+                                <div class="text-success font-weight-bold">
+                                  <c:if test="${r.salaryFrom != null && r.salaryTo != null}">
+                                      $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
+                                      $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
+                                      $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                  </c:if>
+                                  <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
+                                      $Lương: thỏa thuận
+                                  </c:if>
+                                </div>
+                            
+                                <!-- Province -->
+                                <div>Khu vực: ${r.recruiter.location.province.name}</div>
+                                
                             </div>
+                                
+                                <!-- updated_date -->
                             <div class="font-weight-bold text-secondary">
-                              ${r.updatedDate}                      <!-- updated date -->
+                                <fmt:formatDate type="date" value="${r.updatedDate}" />                      
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                 </div>
+                            
             </c:forEach>
+            
         </div>
         
         <ul class="pagination">
             <c:forEach begin="1" end="${Math.ceil(countR / 4)}" var="i">
-            <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
+                <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
             </c:forEach>
         </ul>
-        
+                
     </body>
 </html>

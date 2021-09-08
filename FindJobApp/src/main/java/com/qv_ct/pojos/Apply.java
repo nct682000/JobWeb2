@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -27,7 +31,9 @@ public class Apply implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(min = 5, max = 50, message = "{apply.title.sizeError}")
     private String title;
+    @NotEmpty(message = "{apply.message.emptyError}")
     private String content;
     private String cv;
     @Column(name = "created_date")
@@ -41,6 +47,9 @@ public class Apply implements Serializable{
     @ManyToOne
     @JoinColumn(name = "recruitment_id")
     private Recruitment recruitment;
+    
+    @Transient
+    private MultipartFile file;
 
     public Apply() {
     }
@@ -165,4 +174,17 @@ public class Apply implements Serializable{
     public void setRecruitment(Recruitment recruitment) {
         this.recruitment = recruitment;
     }
+    
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public void setFile(String file) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

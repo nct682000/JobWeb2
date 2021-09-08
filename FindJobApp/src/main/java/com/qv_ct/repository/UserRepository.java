@@ -5,6 +5,7 @@
  */
 package com.qv_ct.repository;
 
+import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import java.util.List;
 
@@ -13,7 +14,13 @@ import java.util.List;
  * @author nct68
  */
 public interface UserRepository {
-//    List<User> getUsers(String companyName);
-//    List<User> getUsers(String username);
-    List<User> getUsers();
+    List<User> getUserAll();
+    List<User> getCadidates();
+    List<User> getRecruiters();
+    List<User> getUsers(String username);
+    boolean addOrUpdate(User user, Role role);
+    User getUserbyId(int id);
+
 }
+
+

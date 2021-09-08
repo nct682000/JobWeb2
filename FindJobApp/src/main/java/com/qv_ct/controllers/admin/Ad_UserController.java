@@ -29,7 +29,7 @@ public class Ad_UserController {
 
     @RequestMapping("/admin/customers")
     public String index(Model model) {
-        model.addAttribute("users", this.userService.getUsers());
+        model.addAttribute("users", this.userService.getUserAll());
 
         return "user";
     }

@@ -8,10 +8,10 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
 import java.util.List;
-import java.util.function.Predicate;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,41 +25,73 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class RecruitmentRepositoryImpl implements RecruitmentRepository{
+public class RecruitmentRepositoryImpl implements RecruitmentRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
-    public List<Recruitment> getRecruitments(String kw, int page) {
+    public List<Recruitment> getRecruitments(int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        query = query.select(root);
+
+        Query q = session.createQuery(query);
+
+        int max = 4;
+        //q.setMaxResults(max);
+        //q.setFirstResult((page - 1) * max);
+
+        return q.getResultList();// bi loi cho nay nne, kop phai cai ham kia
+    }
+
+    @Override
+    public Recruitment getRecruitmentById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        Query q = session.createQuery("From Recruitment R Where R.id = id");
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        query = query.select(root);
+
+        Predicate p = builder.equal(root.get("id"), id);
+
+        query = query.where(p);
+        Query q = session.createQuery(query);
+
+        return (Recruitment) q.getSingleResult();
+    }
+
+    @Override
+    public List<Recruitment> searchRecruitment(String kw) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
-        
-        if (!kw.isEmpty() && kw != null){
-            Predicate p = (Predicate) builder.like(root.get("title").as(String.class),
-                    String.format("%%%s%%", kw));
-        }
-        
+
+        Predicate p = builder.like(root.get("title").as(String.class),
+                 String.format("%%%s%%", kw));
+
+        query = query.where(p);
         Query q = session.createQuery(query);
-        
-        int max = 4;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
-        
+
         return q.getResultList();
     }
 
     @Override
     public boolean addOrUpdate(Recruitment r) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try{
+        try {
             session.save(r);
-            
+
             return true;
-        }catch (Exception ex){
-            System.err.println("==Add Recruitment Error==" + ex.getMessage());
+        } catch (Exception ex) {
+            System.err.println("-- Add Recruitment Error --" + ex.getMessage());
             ex.printStackTrace();
         }
         return false;
@@ -69,16 +101,15 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
     public long countRecruitment() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("Select Count(*) From Recruitment");
-        
+
         return Long.parseLong(q.getSingleResult().toString());
     }
-    
-//    ------------------    admin   --------------------
+
+    //    ------------------    admin   --------------------
     @Override
     public List<Recruitment> getRecruitmentsAll() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Recruitment");
         return q.getResultList();
-    }   
-    
+    }
 }

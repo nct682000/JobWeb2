@@ -24,12 +24,22 @@ import org.springframework.stereotype.Service;
 public class RecruitmentServiceImpl implements RecruitmentService{
     @Autowired
     private RecruitmentRepository recruitmentRepository;
-    @Autowired
-    private Cloudinary cloudinary;
+//    @Autowired
+//    private Cloudinary cloudinary;
     
     @Override
-    public List<Recruitment> getRecruitments(String kw, int page) {
-        return this.recruitmentRepository.getRecruitments(kw, page);
+    public List<Recruitment> getRecruitments(int page) {
+        return this.recruitmentRepository.getRecruitments(page);
+    }
+    
+    @Override
+    public Recruitment getRecruitmentById(int id) {
+        return this.recruitmentRepository.getRecruitmentById(id);
+    }
+    
+    @Override
+    public List<Recruitment> searchRecruitments(String kw) {
+        return this.recruitmentRepository.searchRecruitment(kw);
     }
 
     @Override
@@ -54,8 +64,7 @@ public class RecruitmentServiceImpl implements RecruitmentService{
         return this.recruitmentRepository.countRecruitment();
     }
     
-    
-//    -----------   admin   ------------------
+    //    -----------   admin   ------------------
     @Override
     public List<Recruitment> getRecruitmentsAll() {
         return this.recruitmentRepository.getRecruitmentsAll();

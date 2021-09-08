@@ -27,7 +27,7 @@ public class ProvinceRepositoryImpl implements ProvinceRepository{
     @Override
     @Transactional
     public List<Province> getProvinces() {
-        Session s = sessionFactory.getObject().openSession();
+        Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Province");
         
         return q.getResultList();

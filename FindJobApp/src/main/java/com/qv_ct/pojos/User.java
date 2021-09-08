@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,19 +36,29 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+//    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
+//    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
+    @Transient
+    private String confirmPassword;
     @Column(name = "first_name")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
     @Column(name = "last_name")
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
-    @Column(name = "company_name")
+    @Column(name = "company_name", nullable = true)
     private String companyName;
+    @Column(nullable = true)
     private Sex sex;
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String mail;
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
-    private Role role;
+    private Role role = Role.CANDIDATE;
+    private boolean active = true;
     @Column(name = "web_master")
     private Boolean webMaster = false;
     
@@ -76,6 +89,11 @@ public class User implements Serializable{
     
     @Transient
     private MultipartFile file;
+    
+    @Transient
+    private String address;
+    @Transient
+    private Province province;
 
     public User() {
     }
@@ -380,6 +398,63 @@ public class User implements Serializable{
      */
     public void setInteractions(Set<Interaction> interactions) {
         this.interactions = interactions;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+    
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @return the province
+     */
+    public Province getProvince() {
+        return province;
+    }
+
+    /**
+     * @param province the province to set
+     */
+    public void setProvince(Province province) {
+        this.province = province;
     }
     
     

@@ -46,21 +46,21 @@ public class HibernateConfig {
         dataSource.setPassword(env.getProperty("hibernate.connection.password"));
         return dataSource;
     }
-    
+
     public Properties hibernateProperties() {
         Properties props = new Properties();
         props.setProperty(SHOW_SQL, env.getProperty("hibernate.showSql"));
         props.setProperty(DIALECT, env.getProperty("hibernate.dialect"));
         return props;
     }
-    
+
     @Bean
     public HibernateTransactionManager transactionManager() {
-    HibernateTransactionManager transactionManager
-        = new HibernateTransactionManager();
-    transactionManager.setSessionFactory(
-    getSessionFactory().getObject());
-    return transactionManager;
+        HibernateTransactionManager transactionManager
+                = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(
+                getSessionFactory().getObject());
+        return transactionManager;
     }
-    
+
 }

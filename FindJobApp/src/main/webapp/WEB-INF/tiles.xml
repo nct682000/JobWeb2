@@ -10,37 +10,9 @@ and open the template in the editor.
             "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
-        <put-attribute name="title"     value="..." />
-        <put-attribute name="header"    value="/WEB-INF/layout/header.jsp" />
-        <put-attribute name="content"   value="BASE" />
-        <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
-    </definition>
     
-    <definition name="index" extends="baseLayout">
-        <put-attribute name="title"     value="Trang Chủ" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/index.jsp" />
-    </definition>
     
-    <definition name="login" extends="baseLayout">
-        <put-attribute name="title"     value="Đăng nhập" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/login.jsp" />
-    </definition>
     
-    <definition name="register" extends="baseLayout">
-        <put-attribute name="title"     value="Đăng ký" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/register.jsp" />
-    </definition>
-    
-    <definition name="user" extends="baseLayout">
-        <put-attribute name="title"     value="Trang cá nhân" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/user.jsp" />
-    </definition>
-    
-    <definition name="addRecruitment" extends="baseLayout">
-        <put-attribute name="title"     value="Đăng tin tuyển dụng" />
-        <put-attribute name="content"   value="/WEB-INF/jsp/addRecruitment.jsp" />
-    </definition>
     
     
     <!--    admin     -->
@@ -73,6 +45,77 @@ and open the template in the editor.
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/test.jsp" />
     </definition>
 
+
+
+
+    <!--    client  -->
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+     <definition name="admin" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
+    </definition>
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang Chủ" />
+        <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
+    </definition>
+    
+    <definition name="searchRecruitment" extends="baseLayout">
+        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/searchRecruitment.jsp" />
+    </definition>
+    
+    <definition name="recruitmentDetail" extends="baseLayout">
+        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentDetail.jsp" />
+    </definition>
+    
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
+    </definition>
+    
+    <definition name="cRegister" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cRegister.jsp" />
+    </definition>
+    
+    <definition name="rRegister" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
+    </definition>
+    
+    <definition name="candidate" extends="baseLayout">
+        <put-attribute name="title" value="Trang cá nhân" />
+        <put-attribute name="content" value="/WEB-INF/jsp/candidate.jsp" />
+    </definition>
+    
+    <definition name="addRecruitment" extends="baseLayout">
+        <put-attribute name="title" value="Đăng tin tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
+    </definition>
+    
+    <definition name="addTag" extends="baseLayout">
+        <put-attribute name="title" value="Thêm nhãn dán" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
+    </definition>
+    
+    <definition name="addApply" extends="baseLayout">
+        <put-attribute name="title" value="Ứng tuyển" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addApply.jsp" />
+    </definition>
+    
+    <definition name="recruiter" extends="baseLayout">
+        <put-attribute name="title" value="Nhà tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruiter.jsp" />
+    </definition>
+    
     
 </tiles-definitions>
 
