@@ -18,4 +18,7 @@ public interface RecruitmentService {
     Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
+    
+    //    --------------    admin   -------------------
+    List<Recruitment> getRecruitmentsAll();
 }

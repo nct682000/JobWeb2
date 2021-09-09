@@ -14,9 +14,13 @@ import java.util.List;
  * @author nct68
  */
 public interface UserRepository {
+    List<User> getUserAll();
     List<User> getCadidates();
     List<User> getRecruiters();
     List<User> getUsers(String username);
     boolean addOrUpdate(User user, Role role);
     User getUserbyId(int id);
+
 }
+
+

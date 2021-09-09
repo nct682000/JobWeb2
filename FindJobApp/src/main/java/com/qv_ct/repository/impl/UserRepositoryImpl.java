@@ -98,4 +98,15 @@ public class UserRepositoryImpl implements UserRepository{
         return false;
     }
     
+    
+    
+//    admin
+    @Override
+//    @Transactional      // giao tác từng phần
+    public List<User> getUserAll() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From User");
+        return q.getResultList();
+    }   
+    
 }

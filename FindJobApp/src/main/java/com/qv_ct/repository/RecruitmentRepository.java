@@ -18,4 +18,7 @@ public interface RecruitmentRepository {
     Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
+    
+    //    -------------     admin       --------------
+    List<Recruitment> getRecruitmentsAll();
 }

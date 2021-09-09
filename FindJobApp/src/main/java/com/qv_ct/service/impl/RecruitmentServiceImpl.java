@@ -64,5 +64,10 @@ public class RecruitmentServiceImpl implements RecruitmentService{
         return this.recruitmentRepository.countRecruitment();
     }
     
+    //    -----------   admin   ------------------
+    @Override
+    public List<Recruitment> getRecruitmentsAll() {
+        return this.recruitmentRepository.getRecruitmentsAll();
+    }
     
 }

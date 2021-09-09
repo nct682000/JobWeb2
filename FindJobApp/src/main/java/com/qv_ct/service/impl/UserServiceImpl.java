@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
  *
  * @author nct68
  */
-@Service("userDetailsService")
+@Service
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserService{
         
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
                 
+    }
+    
+//    admin
+    @Override
+    public List<User> getUserAll() {
+        return this.userRepository.getUserAll();
     }
     
 }

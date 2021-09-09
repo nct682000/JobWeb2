@@ -30,21 +30,24 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.qv_ct.repository",
     "com.qv_ct.service"
 })
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService)
+        auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
-    
+
     @Bean
-    public Cloudinary cloudinary(){
+    public Cloudinary cloudinary() {
         Cloudinary c = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "nct682000",
                 "api_key", "163411336543774",
@@ -57,20 +60,20 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/login")
-        .usernameParameter("username")
-        .passwordParameter("password");
-        
+                .usernameParameter("username")
+                .passwordParameter("password");
+
         http.formLogin().defaultSuccessUrl("/").failureUrl("/login/?error");
-        
+
         http.logout().logoutSuccessUrl("/login");
-        
+
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
-        
-        http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ADMIN')");
-        
+
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .antMatchers("/admin/**").access("hasRole('ADMIN')");
+
         http.csrf().disable();
-        
+
     }
-        
+
 }
