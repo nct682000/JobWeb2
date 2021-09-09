@@ -59,8 +59,6 @@ public class User implements Serializable{
     private String avatar;
     private Role role = Role.CANDIDATE;
     private boolean active = true;
-    @Column(name = "web_master")
-    private Boolean webMaster = false;
     
     @OneToOne
     @JoinColumn(name = "location_id", nullable = true)
@@ -258,20 +256,6 @@ public class User implements Serializable{
      */
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    /**
-     * @return the webMaster
-     */
-    public Boolean getWebMaster() {
-        return webMaster;
-    }
-
-    /**
-     * @param webMaster the webMaster to set
-     */
-    public void setWebMaster(Boolean webMaster) {
-        this.webMaster = webMaster;
     }
 
     /**
