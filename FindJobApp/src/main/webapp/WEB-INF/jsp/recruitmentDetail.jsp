@@ -19,12 +19,12 @@
     <div class="card overflow-hidden bg-light my-3">
         <div class="card-content">
           <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
+            <div class="media align-items-stretch row">
                 <!-- Image -->
-              <div class="align-self-center mr-5">
-                  <image src="${recDetail.recruiter.avatar}" alt="Ảnh" style="width:280px; height: 280px"/>
+              <div class="align-self-center col-3">
+                  <image src="${recDetail.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/>
               </div>
-              <div class="media-body mt-3">
+              <div class="media-body mt-3 col-7">
                     <!-- text -->
                     <h5 class="text-info font-weight-bold">THÔNG TIN TUYỂN DỤNG</h5>
                     
@@ -84,7 +84,7 @@
                     </div>
                     
               </div>
-                    <div class="font-weight-bold text-secondary">
+                    <div class="font-weight-bold text-secondary col-2">
                         <a href="#" class="btn btn-info font-weight-bold">ỨNG TUYỂN CÔNG VIỆC NÀY</a>                 
                     </div>
             </div>

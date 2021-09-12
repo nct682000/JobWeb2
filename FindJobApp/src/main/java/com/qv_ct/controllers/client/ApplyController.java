@@ -9,6 +9,7 @@ import com.qv_ct.pojos.Apply;
 import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
+import java.math.BigDecimal;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class ApplyController {
         model.addAttribute("applies", this.applyService.getApplies());
         model.addAttribute("apply", new Apply());
         model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments(""));
+        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments("", 0, 0, -1, 0));
         
         return "addApply";
     }
@@ -48,7 +49,7 @@ public class ApplyController {
             BindingResult result){
         
         model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments(""));
+        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments("", 0, 0, -1, 0));
         
         if(!result.hasErrors()){
            if(this.applyService.addOrUpdate(apply) == true)

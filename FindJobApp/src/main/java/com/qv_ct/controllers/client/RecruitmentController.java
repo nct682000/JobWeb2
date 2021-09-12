@@ -15,6 +15,7 @@ import com.qv_ct.service.UserService;
 import com.qv_ct.validator.RecruitmentValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,9 +85,17 @@ public class RecruitmentController {
     public String search(Model model, 
             @RequestParam(required = false) Map<String, String> params){
         
-        String s = params.getOrDefault("kw", "kw");
+        String kw = params.getOrDefault("kw", "kw");
+        String careerId = params.getOrDefault("careerId", "careerId");
+        String provinceId = params.getOrDefault("provinceId", "provinceId");
+        String form = params.getOrDefault("form", "form");
+        String salary = params.getOrDefault("salary", "salary");
         model.addAttribute("recruitments", 
-                this.recruitmentService.searchRecruitments(s));
+                this.recruitmentService.searchRecruitments(kw,
+                        Integer.parseInt(careerId),
+                        Integer.parseInt(provinceId),
+                        Integer.parseInt(form),
+                        Integer.parseInt(salary)));
         
         return "searchRecruitment";
     }

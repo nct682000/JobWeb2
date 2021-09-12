@@ -14,15 +14,15 @@
 <h2 class="text-center text-info mb-5">Trang người dùng</h2>
 <!-- Card -->
 
-<div class="card overflow-hidden my-3 container-fluid" style="background-color: lemonchiffon">
+<div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
     <div class="card-content">
       <div class="card-body cleartfix">
-        <div class="media align-items-stretch">
+        <div class="media align-items-stretch row">
             <!-- Image -->
-          <div class="align-self-center mr-5">
-              <image src="${user[0].avatar}" alt="Ảnh" style="width:200px; height: 200px"/>
-          </div>
-          <div class="media-body mt-3">
+            <div class="align-self-center col-3">
+                <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
+            </div>
+            <div class="media-body mt-3 col-7">
                 <!-- name -->
                 <h5 class="text-info font-weight-bold">${user[0].firstName} ${user[0].lastName}</h5>
                 <!-- gender -->
@@ -34,10 +34,10 @@
                 <!-- phone -->
                 <div class="text-secondary font-weight-bold">Điện thoại: ${user[0].phone}</div>
 
-          </div>
-                <div class="font-weight-bold text-secondary">
-                    <a href="#" class="btn btn-info font-weight-bold">Chỉnh sửa</a>                 
-                </div>
+            </div>
+            <div class="font-weight-bold text-secondary col-2">
+                <a href="#" class="btn btn-info font-weight-bold">Chỉnh sửa</a>                 
+            </div>
         </div>
       </div>
     </div>

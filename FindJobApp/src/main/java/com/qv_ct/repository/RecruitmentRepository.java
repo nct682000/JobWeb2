@@ -6,6 +6,7 @@
 package com.qv_ct.repository;
 
 import com.qv_ct.pojos.Recruitment;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,7 +15,8 @@ import java.util.List;
  */
 public interface RecruitmentRepository {
     List<Recruitment> getRecruitments(int page);
-    List<Recruitment> searchRecruitment(String kw);
+    List<Recruitment> searchRecruitment(String kw, int careerId, int provinceId,
+                                        int form, int salary);
     Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();

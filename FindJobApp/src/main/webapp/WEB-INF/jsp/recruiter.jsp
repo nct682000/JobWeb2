@@ -15,31 +15,33 @@
     <h2 class="text-center text-success mb-5">${ru.companyName}</h2>
 
 <!-- Card -->
-    <div class="card overflow-hidden my-3" style="background-color: lemonchiffon">
+    <div class="card overflow-hidden my-3" style="background-color: windowframe">
         <div class="card-content">
           <div class="card-body cleartfix">
-            <div class="media align-items-stretch">
+            <div class="media align-items-stretch row">
                 <!-- Image -->
-              <div class="align-self-center mr-5">
-                  <image src="${ru.avatar}" alt="Ảnh" style="width:200px; height: 200px"/>
-              </div>
-              <div class="media-body mt-3">
-                    <!-- company name -->
-                    <h5 class="text-info font-weight-bold">${ru.companyName}</h5>
+                    <div class="col-3 align-self-center">
+                        <image src="${ru.avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                    </div>
+                    
+                    <div class="media-body mt-3 col-7">
+                        <!-- company name -->
+                        <h5 class="text-info font-weight-bold">${ru.companyName}</h5>
 
-                    <!-- location -->
-                    <div class="text-dark font-weight-bold">ĐỊA ĐIỂM</div>
-                    <div class="text-secondary font-weight-bold">${ru.location.address}, ${ru.location.province.name}</div>
+                        <!-- location -->
+                        <div class="text-dark font-weight-bold">ĐỊA ĐIỂM</div>
+                        <div class="text-secondary font-weight-bold">${ru.location.address}, ${ru.location.province.name}</div>
 
-                   <!-- location -->
-                    <div class="text-dark font-weight-bold mt-2">LIÊN HỆ</div>
-                    <div class="text-secondary font-weight-bold">Email: ${ru.mail}</div>
-                    <div class="text-secondary font-weight-bold">Điện thoại: ${ru.phone}</div>
+                        <!-- location -->
+                        <div class="text-dark font-weight-bold mt-2">LIÊN HỆ</div>
+                        <div class="text-secondary font-weight-bold">Email: ${ru.mail}</div>
+                        <div class="text-secondary font-weight-bold">Điện thoại: ${ru.phone}</div>
 
-              </div>
-                    <div class="font-weight-bold text-secondary">
+                    </div>
+                    <div class="font-weight-bold text-secondary col-2">
                         <a href="#" class="btn btn-info btn-lg font-weight-bold align-self-mid">ĐÁNH GIÁ</a>                 
                     </div>
+                
             </div>
           </div>
         </div>
@@ -70,8 +72,8 @@
             <!-- COmment -->
             <c:forEach var="cmt" items="${comments}">
                 <div class="mt-2 row">
-                    <div class="col-md-auto text-center" style="width: 50px">
-                        <img alt="Avatar" src="${cmt.commenter.avatar}" style="width: 40px; height: 40px"/>
+                    <div class="col-md-2 text-center">
+                        <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
                     </div>
                     <div class="col-md ml-2">
                         <div class="card">

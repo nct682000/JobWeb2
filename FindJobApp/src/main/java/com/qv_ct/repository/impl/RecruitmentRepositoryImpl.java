@@ -5,8 +5,12 @@
  */
 package com.qv_ct.repository.impl;
 
+import com.qv_ct.pojos.Location;
+import com.qv_ct.pojos.Province;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -67,17 +71,41 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     }
 
     @Override
-    public List<Recruitment> searchRecruitment(String kw) {
+    public List<Recruitment> searchRecruitment(String kw, int careerId, int provinceId,
+                                        int form, int salary) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
-
-        Predicate p = builder.like(root.get("title").as(String.class),
-                 String.format("%%%s%%", kw));
-
-        query = query.where(p);
+        
+        Predicate p1 = builder.equal(root, root);
+        Predicate p2 = builder.equal(root, root);
+        Predicate p3 = builder.equal(root, root);
+        Predicate p4 = builder.equal(root, root);
+        Predicate p5 = builder.equal(root, root);
+        
+        if (!kw.isBlank()){
+            p1 = builder.like(root.get("title").as(String.class),
+                    String.format("%%%s%%", kw));
+        }
+        
+        if (careerId != 0)
+            p2 = builder.equal(root.get("career"), careerId);
+        
+        if (provinceId != 0)
+            p3 = builder.equal(root.get("recruiter").get("location").get("province"), provinceId);
+        
+        if (form != -1)
+            p4 = builder.equal(root.get("form"), form);
+        
+        if (salary != 0){
+            Predicate p51 = builder.ge(root.get("salaryFrom"), salary);
+            Predicate p52 = builder.ge(root.get("salaryTo"), salary);
+            p5 = builder.or(p51, p52);
+        }
+        
+        query = query.where(builder.and(p1, p2, p3, p4, p5));
         Query q = session.createQuery(query);
 
         return q.getResultList();

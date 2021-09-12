@@ -11,6 +11,7 @@ import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
 import com.qv_ct.service.RecruitmentService;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,9 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     }
     
     @Override
-    public List<Recruitment> searchRecruitments(String kw) {
-        return this.recruitmentRepository.searchRecruitment(kw);
+    public List<Recruitment> searchRecruitments(String kw, int careerId, int provinceId,
+                                        int form, int salary) {
+        return this.recruitmentRepository.searchRecruitment(kw, careerId, provinceId, form, salary);
     }
 
     @Override
