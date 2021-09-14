@@ -17,6 +17,7 @@ public interface RecruitmentService {
     List<Recruitment> getRecruitments(int page);
     List<Recruitment> searchRecruitments(String kw, int careerId, int provinceId,
                                         int form, int salary);
+    List<Object[]> getRecruitmentByComment(int num);
     Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();

@@ -20,6 +20,7 @@ public interface UserRepository {
     List<User> getUsers(String username);
     boolean addOrUpdate(User user, Role role);
     User getUserbyId(int id);
+    List<Object[]> getTopRecruiter(int num);
 
 }
 

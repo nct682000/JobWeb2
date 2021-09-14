@@ -5,8 +5,10 @@
  */
 package com.qv_ct.controllers.client;
 
+import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
+import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.UserService;
 import com.qv_ct.validator.UserValidator;
 import com.qv_ct.validator.WebAppValidator;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,6 +36,10 @@ public class UserController {
     private UserService userDetailsService;
     @Autowired
     private WebAppValidator userValidator;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ApplyService applyService;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -96,5 +103,18 @@ public class UserController {
        model.addAttribute("errMsg", errMsg);
        
         return "rRegister";
+    }
+    
+    @GetMapping("/user/{name}")
+    public String candidate(Model model, @PathVariable String name) {
+       model.addAttribute("user", this.userService.getUsers(name));
+       model.addAttribute("userUpdate", new User());
+       model.addAttribute("recruitment", new Recruitment());
+       User u = this.userService.getUsers(name).get(0);
+       int id = u.getId();
+       System.out.println(id);
+       model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
+        
+       return "userpage";
     }
 }

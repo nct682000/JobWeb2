@@ -5,7 +5,9 @@
  */
 package com.qv_ct.repository.impl;
 
+import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Location;
+import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
@@ -52,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public User getUserbyId(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
+        
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
@@ -108,5 +110,29 @@ public class UserRepositoryImpl implements UserRepository{
         Query q = s.createQuery("From User");
         return q.getResultList();
     }   
+
+    @Override
+    public List<Object[]> getTopRecruiter(int num) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootU = query.from(User.class);
+        Root rootR = query.from(Recruitment.class);
+        
+        query = query.where(builder.equal(rootR.get("recruiter"), rootU.get("id")));
+        query.multiselect(rootU.get("id"),
+                rootU.get("compapyName"),
+                rootU.get("avatar"),
+                builder.count(rootU.get("id")));
+        
+        query = query.groupBy(rootU.get("id"));
+        query = query.orderBy(builder.desc(builder.count(rootU.get("id"))));
+        
+        Query q = session.createQuery(query);
+        q.setMaxResults(num);
+        
+        return q.getResultList();
+    }
     
 }

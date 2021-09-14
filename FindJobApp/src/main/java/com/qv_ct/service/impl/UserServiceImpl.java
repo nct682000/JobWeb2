@@ -103,5 +103,10 @@ public class UserServiceImpl implements UserService{
     public List<User> getUserAll() {
         return this.userRepository.getUserAll();
     }
+
+    @Override
+    public List<Object[]> getTopRecruiter(int num) {
+        return this.userRepository.getTopRecruiter(num);
+    }
     
 }

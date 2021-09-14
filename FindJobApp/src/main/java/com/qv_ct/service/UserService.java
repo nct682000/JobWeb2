@@ -20,6 +20,7 @@ public interface UserService extends UserDetailsService{
     List<User> getUsers(String username);
     boolean addOrUpdate(User user, Role role);
     User getUserById(int id);
+    List<Object[]> getTopRecruiter(int num);
     
 //    admin
     List<User> getUserAll();

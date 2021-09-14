@@ -35,6 +35,8 @@ public class IndexController {
     public void commonAttr(Model model){
         model.addAttribute("careers", this.careerService.getCareers());
         model.addAttribute("provinces", this.provinceService.getProvinces());
+        model.addAttribute("trendRecruitment",
+                this.recruitmentService.getRecruitmentByComment(5));
     }
     
     @RequestMapping("/")

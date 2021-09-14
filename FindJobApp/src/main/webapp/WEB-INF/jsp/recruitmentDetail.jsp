@@ -94,7 +94,7 @@
             
     <div class="row mt-3" >
         <!-- col 1 -->
-        <div class="col-md-10 col-xl-10">
+        <div class="col-md-8 col-xl-8">
             <!-- Benefit -->
             <h5 class="text-dark font-weight-bold">PHÚC LỢI</h5>
             <div class="card-content m-1 bg-light row mb-2">
@@ -134,8 +134,54 @@
         </div>
         
         <!-- col 2 -->
-        <div class="col-md-2 col-xl-2" style="border: 2px dotted blue; border-radius: 10px">
-            <div>Text</div>
+        <div class="col-md-4 col-xl-4">
+            <h4>Các tin nổi bật</h4>
+            <div class="m-1 mb-2">
+                <c:forEach var="trend" items="${trendRecruitment}" >
+                    <div class="mb-3 card bg-light">
+                        <div class="row">
+                            <!-- image -->
+                            <div class="col-3">
+                              <image src="${trend[3]}" alt="Ảnh" class="img-fluid rounded"/>
+                            </div>
+
+                            <div class="col-9">
+
+                                <!-- title -->
+                                <h5><a href="/FindJobApp/recruitment/${trend[0]}" class="text-dark">${trend[1]}</a></h5> 
+
+                                <!-- company_name -->
+                                <div><a href="/FindJobApp/recruiter/${trend[10]}">${trend[2]}</a></div>
+
+                                <!-- form -->
+                                <div>Chức vụ: ${trend[5].toString()}</div>
+
+                                <!-- salary -->
+                                <div class="text-success font-weight-bold">
+                                    <c:if test="${trend[6] != null && trend[7] != null}">
+                                        $Lương: <fmt:formatNumber value="${trend[6]}" type="number" />đ - <fmt:formatNumber value="${trend[7]}" type="number" />đ 
+                                    </c:if>
+                                    <c:if test="${trend[6] != null && trend[7] == null}">
+                                        $Lương: từ <fmt:formatNumber value="${trend[6]}" type="number" />đ 
+                                    </c:if>
+                                    <c:if test="${trend[6] == null && trend[7] != null}">
+                                        $Lương: lên đến <fmt:formatNumber value="${trend[7]}" type="number" />đ 
+                                    </c:if>
+                                    <c:if test="${trend[6] == null && trend[7] == null}">
+                                        $Lương: thỏa thuận
+                                    </c:if>
+                                </div>
+
+                                <!-- Province -->
+                                <div>Khu vực: ${trend[9]}</div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                          
+                </c:forEach>
+            </div>
         </div>
+        
     </div>
 </div>

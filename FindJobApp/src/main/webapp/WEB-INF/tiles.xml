@@ -91,9 +91,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
     </definition>
     
-    <definition name="candidate" extends="baseLayout">
+    <definition name="userpage" extends="baseLayout">
         <put-attribute name="title" value="Trang cá nhân" />
-        <put-attribute name="content" value="/WEB-INF/jsp/candidate.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/userPage.jsp" />
     </definition>
     
     <definition name="addRecruitment" extends="baseLayout">

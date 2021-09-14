@@ -5,12 +5,9 @@
  */
 package com.qv_ct.repository.impl;
 
-import com.qv_ct.pojos.Location;
-import com.qv_ct.pojos.Province;
+import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -138,6 +135,37 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     public List<Recruitment> getRecruitmentsAll() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Recruitment");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getRecruitmentByComment(int num) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootR = query.from(Recruitment.class);
+        Root rootA = query.from(Apply.class);
+        
+        query = query.where(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        query.multiselect(rootR.get("id"),  // 0
+                rootR.get("title"), // 1
+                rootR.get("recruiter").get("companyName"),  // 2
+                rootR.get("recruiter").get("avatar"),   // 3
+                builder.count(rootR.get("id")),     // 4
+                rootR.get("form"),      // 5
+                rootR.get("salaryFrom"),    // 6
+                rootR.get("salaryTo"),      // 7
+                rootR.get("updatedDate"),   // 8
+                rootR.get("recruiter").get("location").get("province").get("name"),   // 9
+                rootR.get("recruiter").get("id"));  // 10
+        
+        query = query.groupBy(rootR.get("id"));
+        query = query.orderBy(builder.desc(builder.count(rootR.get("id"))));
+        
+        Query q = session.createQuery(query);
+        q.setMaxResults(num);
+        
         return q.getResultList();
     }
 }

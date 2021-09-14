@@ -151,7 +151,7 @@
                     </div>
                     
                     <div class="row">
-                        <!-- input first name -->
+                        <!-- Choose Avatar -->
                         <div class="form-group col-md-7 col-xl-7">
                             <div class="input-group">
                                     <div class="input-group-prepend">
@@ -161,10 +161,10 @@
                             </div>
                         </div>
 
-                        <!-- input last name -->
+                        <!-- Avatar view -->
                         <div class="form-group col-md-5 col-xl-5">
                             <div>
-                                <img src="" style="height: 100px" />
+                                <img src="" class="img-thumbnail" />
                             </div>
                         </div> 
                         

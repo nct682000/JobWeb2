@@ -94,6 +94,22 @@
         </div>
 
     </div>
+              
+              <!-- Top Recruitment -->
+    <hr>
+    <div class="row">
+        <c:forEach var="trend" items="${trendRecruitment}">
+            <div class="col card m-3">
+                <div>
+                    <image src="${trend[3]}" alt="${trend[2]} avatar" class="img-thumbnail" />
+                </div>
+                <div>${trend[0]}</div>
+                <div>${trend[1]}</div>
+                <div>${trend[4]}</div>
+            </div>
+        </c:forEach>
+    </div>
+    <hr>
 
     <!-- List Recruitment -->
     <h4 class="text-info font-weight-bold">Tin mới nhất</h4>
@@ -101,17 +117,14 @@
         <c:forEach var="r" items="${recruitments}">
 
             <div class="col-xl-6 col-md-12 mb-4">
-                <div class="card overflow-hidden bg-light">
-                  <div class="card-content">
-                    <div class="card-body cleartfix">
-                      <div class="media align-items-stretch">
-
-                          <!-- image -->
-                        <div class="align-self-center mr-3">
-                            <a href="/FindJobApp/recruitment/${r.id}"><image src="${r.recruiter.avatar}" alt="Ảnh" style="width:150px; height: 150px"/></a>
+                <div class="bg-light mx-2 card">
+                    <div class="row">
+                        <!-- image -->
+                        <div class="col-3">
+                            <a href="/FindJobApp/recruitment/${r.id}"><image src="${r.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/></a>
                         </div>
 
-                        <div class="media-body">
+                        <div class="col-6">
 
                             <!-- title -->
                             <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
@@ -124,18 +137,18 @@
 
                             <!-- salary -->
                             <div class="text-success font-weight-bold">
-                              <c:if test="${r.salaryFrom != null && r.salaryTo != null}">
-                                  $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
-                              </c:if>
-                              <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
-                                  $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
-                              </c:if>
-                              <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
-                                  $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
-                              </c:if>
-                              <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
-                                  $Lương: thỏa thuận
-                              </c:if>
+                                <c:if test="${r.salaryFrom != null && r.salaryTo != null}">
+                                    $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                </c:if>
+                                <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
+                                    $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
+                                </c:if>
+                                <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
+                                    $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                                </c:if>
+                                <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
+                                    $Lương: thỏa thuận
+                                </c:if>
                             </div>
 
                             <!-- Province -->
@@ -143,16 +156,15 @@
 
                         </div>
 
-                            <!-- updated_date -->
-                        <div class="font-weight-bold text-secondary">
+                        <!-- updated_date -->
+                        <div class="font-weight-bold text-secondary col-3">
                             <fmt:formatDate type="date" value="${r.updatedDate}" />                      
                         </div>
-                      </div>
                     </div>
-                  </div>
+
                 </div>
             </div>
-
+           
         </c:forEach>
 
     </div>
@@ -162,5 +174,5 @@
             <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
         </c:forEach>
     </ul>
-
+    
 </div>
