@@ -20,5 +20,5 @@ public interface RecruitmentRepository {
     long countRecruitment();
     
     //    -------------     admin       --------------
-    List<Recruitment> getRecruitmentsAll();
+    List<Recruitment> getRecruitmentsAll(int page);
 }

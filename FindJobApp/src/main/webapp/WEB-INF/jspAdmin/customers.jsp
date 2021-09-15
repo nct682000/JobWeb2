@@ -58,9 +58,9 @@
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                <li class="page-item"><a class="page-link" href="<c:url value="/admin/customers" />?page=${i}">${i}</a></li>
+                                                </c:forEach>
                                             <li class="page-item">
                                                 <a class="page-link" href="#" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
@@ -120,7 +120,7 @@
                                                     ${u.id} 
                                                 </td>
                                                 <td>
-                                                    ${u.username}
+                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
                                                 </td>                                            
                                                 <td>
                                                     ${u.firstName}  ${u.lastName}  
@@ -142,13 +142,9 @@
                                                 </td>
                                                 <td>
                                                     <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <div class="d-flex">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                        </div>
-                                                        <button class="bi bi-pencil-fill btn"></button>
-                                                        <button class="bi bi-trash-fill btn"></button>
-                                                    </div>
+                                                    <button class="btn btn-success">Enable</button>
+                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>
                                         </c:when>
@@ -158,7 +154,7 @@
                                                     ${u.id} 
                                                 </td>
                                                 <td>
-                                                    ${u.username}
+                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
                                                 </td>                                            
                                                 <td>
                                                     ${u.firstName}  ${u.lastName}  

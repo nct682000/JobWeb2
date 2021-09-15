@@ -9,14 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.qv_ct.pojos.User;
 import com.qv_ct.service.UserService;
+import com.qv_ct.service.ApplyService;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMethod;
+//import javax.validation.Valid;
+import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -26,10 +32,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Ad_UserController {
     @Autowired     
     private UserService userService;
+    @Autowired
+    private ApplyService applyService;
 
     @RequestMapping("/admin/customers")
-    public String index(Model model) {
-        model.addAttribute("users", this.userService.getUserAll());
+    public String index(Model model,
+            @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("users", this.userService.getUserAll(page));
+        model.addAttribute("counter", this.userService.countUser());
 
         return "user";
     }
@@ -39,5 +50,17 @@ public class Ad_UserController {
 
         return "edit-user";
     }
+    
+    @RequestMapping("/admin/customers/{name}")
+    public String userDetail(Model model, @PathVariable String name) {
+       model.addAttribute("user", this.userService.getUsers(name));
+       User u = this.userService.getUsers(name).get(0);
+       int id = u.getId();
+       System.out.println(id);
+       model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
+        
+       return "ad_userDetail";
+    }
+    
     
 }

@@ -22,5 +22,6 @@ public interface UserService extends UserDetailsService{
     User getUserById(int id);
     
 //    admin
-    List<User> getUserAll();
+    List<User> getUserAll(int page);
+    long countUser();
 }

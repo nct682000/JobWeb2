@@ -14,7 +14,12 @@ import java.util.List;
  * @author nct68
  */
 public interface UserRepository {
-    List<User> getUserAll();
+    List<User> getUserAll(int page);
+    long countUser();
+    
+    
+    
+    
     List<User> getCadidates();
     List<User> getRecruiters();
     List<User> getUsers(String username);

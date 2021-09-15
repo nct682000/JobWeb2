@@ -10,7 +10,7 @@ import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
 import java.util.List;
-import javax.persistence.Query;
+import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository{
             Predicate p = builder.equal(root.get("username").as(String.class), username);
             query = query.where(p);
         }
-//        
+        
         Query q = session.createQuery(query);
         
         return q.getResultList();
@@ -102,11 +102,23 @@ public class UserRepositoryImpl implements UserRepository{
     
 //    admin
     @Override
-//    @Transactional      // giao tác từng phần
-    public List<User> getUserAll() {
+    public List<User> getUserAll(int page) {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From User");
+        
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        
         return q.getResultList();
     }   
+    
+    @Override
+    public long countUser() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) From User");
+        
+        return Long.parseLong(q.getSingleResult().toString());
+    }
     
 }

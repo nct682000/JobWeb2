@@ -13,7 +13,15 @@ import java.util.List;
  * @author nct68
  */
 public interface ApplyService {
+
     List<Apply> getApplies();
+
     List<Apply> getAppliesByUserId(int id);
+
     boolean addOrUpdate(Apply a);
+
+//    admin
+    List<Apply> getApplyAll(int page);
+
+    long countApplies();
 }

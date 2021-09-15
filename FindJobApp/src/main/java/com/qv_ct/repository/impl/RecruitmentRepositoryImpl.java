@@ -107,9 +107,14 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
     //    ------------------    admin   --------------------
     @Override
-    public List<Recruitment> getRecruitmentsAll() {
+    public List<Recruitment> getRecruitmentsAll(int page) {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Recruitment");
-        return q.getResultList();
+        
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+        
+        return q.getResultList();        
     }
 }

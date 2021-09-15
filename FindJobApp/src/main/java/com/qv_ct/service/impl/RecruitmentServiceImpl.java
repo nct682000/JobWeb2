@@ -66,8 +66,8 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     
     //    -----------   admin   ------------------
     @Override
-    public List<Recruitment> getRecruitmentsAll() {
-        return this.recruitmentRepository.getRecruitmentsAll();
+    public List<Recruitment> getRecruitmentsAll(int page) {
+        return this.recruitmentRepository.getRecruitmentsAll(page);
     }
     
 }

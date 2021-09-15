@@ -100,8 +100,13 @@ public class UserServiceImpl implements UserService{
     
 //    admin
     @Override
-    public List<User> getUserAll() {
-        return this.userRepository.getUserAll();
+    public List<User> getUserAll(int page) {
+        return this.userRepository.getUserAll(page);
+    }
+    
+    @Override
+    public long countUser() {
+        return this.userRepository.countUser();
     }
     
 }

@@ -20,6 +20,7 @@
     </div>
     <a href="/FindJobApp/admin/customers" class="w3-bar-item w3-button">Customers</a>
     <a href="/FindJobApp/admin/recruitment" class="w3-bar-item w3-button">Recruitments</a>
+    <a href="/FindJobApp/admin/applies" class="w3-bar-item w3-button">Applies</a>
     <a href="/FindJobApp/admin/test" class="w3-bar-item w3-button">test</a>
 </div>
 

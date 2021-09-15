@@ -21,10 +21,11 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class ApplyServiceImpl implements ApplyService{
+public class ApplyServiceImpl implements ApplyService {
+
     @Autowired
     private ApplyRepository applyRepository;
-    
+
     @Autowired
     private Cloudinary cloudinary;
 
@@ -36,20 +37,20 @@ public class ApplyServiceImpl implements ApplyService{
     @Override
     public boolean addOrUpdate(Apply a) {
         try {
-            if(!a.getFile().isEmpty()){
+            if (!a.getFile().isEmpty()) {
                 Map map = this.cloudinary.uploader().upload(a.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
 
                 a.setCv((String) map.get("secure_url"));
             }
-            
+
             return this.applyRepository.addOrUpdate(a);
 
         } catch (IOException ex) {
             System.err.println("-----Add Error-----" + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 
@@ -57,5 +58,19 @@ public class ApplyServiceImpl implements ApplyService{
     public List<Apply> getAppliesByUserId(int id) {
         return this.applyRepository.getAppliesByUserId(id);
     }
+
     
+    
+//    admin
+    
+    @Override
+    public List<Apply> getApplyAll(int page) {
+        return this.applyRepository.getApplyAll(page);
+    }
+
+    @Override
+    public long countApplies() {
+        return this.applyRepository.countApplies();
+    }
+
 }

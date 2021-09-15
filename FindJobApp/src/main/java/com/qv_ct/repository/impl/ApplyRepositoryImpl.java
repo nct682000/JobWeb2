@@ -25,7 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ApplyRepositoryImpl implements ApplyRepository{
+public class ApplyRepositoryImpl implements ApplyRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
@@ -33,23 +34,23 @@ public class ApplyRepositoryImpl implements ApplyRepository{
     public List<Apply> getApplies() {
         Session session = sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From Apply");
-        
+
         return q.getResultList();
     }
 
     @Override
     public boolean addOrUpdate(Apply a) {
         Session session = sessionFactory.getObject().getCurrentSession();
-        
-        try{
+
+        try {
             session.save(a);
-            
+
             return true;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.err.println("-- Add Tag Error --" + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 
@@ -60,13 +61,34 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
         Root root = query.from(Apply.class);
         query = query.select(root);
-        
-        Predicate p =builder.equal(root.get("candidate"), id);
-        
+
+        Predicate p = builder.equal(root.get("candidate"), id);
+
         query = query.where(p);
         Query q = session.createQuery(query);
-        
+
         return q.getResultList();
     }
-}
 
+//    admin
+    @Override
+    public List<Apply> getApplyAll(int page) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From Apply");
+
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+
+        return q.getResultList();
+    }
+
+    @Override
+    public long countApplies() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) From Apply");
+
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
+}
