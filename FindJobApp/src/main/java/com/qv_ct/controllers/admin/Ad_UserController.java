@@ -36,16 +36,7 @@ public class Ad_UserController {
     @Autowired
     private ApplyService applyService;
 
-    @RequestMapping("/admin/customers")
-    public String index(Model model,
-            @RequestParam(required = false) Map<String, String> params) {
-        int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("users", this.userService.getUserAll(page));
-        model.addAttribute("counter", this.userService.countUser());
-
-        return "user";
-    }
-
+    //    danh sách ứng viên    ------------------------------------------------------------------
     @RequestMapping("/admin/customers/cadidates")
     public String getCadidates_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -55,7 +46,25 @@ public class Ad_UserController {
 
         return "getCadidates_Admin";
     }
+    
+//    xem thông tin chi tiết ứng viên
+    @RequestMapping("/admin/customers/cadidates/{userId}/edit")
+    public String editCadidates_Admin(Model model, @PathVariable(value = "userId") int userId) {
+        model.addAttribute("user", this.userService.getUserById(userId));
+        model.addAttribute("typeUser", "edit-cadidates");
 
+        return "editCadidates_Admin";
+    }
+    
+    //    tạo mới ứng viên
+    @RequestMapping("/admin/customers/cadidates/new")
+    public String createCadidates_Admin(Model model) {
+        model.addAttribute("typeUser", "create-cadidates");
+
+        return "createCadidates_Admin";
+    }
+
+    //    danh sánh nhà ứng tuyển   ------------------------------------------------------------------
     @RequestMapping("/admin/customers/recruiters")
     public String getRecruiters_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
@@ -65,11 +74,22 @@ public class Ad_UserController {
 
         return "getRecruiters_Admin";
     }
+    
+    //    xem thông tin chi nhà tuyển dụng
+    @RequestMapping("/admin/customers/recruiters/{userId}/edit")
+    public String editRecruiters_Admin(Model model, @PathVariable(value = "userId") int userId) {
+        model.addAttribute("user", this.userService.getUserById(userId));
+        model.addAttribute("typeUser", "edit-recruiters");
 
-    @RequestMapping("/admin/customers/add-user")
-    public String editUser() {
+        return "editRecruiters_Admin";
+    }
 
-        return "edit-user";
+    //    tạo mới ứng viên
+    @RequestMapping("/admin/customers/recruiters/new")
+    public String createRecruiters_Admin(Model model) {
+        model.addAttribute("typeUser", "create-recruiters");
+
+        return "createRecruiters_Admin";
     }
 
     @RequestMapping("/admin/customers/{name}")

@@ -26,21 +26,37 @@ and open the template in the editor.
     
     <!--    admin Cadidates     -->
     <definition name="getCadidates_Admin" extends="baseAdmin">
-        <put-attribute name="title"     value="customers" />
+        <put-attribute name="title"     value="list cadidates_Admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
     </definition>
     
-    <!--    admin Cadidates     -->
+    <definition name="editCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit cadidates_Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="createCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create cadidates_Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <!--    admin Recruiters     -->
     <definition name="getRecruiters_Admin" extends="baseAdmin">
-        <put-attribute name="title"     value="customers" />
+        <put-attribute name="title"     value="list recruiters_Admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
     </definition>
     
-    <definition name="user" extends="baseAdmin">
-        <put-attribute name="title"     value="customers" />
-        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    <definition name="editRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit recruiters_Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
     </definition>
     
+    <definition name="createRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create cadidates_Admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <!--chưa cập nhập-->
     <definition name="ad_userDetail" extends="baseAdmin">
         <put-attribute name="title"     value="User detail" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_customers_detail.jsp" />

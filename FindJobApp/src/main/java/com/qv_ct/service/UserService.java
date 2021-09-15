@@ -27,15 +27,13 @@ public interface UserService extends UserDetailsService {
     User getUserById(int id);
 
 //    ----------------  admin   --------------------
-    List<User> getUserAll(int page);
-
+    //    danh sách ứng viên
     List<User> getCadidates_Admin(int page);
 
-    List<User> getRecruiters_Admin(int page);
-
-    long countUser();
-    
     long countCadidates_Admin();
+
+//    danh sánh nhà ứng tuyển
+    List<User> getRecruiters_Admin(int page);
 
     long countRecruiters_Admin();
 }

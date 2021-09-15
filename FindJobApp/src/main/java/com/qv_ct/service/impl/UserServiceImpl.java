@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int id) {
-        return this.userRepository.getUserbyId(id);
+        return this.userRepository.getUserById(id);
     }
 
     @Override
@@ -98,30 +98,22 @@ public class UserServiceImpl implements UserService {
 
     }
 
-//    admin
-    @Override
-    public List<User> getUserAll(int page) {
-        return this.userRepository.getUserAll(page);
-    }
-
+//    ----------------  admin   --------------------
+    //    danh sách ứng viên
     @Override
     public List<User> getCadidates_Admin(int page) {
         return this.userRepository.getCadidates_Admin(page);
     }
 
     @Override
-    public List<User> getRecruiters_Admin(int page) {
-        return this.userRepository.getRecruiters_Admin(page);
-    }
-
-    @Override
-    public long countUser() {
-        return this.userRepository.countUser();
-    }
-
-    @Override
     public long countCadidates_Admin() {
         return this.userRepository.countCadidates_Admin();
+    }
+
+    //    danh sánh nhà ứng tuyển
+    @Override
+    public List<User> getRecruiters_Admin(int page) {
+        return this.userRepository.getRecruiters_Admin(page);
     }
 
     @Override

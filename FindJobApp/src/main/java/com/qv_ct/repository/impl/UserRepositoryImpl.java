@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUserbyId(int id) {
+    public User getUserById(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -100,18 +100,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 //    ----------------  admin   --------------------
-    @Override
-    public List<User> getUserAll(int page) {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From User");
-
-        int max = 6;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
-
-        return q.getResultList();
-    }
-
+//    danh sách ứng viên
     @Override
     public List<User> getCadidates_Admin(int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -125,6 +114,15 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public long countCadidates_Admin() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 2");
+
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
+//    danh sánh nhà ứng tuyển
+    @Override
     public List<User> getRecruiters_Admin(int page) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From User U Where U.role = 1");
@@ -136,22 +134,6 @@ public class UserRepositoryImpl implements UserRepository {
         return q.getResultList();
     }
 
-    @Override
-    public long countUser() {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) From User");
-
-        return Long.parseLong(q.getSingleResult().toString());
-    }
-    
-    @Override
-    public long countCadidates_Admin() {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 2");
-
-        return Long.parseLong(q.getSingleResult().toString());
-    }
-    
     @Override
     public long countRecruiters_Admin() {
         Session s = sessionFactory.getObject().getCurrentSession();
