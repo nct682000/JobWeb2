@@ -17,18 +17,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary row">
-                        <h4 class="card-title col">Thông tin khách hàng</h4>
-
                         <!--    lọc người ứng tuyển || người tuyển chọn     -->
-                        <div class="col">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">RECRUITER</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">CANDIDATE</a>
-                                </li>
-                            </ul>
+                        <div class="col-4">
+                            <div class="row">
+                                <c:if test="${typeUser == 'cadidates'}">
+                                    <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                    <a href="/FindJobApp/admin/customers/recruiters" 
+                                       class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                </c:if>
+                                <c:if test="${typeUser == 'recruiters'}">
+                                    <a href="/FindJobApp/admin/customers/cadidates" 
+                                       class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                    <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                </c:if>
+                            </div>
                         </div>
 
                         <!--    tìm kiếm    -->
@@ -59,7 +61,7 @@
                                                 </a>
                                             </li>
                                             <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
-                                                <li class="page-item"><a class="page-link" href="<c:url value="/admin/customers" />?page=${i}">${i}</a></li>
+                                                <li class="page-item"><a class="page-link" href="<c:url value="/admin/customers/cadidates" />?page=${i}">${i}</a></li>
                                                 </c:forEach>
                                             <li class="page-item">
                                                 <a class="page-link" href="#" aria-label="Next">
@@ -79,114 +81,133 @@
                     </div>
 
 
-
+                    <!--    Bảng dữ liệu      -->
                     <div class="table-responsive">
-                        <table class="table">
-                            <thead class="table-dark">
-                            <th>
-                                Mã 
-                            </th>
-                            <th>
-                                Tên đăng nhập
-                            </th>
-                            <th>
-                                Tên khách hàng
-                            </th>
-                            <th>
-                                Tên công ty
-                            </th>
-                            <th>
-                                Giới tính
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Số điện thoại
-                            </th>
-                            <th>
-                                Chức vụ
-                            </th>
-                            <th>
-                                Hoạt động
-                            </th>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${users}" var="u">
-                                    <c:choose>
-                                        <c:when test="${u.id % 2 == 0}">
-                                            <tr class="table-secondary text-dark">
-                                                <td class="text-primary">
-                                                    ${u.id} 
-                                                </td>
-                                                <td>
-                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
-                                                </td>                                            
-                                                <td>
-                                                    ${u.firstName}  ${u.lastName}  
-                                                </td>
-                                                <td>
-                                                    ${u.companyName} 
-                                                </td>
-                                                <td>
-                                                    ${u.sex} 
-                                                </td>
-                                                <td>
-                                                    ${u.mail} 
-                                                </td>
-                                                <td>
-                                                    ${u.phone} 
-                                                </td>
-                                                <td>
-                                                    ${u.role} 
-                                                </td>
-                                                <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-success">Enable</button>
-                                                    <button class="bi bi-pencil-fill btn"></button>
-                                                    <button class="bi bi-trash-fill btn"></button>
-                                                </td>
-                                            </tr>
-                                        </c:when>
-                                        <c:when test="${u.id % 2 != 0}">
-                                            <tr class="">
-                                                <td class="text-primary">
-                                                    ${u.id} 
-                                                </td>
-                                                <td>
-                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
-                                                </td>                                            
-                                                <td>
-                                                    ${u.firstName}  ${u.lastName}  
-                                                </td>
-                                                <td>
-                                                    ${u.companyName} 
-                                                </td>
-                                                <td>
-                                                    ${u.sex} 
-                                                </td>
-                                                <td>
-                                                    ${u.mail} 
-                                                </td>
-                                                <td>
-                                                    ${u.phone} 
-                                                </td>
-                                                <td>
-                                                    ${u.role} 
-                                                </td>
-                                                <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-success">Enable</button>
-                                                    <button class="bi bi-pencil-fill btn"></button>
-                                                    <button class="bi bi-trash-fill btn"></button>
-                                                </td>
-                                            </tr>
-                                        </c:when>
-                                    </c:choose>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                        <!--    Người ứng tuyển      -->
+                        <c:if test="${typeUser == 'cadidates'}">
+                            <table class="table">
+                                <thead class="table-dark">
+                                <th>
+                                    Tên đăng nhập
+                                </th>
+                                <th>
+                                    Tên khách hàng
+                                </th>
+                                <th>
+                                    Giới tính
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Số điện thoại
+                                </th>
+                                <th>
+                                    Địa chỉ
+                                </th>
+                                <th>
+                                    Hoạt động
+                                </th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${users}" var="u">                                        
+                                        <tr class="table-secondary text-dark">
+                                            <td class="text-primary">
+                                                <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
+                                            </td>                                            
+                                            <td>
+                                                ${u.firstName}  ${u.lastName}  
+                                            </td>
+                                            <td>
+                                                <c:if test="${u.sex == 'MALE'}">
+                                                    Nam
+                                                </c:if>
+                                                <c:if test="${u.sex == 'FEMALE'}">
+                                                    Nữ
+                                                </c:if>
+                                                <c:if test="${u.sex == 'NEUTRAL'}">
+                                                    Khác
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                ${u.mail} 
+                                            </td>
+                                            <td>
+                                                ${u.phone} 
+                                            </td>
+                                            <td>
+                                                ${u.location.address},  ${u.location.province.name}
+                                            </td>
+                                            <td>
+                                                <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
+                                                <button class="btn btn-success">Enable</button>
+                                                <button class="bi bi-pencil-fill btn"></button>
+                                                <button class="bi bi-trash-fill btn"></button>
+                                            </td>
+                                        </tr>                                                                                                                   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+
+                        </c:if>
+                        <!--    Nhà tuyển dụng      -->
+                        <c:if test="${typeUser == 'recruiters'}">
+                            <table class="table">
+                                <thead class="table-dark">
+                                <th>
+                                    Tên đăng nhập
+                                </th>
+                                <th>
+                                    Tên công ty
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Số điện thoại
+                                </th>
+                                <th>
+                                    Địa chỉ
+                                </th>
+                                <th>
+                                    Hoạt động
+                                </th>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${users}" var="u">                                        
+                                        <tr class="table-secondary text-dark">
+                                            <td class="text-primary">
+                                                <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
+                                            </td> 
+                                            <td>
+                                                ${u.companyName} 
+                                            </td>
+                                            <td>
+                                                ${u.mail} 
+                                            </td>
+                                            <td>
+                                                ${u.phone} 
+                                            </td>
+                                            <td>
+                                                ${u.location.address},  ${u.location.province.name}
+                                            </td>
+                                            <td>
+                                                <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
+                                                <button class="btn btn-success">Enable</button>
+                                                <button class="bi bi-pencil-fill btn"></button>
+                                                <button class="bi bi-trash-fill btn"></button>
+                                            </td>
+                                        </tr>                                                                                                                   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
+
+
                     </div>
+
+
+
                 </div>
             </div>
         </div>

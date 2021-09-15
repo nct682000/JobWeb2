@@ -14,18 +14,27 @@ import java.util.List;
  * @author nct68
  */
 public interface UserRepository {
-    List<User> getUserAll(int page);
-    long countUser();
-    
-    
-    
-    
+
     List<User> getCadidates();
+
     List<User> getRecruiters();
+
     List<User> getUsers(String username);
+
     boolean addOrUpdate(User user, Role role);
+
     User getUserbyId(int id);
 
+//    ----------------  admin   --------------------
+    List<User> getUserAll(int page);
+
+    List<User> getCadidates_Admin(int page);
+
+    List<User> getRecruiters_Admin(int page);
+
+    long countUser();
+
+    long countCadidates_Admin();
+
+    long countRecruiters_Admin();
 }
-
-

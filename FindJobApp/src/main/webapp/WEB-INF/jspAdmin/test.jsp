@@ -1,118 +1,189 @@
 <%-- 
-    Document   : test
-    Created on : Aug 25, 2021, 2:17:14 PM
+    Document   : customers
+    Created on : Aug 19, 2021, 3:43:35 PM
     Author     : DELL
 --%>
 
+<link
+    rel="stylesheet"  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+    crossOrigin="anonymous"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<form class="container bg-info col-md-8" style="margin-bottom: 30px;margin-top: 30px;">
-    <div class="row" style="padding: 20px;">
-
-        <div class="col-md-5  " style="padding: 20px 20px 0;" >
-            <!--    tài khoản   -->
-            <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
-                <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
-                <div class="col-md-9 " style="margin: auto;">
-                    <input type="text"      class="form-control"    id="validationDefault03"    placeholder="username" style=" margin-bottom: 20px;">
-                    <input type="password"  class="form-control "   id="validationDefault03"    placeholder="password" style=" margin-bottom: 20px;">
-                    <input type="password"  class="form-control"    id="validationDefault03"    placeholder="reconfirm password" style=" margin-bottom: 20px;">
-                    <div class="form-check" style=" margin-bottom: 20px;">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                        <label class="form-check-label" for="invalidCheck2">
-                            Agree to terms and conditions
-                        </label>
-                    </div>
-                </div>
-
-            </div>
-            <div style="text-align: center">
-                <button class="btn btn-success" type="submit" style="width: 80%;padding: 10px;margin-top: 20px;">Add user</button>
-            </div>
-        </div>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-        <div class="col-md-7">
-            <div class="row" style=" margin-bottom: 30px;">
-                <!--    họ tên  -->
-                <div class="col-md-4">
-                    <label for="validationDefault01" class="form-label">Họ</label>
-                    <input type="text" class="form-control" id="validationDefault01" placeholder="họ" >
-                </div>
-                <div class="col-md-2">
-                    <label for="validationDefault02" class="form-label">Tên</label>
-                    <input type="text" class="form-control" id="validationDefault02" placeholder="tên" >
-                </div>
-
-                <!--    email   -->
-                <div class="col-md-6">
-                    <label for="validationDefaultUsername" class="form-label">Email</label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                        <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" >
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" style=" margin-bottom: 30px;">
-                <!--    giới tính   -->
-                <div class="col-md-4">
-                    <label for="validationDefault05" class="form-label">Giới tính</label>
-                    <div class="d-flex">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                            <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                Nam
-                            </label>
+<div class="content" id="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary row">
+                        <!--    lọc người ứng tuyển || người tuyển chọn     -->
+                        <div class="col-4">
+                            <div class="row">
+                                <c:if test="${typeUser == 'cadidates'}">
+                                    <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                    <a href="/FindJobApp/admin/customers/recruiters" 
+                                       class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                </c:if>
+                                <c:if test="${typeUser == 'recruiters'}">
+                                    <a href="/FindJobApp/admin/customers/cadidates" 
+                                       class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                    <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                </c:if>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Nữ
-                            </label>
+
+                        <!--    tìm kiếm    -->
+                        <div class="simple-search col">
+                            <input type="email" placeholder="name . . ."/>
+                            <button class="fa fa-search"></button>
+                        </div>
+
+                        <!--    lọc theo công ty    -->
+                        <div class="col">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Công ty</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <!--    phân trang      -->
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-9">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                <li class="page-item"><a class="page-link" href="<c:url value="/admin/customers/cadidates" />?page=${i}">${i}</a></li>
+                                                </c:forEach>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                                <!--    btn add     -->
+                                <div class="col-3">
+                                    <a href="/FindJobApp/admin/customers/add-user" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!--    số điện thoại   -->
-                <div class="col-md-5">
-                    <label for="validationDefault03" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="validationDefault03" >
-                </div>
-            </div>
 
-            <div class="row" style=" margin-bottom: 30px;">
-                <!--    công ty     -->
-                <div class="col-md-7">
-                    <label for="validationDefault03" class="form-label">Công ty</label>
-                    <input type="text" class="form-control" id="validationDefault03" >
-                </div>
-                <!--    nhóm người dùng     role ?    -->
-                <div class="col-md-5">
-                    <label for="validationDefault04" class="form-label">Nhóm người dùng </label>
-                    <select class="form-select" id="validationDefault04" >
-                        <option selected disabled value="">Nhóm người dùng</option>
-                        <option>ngưởi tuyển dụng</option>
-                        <option>ngưởi ứng tuyển</option>
-                    </select>
-                </div>
-            </div>    
 
-            <div class="row" >
-                <!--    địa chỉ     -->
-                <div class="col-md-5">
-                    <label for="validationDefault04" class="form-label">Địa chỉ</label>
-                    <select class="form-select" id="validationDefault04" >
-                        <option selected disabled value="">thành phố</option>
-                        <option>...</option>
-                    </select>                    
-                </div>
-                <div class="col-md-7">
-                    <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-dark">
+                            <th>
+                                Mã 
+                            </th>
+                            <th>
+                                Tên đăng nhập
+                            </th>
+                            <th>
+                                Tên khách hàng
+                            </th>
+                            <th>
+                                Tên công ty
+                            </th>
+                            <th>
+                                Giới tính
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Số điện thoại
+                            </th>
+                            <th>
+                                Hoạt động
+                            </th>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${users}" var="u">
+                                    <c:choose>
+                                        <c:when test="${u.id % 2 == 0}">
+                                            <tr class="table-secondary text-dark">
+                                                <td class="text-primary">
+                                                    ${u.id} 
+                                                </td>
+                                                <td>
+                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
+                                                </td>                                            
+                                                <td>
+                                                    ${u.firstName}  ${u.lastName}  
+                                                </td>
+                                                <td>
+                                                    ${u.companyName} 
+                                                </td>
+                                                <td>
+                                                    ${u.sex} 
+                                                </td>
+                                                <td>
+                                                    ${u.mail} 
+                                                </td>
+                                                <td>
+                                                    ${u.phone} 
+                                                </td>
+                                                <td>
+                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
+                                                    <button class="btn btn-success">Enable</button>
+                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <button class="bi bi-trash-fill btn"></button>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                        <c:when test="${u.id % 2 != 0}">
+                                            <tr class="">
+                                                <td class="text-primary">
+                                                    ${u.id} 
+                                                </td>
+                                                <td>
+                                                    <a href="/FindJobApp/admin/customers/${u.username}" class="text-dark">${u.username}</a>
+                                                </td>                                            
+                                                <td>
+                                                    ${u.firstName}  ${u.lastName}  
+                                                </td>
+                                                <td>
+                                                    ${u.companyName} 
+                                                </td>
+                                                <td>
+                                                    ${u.sex} 
+                                                </td>
+                                                <td>
+                                                    ${u.mail} 
+                                                </td>
+                                                <td>
+                                                    ${u.phone} 
+                                                </td>
+                                                <td>
+                                                <td>
+                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
+                                                    <button class="btn btn-success">Enable</button>
+                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <button class="bi bi-trash-fill btn"></button>
+                                                </td>
+                                            </tr>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-</form>

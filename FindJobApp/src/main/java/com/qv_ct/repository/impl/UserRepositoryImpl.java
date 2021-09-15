@@ -27,7 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
@@ -38,17 +39,17 @@ public class UserRepositoryImpl implements UserRepository{
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
-        
-        if(!username.isEmpty()){
+
+        if (!username.isEmpty()) {
             Predicate p = builder.equal(root.get("username").as(String.class), username);
             query = query.where(p);
         }
-        
+
         Query q = session.createQuery(query);
-        
+
         return q.getResultList();
     }
-    
+
     @Override
     public User getUserbyId(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -57,12 +58,12 @@ public class UserRepositoryImpl implements UserRepository{
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
-        
+
         Predicate p = builder.equal(root.get("id"), id);
-        
+
         query = query.where(p);
         Query q = session.createQuery(query);
-        
+
         return (User) q.getSingleResult();
     }
 
@@ -70,7 +71,7 @@ public class UserRepositoryImpl implements UserRepository{
     public List<User> getCadidates() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From User U Where U.role = 2");
-        
+
         return q.getResultList();
     }
 
@@ -78,47 +79,85 @@ public class UserRepositoryImpl implements UserRepository{
     public List<User> getRecruiters() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("From User U Where U.role = 1");
-        
+
         return q.getResultList();
     }
 
     @Override
     public boolean addOrUpdate(User user, Role role) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try{
+        try {
             Location l = new Location(user.getAddress(), user.getProvince());
             user.setLocation(l);
-            
+
             session.save(l);
             session.save(user);
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
         return false;
     }
-    
-    
-    
-//    admin
+
+//    ----------------  admin   --------------------
     @Override
     public List<User> getUserAll(int page) {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From User");
-        
+
         int max = 6;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
-        
+
         return q.getResultList();
-    }   
-    
+    }
+
+    @Override
+    public List<User> getCadidates_Admin(int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From User U Where U.role = 2");
+
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+
+        return q.getResultList();
+    }
+
+    @Override
+    public List<User> getRecruiters_Admin(int page) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("From User U Where U.role = 1");
+
+        int max = 6;
+        q.setMaxResults(max);
+        q.setFirstResult((page - 1) * max);
+
+        return q.getResultList();
+    }
+
     @Override
     public long countUser() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("SELECT Count(*) From User");
-        
+
         return Long.parseLong(q.getSingleResult().toString());
     }
     
+    @Override
+    public long countCadidates_Admin() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 2");
+
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+    
+    @Override
+    public long countRecruiters_Admin() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 1");
+
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
 }

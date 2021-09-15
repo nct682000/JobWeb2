@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <form class="container bg-info col-md-8" style="margin-bottom: 30px;margin-top: 30px;" method="POST">
     <div class="row" style="padding: 20px;">
 

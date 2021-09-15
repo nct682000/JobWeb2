@@ -18,7 +18,7 @@
     <div class="" style="margin-bottom: 30px;text-align: center;">
         <h4>quan tri vien</h4>
     </div>
-    <a href="/FindJobApp/admin/customers" class="w3-bar-item w3-button">Customers</a>
+    <a href="/FindJobApp/admin/customers/cadidates" class="w3-bar-item w3-button">Customers</a>
     <a href="/FindJobApp/admin/recruitment" class="w3-bar-item w3-button">Recruitments</a>
     <a href="/FindJobApp/admin/applies" class="w3-bar-item w3-button">Applies</a>
     <a href="/FindJobApp/admin/test" class="w3-bar-item w3-button">test</a>

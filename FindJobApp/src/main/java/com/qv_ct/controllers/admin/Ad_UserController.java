@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Controller
 public class Ad_UserController {
-    @Autowired     
+
+    @Autowired
     private UserService userService;
     @Autowired
     private ApplyService applyService;
@@ -44,23 +45,42 @@ public class Ad_UserController {
 
         return "user";
     }
-    
+
+    @RequestMapping("/admin/customers/cadidates")
+    public String getCadidates_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("users", this.userService.getCadidates_Admin(page));
+        model.addAttribute("counter", this.userService.countCadidates_Admin());
+        model.addAttribute("typeUser", "cadidates");
+
+        return "getCadidates_Admin";
+    }
+
+    @RequestMapping("/admin/customers/recruiters")
+    public String getRecruiters_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        model.addAttribute("users", this.userService.getRecruiters_Admin(page));
+        model.addAttribute("counter", this.userService.countRecruiters_Admin());
+        model.addAttribute("typeUser", "recruiters");
+
+        return "getRecruiters_Admin";
+    }
+
     @RequestMapping("/admin/customers/add-user")
     public String editUser() {
 
         return "edit-user";
     }
-    
+
     @RequestMapping("/admin/customers/{name}")
     public String userDetail(Model model, @PathVariable String name) {
-       model.addAttribute("user", this.userService.getUsers(name));
-       User u = this.userService.getUsers(name).get(0);
-       int id = u.getId();
-       System.out.println(id);
-       model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-        
-       return "ad_userDetail";
+        model.addAttribute("user", this.userService.getUsers(name));
+        User u = this.userService.getUsers(name).get(0);
+        int id = u.getId();
+        System.out.println(id);
+        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
+
+        return "ad_userDetail";
     }
-    
-    
+
 }

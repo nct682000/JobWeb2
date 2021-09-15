@@ -24,6 +24,18 @@ and open the template in the editor.
         <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
     </definition>
     
+    <!--    admin Cadidates     -->
+    <definition name="getCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="customers" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <!--    admin Cadidates     -->
+    <definition name="getRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="customers" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
     <definition name="user" extends="baseAdmin">
         <put-attribute name="title"     value="customers" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
