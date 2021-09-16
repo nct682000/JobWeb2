@@ -99,25 +99,16 @@ public class UserServiceImpl implements UserService {
     }
 
 //    ----------------  admin   --------------------
-    //    danh sách ứng viên
+//    danh sách người dùng theo role
     @Override
-    public List<User> getCadidates_Admin(int page) {
-        return this.userRepository.getCadidates_Admin(page);
+    public List<User> getUsers_Admin(int page, Role role, boolean active, String email) {
+        return this.userRepository.getUsers_Admin(page, role, active, email);
     }
 
     @Override
-    public long countCadidates_Admin() {
-        return this.userRepository.countCadidates_Admin();
+    public long countUsers_Admin(Role role, boolean active) {
+        return this.userRepository.countUsers_Admin(role, active);
+
     }
 
-    //    danh sánh nhà ứng tuyển
-    @Override
-    public List<User> getRecruiters_Admin(int page) {
-        return this.userRepository.getRecruiters_Admin(page);
-    }
-
-    @Override
-    public long countRecruiters_Admin() {
-        return this.userRepository.countRecruiters_Admin();
-    }
 }

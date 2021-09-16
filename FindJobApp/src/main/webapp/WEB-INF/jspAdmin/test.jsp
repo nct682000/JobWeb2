@@ -112,6 +112,52 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
             </div>
+
+            <div class="col-5 ">
+                <div class="row justify-content-end">
+                    <div class="col-4 btn-group" role="group">                  
+
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary " data-bs-toggle="dropdown" aria-expanded="false">
+                            Địa chỉ
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <c:forEach var="p" items="${provinces}">
+                                <li><a class="dropdown-item" href="#">${p.name}</a></li>
+                            </c:forEach>
+                        </ul>
+
+                    </div>
+                    <form action="/FindJobApp/admin/customers/cadidates"  class="col-6">
+                        <div class="input-group input-group-lg">
+                            <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                            <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                        </div>                                    
+                    </form>
+                </div>
+
+            </div>
+
+
+            <div class="row justify-content-end">
+                <div class="col-4 btn-group" role="group">                  
+
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary " data-bs-toggle="dropdown" aria-expanded="false">
+                        Địa chỉ
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <c:forEach var="p" items="${provinces}">
+                            <li><a class="dropdown-item" href="#">${p.name}</a></li>
+                        </c:forEach>
+                    </ul>
+
+                </div>
+                <form action="/FindJobApp/admin/customers/cadidates"  class="col-6">
+                    <div class="input-group input-group-lg">
+                        <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                        <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                    </div>                                    
+                </form>
+            </div>
         </div>
     </div>
 </form>

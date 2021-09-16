@@ -8,8 +8,11 @@ package com.qv_ct.controllers.admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.qv_ct.pojos.User;
+import com.qv_ct.pojos.Role;
 import com.qv_ct.service.UserService;
 import com.qv_ct.service.ApplyService;
+import com.qv_ct.service.CareerService;
+import com.qv_ct.service.ProvinceService;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +38,47 @@ public class Ad_UserController {
     private UserService userService;
     @Autowired
     private ApplyService applyService;
+    @Autowired
+    private CareerService careerService;
+    @Autowired
+    private ProvinceService provinceService;
 
-    //    danh sách ứng viên    ------------------------------------------------------------------
+    @ModelAttribute
+    public void commonAttr(Model model) {
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("provinces", this.provinceService.getProvinces());
+    }
+
+    //    danh sách ứng viên đã kích hoạt     ------------------------------------------------------------------
     @RequestMapping("/admin/customers/cadidates")
     public String getCadidates_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("users", this.userService.getCadidates_Admin(page));
-        model.addAttribute("counter", this.userService.countCadidates_Admin());
+        String email = params.getOrDefault("email", null);
+
+        Role role = Role.CANDIDATE;
+        model.addAttribute("users", this.userService.getUsers_Admin(page, role, true, email));
+        model.addAttribute("counter", this.userService.countUsers_Admin(role, true));
         model.addAttribute("typeUser", "cadidates");
+        model.addAttribute("status", "active");
 
         return "getCadidates_Admin";
     }
-    
+
+//    danh sách ứng viên đã chưa hoạt động
+    @RequestMapping("/admin/customers/cadidates/inactive")
+    public String getCadidates_Inactive_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String email = params.getOrDefault("email", null);
+
+        Role role = Role.CANDIDATE;
+        model.addAttribute("users", this.userService.getUsers_Admin(page, role, false, email));
+        model.addAttribute("counter", this.userService.countUsers_Admin(role, false));
+        model.addAttribute("typeUser", "cadidates");
+        model.addAttribute("status", "inactive");
+
+        return "getCadidates_Inactive_Admin";
+    }
+
 //    xem thông tin chi tiết ứng viên
     @RequestMapping("/admin/customers/cadidates/{userId}/edit")
     public String editCadidates_Admin(Model model, @PathVariable(value = "userId") int userId) {
@@ -55,7 +87,7 @@ public class Ad_UserController {
 
         return "editCadidates_Admin";
     }
-    
+
     //    tạo mới ứng viên
     @RequestMapping("/admin/customers/cadidates/new")
     public String createCadidates_Admin(Model model) {
@@ -64,17 +96,36 @@ public class Ad_UserController {
         return "createCadidates_Admin";
     }
 
-    //    danh sánh nhà ứng tuyển   ------------------------------------------------------------------
+    //    danh sánh nhà ứng tuyển đã kích hoạt   ------------------------------------------------------------------
     @RequestMapping("/admin/customers/recruiters")
     public String getRecruiters_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("users", this.userService.getRecruiters_Admin(page));
-        model.addAttribute("counter", this.userService.countRecruiters_Admin());
+        String email = params.getOrDefault("email", null);
+
+        Role role = Role.RECRUITER;
+        model.addAttribute("users", this.userService.getUsers_Admin(page, role, true, email));
+        model.addAttribute("counter", this.userService.countUsers_Admin(role, true));
         model.addAttribute("typeUser", "recruiters");
+        model.addAttribute("status", "active");
 
         return "getRecruiters_Admin";
     }
-    
+
+    //    danh sách ứng viên đã chưa hoạt động
+    @RequestMapping("/admin/customers/recruiters/inactive")
+    public String getRecruiters_Inactive_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String email = params.getOrDefault("email", null);
+
+        Role role = Role.RECRUITER;
+        model.addAttribute("users", this.userService.getUsers_Admin(page, role, false, email));
+        model.addAttribute("counter", this.userService.countUsers_Admin(role, false));
+        model.addAttribute("typeUser", "recruiters");
+        model.addAttribute("status", "inactive");
+
+        return "getRecruiters_Inactive_Admin";
+    }
+
     //    xem thông tin chi nhà tuyển dụng
     @RequestMapping("/admin/customers/recruiters/{userId}/edit")
     public String editRecruiters_Admin(Model model, @PathVariable(value = "userId") int userId) {
@@ -92,15 +143,5 @@ public class Ad_UserController {
         return "createRecruiters_Admin";
     }
 
-    @RequestMapping("/admin/customers/{name}")
-    public String userDetail(Model model, @PathVariable String name) {
-        model.addAttribute("user", this.userService.getUsers(name));
-        User u = this.userService.getUsers(name).get(0);
-        int id = u.getId();
-        System.out.println(id);
-        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-
-        return "ad_userDetail";
-    }
-
+   
 }

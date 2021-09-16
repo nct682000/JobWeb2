@@ -9,7 +9,7 @@
     crossOrigin="anonymous"/>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="" id="main">
     <div class="container-fluid">
@@ -20,80 +20,163 @@
                         <!--    lọc người ứng tuyển || người tuyển chọn     -->
                         <div class="col-4">
                             <div class="row">
-                                <c:if test="${typeUser == 'cadidates'}">
-                                    <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
-                                    <a href="/FindJobApp/admin/customers/recruiters" 
-                                       class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                <c:if test="${typeUser == 'cadidates'}">                            
+                                    <c:if test="${status == 'active'}">
+                                        <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                        <a href="/FindJobApp/admin/customers/recruiters" 
+                                           class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                        <a href="/FindJobApp/admin/customers/recruiters/inactive" 
+                                           class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                    </c:if>
                                 </c:if>
                                 <c:if test="${typeUser == 'recruiters'}">
-                                    <a href="/FindJobApp/admin/customers/cadidates" 
-                                       class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
-                                    <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                    <c:if test="${status == 'active'}">
+                                        <a href="/FindJobApp/admin/customers/cadidates" 
+                                           class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                        <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <a href="/FindJobApp/admin/customers/cadidates/inactive" 
+                                           class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                        <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                    </c:if>
                                 </c:if>
                             </div>
                         </div>
 
-                        <!--    tìm kiếm    -->
-                        <div class="simple-search col">
-                            <input type="email" placeholder="name . . ."/>
-                            <button class="fa fa-search"></button>
+                        <!--    lọc theo Địa chỉ    && tìm kiếm theo mail   -->
+                        <div class="col-4 ">
+                            <div class="row justify-content-end">
+                                <c:if test="${typeUser == 'cadidates'}">
+                                    <c:if test="${status == 'active'}">
+                                        <form action="/FindJobApp/admin/customers/cadidates"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <form action="/FindJobApp/admin/customers/cadidates/inactive"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${typeUser == 'recruiters'}">
+                                    <c:if test="${status == 'active'}">
+                                        <form action="/FindJobApp/admin/customers/recruiters"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <form action="/FindJobApp/admin/customers/recruiters/inactive"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                </c:if>                                
+                            </div>
                         </div>
 
-                        <!--    lọc theo công ty    -->
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Công ty</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
 
                         <!--    phân trang      -->
-                        <div class="col">
-                            <!--    phân trang của người ứng tuyển  -->
+                        <div class="col-3 ">
+                            <!--${counter}-->
+                            <!--người ứng tuyển-->
                             <c:if test="${typeUser == 'cadidates'}">
-                                <div class="row">
-                                    <div class="col-9">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="<c:url value="/admin/customers/cadidates" />?page=${i}">${i}</a>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                <!--    đã kích hoạt tài khoản   -->
+                                <c:if test="${status == 'active'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination ">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item" >
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
 
-                                    <!--    btn add     -->
-                                    <div class="col-3">
-                                        <a href="/FindJobApp/admin/customers/cadidates/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        <!--    btn add     -->
+                                        <div class="col-3">
+                                            <a href="/FindJobApp/admin/customers/cadidates/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:if>
+
+                                <!--    chưa kích hoạt tài khoản   -->
+                                <c:if test="${status == 'inactive'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates/inactive" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </c:if>
 
-                            <!--    phân trang của nhà tuyển dụng  -->
+                            <!--nhà tuyển dụng-->
                             <c:if test="${typeUser == 'recruiters'}">
-                                <div class="row">
-                                    <div class="col-9">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="<c:url value="/admin/customers/recruiters" />?page=${i}">${i}</a>
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                <!--    đã kích hoạt tài khoản  -->
+                                <c:if test="${status == 'active'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/recruiters" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
 
-                                    <!--    btn add     -->
-                                    <div class="col-3">
-                                        <a href="/FindJobApp/admin/customers/recruiters/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        <!--    btn add     -->
+                                        <div class="col-3">
+                                            <a href="/FindJobApp/admin/customers/recruiters/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:if>
+
+                                <!--    chưa kích hoạt tài khoản   -->
+                                <c:if test="${status == 'inactive'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates/inactive" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </c:if>
+
                         </div>
 
 
@@ -101,7 +184,7 @@
                         <div class="table-responsive">
                             <!--    Người ứng tuyển      -->
                             <c:if test="${typeUser == 'cadidates'}">
-                                <table class="table">
+                                <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                     <th>
                                         Tên đăng nhập
@@ -168,7 +251,7 @@
                             </c:if>
                             <!--    Nhà tuyển dụng      -->
                             <c:if test="${typeUser == 'recruiters'}">
-                                <table class="table">
+                                <table class="table  table-striped table-hover">
                                     <thead class="table-dark">
                                     <th>
                                         Tên đăng nhập

@@ -100,44 +100,42 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 //    ----------------  admin   --------------------
-//    danh sách ứng viên
+    int maxList = 6;
+
+//    danh sách người dùng theo role
     @Override
-    public List<User> getCadidates_Admin(int page) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From User U Where U.role = 2");
+    public List<User> getUsers_Admin(int page, Role role, boolean active, String email) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
 
-        int max = 6;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
+        Predicate p1 = builder.equal(root.get("role"), role);
+        Predicate p2 = builder.equal(root.get("active"), active);
+        if (email == null) {
+            query = query.where(builder.and(p1, p2));
+        } else {
+            String kw = "%" + email + "%";
+            Predicate p3 = builder.like(root.get("mail").as(String.class), kw);
+            query = query.where(builder.and(p1, p2, p3));
+        }
+        query = query.orderBy(builder.desc(root.get("id")));
 
+        Query q = s.createQuery(query);
+
+        q.setMaxResults(maxList);
+        q.setFirstResult((page - 1) * maxList);
         return q.getResultList();
+
     }
 
     @Override
-    public long countCadidates_Admin() {
+    public long countUsers_Admin(Role role, boolean active) {
         Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 2");
-
-        return Long.parseLong(q.getSingleResult().toString());
-    }
-
-//    danh sánh nhà ứng tuyển
-    @Override
-    public List<User> getRecruiters_Admin(int page) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From User U Where U.role = 1");
-
-        int max = 6;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
-
-        return q.getResultList();
-    }
-
-    @Override
-    public long countRecruiters_Admin() {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) From User U Where U.role = 1");
+        Query q = s.createQuery("SELECT Count(*) FROM User U WHERE U.role = :role AND U.active =:active");
+        q.setParameter("role", role);
+        q.setParameter("active", active);
 
         return Long.parseLong(q.getSingleResult().toString());
     }
