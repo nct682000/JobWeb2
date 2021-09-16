@@ -90,6 +90,7 @@ public class UserRepositoryImpl implements UserRepository{
         try{
             Location l = new Location(user.getAddress(), user.getProvince());
             user.setLocation(l);
+            user.setRole(role);
             
             session.save(l);
             session.save(user);

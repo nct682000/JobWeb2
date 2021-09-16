@@ -18,6 +18,7 @@ public interface RecruitmentRepository {
                                         int form, int salary);
     List<Object[]> getRecruitmentByComment(int num);
     Recruitment getRecruitmentById(int id);
+    List<Recruitment> getRecruitmentByUserId(int userId);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
     

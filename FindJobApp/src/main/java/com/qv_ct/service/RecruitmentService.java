@@ -21,6 +21,7 @@ public interface RecruitmentService {
     Recruitment getRecruitmentById(int id);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
+    List<Recruitment> getRecruitmentByUserId(int userId);
     
     //    --------------    admin   -------------------
     List<Recruitment> getRecruitmentsAll();

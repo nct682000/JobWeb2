@@ -95,22 +95,6 @@
 
     </div>
               
-              <!-- Top Recruitment -->
-    <hr>
-    <div class="row">
-        <c:forEach var="trend" items="${trendRecruitment}">
-            <div class="col card m-3">
-                <div>
-                    <image src="${trend[3]}" alt="${trend[2]} avatar" class="img-thumbnail" />
-                </div>
-                <div>${trend[0]}</div>
-                <div>${trend[1]}</div>
-                <div>${trend[4]}</div>
-            </div>
-        </c:forEach>
-    </div>
-    <hr>
-
     <!-- List Recruitment -->
     <h4 class="text-info font-weight-bold">Tin mới nhất</h4>
     <div class="row">

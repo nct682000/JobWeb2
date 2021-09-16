@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService{
                 }
                 String pass = user.getPassword();
                 user.setPassword(this.passwordEncoder.encode(pass));
-                user.setRole(role);
                 return this.userRepository.addOrUpdate(user, role);
                 
             } catch (IOException ex) {

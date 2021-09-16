@@ -76,6 +76,11 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     public List<Object[]> getRecruitmentByComment(int num) {
         return this.recruitmentRepository.getRecruitmentByComment(num);
     }
+
+    @Override
+    public List<Recruitment> getRecruitmentByUserId(int userId) {
+        return this.recruitmentRepository.getRecruitmentByUserId(userId);
+    }
     
     
     

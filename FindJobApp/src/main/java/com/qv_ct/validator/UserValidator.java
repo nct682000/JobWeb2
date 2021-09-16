@@ -31,10 +31,10 @@ public class UserValidator implements Validator{
         User u = (User) o;
         
         //Unique
-        if(!u.getUsername().isEmpty()){
-             errors.rejectValue("username", "user.unique.myError");
-        }
-        
+//        if(!u.getUsername().isEmpty()){
+//             errors.rejectValue("username", "user.unique.myError");
+//        }
+//        
     }
     
 }

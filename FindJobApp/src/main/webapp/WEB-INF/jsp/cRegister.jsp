@@ -174,7 +174,7 @@
 
         </div>
                 
-        <div class="row mt-4">
+        <div class="row mt-4 i">
             <!-- input company name -->
             <div class="form-group col-md-7 col-xl-7">
                 <div class="input-group">

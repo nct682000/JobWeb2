@@ -125,11 +125,11 @@
             <!-- col 2 -->
             <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
                 <h5 class="text-dark font-weight-bold">Các tin đang tuyển dụng</h5>
-                <c:forEach var="a" items="${applies}">
+                <c:forEach var="rec" items="${recPost}">
                     <div class="card bg-light mb-2">
-                        <div class="text-info font-weight-bold">${a.recruitment.title}</div>
+                        <div class="text-info font-weight-bold">${rec.title}</div>
                         <div>
-                            <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
+                            <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
                         </div>
 
                     </div>
@@ -139,7 +139,7 @@
     </div>         
 </c:if>
 
-<!-- RECRUITER -->
+<!-- ADMIN -->
 <c:if test="${user[0].role.toString() == 'ADMIN'}">
     <div class="m-4 text-center">
         <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
@@ -153,7 +153,7 @@
 <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form:form method="post" action="" modelAttribute="userUpdate" enctype="multipart/form-data">
+            <form:form method="post" action="/FindJobApp/user/${pageContext.request.userPrincipal.name}" modelAttribute="userUpdate" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title text-info font-weight-bold" id="exampleModalLongTitle">Chỉnh sửa thông tin người dùng</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -284,7 +284,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
                                          </div>
-                                        <form:input path="avatar" class="form-control" type="file"/>
+                                        <form:input path="file" class="form-control" type="file"/>
                                 </div>
                             </div>
 
@@ -313,7 +313,7 @@
 <div class="modal fade" id="addRecruitmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form:form method="post" action="" modelAttribute="recruitment" enctype="multipart/form-data">
+            <form:form method="post" action="/FindJobApp/user/${pageContext.request.userPrincipal.name}" modelAttribute="recruitment" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLongTitle">Thêm mới tin tuyển dụng</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -322,6 +322,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="p-2">
+                        
+                        <c:if test="${errMsg != null}">
+                            <div class="alert alert-danger">${errMsg}</div>
+                        </c:if>
                        
                         <!-- input title -->
                         <div class="form-group">
@@ -332,9 +336,10 @@
                                      </div>
                                     <form:input path="title" class="form-control" type="text"/>
                             </div>
+                            <form:errors path="title" cssClass="text-danger" element="div" />
                         </div>
 
-                            <!-- Salary -->
+                             <!-- Salary --> 
                         <div class="row mt-4">
 
                             <!-- input salary from -->
@@ -346,9 +351,10 @@
                                          </div>
                                         <form:input path="salaryFrom" class="form-control" type="phone"/>
                                 </div>
+                                <form:errors path="salaryFrom" cssClass="text-danger" element="div" />
                             </div>
 
-                            <!-- input salary from -->
+                            <!-- input salary from  -->
                             <div class="form-group col-6">
                                 <div class="text-primary font-weight-bold">Mức lương kết thúc</div>
                                 <div class="input-group">
@@ -362,7 +368,7 @@
                         </div>
 
                         <div class="row">
-                            <!-- select form -->
+                            <!-- select form  -->
                             <div class="form-group col-6">
                                 <div class="text-primary font-weight-bold">Chức vụ</div>
                                 <div class="input-group">
@@ -380,6 +386,7 @@
                                         <option value="EXECUTIVES">Giám đốc điều hành</option>
                                     </form:select>
                                 </div>
+                                <form:errors path="form" cssClass="text-danger" element="div" />
                             </div>
                             
                             <!-- select career -->
@@ -396,10 +403,12 @@
                                         </c:forEach>
                                     </form:select>
                                 </div>
+                                <form:errors path="career" cssClass="text-danger" element="div" />
                             </div>
                         </div>
 
                         <!-- input description -->
+                         input description 
                         <div class="form-group">
                             <div class="text-primary font-weight-bold">Chi tiết</div>
                             <div class="input-group">
@@ -409,10 +418,11 @@
                                     <form:input path="description" class="form-control" type="text"/>
                             </div>
                         </div>
+                            
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary btn-lg">Thêm tin</button>
+                    <input type="submit" class="btn btn-primary btn-lg" value="Thêm tin">
                 </div>
             </form:form>
         </div>

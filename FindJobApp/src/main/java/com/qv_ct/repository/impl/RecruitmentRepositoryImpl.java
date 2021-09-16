@@ -8,8 +8,9 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -112,6 +114,8 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     public boolean addOrUpdate(Recruitment r) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
+            r.setCreatedDate(Date.from(Instant.now()));
+            r.setUpdatedDate(Date.from(Instant.now()));
             session.save(r);
 
             return true;
@@ -165,6 +169,22 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         
         Query q = session.createQuery(query);
         q.setMaxResults(num);
+        
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Recruitment> getRecruitmentByUserId(int userId) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        query = query.select(root);
+        
+        Predicate p =builder.equal(root.get("recruiter"), userId);
+        
+        query = query.where(p);
+        Query q = session.createQuery(query);
         
         return q.getResultList();
     }
