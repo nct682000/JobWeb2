@@ -15,4 +15,5 @@ import java.util.Set;
  */
 public interface CommentRepository {
     List<Comment> getCommentByRecruiterId(int id);
+    Comment addComment(Comment c);
 }

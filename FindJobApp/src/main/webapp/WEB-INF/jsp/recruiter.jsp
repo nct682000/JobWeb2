@@ -10,6 +10,9 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+    <script src="../resources/js/main.js"></script>
+</head>
 
 <div class="container-fluid" style="width: 90%">
     <h2 class="text-center text-success mb-5">${ru.companyName}</h2>
@@ -69,40 +72,43 @@
     <div class="row" >
         <!-- col 1 -->
         <div class="col-md-7 col-xl-7 col-7 bg-light">
-            <!-- COmment -->
-            <c:forEach var="cmt" items="${comments}">
-                <div class="mt-2 row">
-                    <div class="col-md-2 text-center">
-                        <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
-                    </div>
-                    <div class="col-md ml-2">
-                        <div class="card">
-                            <div class="font-weight-bold">
-                                <c:if test="${cmt.commenter.role == 'CANDIDATE'}">
-                                    ${cmt.commenter.firstName} ${cmt.commenter.lastName}
-                                </c:if>
-                                <c:if test="${cmt.commenter.role == 'RECRUITER'}">
-                                   ${cmt.commenter.companyName}
-                                </c:if>
+            <div id="commentArea">
+                <!-- COmment -->
+                <c:forEach var="cmt" items="${comments}">
+                    <div class="mt-2 row">
+                        <div class="col-md-2 text-center">
+                            <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
+                        </div>
+                        <div class="col-md ml-2">
+                            <div class="card">
+                                <div class="font-weight-bold">
+                                    <c:if test="${cmt.commenter.role == 'CANDIDATE'}">
+                                        ${cmt.commenter.firstName} ${cmt.commenter.lastName}
+                                    </c:if>
+                                    <c:if test="${cmt.commenter.role == 'RECRUITER'}">
+                                       ${cmt.commenter.companyName}
+                                    </c:if>
+                                </div>
+                                <div class="ml-3">${cmt.content}</div>
                             </div>
-                            <div class="ml-3">${cmt.content}</div>
+                            <div>
+                                <span><a href="#">Thích</a> . </span>
+                                <span><a href="#">Trả lời</a> . </span>
+                                <span class="text-secondary my-date">Lúc: ${cmt.createdDate}</span>
+                            </div>
                         </div>
-                        <div>
-                            <span><a href="#">Thích</a> . </span>
-                            <span><a href="#">Trả lời</a> . </span>
-                            <span class="text-secondary">Lúc: ${cmt.createdDate}</span>
-                        </div>
+
+                            <!-- replies -->
+                        <c:if test="${!replies.isEmpty()}">
+                            <div>${relies.content}</div>
+                        </c:if>
+
                     </div>
-
-                        <!-- replies -->
-                    <c:if test="${!replies.isEmpty()}">
-                        <div>${relies.content}</div>
-                    </c:if>
-
-                </div>
-            </c:forEach>
-            <input type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2" />
-            <div class="ml-2"><input type="submit" value="Bình luận" class="btn btn-info" /></div>
+                </c:forEach>
+            </div>
+            <textarea id="commentId" type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2" ></textarea>
+            <input type="button" value="Bình luận" class="btn btn-info ml-2"
+                                     onclick="addComment(${currentUser.id}, ${ru.id})" />
 
         </div>
 
@@ -118,3 +124,16 @@
     </div>
     
 </div>
+                        
+
+<script>
+    window.onload = function (){
+        let dates = document.querySelectorAll(".my-date")
+        for(let i = 0; i < dates.length; i++){
+            let d = dates[i]
+            moment.locale('vi')
+            d.innerText = moment(d.innerText).fromNow()
+        }
+    }
+    
+</script>

@@ -8,12 +8,15 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Comment;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.CommentRepository;
+import java.sql.Time;
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,21 @@ public class CommentRepositoryImpl implements CommentRepository{
         Query q = session.createQuery(query);
         
         return q.getResultList();
+    }
+
+    @Override
+    public Comment addComment(Comment c) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        
+        try{
+            c.setCreatedDate(Time.from(Instant.now()));
+            session.save(c);
+            return c;
+        }catch (HibernateException ex){
+            ex.printStackTrace();
+        }
+        
+        return null;
     }
     
 }

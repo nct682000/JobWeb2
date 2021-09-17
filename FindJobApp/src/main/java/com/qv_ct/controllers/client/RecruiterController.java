@@ -7,6 +7,7 @@ package com.qv_ct.controllers.client;
 
 import com.qv_ct.service.CommentService;
 import com.qv_ct.service.UserService;
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +26,13 @@ public class RecruiterController {
     private CommentService commentService;
     
     @RequestMapping("/recruiter/{id}")
-    public String recruiter(Model model, @PathVariable int id){
+    public String recruiter(Model model, @PathVariable int id,
+            Principal principal){
         
         model.addAttribute("ru", this.userService.getUserById(id));
         
         model.addAttribute("comments", this.commentService.getCommentByRecruiterId(id));
+        model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
         
         return "recruiter";
     }

@@ -6,8 +6,11 @@
 package com.qv_ct.service.impl;
 
 import com.qv_ct.pojos.Comment;
+import com.qv_ct.pojos.User;
 import com.qv_ct.repository.CommentRepository;
 import com.qv_ct.service.CommentService;
+import com.qv_ct.service.RecruitmentService;
+import com.qv_ct.service.UserService;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +24,23 @@ import org.springframework.stereotype.Service;
 public class CommentServiceImpl implements CommentService{
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<Comment> getCommentByRecruiterId(int id) {
         return this.commentRepository.getCommentByRecruiterId(id);
+    }
+
+    @Override
+    public Comment addComment(String content, int commenterId, int commentedId) {
+        User u1 = this.userService.getUserById(commenterId);
+        User u2 = this.userService.getUserById(commentedId);
+        Comment c = new Comment();
+        c.setCommenter(u1);
+        c.setCommented(u2);
+        c.setContent(content);
+        return this.commentRepository.addComment(c);
     }
     
 }
