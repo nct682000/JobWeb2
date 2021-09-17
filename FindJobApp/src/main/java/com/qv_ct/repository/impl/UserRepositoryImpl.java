@@ -89,6 +89,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             Location l = new Location(user.getAddress(), user.getProvince());
             user.setLocation(l);
+            user.setRole(role);          // thêm mới 1 dòng này 
 
             session.save(l);
             session.save(user);

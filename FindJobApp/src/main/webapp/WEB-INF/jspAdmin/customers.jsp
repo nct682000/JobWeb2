@@ -239,8 +239,12 @@
                                                 </td>
                                                 <td>
                                                     <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-success">Enable</button>
-                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <c:if test="${status == 'active'}">
+                                                        <button class="btn btn-secondary">Disable</button>
+                                                    </c:if>
+                                                    <c:if test="${status == 'inactive'}">
+                                                        <button class="btn btn-success">Enable</button>
+                                                    </c:if>
                                                     <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>                                                                                                                   
@@ -292,8 +296,12 @@
                                                 </td>
                                                 <td>
                                                     <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-success">Enable</button>
-                                                    <button class="bi bi-pencil-fill btn"></button>
+                                                    <c:if test="${status == 'active'}">
+                                                        <button class="btn btn-secondary">Disable</button>
+                                                    </c:if>
+                                                    <c:if test="${status == 'inactive'}">
+                                                        <button class="btn btn-success">Enable</button>
+                                                    </c:if>
                                                     <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>                                                                                                                   

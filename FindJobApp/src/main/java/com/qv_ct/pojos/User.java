@@ -57,7 +57,7 @@ public class User implements Serializable{
 //    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
-    private Role role = Role.CANDIDATE;
+    private Role role;			// đổi chổ này
     private boolean active = true;
     
     @OneToOne

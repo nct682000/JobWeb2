@@ -6,12 +6,30 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div id="main">
-    <form class="container bg-info col-md-8" style="margin-bottom: 30px;margin-top: 30px;" method="POST" >
 
-        <!--    form cập nhập người ứng tuyển    -->
-        <c:if test="${typeUser == 'edit-cadidates'}">
+
+<c:if test="${typeUser == 'create-cadidates'}">
+    <c:url value="/admin/customers/cadidates/new" var="action" />
+</c:if>
+<c:if test="${typeUser == 'create-recruiters'}">
+    <c:url value="/admin/customers/recruiters/new" var="action" />
+</c:if>
+<c:if test="${typeUser == 'edit-cadidates'}">
+    <c:url value="/admin/customers/cadidates/{userId}/edit" var="action" />
+</c:if>
+<c:if test="${typeUser == 'edit-recruiters'}">
+    <c:url value="/admin/customers/recruiters/{userId}/edit" var="action" />
+</c:if>
+
+<div id="main" >
+
+    <!--    form tạo mới người ứng tuyển    -->
+    <c:if test="${typeUser == 'create-cadidates'}">
+        <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data"
+                   cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
+
             <h3 style="text-align: center; padding-top: 20px; margin: 0;">Cập nhập thông tin người ứng tuyển</h3>
             <div class="row" style="padding: 20px;">
                 <!--    tài khoản   -->
@@ -19,13 +37,13 @@
                     <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
                         <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
                         <div class="col-md-9 " style="margin: auto;">
-                            <input type="text"      class="form-control"    id="validationDefault03"    value="${user.username}" placeholder="username" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control "   id="validationDefault03"    placeholder="password" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control"    id="validationDefault03"    placeholder="reconfirm password" style=" margin-bottom: 20px;">
+                            <form:input path="username"         id="username"           cssClass="form-control"     placeholder="Tên tài khoản"     type="text"     cssStyle=" margin-bottom: 20px;" />
+                            <form:input path="password"         id="password"           cssClass="form-control"     placeholder="Mật khẩu"          type="password" cssStyle=" margin-bottom: 20px;" autocomplete=""/>
+                            <form:input path="confirmPassword"  id="confirmPassword"    cssClass="form-control"     placeholder="Nhập lại Mật khẩu" type="password" cssStyle=" margin-bottom: 20px;" autocomplete=""/>
                         </div>
                     </div>
                     <div style="text-align: center" class="row"> 
-                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Cập nhập</button>
+                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Tạo mới</button>
                         <a href="/FindJobApp/admin/customers/cadidates" 
                            class="btn btn-secondary col-md-4" style="padding: 10px;margin-top: 20px;">Quay về</a>
                     </div>
@@ -37,20 +55,20 @@
                     <div class="row" style=" margin-bottom: 30px;">
                         <!--    họ tên  -->
                         <div class="col-md-4">
-                            <label for="validationDefault01" class="form-label">Họ</label>
-                            <input type="text" class="form-control" id="validationDefault01" placeholder="họ" value="${user.firstName}">
+                            <label      for="firstName"     class="form-label">Họ</label>
+                            <form:input path="firstName"    id="firstName"  cssClass="form-control"     placeholder="Họ. . ."       type="text"/>
                         </div>
                         <div class="col-md-2">
-                            <label for="validationDefault02" class="form-label">Tên</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="tên" value="${user.lastName}">
+                            <label      for="lastName"      class="form-label">Tên</label>
+                            <form:input path="lastName"     id="lastName"   cssClass="form-control"     placeholder="Tên"           type="text"/>
                         </div>
 
                         <!--    email   -->
                         <div class="col-md-6">
-                            <label for="validationDefaultUsername" class="form-label">Email</label>
+                            <label      for="mail"      class="form-label">Email</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" value="${user.mail}">
+                                <span class="input-group-text">@</span>
+                                <form:input path="mail"     id="mail"       cssClass="form-control"     placeholder=""     type="email"/>
                             </div>
                         </div>
                     </div>
@@ -60,101 +78,65 @@
                         <!--    giới tính   -->
                         <div class="col-md-5">
                             <label for="validationDefault05" class="form-label">Giới tính</label>
-                            <c:if test="${user.sex == 'MALE'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" >
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="MALE" id="MALE"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Nam
+                                    </label>
                                 </div>
-                            </c:if>
-                            <c:if test="${user.sex=='FEMALE'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" >
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="FEMALE" id="FEMALE"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Nữ
+                                    </label>
                                 </div>
-                            </c:if>
-                            <c:if test="${user.sex=='NEUTRAL'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="NEUTRAL" id="NEUTRAL"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Khác
+                                    </label>
                                 </div>
-                            </c:if>
+                            </div>
                         </div>
-
                         <!--    số điện thoại   -->
                         <div class="col-md-5">
-                            <label for="validationDefault03" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.phone}">
+                            <label      for="phone"      class="form-label">Số điện thoại</label>
+                            <form:input path="phone"     id="phone"   cssClass="form-control"       type="text"/>
                         </div>
                     </div>
 
-                    <!--    địa chỉ     -->
+
+                    <!--    địa chỉ     &   ảnh đại diện    -->
                     <div class="row" >                
                         <div class="col-md-5">
-                            <label for="validationDefault04" class="form-label">Địa chỉ</label>
-                            <select class="form-select" id="validationDefault04" >
-                                <option selected disabled value="${user.location.province.name}">${user.location.province.name}</option>
-                                <option>...</option>
-                            </select>                      
+                            <label for="province" class="form-label">Địa chỉ</label>  
+                            <form:select path="province" cssClass="form-control" aria-label=".form-select-sm example" id="province">
+                                <option selected>Tỉnh thành</option>
+                                <c:forEach var="p" items="${provinces}">
+                                    <option value="${p.id}">${p.name}</option>
+                                </c:forEach>
+                            </form:select>
                         </div>
                         <div class="col-md-7">
                             <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >${user.location.address}</textarea>
+                            <form:textarea path="address" class="form-control" placeholder="Nhập địa chỉ" type="text" rows="3"/>
                         </div>
                     </div>
+                    <div class="row" >
+                        <label for="province" class="form-label">Ảnh</label>  
+                        <form:input path="file" id="file" class="form-control" type="file" />
+                    </div>                
                 </div>
             </div>
-        </c:if>
+        </form:form>
+    </c:if>
 
-        <!--    form tạo mới người ứng tuyển    -->
-        <c:if test="${typeUser == 'create-cadidates'}">
+    <!--    form cập nhập người ứng tuyển    -->
+    <c:if test="${typeUser == 'edit-cadidates'}">
+        <form:form method="patch" action="${action}" modelAttribute="user" enctype="multipart/form-data"
+                   cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
+
             <h3 style="text-align: center; padding-top: 20px; margin: 0;">Tạo mới người ứng tuyển</h3>
             <div class="row" style="padding: 20px;">
                 <!--    tài khoản   -->
@@ -162,13 +144,13 @@
                     <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
                         <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
                         <div class="col-md-9 " style="margin: auto;">
-                            <input type="text"      class="form-control"    id="validationDefault03"    placeholder="username" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control "   id="validationDefault03"    placeholder="password" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control"    id="validationDefault03"    placeholder="reconfirm password" style=" margin-bottom: 20px;">
+                            <form:input path="username"         id="username"           value="${user.username}"    cssClass="form-control"     placeholder="Tên tài khoản"     type="text"     cssStyle=" margin-bottom: 20px;" />
+                            <form:input path="password"         id="password"           cssClass="form-control"     placeholder="Mật khẩu"          type="password" cssStyle=" margin-bottom: 20px;" autocomplete="new-password"/>
+                            <form:input path="confirmPassword"  id="confirmPassword"    cssClass="form-control"     placeholder="Nhập lại Mật khẩu" type="password" cssStyle=" margin-bottom: 20px;" autocomplete="new-password"/>
                         </div>
                     </div>
                     <div style="text-align: center" class="row"> 
-                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Tạo mới</button>
+                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Cập nhập</button>
                         <a href="/FindJobApp/admin/customers/cadidates" 
                            class="btn btn-secondary col-md-4" style="padding: 10px;margin-top: 20px;">Quay về</a>
                     </div>
@@ -180,20 +162,20 @@
                     <div class="row" style=" margin-bottom: 30px;">
                         <!--    họ tên  -->
                         <div class="col-md-4">
-                            <label for="validationDefault01" class="form-label">Họ</label>
-                            <input type="text" class="form-control" id="validationDefault01" placeholder="họ" value="${user.firstName}">
+                            <label      for="firstName"     class="form-label">Họ</label>
+                            <form:input path="firstName"    id="firstName"  value="${user.firstName}"   cssClass="form-control"     placeholder="Họ. . ."       type="text"/>
                         </div>
                         <div class="col-md-2">
-                            <label for="validationDefault02" class="form-label">Tên</label>
-                            <input type="text" class="form-control" id="validationDefault02" placeholder="tên" value="${user.lastName}">
+                            <label      for="lastName"      class="form-label">Tên</label>
+                            <form:input path="lastName"     id="lastName"   value="${user.lastName}"   cssClass="form-control"     placeholder="Tên"           type="text"/>
                         </div>
 
                         <!--    email   -->
                         <div class="col-md-6">
-                            <label for="validationDefaultUsername" class="form-label">Email</label>
+                            <label      for="mail"      class="form-label">Email</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" value="${user.mail}">
+                                <span class="input-group-text">@</span>
+                                <form:input path="mail"     id="mail"       value="${user.mail}" cssClass="form-control"     placeholder=""     type="email"/>
                             </div>
                         </div>
                     </div>
@@ -203,168 +185,65 @@
                         <!--    giới tính   -->
                         <div class="col-md-5">
                             <label for="validationDefault05" class="form-label">Giới tính</label>
-                            <c:if test="${user.sex == 'MALE'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" >
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="MALE" id="MALE"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Nam
+                                    </label>
                                 </div>
-                            </c:if>
-                            <c:if test="${user.sex=='FEMALE'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" >
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="FEMALE" id="FEMALE"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Nữ
+                                    </label>
                                 </div>
-                            </c:if>
-                            <c:if test="${user.sex=='NEUTRAL'}">
-                                <div class="d-flex">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
-                                        <label class="form-check-label" for="flexRadioDefault1" style="margin-right: 20px;">
-                                            Nam
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                                        <label class="form-check-label" for="flexRadioDefault2" style="margin-right: 20px;">
-                                            Nữ
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                                        <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 20px;">
-                                            Khác
-                                        </label>
-                                    </div>
+                                <div class="form-check">
+                                    <form:radiobutton  path="sex" value="NEUTRAL" id="NEUTRAL"  cssClass="form-check-input" />
+                                    <label class="form-check-label" for="sex" style="margin-right: 20px;">
+                                        Khác
+                                    </label>
                                 </div>
-                            </c:if>
-                        </div>
-
-                        <!--    số điện thoại   -->
-                        <div class="col-md-5">
-                            <label for="validationDefault03" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.phone}">
-                        </div>
-                    </div>
-
-                    <!--    địa chỉ     -->
-                    <div class="row" >                
-                        <div class="col-md-5">
-                            <label for="validationDefault04" class="form-label">Địa chỉ</label>
-                            <select class="form-select" id="validationDefault04" >
-                                <option selected disabled value="${user.location.province.name}">${user.location.province.name}</option>
-                                <option>...</option>
-                            </select>                      
-                        </div>
-                        <div class="col-md-7">
-                            <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >${user.location.address}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </c:if>
-
-        <!--    form cập nhập nhà tuyển dụng    -->
-        <c:if test="${typeUser == 'edit-recruiters'}">
-            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Cập nhập thông tin nhà tuyển dụng</h3>
-            <div class="row" style="padding: 20px;">
-                <!--    tài khoản   -->
-                <div class="col-md-5  " style="padding: 20px 20px 0;" >
-                    <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
-                        <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
-                        <div class="col-md-9 " style="margin: auto;">
-                            <input type="text"      class="form-control"    id="validationDefault03"    value="${user.username}" placeholder="username" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control "   id="validationDefault03"    placeholder="password" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control"    id="validationDefault03"    placeholder="reconfirm password" style=" margin-bottom: 20px;">
-                        </div>
-                    </div>
-                    <div style="text-align: center" class="row"> 
-                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Cập nhập</button>
-                        <a href="/FindJobApp/admin/customers/recruiters" 
-                           class="btn btn-secondary col-md-4" style="padding: 10px;margin-top: 20px;">Quay về</a>
-                    </div>
-                </div>
-
-                <!--    thông tin người dùng   -->
-                <div class="col-md-7">
-                    <!--    công ty     -->
-                    <div class="row" style=" margin-bottom: 30px;">
-                        <div class="col-md-12">
-                            <label for="validationDefault03" class="form-label">Công ty</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.companyName}">
-                        </div>
-                    </div>
-
-                    <!--    email   &   số điện thoại    -->
-                    <div class="row" style=" margin-bottom: 30px;">
-                        <!--    email   -->
-                        <div class="col-md-7">
-                            <label for="validationDefaultUsername" class="form-label">Email</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" value="${user.mail}">
                             </div>
                         </div>
-
                         <!--    số điện thoại   -->
                         <div class="col-md-5">
-                            <label for="validationDefault03" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.phone}">
+                            <label      for="phone"      class="form-label">Số điện thoại</label>
+                            <form:input path="phone"     id="phone"   value="${user.phone}"  cssClass="form-control"       type="text"/>
                         </div>
                     </div>
 
-                    <!--    địa chỉ     -->
+
+                    <!--    địa chỉ     &   ảnh đại diện    -->
                     <div class="row" >                
                         <div class="col-md-5">
-                            <label for="validationDefault04" class="form-label">Địa chỉ</label>
-                            <select class="form-select" id="validationDefault04" >
-                                <option selected disabled value="${user.location.province.name}">${user.location.province.name}</option>
-                                <option>...</option>
-                            </select>                      
+                            <label for="province" class="form-label">Địa chỉ</label>  
+                            <form:select path="province" cssClass="form-control" aria-label=".form-select-sm example" id="province">
+                                <option selected>Tỉnh thành</option>
+                                <c:forEach var="p" items="${provinces}">
+                                    <option value="${p.id}">${p.name}</option>
+                                </c:forEach>
+                            </form:select>
                         </div>
                         <div class="col-md-7">
-                            <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >${user.location.address}</textarea>
+                            <label for="address" class="form-label">địa chỉ cụ thể</label>
+                            <form:textarea path="address"    class="form-control" placeholder="Nhập địa chỉ" type="text" rows="3"/>
                         </div>
                     </div>
+                    <div class="row" >
+                        <label for="province" class="form-label">Ảnh</label>  
+                        <form:input path="file" id="file" class="form-control" type="file" />
+                    </div>                
                 </div>
             </div>
-        </c:if>
+        </form:form>
+    </c:if>
 
-        <!--    form tạo mới nhà tuyển dụng    -->
-        <c:if test="${typeUser == 'create-recruiters'}">
+    <!--    form tạo mới nhà tuyển dụng    -->
+    <c:if test="${typeUser == 'create-recruiters'}">
+        <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data"
+                   cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
+
             <h3 style="text-align: center; padding-top: 20px; margin: 0;">Tạo mới nhà tuyển dụng</h3>
             <div class="row" style="padding: 20px;">
                 <!--    tài khoản   -->
@@ -372,9 +251,9 @@
                     <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
                         <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
                         <div class="col-md-9 " style="margin: auto;">
-                            <input type="text"      class="form-control"    id="validationDefault03"    value="${user.username}" placeholder="username" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control "   id="validationDefault03"    placeholder="password" style=" margin-bottom: 20px;">
-                            <input type="password"  class="form-control"    id="validationDefault03"    placeholder="reconfirm password" style=" margin-bottom: 20px;">
+                            <form:input path="username"         id="username"           cssClass="form-control"     placeholder="Tên tài khoản"     type="text"     cssStyle=" margin-bottom: 20px;" />
+                            <form:input path="password"         id="password"           cssClass="form-control"     placeholder="Mật khẩu"          type="password" cssStyle=" margin-bottom: 20px;" autocomplete=""/>
+                            <form:input path="confirmPassword"  id="confirmPassword"    cssClass="form-control"     placeholder="Nhập lại Mật khẩu" type="password" cssStyle=" margin-bottom: 20px;" autocomplete=""/>
                         </div>
                     </div>
                     <div style="text-align: center" class="row"> 
@@ -389,8 +268,8 @@
                     <!--    công ty     -->
                     <div class="row" style=" margin-bottom: 30px;">
                         <div class="col-md-12">
-                            <label for="validationDefault03" class="form-label">Công ty</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.companyName}">
+                            <label for="companyName" class="form-label">Công ty</label>
+                            <form:input path="companyName"    id="companyName"  cssClass="form-control"     placeholder="Công ty. . ."       type="text"/>
                         </div>
                     </div>
 
@@ -398,36 +277,121 @@
                     <div class="row" style=" margin-bottom: 30px;">
                         <!--    email   -->
                         <div class="col-md-7">
-                            <label for="validationDefaultUsername" class="form-label">Email</label>
+                            <label      for="mail"      class="form-label">Email</label>
                             <div class="input-group">
-                                <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                                <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" value="${user.mail}">
+                                <span class="input-group-text">@</span>
+                                <form:input path="mail"     id="mail"       cssClass="form-control"     placeholder=""     type="email"/>
                             </div>
                         </div>
 
                         <!--    số điện thoại   -->
                         <div class="col-md-5">
-                            <label for="validationDefault03" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="validationDefault03" value="${user.phone}">
+                            <label      for="phone"      class="form-label">Số điện thoại</label>
+                            <form:input path="phone"     id="phone"   cssClass="form-control"       type="text"/>
                         </div>
                     </div>
 
-                    <!--    địa chỉ     -->
+                    <!--    địa chỉ     &   ảnh đại diện    -->
                     <div class="row" >                
                         <div class="col-md-5">
-                            <label for="validationDefault04" class="form-label">Địa chỉ</label>
-                            <select class="form-select" id="validationDefault04" >
-                                <option selected disabled value="${user.location.province.name}">${user.location.province.name}</option>
-                                <option>...</option>
-                            </select>                      
+                            <label for="province" class="form-label">Địa chỉ</label>  
+                            <form:select path="province" cssClass="form-control" aria-label=".form-select-sm example" id="province">
+                                <option selected>Tỉnh thành</option>
+                                <c:forEach var="p" items="${provinces}">
+                                    <option value="${p.id}">${p.name}</option>
+                                </c:forEach>
+                            </form:select>
                         </div>
                         <div class="col-md-7">
                             <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >${user.location.address}</textarea>
+                            <form:textarea path="address" class="form-control" placeholder="Nhập địa chỉ" type="text" rows="3"/>
                         </div>
                     </div>
+                    <div class="row" >
+                        <label for="province" class="form-label">Ảnh</label>  
+                        <form:input path="file" id="file" class="form-control" type="file" />
+                    </div>                
                 </div>
             </div>
-        </c:if>
-    </form>
+        </form:form>
+    </c:if>
+
+    <!--    form cập nhập nhà tuyển dụng    -->
+    <c:if test="${typeUser == 'edit-recruiters'}">
+        <form:form method="patch" action="${action}" modelAttribute="user" enctype="multipart/form-data"
+                   cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
+
+            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Tạo mới nhà tuyển dụng</h3>
+            <div class="row" style="padding: 20px;">
+                <!--    tài khoản   -->
+                <div class="col-md-5  " style="padding: 20px 20px 0;" >
+                    <div class="" style="border: 2px solid #dee2e6;border-radius: 7%;">
+                        <h2 style="text-align: center;padding: 25px;">Tài khoản</h2>
+                        <div class="col-md-9 " style="margin: auto;">
+                            <form:input path="username"         id="username"           value="${user.username}"    cssClass="form-control"     placeholder="Tên tài khoản"     type="text"     cssStyle=" margin-bottom: 20px;" />
+                            <form:input path="password"         id="password"           value=" "        cssClass="form-control"     placeholder="Mật khẩu"          type="password" cssStyle=" margin-bottom: 20px;" autocomplete="new-password"/>
+                            <form:input path="confirmPassword"  id="confirmPassword"    cssClass="form-control"     placeholder="Nhập lại Mật khẩu" type="password" cssStyle=" margin-bottom: 20px;" autocomplete="new-password"/>
+                        </div>
+                    </div>
+                    <div style="text-align: center" class="row"> 
+                        <button class="btn btn-success col-md-5" type="submit" style="margin: 20px 20px 0 30px;">Tạo mới</button>
+                        <a href="/FindJobApp/admin/customers/recruiters" 
+                           class="btn btn-secondary col-md-4" style="padding: 10px;margin-top: 20px;">Quay về</a>
+                    </div>
+                </div>
+
+                <!--    thông tin người dùng   -->
+                <div class="col-md-7">
+                    <!--    công ty     -->
+                    <div class="row" style=" margin-bottom: 30px;">
+                        <div class="col-md-12">
+                            <label for="companyName" class="form-label">Công ty</label>
+                            <form:input path="companyName"    id="companyName"  value="${user.companyName}"    cssClass="form-control"     placeholder="Công ty. . ."       type="text"/>
+                        </div>
+                    </div>
+
+                    <!--    email   &   số điện thoại    -->
+                    <div class="row" style=" margin-bottom: 30px;">
+                        <!--    email   -->
+                        <div class="col-md-7">
+                            <label      for="mail"      class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+                                <form:input path="mail"     id="mail"       value="${user.mail}"     cssClass="form-control"     placeholder=""     type="email"/>
+                            </div>
+                        </div>
+
+                        <!--    số điện thoại   -->
+                        <div class="col-md-5">
+                            <label      for="phone"      class="form-label">Số điện thoại</label>
+                            <form:input path="phone"     id="phone"   value="${user.phone}"     cssClass="form-control"       type="text"/>
+                        </div>
+                    </div>
+
+                    <!--    địa chỉ     &   ảnh đại diện    -->
+                    <div class="row" >                
+                        <div class="col-md-5">
+                            <label for="province" class="form-label">Địa chỉ</label>  
+                            <form:select path="province" cssClass="form-control" aria-label=".form-select-sm example" id="province">
+                                <option selected>Tỉnh thành</option>
+                                <c:forEach var="p" items="${provinces}">
+                                    <option value="${p.id}">${p.name}</option>
+                                </c:forEach>
+                            </form:select>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="validationDefault03" class="form-label">địa chỉ cụ thể</label>
+                            <form:textarea path="address"   id="address"   class="form-control" placeholder="Nhập địa chỉ" type="text" rows="3"/>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <label for="province" class="form-label">Ảnh</label>  
+                        <form:input path="file" id="file" class="form-control" type="file" />
+                    </div>                
+                </div>
+            </div>
+        </form:form>
+    </c:if>
+
+
 </div>

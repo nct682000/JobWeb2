@@ -61,7 +61,7 @@ and open the template in the editor.
     </definition>
     
     <definition name="createRecruiters_Admin" extends="baseAdmin">
-        <put-attribute name="title"     value="create cadidates admin" />
+        <put-attribute name="title"     value="create recruiter admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
     </definition>
     
