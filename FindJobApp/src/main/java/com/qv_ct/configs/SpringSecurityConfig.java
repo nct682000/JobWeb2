@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.qv_ct.pojos.Role;
 
 /**
  *
@@ -27,8 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-    "com.qv_ct.repository",
-    "com.qv_ct.service"
+    "com.qv_ct"
 })
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -69,8 +69,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/admin/**").access("hasRole('ADMIN')");
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_RECRUITER.name() + "')")
+                .antMatchers("/candidate/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_CANDIDATE.name() + "')");
 
         http.csrf().disable();
 

@@ -56,7 +56,7 @@ public class UserController {
                             @Valid User user,
                             BindingResult result){
        String errMsg = "";
-       Role role = Role.CANDIDATE;
+       Role role = Role.ROLE_CANDIDATE;
 //       if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){
@@ -83,7 +83,7 @@ public class UserController {
                             @Valid User user,
                             BindingResult result){
        String errMsg = "";
-       Role role = Role.RECRUITER;
+       Role role = Role.ROLE_RECRUITER;
 //       if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){

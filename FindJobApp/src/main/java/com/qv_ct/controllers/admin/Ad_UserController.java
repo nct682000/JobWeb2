@@ -58,7 +58,7 @@ public class Ad_UserController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String email = params.getOrDefault("email", null);
 
-        Role role = Role.CANDIDATE;
+        Role role = Role.ROLE_CANDIDATE;
         model.addAttribute("users", this.userService.getUsers_Admin(page, role, true, email));
         model.addAttribute("counter", this.userService.countUsers_Admin(role, true));
         model.addAttribute("typeUser", "cadidates");
@@ -73,7 +73,7 @@ public class Ad_UserController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String email = params.getOrDefault("email", null);
 
-        Role role = Role.CANDIDATE;
+        Role role = Role.ROLE_CANDIDATE;
         model.addAttribute("users", this.userService.getUsers_Admin(page, role, false, email));
         model.addAttribute("counter", this.userService.countUsers_Admin(role, false));
         model.addAttribute("typeUser", "cadidates");
@@ -104,7 +104,7 @@ public class Ad_UserController {
     public String createCadidates_Admin_Process(Model model,
             @ModelAttribute(value = "user") @Valid User user,
             BindingResult result) {
-        Role role = Role.CANDIDATE;
+        Role role = Role.ROLE_CANDIDATE;
         if (user.getPassword().trim().equals(user.getConfirmPassword().trim())) {
             if (this.userService.addOrUpdate(user, role) == true) {
                 return "redirect:/admin/customers/cadidates";
@@ -121,7 +121,7 @@ public class Ad_UserController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String email = params.getOrDefault("email", null);
 
-        Role role = Role.RECRUITER;
+        Role role = Role.ROLE_RECRUITER;
         model.addAttribute("users", this.userService.getUsers_Admin(page, role, true, email));
         model.addAttribute("counter", this.userService.countUsers_Admin(role, true));
         model.addAttribute("typeUser", "recruiters");
@@ -136,7 +136,7 @@ public class Ad_UserController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         String email = params.getOrDefault("email", null);
 
-        Role role = Role.RECRUITER;
+        Role role = Role.ROLE_RECRUITER;
         model.addAttribute("users", this.userService.getUsers_Admin(page, role, false, email));
         model.addAttribute("counter", this.userService.countUsers_Admin(role, false));
         model.addAttribute("typeUser", "recruiters");
@@ -167,7 +167,7 @@ public class Ad_UserController {
     public String createRecruiters_Admin_Process(Model model,
             @ModelAttribute(value = "user") @Valid User user,
             BindingResult result) {
-        Role role = Role.RECRUITER;
+        Role role = Role.ROLE_RECRUITER;
         if (user.getPassword().trim().equals(user.getConfirmPassword().trim())) {
             if (this.userService.addOrUpdate(user, role) == true) {
                 return "redirect:/admin/customers/recruiters";
