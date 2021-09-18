@@ -33,7 +33,7 @@ public class Comment implements Serializable{
     private String content;
     private String file;
     @Column(name = "created_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
     
     @ManyToOne

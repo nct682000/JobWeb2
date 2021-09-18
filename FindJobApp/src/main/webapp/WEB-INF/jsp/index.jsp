@@ -154,7 +154,7 @@
     </div>
 
     <ul class="pagination">
-        <c:forEach begin="1" end="${Math.ceil(countR / 4)}" var="i">
+        <c:forEach begin="1" end="${Math.ceil(countR / 8)}" var="i">
             <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
         </c:forEach>
     </ul>

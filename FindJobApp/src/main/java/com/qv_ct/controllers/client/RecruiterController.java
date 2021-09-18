@@ -6,6 +6,7 @@
 package com.qv_ct.controllers.client;
 
 import com.qv_ct.service.CommentService;
+import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,19 @@ public class RecruiterController {
     private UserService userService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private RecruitmentService recruitmentService;
     
     @RequestMapping("/recruiter/{id}")
     public String recruiter(Model model, @PathVariable int id,
             Principal principal){
         
         model.addAttribute("ru", this.userService.getUserById(id));
+        model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
         
         model.addAttribute("comments", this.commentService.getCommentByRecruiterId(id));
-        model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+        if(principal != null)
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
         
         return "recruiter";
     }

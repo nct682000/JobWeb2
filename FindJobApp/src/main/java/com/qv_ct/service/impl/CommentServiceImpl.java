@@ -31,9 +31,16 @@ public class CommentServiceImpl implements CommentService{
     public List<Comment> getCommentByRecruiterId(int id) {
         return this.commentRepository.getCommentByRecruiterId(id);
     }
+    
+    @Override
+    public Comment getCommentById(int id) {
+        return this.commentRepository.getCommentById(id);
+    }
 
     @Override
     public Comment addComment(String content, int commenterId, int commentedId) {
+        if (content.trim() == "")
+            return null;
         User u1 = this.userService.getUserById(commenterId);
         User u2 = this.userService.getUserById(commentedId);
         Comment c = new Comment();
@@ -41,6 +48,16 @@ public class CommentServiceImpl implements CommentService{
         c.setCommented(u2);
         c.setContent(content);
         return this.commentRepository.addComment(c);
+    }
+
+    @Override
+    public Comment deleteComment(int userId, int id) {
+        User u = this.userService.getUserById(userId);
+        Comment c = this.commentRepository.getCommentById(id);
+        if(u.getId() == c.getCommenter().getId())
+            return this.commentRepository.deleteComment(c);
+        
+        return null;
     }
     
 }

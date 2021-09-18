@@ -42,4 +42,21 @@ public class ApiCommentController {
         
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+    
+    @PostMapping(path = "/api/delete-comment", produces = {
+        MediaType.APPLICATION_JSON_VALUE
+    })
+    public ResponseEntity<Comment> deleteComment(@RequestBody Map<String, String> params){
+        try{
+            int userId = Integer.parseInt(params.get("userId"));
+            int commentId = Integer.parseInt(params.get("commentId"));
+            
+            Comment c = this.commentService.deleteComment(userId, commentId);
+            return new ResponseEntity<>(c, HttpStatus.OK);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

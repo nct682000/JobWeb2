@@ -20,6 +20,5 @@ public class Tester{
         Role r = Role.ADMIN;
         if (r.ordinal() == 0)
             System.out.println(1);
-        System.out.println(r.hashCode());
     }
 }

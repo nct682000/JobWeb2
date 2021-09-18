@@ -16,14 +16,15 @@ function addComment(commenterId, commentedId){
             "Content-Type": "application/json"
         }
     }).then (function(res){
-        console.info(res);
-        return res.json();
+        console.info(res)
+        return res.json()
     }).then (function(data){
-        console.info(data);
+        console.info(data)
         
-        let area =  document.getElementById("commentArea");
-        console.log(area);
-        area.innerHTML = area.innerHTML + `
+        let area =  document.getElementById("commentArea")
+        
+        moment.locale('vi')
+        area.innerHTML = `
         <div class="mt-2 row">
             <div class="col-md-2 text-center">
                 <img alt="Avatar" src="${data.commenterId}" class="img-fluid rounded"/>
@@ -37,12 +38,31 @@ function addComment(commenterId, commentedId){
                     <span><a href="#">Thích</a> . </span>
                     <span><a href="#">Trả lời</a> . </span>
                     <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
+                    <span class="btn btn-danger">Xóa</span>
                 </div>
             </div>
 
         </div>
-        `
+        ` + area.innerHTML
     }).then (function(empty){
-        document.getElementById("commentId").value = "";
+        document.getElementById("commentId").value = ""
+        location.reload()
+    })
+}
+
+function deleteComment(userId, commentId){
+    fetch("/FindJobApp/api/delete-comment", {
+        method: 'post',
+        body: JSON.stringify({
+            "userId": userId,
+            "commentId": commentId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then (function(data){
+        console.info(data)
+        
+        location.reload()
     })
 }
