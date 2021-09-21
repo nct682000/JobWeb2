@@ -111,4 +111,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public boolean enableUser(int userId, boolean active) {
+        return this.userRepository.enableUser(userId, active);
+
+    }
+    
+    
 }

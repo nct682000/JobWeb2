@@ -102,7 +102,16 @@ public class User implements Serializable{
         this.role = role;
     }
     
-    
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setActive(boolean ac) {
+        this.active = ac;
+    }
 
     /**
      * @return the id

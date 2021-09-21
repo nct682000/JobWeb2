@@ -67,7 +67,7 @@ public class Ad_UserController {
         return "getCadidates_Admin";
     }
 
-//      danh sách ứng viên đã chưa hoạt động
+//      danh sách ứng viên chưa hoạt động
     @RequestMapping("/admin/customers/cadidates/inactive")
     public String getCadidates_Inactive_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));

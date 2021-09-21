@@ -141,4 +141,19 @@ public class UserRepositoryImpl implements UserRepository {
         return Long.parseLong(q.getSingleResult().toString());
     }
 
+    @Override
+    public boolean enableUser(int userId, boolean active) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            User u = s.get(User.class, userId);
+            u.setActive(active);
+            s.getTransaction().begin();
+            s.save(u);
+            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
 }

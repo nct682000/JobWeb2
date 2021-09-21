@@ -238,12 +238,11 @@
                                                     ${u.location.address},  ${u.location.province.name}
                                                 </td>
                                                 <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
                                                     <c:if test="${status == 'active'}">
-                                                        <button class="btn btn-secondary">Disable</button>
+                                                        <a href="javascript:;" class="btn btn-secondary" onclick="enableUser(${u.id}, 'cadidates', 'active')">Disable</a>
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
-                                                        <button class="btn btn-success">Enable</button>
+                                                        <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'cadidates', 'inactive')">Enable</a>
                                                     </c:if>
                                                     <button class="bi bi-trash-fill btn"></button>
                                                 </td>
@@ -295,12 +294,11 @@
                                                     ${u.location.address},  ${u.location.province.name}
                                                 </td>
                                                 <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
                                                     <c:if test="${status == 'active'}">
-                                                        <button class="btn btn-secondary">Disable</button>
+                                                        <a href="javascript:;" class="btn btn-secondary" onclick="enableUser(${u.id}, 'recruiters', 'active')">Disable</a>
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
-                                                        <button class="btn btn-success">Enable</button>
+                                                        <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'recruiters', 'inactive')">Enable</a>
                                                     </c:if>
                                                     <button class="bi bi-trash-fill btn"></button>
                                                 </td>
@@ -321,4 +319,5 @@
         </div>
     </div>
 </div>
+<script src="<c:url value="/js/assets/user.js" />"></script>
 
