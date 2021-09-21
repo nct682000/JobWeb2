@@ -243,8 +243,8 @@
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
                                                         <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'cadidates', 'inactive')">Enable</a>
+                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
                                                     </c:if>
-                                                    <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>                                                                                                                   
                                         </c:forEach>
@@ -299,8 +299,8 @@
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
                                                         <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'recruiters', 'inactive')">Enable</a>
+                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
                                                     </c:if>
-                                                    <button class="bi bi-trash-fill btn"></button>
                                                 </td>
                                             </tr>                                                                                                                   
                                         </c:forEach>

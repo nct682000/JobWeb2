@@ -70,3 +70,19 @@ function enableUser(userId, typeUser, status) {
         }
     }
 }
+
+function deleteUser(userId) {
+    if (confirm("Xóa tài khoản người dùng?") == true) { 
+        fetch(`/FindJobApp/api/admin/customers/${userId}`, {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => {
+            if (res.status == 200) {
+                location.reload();
+            } else 
+                alert("Something wrong!!!");
+        })
+    }
+}

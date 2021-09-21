@@ -156,4 +156,18 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public boolean deleteUser(int userId) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            User u = s.get(User.class, userId);
+//            s.getTransaction().begin();
+            s.delete(u);
+//            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
 }

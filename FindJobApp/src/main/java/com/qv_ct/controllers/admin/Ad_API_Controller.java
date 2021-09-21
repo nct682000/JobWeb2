@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 /**
  *
@@ -47,6 +49,12 @@ public class Ad_API_Controller {
     @ResponseStatus(HttpStatus.OK)
     public void enableUser_Recruiters(@PathVariable(name = "userId") int userId) {
         this.userService.enableUser(userId, true);
+    }
+    
+    @DeleteMapping("/admin/customers/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@PathVariable(name = "userId") int userId) {
+        this.userService.deleteUser(userId);
     }
 
 }

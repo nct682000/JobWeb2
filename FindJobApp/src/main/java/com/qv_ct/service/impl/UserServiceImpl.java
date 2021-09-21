@@ -116,6 +116,11 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.enableUser(userId, active);
 
     }
-    
-    
+
+    @Override
+    public boolean deleteUser(int userId) {
+        return this.userRepository.deleteUser(userId);
+
+    }
+
 }

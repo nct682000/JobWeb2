@@ -32,4 +32,6 @@ public interface UserRepository {
     long countUsers_Admin(Role role, boolean active);
 
     boolean enableUser(int userId, boolean active);
+    
+    boolean deleteUser(int userId);
 }
