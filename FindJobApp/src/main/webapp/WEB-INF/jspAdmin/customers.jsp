@@ -47,7 +47,7 @@
                             </div>
                         </div>
 
-                        <!--    lọc theo Địa chỉ    && tìm kiếm theo mail   -->
+                        <!--    tìm kiếm theo mail   -->
                         <div class="col-4 ">
                             <div class="row justify-content-end">
                                 <c:if test="${typeUser == 'cadidates'}">

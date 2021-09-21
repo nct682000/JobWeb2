@@ -68,8 +68,8 @@ and open the template in the editor.
     <!--chưa cập nhập-->
 
     
-    <definition name="ad_recruitment" extends="baseAdmin">
-        <put-attribute name="title"     value="List recruitment" />
+    <definition name="getRecruiment_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruitments admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
     </definition>
     

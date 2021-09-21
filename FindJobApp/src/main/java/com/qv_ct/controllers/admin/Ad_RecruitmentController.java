@@ -25,15 +25,35 @@ public class Ad_RecruitmentController {
     private RecruitmentService recruitmentService;
 
     @RequestMapping("/admin/recruitment")
-    public String index(Model model,
-            @RequestParam(required = false) Map<String, String> params) {
+    public String getRecruiment_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("recruitments", this.recruitmentService.getRecruitmentsAll(page));
-        model.addAttribute("counter", this.recruitmentService.countRecruitment());
+        boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
+        long salaryFrom = Long.parseLong(params.getOrDefault("salaryFrom", "1"));
+        long salaryTo = Long.parseLong(params.getOrDefault("salaryTo", "900000000"));
 
-        return "ad_recruitment";
+        if (active) {
+            model.addAttribute("recruitments", this.recruitmentService.getRecruitments_Admin(page, salaryFrom, salaryTo, active));
+            model.addAttribute("counter", this.recruitmentService.countRecruitment_Admin(active));
+//            model.addAttribute("type", "cadidates");
+            model.addAttribute("status", "active");
+        } else {
+            model.addAttribute("recruitments", this.recruitmentService.getRecruitments_Admin(page, salaryFrom, salaryTo, active));
+            model.addAttribute("counter", this.recruitmentService.countRecruitment_Admin(active));
+            model.addAttribute("status", "inactive");
+        }
+
+        return "getRecruiment_Admin";
     }
 
+//    @RequestMapping("/admin/recruitment/inactive")
+//    public String getRecruiment_Inactive_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+//        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+//        model.addAttribute("recruitments", this.recruitmentService.getRecruitmentsAll(page));
+//        
+//        model.addAttribute("counter", this.recruitmentService.countRecruitment());
+//
+//        return "ad_recruitment";
+//    }
     @RequestMapping("/admin/recruitment/{id}")
     public String getRecruitment(Model model, @PathVariable int id) {
 

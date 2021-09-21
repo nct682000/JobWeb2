@@ -21,22 +21,23 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class RecruitmentServiceImpl implements RecruitmentService{
+public class RecruitmentServiceImpl implements RecruitmentService {
+
     @Autowired
     private RecruitmentRepository recruitmentRepository;
 //    @Autowired
 //    private Cloudinary cloudinary;
-    
+
     @Override
     public List<Recruitment> getRecruitments(int page) {
         return this.recruitmentRepository.getRecruitments(page);
     }
-    
+
     @Override
     public Recruitment getRecruitmentById(int id) {
         return this.recruitmentRepository.getRecruitmentById(id);
     }
-    
+
     @Override
     public List<Recruitment> searchRecruitments(String kw) {
         return this.recruitmentRepository.searchRecruitment(kw);
@@ -44,7 +45,7 @@ public class RecruitmentServiceImpl implements RecruitmentService{
 
     @Override
     public boolean addOrUpdate(Recruitment r) {
-        
+
         try {
 //            Map map = this.cloudinary.uploader().upload(r.getFile().getBytes(),
 //                    ObjectUtils.asMap("resource_type", "auto"));
@@ -55,7 +56,7 @@ public class RecruitmentServiceImpl implements RecruitmentService{
             System.err.println("-----Add Error-----" + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 
@@ -63,11 +64,26 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     public long countRecruitment() {
         return this.recruitmentRepository.countRecruitment();
     }
-    
+
     //    -----------   admin   ------------------
     @Override
-    public List<Recruitment> getRecruitmentsAll(int page) {
-        return this.recruitmentRepository.getRecruitmentsAll(page);
+    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active) {
+        return this.recruitmentRepository.getRecruitments_Admin(page, salaryFrom, salaryTo, active);
     }
-    
+
+    @Override
+    public long countRecruitment_Admin(boolean active) {
+        return this.recruitmentRepository.countRecruitment_Admin(active);
+    }
+
+    @Override
+    public boolean enableRecruitment(int recId, boolean active) {
+        return this.recruitmentRepository.enableRecruitment(recId, active);
+    }
+
+    @Override
+    public boolean deleteRecruitment(int recId) {
+        return this.recruitmentRepository.deleteRecruitment(recId);
+    }
+
 }
