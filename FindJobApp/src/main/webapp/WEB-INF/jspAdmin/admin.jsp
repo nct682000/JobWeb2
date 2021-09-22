@@ -15,30 +15,31 @@
     <h1 style="text-align: center; padding: 30px">Báo cáo thống kê hoạt động ứng tuyển trong năm ${year}</h1>
     <div class="container">
         <div class="row " >
+            <!--    biểu đồ     -->
             <div class="col-md-8 ">
                 <canvas id="myChart" width="800" height="500"  style="background-color: blanchedalmond;"></canvas>
             </div >
-            <form action="/FindJobApp/admin"  class="col-md-4">
+
+            <!--    form nhập request     -->
+            <form action="/FindJobApp/admin"  class="col-md-4" style="text-align: center">
                 <div class="row" style="justify-content: space-around">
                     <!--    thống kê ứng tuyển theo tháng || quý     -->
-                    <div class="col-12">
-                        <div class="row ">
-                            <c:if test="${sortBy == 'thang'}">
-                                <input type="text" checked id="true" name="sort" value="thang" class="form-control" style="display: none"/>                                          
-                                <div class="col btn btn-lg btn-outline-success active">Theo tháng</div>    
-                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=quy">Theo quý</a>                                                   
-                            </c:if>
-                            <c:if test="${sortBy == 'quy'}">
-                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=thang">Theo tháng</a>                                                            
-                                <input type="text" checked id="true" name="sort" value="quy" class="form-control" style="display: none"/>
-                                <div class="col btn btn-lg btn-outline-success active">Theo quý</div>                                                         
-                            </c:if>
-                        </div>
+                    <div class="container">
+                        <c:if test="${sortBy == 'thang'}">
+                            <input type="text" checked id="true" name="sort" value="thang" class="form-control" style="display: none"/>                                          
+                            <div class="col-5 btn btn-lg btn-outline-success active">Theo tháng</div>    
+                            <a class="col-5 btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=quy">Theo quý</a>                                                   
+                        </c:if>
+                        <c:if test="${sortBy == 'quy'}">
+                            <a class="col-5 btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=thang">Theo tháng</a>                                                            
+                            <input type="text" checked id="true" name="sort" value="quy" class="form-control" style="display: none"/>
+                            <div class="col-5 btn btn-lg btn-outline-success active">Theo quý</div>                                                         
+                        </c:if>
                     </div>
 
                     <!--    thống kê ứng tuyển theo năm     -->
-                    <div class="col-10">
-                        <div class="input-group input-group-lg col-10">
+                    <div class="container" style="padding: 45px">
+                        <div class="input-group input-group-lg ">
                             <input type="text" name="year"  placeholder="năm . . ." class="form-control">
                             <button class="btn btn-outline-success fa fa-search"></button>         
                         </div>

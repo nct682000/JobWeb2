@@ -120,7 +120,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(int userId) {
         return this.userRepository.deleteUser(userId);
-
     }
 
 }

@@ -144,5 +144,5 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         return Long.parseLong(q.getSingleResult().toString());
     }
 
-;
+
 }
