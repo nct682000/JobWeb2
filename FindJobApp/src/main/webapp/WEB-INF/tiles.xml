@@ -90,9 +90,9 @@ and open the template in the editor.
     </definition>
 
 
-    <definition name="admin" extends="baseAdmin">
+    <definition name="dashboard" extends="baseAdmin">
         <put-attribute name="title" value="Dashboard" />
-        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
     </definition>
     
 

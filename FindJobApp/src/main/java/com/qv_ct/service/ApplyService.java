@@ -28,4 +28,6 @@ public interface ApplyService {
     boolean enableApply(int applyId, boolean active);
 
     boolean deleteApply(int applyId);
+
+    long countApply_Admin_For_Chart(boolean active, int month, int year);
 }

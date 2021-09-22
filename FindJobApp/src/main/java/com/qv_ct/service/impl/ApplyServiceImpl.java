@@ -79,4 +79,10 @@ public class ApplyServiceImpl implements ApplyService {
     public boolean deleteApply(int applyId) {
         return this.applyRepository.deleteApply(applyId);
     }
+
+    @Override
+    public long countApply_Admin_For_Chart(boolean active, int month, int year) {
+        return this.applyRepository.countApply_Admin_For_Chart(active, month, year);
+    }
+
 }

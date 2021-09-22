@@ -132,4 +132,17 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         }
         return false;
     }
+
+    @Override
+    public long countApply_Admin_For_Chart(boolean active, int month, int year) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) FROM Apply a WHERE month(a.createdDate) =:month AND year(a.createdDate) =:year AND a.active=:active");
+        q.setParameter("month", month);
+        q.setParameter("year", year);
+        q.setParameter("active", active);
+
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
+;
 }

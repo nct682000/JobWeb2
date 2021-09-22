@@ -29,4 +29,6 @@ public interface ApplyRepository {
 
     boolean deleteApply(int applyId);
 
+    long countApply_Admin_For_Chart(boolean active, int month, int year);
+
 }

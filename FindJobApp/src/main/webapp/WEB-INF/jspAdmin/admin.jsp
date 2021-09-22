@@ -1,3 +1,8 @@
+<%-- 
+    Document   : customers
+    Created on : Aug 19, 2021, 3:43:35 PM
+    Author     : DELL
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,13 +12,13 @@
 
 
 <div id="main">
-    <h1>Báo cáo thống kê hoạt động ứng tuyển trong năm ${year}</h1>
+    <h1 style="text-align: center; padding: 30px">Báo cáo thống kê hoạt động ứng tuyển trong năm ${year}</h1>
     <div class="container">
         <div class="row " >
             <div class="col-md-8 ">
                 <canvas id="myChart" width="800" height="500"  style="background-color: blanchedalmond;"></canvas>
             </div >
-            <form action="/FindJobApp/admin/test"  class="col-md-4">
+            <form action="/FindJobApp/admin"  class="col-md-4">
                 <div class="row" style="justify-content: space-around">
                     <!--    thống kê ứng tuyển theo tháng || quý     -->
                     <div class="col-12">
@@ -21,10 +26,10 @@
                             <c:if test="${sortBy == 'thang'}">
                                 <input type="text" checked id="true" name="sort" value="thang" class="form-control" style="display: none"/>                                          
                                 <div class="col btn btn-lg btn-outline-success active">Theo tháng</div>    
-                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/test" />?sort=quy">Theo quý</a>                                                   
+                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=quy">Theo quý</a>                                                   
                             </c:if>
                             <c:if test="${sortBy == 'quy'}">
-                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/test" />?sort=thang">Theo tháng</a>                                                            
+                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin" />?sort=thang">Theo tháng</a>                                                            
                                 <input type="text" checked id="true" name="sort" value="quy" class="form-control" style="display: none"/>
                                 <div class="col btn btn-lg btn-outline-success active">Theo quý</div>                                                         
                             </c:if>
