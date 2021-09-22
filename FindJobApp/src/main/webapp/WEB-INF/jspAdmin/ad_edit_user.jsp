@@ -23,7 +23,7 @@
     <c:url value="/admin/customers/recruiters/{userId}/edit" var="action" />
 </c:if>
 
-<div id="main" >
+<div >
 
     <!--    form tạo mới người ứng tuyển    -->
     <c:if test="${typeUser == 'create-cadidates'}">

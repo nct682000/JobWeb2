@@ -65,6 +65,21 @@ and open the template in the editor.
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
     </definition>
     
+    <definition name="getEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="employees admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_employees.jsp" />
+    </definition>
+    
+    <definition name="createEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create employee admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_createEmployee.jsp" />
+    </definition>
+
+    <definition name="dashboard" extends="baseAdmin">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
+    </definition>
+    
     <!--chưa cập nhập-->
 
     
@@ -84,16 +99,7 @@ and open the template in the editor.
     </definition>
     
    
-    <definition name="test" extends="baseAdmin">
-        <put-attribute name="title"     value="test view admin" />
-        <put-attribute name="content"   value="/WEB-INF/jspAdmin/test.jsp" />
-    </definition>
-
-
-    <definition name="dashboard" extends="baseAdmin">
-        <put-attribute name="title" value="Dashboard" />
-        <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
-    </definition>
+    
     
 
     <!--    client  -->

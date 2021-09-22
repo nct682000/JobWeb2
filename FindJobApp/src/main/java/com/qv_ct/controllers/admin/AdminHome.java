@@ -55,33 +55,5 @@ public class AdminHome {
         return "dashboard";
     }
 
-    @RequestMapping("/admin/test")
-    public String chart(Model model, @RequestParam(required = false) Map<String, String> params) {
-        boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
-        int year = Integer.parseInt(params.getOrDefault("year", "2021"));
-        String sort = params.getOrDefault("sort", "thang");
-
-        if (sort.equals("thang")) {
-            long[] data = new long[12];
-            for (int i = 1; i <= 12; i++) {
-                data[i - 1] = this.applyService.countApply_Admin_For_Chart(active, i, year);
-            }
-            model.addAttribute("counterApples", data);
-            model.addAttribute("sortBy", "thang");
-            model.addAttribute("year", year);
-        } else {
-            long[] data = new long[4];
-            for (int i = 1; i <= 4; i++) {
-                for (int j = 1; j <= 3; j++) {
-                    int flag = j + (3 * (i - 1));
-                    data[i - 1] += this.applyService.countApply_Admin_For_Chart(active, flag, year);
-                }
-            }
-            model.addAttribute("counterApples", data);
-            model.addAttribute("sortBy", "quy");
-            model.addAttribute("year", year);
-        }
-
-        return "test";
-    }
+   
 }

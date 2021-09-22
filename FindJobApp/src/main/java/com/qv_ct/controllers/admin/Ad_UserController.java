@@ -178,4 +178,37 @@ public class Ad_UserController {
         return "createRecruiters_Admin";
     }
 
+//        danh sánh nhân viên   ------------------------------------------------------------------
+    @RequestMapping("/admin/employees")
+    public String getEmployees_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String email = params.getOrDefault("email", null);
+
+        Role role = Role.ROLE_EMPLOYEE;
+        model.addAttribute("users", this.userService.getUsers_Admin(page, role, true, email));
+        model.addAttribute("counter", this.userService.countUsers_Admin(role, true));
+
+        return "getEmployees_Admin";
+    }
+
+    @GetMapping("/admin/employees/new")
+    public String createEmployee_Admin_View(Model model, @RequestParam(required = false) Map<String, String> params) {
+        model.addAttribute("user", new User());
+
+        return "createEmployees_Admin";
+    }
+
+    @PostMapping("/admin/employees/new")
+    public String createEmployee_Admin_Process(Model model,
+            @ModelAttribute(value = "user") @Valid User user,
+            BindingResult result) {
+        Role role = Role.ROLE_EMPLOYEE;
+        if (user.getPassword().trim().equals(user.getConfirmPassword().trim())) {
+            if (this.userService.addOrUpdate(user, role) == true) {
+                return "redirect:/admin/employees";
+            }
+        }
+
+        return "createEmployees_Admin";
+    }
 }

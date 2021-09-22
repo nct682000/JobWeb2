@@ -37,11 +37,11 @@
         </div>
         <div class="offcanvas-body" style="text-align-last: left">
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin"                                 >Trang quản lý</a>
+            <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/employees"                       >Nhân viên</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/customers/cadidates"             >Người dùng</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/customers/cadidates/inactive"    >Kích hoạt tài khoản</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/recruitment"                     >Tin Tuyển dụng</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/applies"                         >Thư ứng tuyển</a>
-            <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/test"                            >test</a>
         </div>
     </div>
 </nav>

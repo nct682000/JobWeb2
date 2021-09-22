@@ -11,7 +11,7 @@
 
 
 
-<div id="main">
+<div>
     <h1 style="text-align: center; padding: 30px">Báo cáo thống kê hoạt động ứng tuyển trong năm ${year}</h1>
     <div class="container">
         <div class="row " >

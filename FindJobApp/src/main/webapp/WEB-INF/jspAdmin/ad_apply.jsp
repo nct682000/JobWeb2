@@ -10,11 +10,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<div class="content" id="main">
-    <h1>${fullName}</h1>
+<div class="content">
     <div class="container-fluid">
-
-        <div class="row" style="transition: 0.4s">
+        <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary row">
