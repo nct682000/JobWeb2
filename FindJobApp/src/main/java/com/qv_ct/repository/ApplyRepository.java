@@ -13,11 +13,20 @@ import java.util.List;
  * @author nct68
  */
 public interface ApplyRepository {
-    List<Apply> getApplies();   
+
+    List<Apply> getApplies();
+
     List<Apply> getAppliesByUserId(int id);
+
     boolean addOrUpdate(Apply a);
-    
-//    admin
-    List<Apply> getApplyAll(int page);
-    long countApplies();
+
+    //    -------------     admin       --------------
+    List<Apply> getApply_Admin(int page, boolean active, String title);
+
+    long countApply_Admin(boolean active);
+
+    boolean enableApply(int applyId, boolean active);
+
+    boolean deleteApply(int applyId);
+
 }

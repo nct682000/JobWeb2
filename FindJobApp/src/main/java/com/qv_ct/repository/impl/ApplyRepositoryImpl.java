@@ -70,25 +70,66 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         return q.getResultList();
     }
 
-//    admin
+    //    -------------     admin       --------------
+    int maxList = 6;
+
     @Override
-    public List<Apply> getApplyAll(int page) {
-        Session session = sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From Apply");
+    public List<Apply> getApply_Admin(int page, boolean active, String title) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
+        Root root = query.from(Apply.class);
+        query = query.select(root);
 
-        int max = 6;
-        q.setMaxResults(max);
-        q.setFirstResult((page - 1) * max);
+        Predicate p2 = builder.equal(root.get("active"), active);
+        String kw = "%" + title + "%";
+        Predicate p1 = builder.like(root.get("title").as(String.class), kw);
+        query.where(builder.and(p1, p2));
 
+        query = query.orderBy(builder.desc(root.get("id")));
+
+        Query q = s.createQuery(query);
+
+        q.setMaxResults(maxList);
+        q.setFirstResult((page - 1) * maxList);
         return q.getResultList();
     }
 
     @Override
-    public long countApplies() {
+    public long countApply_Admin(boolean active) {
         Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) From Apply");
+        Query q = s.createQuery("SELECT Count(*) FROM Apply a WHERE a.active =:active");
+        q.setParameter("active", active);
 
         return Long.parseLong(q.getSingleResult().toString());
     }
 
+    @Override
+    public boolean enableApply(int applyId, boolean active) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            Apply a = s.get(Apply.class, applyId);
+            a.setActive(active);
+            s.getTransaction().begin();
+            s.save(a);
+            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteApply(int applyId) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            Apply a = s.get(Apply.class, applyId);
+//            s.getTransaction().begin();
+            s.delete(a);
+//            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.qv_ct.service.ApplyService;
+import com.qv_ct.pojos.User;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
@@ -24,12 +25,21 @@ public class Ad_ApplyController {
     private ApplyService applyService;
 
     @RequestMapping("/admin/applies")
-    public String index(Model model,
-            @RequestParam(required = false) Map<String, String> params) {
+    public String getApply_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("applys", this.applyService.getApplyAll(page));
-        model.addAttribute("counter", this.applyService.countApplies());
+        boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
+        String title = params.getOrDefault("title", "");
 
-        return "ad_apply";
+        if (active) {
+            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title));
+            model.addAttribute("counter", this.applyService.countApply_Admin(active));
+            model.addAttribute("status", "active");
+        } else {
+            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title));
+            model.addAttribute("counter", this.applyService.countApply_Admin(active));
+            model.addAttribute("status", "inactive");
+        }
+
+        return "getApply_Admin";
     }
 }

@@ -20,8 +20,12 @@ public interface ApplyService {
 
     boolean addOrUpdate(Apply a);
 
-//    admin
-    List<Apply> getApplyAll(int page);
+    //    -------------     admin       --------------
+    List<Apply> getApply_Admin(int page, boolean active, String title);
 
-    long countApplies();
+    long countApply_Admin(boolean active);
+
+    boolean enableApply(int applyId, boolean active);
+
+    boolean deleteApply(int applyId);
 }

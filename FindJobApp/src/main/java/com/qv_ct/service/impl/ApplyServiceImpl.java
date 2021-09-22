@@ -59,18 +59,24 @@ public class ApplyServiceImpl implements ApplyService {
         return this.applyRepository.getAppliesByUserId(id);
     }
 
-    
-    
-//    admin
-    
+    //    -------------     admin       --------------
     @Override
-    public List<Apply> getApplyAll(int page) {
-        return this.applyRepository.getApplyAll(page);
+    public List<Apply> getApply_Admin(int page, boolean active, String title) {
+        return this.applyRepository.getApply_Admin(page, active, title);
     }
 
     @Override
-    public long countApplies() {
-        return this.applyRepository.countApplies();
+    public long countApply_Admin(boolean active) {
+        return this.applyRepository.countApply_Admin(active);
     }
 
+    @Override
+    public boolean enableApply(int applyId, boolean active) {
+        return this.applyRepository.enableApply(applyId, active);
+    }
+
+    @Override
+    public boolean deleteApply(int applyId) {
+        return this.applyRepository.deleteApply(applyId);
+    }
 }

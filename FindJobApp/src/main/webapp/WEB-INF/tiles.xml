@@ -78,8 +78,8 @@ and open the template in the editor.
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitment_detail.jsp" />
     </definition>
     
-    <definition name="ad_apply" extends="baseAdmin">
-        <put-attribute name="title"     value="list apply" />
+    <definition name="getApply_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="applies admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_apply.jsp" />
     </definition>
     

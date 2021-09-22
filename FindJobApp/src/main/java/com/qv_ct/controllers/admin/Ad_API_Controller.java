@@ -7,6 +7,7 @@ package com.qv_ct.controllers.admin;
 
 import com.qv_ct.service.UserService;
 import com.qv_ct.service.RecruitmentService;
+import com.qv_ct.service.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,8 @@ public class Ad_API_Controller {
     private UserService userService;
     @Autowired
     private RecruitmentService recruitmentService;
+    @Autowired
+    private ApplyService applyService;
 
 //    ------------------ user -------------------------------
     @GetMapping("/admin/customers/cadidates/{userId}")
@@ -79,4 +82,22 @@ public class Ad_API_Controller {
         this.recruitmentService.deleteRecruitment(recId);
     }
 
+    //    ------------------ apply -------------------------------
+    @GetMapping("/admin/apply/active/{applyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void enableApply(@PathVariable(name = "applyId") int applyId) {
+        this.applyService.enableApply(applyId, true);
+    }
+
+    @GetMapping("/admin/apply/inactive/{applyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void disableApply(@PathVariable(name = "applyId") int applyId) {
+        this.applyService.enableApply(applyId, false);
+    }
+
+    @DeleteMapping("/admin/apply/{applyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteApply(@PathVariable(name = "applyId") int applyId) {
+        this.applyService.deleteApply(applyId);
+    }
 }
