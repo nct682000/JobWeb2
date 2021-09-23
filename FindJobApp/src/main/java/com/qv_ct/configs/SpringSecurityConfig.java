@@ -70,7 +70,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/login?accessDenied");
 
         http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/admin").access("hasRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/admin/employees/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/admin/customers/cadidates/inactive/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/admin/customers/recruiters/inactive/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "')")
+                .antMatchers("/admin/customers/cadidates/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
+                .antMatchers("/admin/customers/recruiters/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
+                .antMatchers("/admin/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
+                .antMatchers("/admin/applies/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
                 .antMatchers("/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_RECRUITER.name() + "')")
                 .antMatchers("/candidate/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_CANDIDATE.name() + "')");
 

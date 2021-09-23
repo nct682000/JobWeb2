@@ -170,4 +170,16 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public boolean addEmployee(User user, Role role) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            user.setRole(role);      
+            session.save(user);
+            return true;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
 }

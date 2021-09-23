@@ -23,6 +23,12 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="file" class="col-sm-4 col-form-label">Avatar</label>
+                <div class="col-sm-8">
+                    <form:input path="file"         id="file"           cssClass="form-control"     placeholder=""     type="file"/>
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="username" class="col-sm-4 col-form-label">Username</label>
                 <div class="col-sm-8">
                     <form:input path="username"         id="username"           cssClass="form-control"     placeholder="Tên tài khoản"     type="text"/>

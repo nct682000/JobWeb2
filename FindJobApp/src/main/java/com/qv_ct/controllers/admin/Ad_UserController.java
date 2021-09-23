@@ -204,7 +204,7 @@ public class Ad_UserController {
             BindingResult result) {
         Role role = Role.ROLE_EMPLOYEE;
         if (user.getPassword().trim().equals(user.getConfirmPassword().trim())) {
-            if (this.userService.addOrUpdate(user, role) == true) {
+            if (this.userService.addEmployee(user, role) == true) {
                 return "redirect:/admin/employees";
             }
         }
