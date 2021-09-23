@@ -31,15 +31,21 @@ public class AdminHome {
         boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
         int year = Integer.parseInt(params.getOrDefault("year", "2021"));
         String sort = params.getOrDefault("sort", "thang");
+        double avg = 0;
+        int total = 0;
 
         if (sort.equals("thang")) {
             long[] data = new long[12];
             for (int i = 1; i <= 12; i++) {
                 data[i - 1] = this.applyService.countApply_Admin_For_Chart(active, i, year);
+                total += (int) data[i - 1];
             }
+            avg = total / 12.0;
             model.addAttribute("counterApples", data);
             model.addAttribute("sortBy", "thang");
             model.addAttribute("year", year);
+            model.addAttribute("total", total);
+            model.addAttribute("avg", avg);
         } else {
             long[] data = new long[4];
             for (int i = 1; i <= 4; i++) {
@@ -47,13 +53,16 @@ public class AdminHome {
                     int flag = j + (3 * (i - 1));
                     data[i - 1] += this.applyService.countApply_Admin_For_Chart(active, flag, year);
                 }
+                total += (int) data[i - 1];
             }
+            avg = total / 4.0;
             model.addAttribute("counterApples", data);
             model.addAttribute("sortBy", "quy");
             model.addAttribute("year", year);
+            model.addAttribute("total", total);
+            model.addAttribute("avg", avg);
         }
         return "dashboard";
     }
 
-   
 }

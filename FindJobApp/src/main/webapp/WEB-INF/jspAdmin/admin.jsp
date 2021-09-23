@@ -44,10 +44,26 @@
                             <button class="btn btn-outline-success fa fa-search"></button>         
                         </div>
                     </div>
-                    <div id="show">
-                        tổng trong năm, cột cao nhất -> %, thấp nhất -> %, trung bình -> so sánh với năm trước
+
+                    <!--    Số liệu     -->
+                    <div class="container " style="padding: 0 45px 0 45px">
+                        <c:if test="${sortBy == 'thang'}">
+                            <div class="input-group input-group-lg ">
+                                <input type="text" readonly value="Trong năm tổng có: ${total}" class="form-control col-5"/>
+                            </div>
+                            <div class="input-group input-group-lg ">
+                                <input type="text" readonly value="Trung bình mỗi tháng: ${Math.ceil(avg * 100) / 100}" class="form-control col-5"/>
+                            </div>
+                        </c:if>
+                        <c:if test="${sortBy == 'quy'}">
+                            <div class="input-group input-group-lg ">
+                                <input type="text" readonly value="Trong năm tổng có: ${total}" class="form-control col-5"/>
+                            </div>
+                            <div class="input-group input-group-lg ">
+                                <input type="text" readonly value="Trung bình mỗi quý: ${Math.ceil(avg * 100) / 100}" class="form-control col-5"/>
+                            </div>
+                        </c:if>
                     </div>
-                    <div>${pageContext.request.userPrincipal.getAuthorities()}</div>
                 </div>
             </form>
         </div>
