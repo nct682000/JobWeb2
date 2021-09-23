@@ -47,6 +47,7 @@
                     <div id="show">
                         tổng trong năm, cột cao nhất -> %, thấp nhất -> %, trung bình -> so sánh với năm trước
                     </div>
+                    <div>${pageContext.request.userPrincipal.getAuthorities()}</div>
                 </div>
             </form>
         </div>
@@ -58,7 +59,6 @@
     <c:forEach items="${counterApples}" var="a">
     chartData.push(${a});
     </c:forEach>
-
 
     var ctx = document.getElementById('myChart').getContext('2d');
 
