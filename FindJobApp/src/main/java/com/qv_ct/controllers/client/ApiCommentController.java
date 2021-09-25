@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,9 +44,7 @@ public class ApiCommentController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
-    @PostMapping(path = "/api/delete-comment", produces = {
-        MediaType.APPLICATION_JSON_VALUE
-    })
+    @DeleteMapping(path = "/api/delete-comment")
     public ResponseEntity<Comment> deleteComment(@RequestBody Map<String, String> params){
         try{
             int userId = Integer.parseInt(params.get("userId"));

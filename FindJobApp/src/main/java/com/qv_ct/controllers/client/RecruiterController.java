@@ -5,7 +5,9 @@
  */
 package com.qv_ct.controllers.client;
 
+import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.CommentService;
+import com.qv_ct.service.RateService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
 import java.security.Principal;
@@ -27,6 +29,8 @@ public class RecruiterController {
     private CommentService commentService;
     @Autowired
     private RecruitmentService recruitmentService;
+    @Autowired
+    private RateService rateService;
     
     @RequestMapping("/recruiter/{id}")
     public String recruiter(Model model, @PathVariable int id,
@@ -39,6 +43,8 @@ public class RecruiterController {
         if(principal != null)
             model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
         
+        model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
+        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
         return "recruiter";
     }
 }

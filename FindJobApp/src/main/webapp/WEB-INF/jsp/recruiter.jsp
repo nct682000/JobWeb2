@@ -14,6 +14,15 @@
     <script src="../resources/js/main.js"></script>
 </head>
 
+<!-- hidden -->
+<c:if test="${currentUser.role == 'CANDIDATE'}">
+    <input type="hidden" id="cmtName" value="${currentUser.firstName} ${currentUser.lastName}">
+</c:if>
+<c:if test="${currentUser.role == 'RECRUITER'}">
+   <input type="hidden" id="cmtName" value="${currentUser.companyName}">
+</c:if>
+<input type="hidden" id="cmtAvatar" value="${currentUser.avatar}">
+
 <div class="container-fluid" style="width: 90%">
     <h2 class="text-center text-success mb-5">${ru.companyName}</h2>
 
@@ -42,9 +51,14 @@
 
                     </div>
                     <div class="font-weight-bold text-secondary text-center col-2">
-                        <button class="btn btn-info btn-lg font-weight-bold align-self-mid mb-4" data-toggle="modal" data-target="#rateModal">ĐÁNH GIÁ</button> 
-                        <h1 class="text-info">5<i class="fa fa-star text-warning" aria-hiden="true"></i></h1>
-                        <div class="text-info">100 lượt đánh giá</div>
+                        <c:if test="${currentUser != null}">
+                            <button class="btn btn-info btn-lg font-weight-bold align-self-mid mb-4" data-toggle="modal" data-target="#rateModal">ĐÁNH GIÁ</button> 
+                        </c:if>
+                        <c:if test="${currentUser == null}">
+                            <button class="btn btn-info btn-lg font-weight-bold align-self-mid mb-4" data-toggle="modal" data-target="#requireLoginModal">ĐÁNH GIÁ</button> 
+                        </c:if>
+                        <h1 class="text-info"><fmt:formatNumber maxFractionDigits="2" value="${ratePointRecruiter}" type="number" /><i class="fa fa-star text-warning" aria-hiden="true"></i></h1>
+                        <div class="text-info font-weight-normal font-italic">${rateCountRecruiter} lượt đánh giá</div>
                         
                     </div>
                 
@@ -98,7 +112,7 @@
             <div id="commentArea">
                 <!-- COmment -->
                 <c:forEach var="cmt" items="${comments}">
-                    <div class="mt-2 row bg-light">
+                    <div class="mt-2 row bg-light" id="comment-${cmt.id}">
                         <div class="col-md-2 text-center">
                             <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
                         </div>
@@ -186,26 +200,35 @@
                 </div>
                 <div class="modal-body">
                     <div class="p-2 text-center">
-                        <input type="radio" class="btn-check invisible" name="options" id="option1" autocomplete="on" checked>
-                        <label class="btn btn-secondary" for="option1">1<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        <input type="radio" class="btn-check invisible" name="options" id="option1" autocomplete="off">
+                        <label class="btn btn-info" for="option1"
+                               onclick="getRatePoint(1)">1<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
 
                         <input type="radio" class="btn-check invisible" name="options" id="option2" autocomplete="off">
-                        <label class="btn btn-secondary" for="option2">2<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        <label class="btn btn-info" for="option2"
+                               onclick="getRatePoint(2)">2<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
 
                         <input type="radio" class="btn-check invisible" name="options" id="option3" autocomplete="off">
-                        <label class="btn btn-secondary" for="option3">3<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        <label class="btn btn-info" for="option3"
+                               onclick="getRatePoint(3)">3<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
 
                         <input type="radio" class="btn-check invisible" name="options" id="option4" autocomplete="off">
-                        <label class="btn btn-secondary" for="option4">4<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        <label class="btn btn-info" for="option4"
+                               onclick="getRatePoint(4)">4<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
                         
                         <input type="radio" class="btn-check invisible" name="options" id="option5" autocomplete="off">
-                        <label class="btn btn-secondary" for="option5">5<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        <label class="btn btn-info" for="option5"
+                               onclick="getRatePoint(5)">5<i class="fa fa-star text-warning" aria-hiden="true"></i></label>
+                        
+                               <div>Bạn đang chọn: <span id="ratePoint" class="font-weight-bold text-info">0</span><i class="fa fa-star text-warning" aria-hiden="true"></i></div>
+                        
                     </div>
                             
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                    <input type="submit" class="btn btn-primary btn-lg" value="Đánh giá">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Đánh giá" onclick="addRate(${currentUser.id}, ${ru.id})">
+                    
                 </div>
             </form:form>
         </div>
@@ -217,7 +240,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">Đăng nhập để bình luận</h4>
+        <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">Bạn chưa đăng nhập!</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -243,5 +266,4 @@
             d.innerText = moment(d.innerText).fromNow()
         }
     }
-    
 </script>

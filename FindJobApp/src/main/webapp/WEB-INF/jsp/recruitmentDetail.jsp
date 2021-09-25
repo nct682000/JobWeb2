@@ -7,10 +7,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
+
 <h1 class="text-primary text-center">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
 <div class="container-fluid" style="width: 95%">
     <h3 class="text-info font-weight-bold">${recDetail.title}</h3>
@@ -85,7 +87,9 @@
                     
               </div>
                     <div class="font-weight-bold text-secondary col-2">
-                        <a href="#" class="btn btn-info font-weight-bold">ỨNG TUYỂN CÔNG VIỆC NÀY</a>                 
+                        <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
+                            Ứng tuyển công việc này
+                        </button>                 
                     </div>
             </div>
           </div>
@@ -183,5 +187,61 @@
             </div>
         </div>
         
+    </div>
+</div>
+            
+            <!-- MODAL -->
+
+<!-- Add Apply Modal -->
+<div class="modal fade" id="addApplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <c:if test="${errMsg != null}">
+            <div class="alert alert-danger">${errMsg}</div>
+        </c:if>
+            
+        <c:url value="/add/apply" var="action" />
+        
+        <form:form method="post" action="${action}" modelAttribute="apply"
+               enctype="multipart/form-data">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ứng tuyển công việc này</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <!-- input title -->
+                    <div class="form-group">
+                        <label for="title" >Chủ đề</label>
+                        <form:input type="text" id="title" path="title" cssClass="form-control" />
+                        <form:errors path="title" cssClass="text-danger" element="div" />
+                    </div>
+
+                    <!-- input content -->
+                    <div class="form-group">
+                        <label for="content" >Nội dung</label>
+                        <form:textarea id="content" path="content" cssClass="form-control"></form:textarea>
+                        <form:errors path="content" cssClass="text-danger" element="div" />
+                    </div>
+
+                    <!-- Choose Image -->
+                    <div class="form-group">
+                        <label for="file" >CV</label>
+                        <form:input type="file" id="file" path="file" cssClass="form-control" />
+                    </div>
+                    
+                    <!-- Recruitment -->
+                    <form:input type="hidden" id="file" path="candidate" cssClass="form-control" value="${recDetail.id}" />
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Ứng tuyển</button>
+                </div>
+            </div>
+        </form:form>
     </div>
 </div>

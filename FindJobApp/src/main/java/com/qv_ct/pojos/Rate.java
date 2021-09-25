@@ -6,6 +6,8 @@
 package com.qv_ct.pojos;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -32,6 +35,9 @@ public class Rate implements Serializable{
     private User recruiter;
     
     private int point;
+    @Column(name = "created_date")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date createdDate;
 
     public Rate() {
     }
@@ -47,29 +53,29 @@ public class Rate implements Serializable{
     /**
      * @return the candidateId
      */
-    public User getCandidateId() {
+    public User getCandidate() {
         return candidate;
     }
 
     /**
      * @param candidateId the candidateId to set
      */
-    public void setCandidateId(User candidateId) {
-        this.candidate = candidateId;
+    public void setCandidate(User candidate) {
+        this.candidate = candidate;
     }
 
     /**
      * @return the recruiterId
      */
-    public User getRecruiterId() {
+    public User getRecruiter() {
         return recruiter;
     }
 
     /**
-     * @param recruiterId the recruiterId to set
+     * @param recruiter the recruiterId to set
      */
-    public void setRecruiterId(User recruiterId) {
-        this.recruiter = recruiterId;
+    public void setRecruiter(User recruiter) {
+        this.recruiter = recruiter;
     }
 
     /**
@@ -84,5 +90,19 @@ public class Rate implements Serializable{
      */
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    /**
+     * @return the createdDate
+     */
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    /**
+     * @param createdDate the createdDate to set
+     */
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

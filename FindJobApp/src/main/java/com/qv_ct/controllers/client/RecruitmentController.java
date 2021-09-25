@@ -7,6 +7,7 @@ package com.qv_ct.controllers.client;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Tag;
 import com.qv_ct.service.RecruitmentService;
@@ -16,6 +17,7 @@ import com.qv_ct.validator.RecruitmentValidator;
 import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,10 +53,10 @@ public class RecruitmentController {
     @Autowired
     private UserService userService;
     
-    @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.setValidator(recruitmentValidator);
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        binder.setValidator(recruitmentValidator);
+//    }
     
     @GetMapping("/add/recruitment")
     public String list(Model model){
@@ -102,10 +104,14 @@ public class RecruitmentController {
     
     @RequestMapping("/recruitment/{id}")
     public String getRecruitment(Model model, 
+            Principal principal,
             @PathVariable int id){
         
         model.addAttribute("recDetail", 
                 this.recruitmentService.getRecruitmentById(id));
+        model.addAttribute("apply", new Apply());
+        if(principal != null)
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
         
         return "recruitmentDetail";
     }

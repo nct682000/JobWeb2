@@ -6,10 +6,12 @@
 package com.qv_ct.controllers.client;
 
 import com.qv_ct.pojos.Apply;
+import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.User;
 import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
-import java.math.BigDecimal;
+import java.security.Principal;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -46,14 +47,18 @@ public class ApplyController {
     @PostMapping("/add/apply")
     public String applyPost(Model model,
             @ModelAttribute(value = "apply") @Valid Apply apply,
+            Principal principal,
             BindingResult result){
         
         model.addAttribute("candidates", this.userService.getCadidates());
         model.addAttribute("recruitments", this.recruitmentService.searchRecruitments("", 0, 0, -1, 0));
         
+        User u = this.userService.getUsers(principal.getName()).get(0);
         if(!result.hasErrors()){
-           if(this.applyService.addOrUpdate(apply) == true)
+           if(this.applyService.addOrUpdate(apply) == true){
+               apply.setCandidate(u);
                return "redirect:/";
+           }
            else
                model.addAttribute("errMsg", "Đã có lỗi xảy ra trong quá trình thêm tin");
         }

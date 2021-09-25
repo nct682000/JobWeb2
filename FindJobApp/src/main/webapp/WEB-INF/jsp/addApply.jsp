@@ -27,12 +27,6 @@
             <div class="alert alert-danger">${errMsg}</div>
         </c:if>
 
-<!--            <div class="row justify-content-center">
-                <div class="col-md-4 col-xl-6">
-                    <%--<form:errors path="*" cssClass="alert alert-warning text-danger text-center" element="div" />--%>
-                </div>
-            </div>-->
-
         <div class="row justify-center">
             <div class="col-md-2 col-xl-4">
                 <!-- select candidate -->
