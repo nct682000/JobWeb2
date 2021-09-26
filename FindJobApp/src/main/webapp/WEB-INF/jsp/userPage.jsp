@@ -62,6 +62,7 @@
                 <c:forEach var="a" items="${applies}">
                     <div class="card bg-light mb-2">
                         <div class="text-info font-weight-bold">${a.recruitment.title}</div>
+                        <div class="text-success">${a.title}</div>
                         <div>
                             <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
                         </div>

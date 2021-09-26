@@ -41,10 +41,10 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
-
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
-        int max = 8;
+        int max = 10;
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
 
@@ -143,7 +143,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     }
 
     @Override
-    public List<Object[]> getRecruitmentByComment(int num) {
+    public List<Object[]> getRecruitmentByApply(int num) {
         Session session = sessionFactory.getObject().getCurrentSession();
         
         CriteriaBuilder builder = session.getCriteriaBuilder();

@@ -11,10 +11,63 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<h1>Tin tuyển dụng</h1>
+<h2 class="text-info font-weight-bold mb-3 text-center">KẾT QUẢ TÌM KIẾM</h2>
+
+<div class="container">
+    <form action="/FindJobApp/recruitments/">
+        <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh"  name="kw">
+        <div class="row m-2 mb-3">
+
+            <!-- province search -->
+            <select class="form-control col mr-2" aria-label=".form-select-sm example" name="provinceId">
+                <option selected value=0>Tất cả địa điểm</option>
+                <c:forEach var="p" items="${provinces}">
+                <option value="${p.id}">${p.name}</option>
+                </c:forEach>
+            </select>
+
+            <!-- career search -->
+            <select class="form-control col" aria-label=".form-select-sm example" name="careerId">
+                <option selected value=0>Ngành nghề</option>
+                <c:forEach var="c" items="${careers}">
+                <option value="${c.id}">${c.name}</option>
+                </c:forEach>
+            </select>
+        </div> 
+
+        <div class="row m-2 mb-3">
+
+            <!-- salary search -->
+            <select class="form-control col mr-2" aria-label=".form-select-sm example" name="salary">
+                <option value="0">--Chọn mức lương--</option>
+                <option value="2000000">Từ 2.000.000đ</option>
+                <option value="5000000">Từ 5.000.000đ</option>
+                <option value="10000000">Từ 10.000.000đ</option>
+                <option value="20000000">Từ 20.000.000đ</option>
+                <option value="50000000">Từ 50.000.000đ</option>
+            </select>
+
+            <!-- form search -->
+            <select class="form-control col" aria-label=".form-select-sm example" name="form">
+                <option value="-1">--Chức vụ--</option>
+                <option value="0">Thực tập sinh</option>
+                <option value="1">Mới ra trường</option>
+                <option value="2">Nhân viên</option>
+                <option value="3">Trưởng phòng</option>
+                <option value="4">Quản lý</option>
+                <option value="5">Quản lý cấp cao</option>
+                <option value="6">Giám đốc điều hành</option>
+            </select>
+        </div> 
+
+        <!-- search button -->
+        <button type="submit" class="btn btn-info btn-block btn-lg mb-3">Tìm kiếm</button>
+    </form>
+</div>
+
 <c:forEach var="r" items="${recruitments}">
 
-    <div class="container">
+    <div class="container mb-3">
         <div class="card overflow-hidden bg-light">
           <div class="card-content">
             <div class="card-body cleartfix">

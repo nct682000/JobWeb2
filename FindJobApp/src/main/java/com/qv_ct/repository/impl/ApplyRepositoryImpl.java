@@ -46,10 +46,9 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         try{
             a.setCreatedDate(Date.from(Instant.now()));
             session.save(a);
-            
             return true;
         }catch(Exception ex){
-            System.err.println("-- Add Tag Error --" + ex.getMessage());
+            System.err.println("-------Add Apply Error-------" + ex.getMessage());
             ex.printStackTrace();
         }
         
@@ -67,6 +66,7 @@ public class ApplyRepositoryImpl implements ApplyRepository{
         Predicate p =builder.equal(root.get("candidate"), id);
         
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
         
         return q.getResultList();

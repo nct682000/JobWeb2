@@ -139,7 +139,7 @@
         
         <!-- col 2 -->
         <div class="col-md-4 col-xl-4">
-            <h4>Các tin nổi bật</h4>
+            <h5 class="font-weight-bold">CÁC TIN NỔI BẬT</h5>
             <div class="m-1 mb-2">
                 <c:forEach var="trend" items="${trendRecruitment}" >
                     <div class="mb-3 card bg-light">
@@ -193,18 +193,18 @@
             <!-- MODAL -->
 
 <!-- Add Apply Modal -->
-<div class="modal fade" id="addApplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <c:if test="${errMsg != null}">
-            <div class="alert alert-danger">${errMsg}</div>
-        </c:if>
-            
-        <c:url value="/add/apply" var="action" />
-        
-        <form:form method="post" action="${action}" modelAttribute="apply"
-               enctype="multipart/form-data">
+<div class="modal" id="addApplyModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <c:if test="${errMsg != null}">
+                <div class="alert alert-danger">${errMsg}</div>
+            </c:if>
 
-            <div class="modal-content">
+            <c:url value="/add/apply" var="action" />
+
+            <form:form method="post" action="${action}" modelAttribute="apply"
+                   enctype="multipart/form-data">
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Ứng tuyển công việc này</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -212,7 +212,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    
+
                     <!-- input title -->
                     <div class="form-group">
                         <label for="title" >Chủ đề</label>
@@ -232,16 +232,18 @@
                         <label for="file" >CV</label>
                         <form:input type="file" id="file" path="file" cssClass="form-control" />
                     </div>
-                    
+
                     <!-- Recruitment -->
-                    <form:input type="hidden" id="file" path="candidate" cssClass="form-control" value="${recDetail.id}" />
-                    
+                    <form:input type="hidden" id="recruitment" path="recruitment" cssClass="form-control" value="${recDetail.id}" />
+                    <!-- Candidate -->
+                    <form:input type="hidden" id="candidate" path="candidate" cssClass="form-control" value="${currentUser.id}" />
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                     <button type="submit" class="btn btn-primary">Ứng tuyển</button>
                 </div>
-            </div>
-        </form:form>
+            </form:form>
+        </div>
     </div>
 </div>

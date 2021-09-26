@@ -42,7 +42,6 @@ public class ApplyServiceImpl implements ApplyService{
 
                 a.setCv((String) map.get("secure_url"));
             }
-            
             return this.applyRepository.addOrUpdate(a);
 
         } catch (IOException ex) {

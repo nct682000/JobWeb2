@@ -16,7 +16,7 @@ public interface RecruitmentRepository {
     List<Recruitment> getRecruitments(int page);
     List<Recruitment> searchRecruitment(String kw, int careerId, int provinceId,
                                         int form, int salary);
-    List<Object[]> getRecruitmentByComment(int num);
+    List<Object[]> getRecruitmentByApply(int num);
     Recruitment getRecruitmentById(int id);
     List<Recruitment> getRecruitmentByUserId(int userId);
     boolean addOrUpdate(Recruitment r);

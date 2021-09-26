@@ -11,6 +11,7 @@ import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
+import com.qv_ct.service.RecruitmentService;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -120,10 +121,13 @@ public class UserRepositoryImpl implements UserRepository{
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root rootU = query.from(User.class);
         Root rootR = query.from(Recruitment.class);
+        Root rootA = query.from(Apply.class);
         
         query = query.where(builder.equal(rootR.get("recruiter"), rootU.get("id")));
+        query = query.where(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        
         query.multiselect(rootU.get("id"),
-                rootU.get("compapyName"),
+                rootU.get("companyName"),
                 rootU.get("avatar"),
                 builder.count(rootU.get("id")));
         

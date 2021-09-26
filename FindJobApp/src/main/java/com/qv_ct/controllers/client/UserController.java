@@ -44,10 +44,10 @@ public class UserController {
      @Autowired
     private RecruitmentService recruitmentService;
     
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        binder.setValidator(userValidator);
-//    }
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.setValidator(userValidator);
+    }
     
     @GetMapping("/login")
     public String login(){
@@ -67,14 +67,14 @@ public class UserController {
                             BindingResult result){
        String errMsg = "";
        Role role = Role.CANDIDATE;
-//       if(!result.hasErrors()){
+       if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){
                     return "redirect:/login";
                 }
             }else
                 errMsg = "Mật khẩu không trùng khớp";
-//       }
+       }
        
        model.addAttribute("errMsg", errMsg);
        
@@ -119,7 +119,6 @@ public class UserController {
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
        model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
        
-       System.out.println("-----------------------------Get-------------------------------------");
        return "userpage";
     }
     

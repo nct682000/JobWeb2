@@ -95,8 +95,18 @@
 
     </div>
               
+<!--    <div class="mt-3 mb-3">
+        <c:forEach var="top" items="${topRecruiter}">
+            <div>${top[0]}</div>
+            <div>${top[1]}</div>
+            
+            <div>${top[3]}</div>
+        </c:forEach>
+        
+    </div>-->
+              
     <!-- List Recruitment -->
-    <h4 class="text-info font-weight-bold">Tin mới nhất</h4>
+    <h4 class="text-info font-weight-bold m-3">Tin mới nhất</h4>
     <div class="row">
         <c:forEach var="r" items="${recruitments}">
 
@@ -154,7 +164,7 @@
     </div>
 
     <ul class="pagination">
-        <c:forEach begin="1" end="${Math.ceil(countR / 8)}" var="i">
+        <c:forEach begin="1" end="${Math.ceil(countR / 10)}" var="i">
             <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
         </c:forEach>
     </ul>

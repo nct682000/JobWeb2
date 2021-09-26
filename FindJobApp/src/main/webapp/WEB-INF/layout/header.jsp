@@ -31,7 +31,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <c:forEach var="c" items="${careers}">
-                            <a class="dropdown-item" href="#">${c.name}</a>
+                            <a class="dropdown-item" href="/FindJobApp/recruitments/?kw=&provinceId=0&careerId=${c.id}&salary=0&form=-1">${c.name}</a>
                         </c:forEach> 
                     </div>
                 </li>

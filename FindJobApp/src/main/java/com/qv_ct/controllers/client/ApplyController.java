@@ -31,39 +31,20 @@ public class ApplyController {
     private ApplyService applyService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private RecruitmentService recruitmentService;
-    
-    @GetMapping("/add/apply")
-    public String apply(Model model){
-        model.addAttribute("applies", this.applyService.getApplies());
-        model.addAttribute("apply", new Apply());
-        model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments("", 0, 0, -1, 0));
-        
-        return "addApply";
-    }
     
     @PostMapping("/add/apply")
     public String applyPost(Model model,
             @ModelAttribute(value = "apply") @Valid Apply apply,
             Principal principal,
             BindingResult result){
-        
-        model.addAttribute("candidates", this.userService.getCadidates());
-        model.addAttribute("recruitments", this.recruitmentService.searchRecruitments("", 0, 0, -1, 0));
-        
-        User u = this.userService.getUsers(principal.getName()).get(0);
         if(!result.hasErrors()){
-           if(this.applyService.addOrUpdate(apply) == true){
-               apply.setCandidate(u);
+           if(this.applyService.addOrUpdate(apply) == true)
                return "redirect:/";
-           }
            else
                model.addAttribute("errMsg", "Đã có lỗi xảy ra trong quá trình thêm tin");
         }
         
-        return "addApply";
+        return "recruitmentDetail";
     }
   
 }
