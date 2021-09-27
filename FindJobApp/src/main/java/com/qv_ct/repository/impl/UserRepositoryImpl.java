@@ -92,9 +92,11 @@ public class UserRepositoryImpl implements UserRepository{
             Location l = new Location(user.getAddress(), user.getProvince());
             user.setLocation(l);
             user.setRole(role);
-            
-            session.save(l);
-            session.save(user);
+            System.out.println("-----------------------User addOrUpdate Repository-------------------------");
+            session.saveOrUpdate(l);
+            System.out.println("-----------------------Save Location-------------------------");
+            session.saveOrUpdate(user);
+            System.out.println("-----------------------Save User-------------------------");
             return true;
         }catch (Exception ex){
             System.err.println(ex.getMessage());
@@ -123,8 +125,8 @@ public class UserRepositoryImpl implements UserRepository{
         Root rootR = query.from(Recruitment.class);
         Root rootA = query.from(Apply.class);
         
-        query = query.where(builder.equal(rootR.get("recruiter"), rootU.get("id")));
         query = query.where(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        query = query.where(builder.equal(rootR.get("recruiter"), rootU.get("id")));
         
         query.multiselect(rootU.get("id"),
                 rootU.get("companyName"),

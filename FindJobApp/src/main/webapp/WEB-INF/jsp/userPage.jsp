@@ -1,5 +1,5 @@
 <%-- 
-    Document   : candidate
+    Document   : userPage
     Created on : Aug 15, 2021, 8:41:10 PM
     Author     : nct68
 --%>
@@ -12,133 +12,135 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<h2 class="text-center text-info mb-5">Trang người dùng</h2>
-<!-- CANDIDATE -->
-<c:if test="${user[0].role.toString() == 'CANDIDATE'}">
-    <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch row">
-                <!-- Image -->
-                <div class="align-self-center col-3">
-                    <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
-                </div>
-                <div class="media-body mt-3 col-7">
-                    <!-- name -->
-                    <h5 class="text-info font-weight-bold">${user[0].firstName} ${user[0].lastName}</h5>
-                    <!-- gender -->
-                    <div class="text-secondary font-weight-bold ml-2">Giới tính: ${user[0].sex.toString()}</div>
-                    <!-- location -->
-                    <div class="text-secondary font-weight-bold ml-2">Địa chỉ: ${user[0].location.address}, ${user[0].location.province.name}</div>
-                    <!-- mail -->
-                    <div class="text-secondary font-weight-bold ml-2">Email: ${user[0].mail}</div>
-                    <!-- phone -->
-                    <div class="text-secondary font-weight-bold ml-2">Điện thoại: ${user[0].phone}</div>
-
-                </div>
-                <div class="font-weight-bold text-secondary col-2">
-                    <!-- Button add recruitment modal -->
-                    <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
-                        Chỉnh sửa thông tin
-                    </button>
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="container-fluid" style="width: 95%">
-        <div class="row mt-3" >
-            <!-- col 1 -->
-            <div class="col-md-9 col-xl-9">
-                <!-- COmment -->
-                <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
-                <div>Text</div>
-
-            </div>
-
-            <!-- col 2 -->
-            <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                <h5 class="text-dark font-weight-bold">Lịch sử ứng tuyển</h5>
-                <c:forEach var="a" items="${applies}">
-                    <div class="card bg-light mb-2">
-                        <div class="text-info font-weight-bold">${a.recruitment.title}</div>
-                        <div class="text-success">${a.title}</div>
-                        <div>
-                            <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
-                        </div>
+<div class="container-fluid" style="width: 95%">
+    <h2 class="text-center text-info mb-5">Trang người dùng</h2>
+    <!-- CANDIDATE -->
+    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+        <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
+            <div class="card-content">
+              <div class="card-body cleartfix">
+                <div class="media align-items-stretch row">
+                    <!-- Image -->
+                    <div class="align-self-center col-3">
+                        <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                    </div>
+                    <div class="media-body mt-3 col-7">
+                        <!-- name -->
+                        <h5 class="text-info font-weight-bold">${user[0].firstName} ${user[0].lastName}</h5>
+                        <!-- gender -->
+                        <div class="text-secondary font-weight-bold ml-2">Giới tính: ${user[0].sex.toString()}</div>
+                        <!-- location -->
+                        <div class="text-secondary font-weight-bold ml-2">Địa chỉ: ${user[0].location.address}, ${user[0].location.province.name}</div>
+                        <!-- mail -->
+                        <div class="text-secondary font-weight-bold ml-2">Email: ${user[0].mail}</div>
+                        <!-- phone -->
+                        <div class="text-secondary font-weight-bold ml-2">Điện thoại: ${user[0].phone}</div>
 
                     </div>
-                </c:forEach>
+                    <div class="font-weight-bold text-secondary col-2">
+                        <!-- Button add recruitment modal -->
+                        <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
+                            Chỉnh sửa thông tin
+                        </button>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
-    </div>         
-</c:if>
-
-<!-- RECRUITER -->
-<c:if test="${user[0].role.toString() == 'RECRUITER'}">
-    <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
-        <div class="card-content">
-          <div class="card-body cleartfix">
-            <div class="media align-items-stretch row">
-                <!-- Image -->
-                <div class="align-self-center col-3">
-                    <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
-                </div>
-                <div class="media-body mt-3 col-7">
-                    <!-- name -->
-                    <h5 class="text-info font-weight-bold">${user[0].companyName}</h5>
-                    <!-- location -->
-                    <div class="text-secondary font-weight-bold ml-2">Địa chỉ: ${user[0].location.address}, ${user[0].location.province.name}</div>
-                    <!-- mail -->
-                    <div class="text-secondary font-weight-bold ml-2">Email: ${user[0].mail}</div>
-                    <!-- phone -->
-                    <div class="text-secondary font-weight-bold ml-2">Điện thoại: ${user[0].phone}</div>
-                    
-                    <!-- Rating -->
-                    <div class="text-dark font-weight-bold mt-3">ĐÁNH GIÁ</div>
+        <div class="container-fluid" style="width: 95%">
+            <div class="row mt-3" >
+                <!-- col 1 -->
+                <div class="col-md-9 col-xl-9">
+                    <!-- COmment -->
+                    <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
+                    <div>Text</div>
 
                 </div>
-                <div class="font-weight-bold text-secondary col-2">
-                    <!-- Button add recruitment modal -->
-                    <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
-                        Chỉnh sửa thông tin
-                    </button>
-                    
-                    <!-- Button add recruitment modal -->
-                    <button type="button" class="btn btn-primary mt-3 font-weight-bold" data-toggle="modal" data-target="#addRecruitmentModal">
-                        Thêm tin tuyển dụng
-                    </button>
-                </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="container-fluid" style="width: 95%">
-        <div class="row mt-3" >
-            <!-- col 1 -->
-            <div class="col-md-9 col-xl-9">
-                <!-- COmment -->
-                <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
-                <div>Text</div>
 
-            </div>
+                <!-- col 2 -->
+                <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
+                    <h5 class="text-dark font-weight-bold">Lịch sử ứng tuyển</h5>
+                    <c:forEach var="a" items="${applies}">
+                        <div class="card bg-light mb-2">
+                            <div class="text-info font-weight-bold">${a.recruitment.title}</div>
+                            <div class="text-success">${a.title}</div>
+                            <div>
+                                <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
+                            </div>
 
-            <!-- col 2 -->
-            <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                <h5 class="text-dark font-weight-bold">Các tin đang tuyển dụng</h5>
-                <c:forEach var="rec" items="${recPost}">
-                    <div class="card bg-light mb-2">
-                        <div class="text-info font-weight-bold">${rec.title}</div>
-                        <div>
-                            <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
                         </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>         
+    </c:if>
+
+    <!-- RECRUITER -->
+    <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+        <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
+            <div class="card-content">
+              <div class="card-body cleartfix">
+                <div class="media align-items-stretch row">
+                    <!-- Image -->
+                    <div class="align-self-center col-3">
+                        <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                    </div>
+                    <div class="media-body mt-3 col-7">
+                        <!-- name -->
+                        <h5 class="text-info font-weight-bold">${user[0].companyName}</h5>
+                        <!-- location -->
+                        <div class="text-secondary font-weight-bold ml-2">Địa chỉ: ${user[0].location.address}, ${user[0].location.province.name}</div>
+                        <!-- mail -->
+                        <div class="text-secondary font-weight-bold ml-2">Email: ${user[0].mail}</div>
+                        <!-- phone -->
+                        <div class="text-secondary font-weight-bold ml-2">Điện thoại: ${user[0].phone}</div>
+
+                        <!-- Rating -->
+                        <div class="text-dark font-weight-bold mt-3">ĐÁNH GIÁ</div>
 
                     </div>
-                </c:forEach>
+                    <div class="font-weight-bold text-secondary col-2">
+                        <!-- Button add recruitment modal -->
+                        <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
+                            Chỉnh sửa thông tin
+                        </button>
+
+                        <!-- Button add recruitment modal -->
+                        <button type="button" class="btn btn-primary mt-3 font-weight-bold" data-toggle="modal" data-target="#addRecruitmentModal">
+                            Thêm tin tuyển dụng
+                        </button>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
-    </div>         
-</c:if>
+        <div class="container-fluid" style="width: 95%">
+            <div class="row mt-3" >
+                <!-- col 1 -->
+                <div class="col-md-9 col-xl-9">
+                    <!-- COmment -->
+                    <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
+                    <div>Text</div>
+
+                </div>
+
+                <!-- col 2 -->
+                <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
+                    <h5 class="text-dark font-weight-bold">Các tin đang tuyển dụng</h5>
+                    <c:forEach var="rec" items="${recPost}">
+                        <div class="card bg-light mb-2">
+                            <div class="text-info font-weight-bold">${rec.title}</div>
+                            <div>
+                                <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
+                            </div>
+
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>         
+    </c:if>
+</div>
 
 <!-- ADMIN -->
 <c:if test="${user[0].role.toString() == 'ADMIN'}">
@@ -311,10 +313,11 @@
 
 
 <!-- Add recruitment modal -->
-<div class="modal fade" id="addRecruitmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal fade" id="addRecruitmentModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <form:form method="post" action="/FindJobApp/user/${pageContext.request.userPrincipal.name}" modelAttribute="recruitment" enctype="multipart/form-data">
+            <c:url value="/addRecruitment" var="addRecruitmentAction" />
+            <form:form method="post" action="${addRecruitmentAction}" modelAttribute="recruitment" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLongTitle">Thêm mới tin tuyển dụng</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

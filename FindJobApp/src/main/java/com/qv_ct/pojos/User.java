@@ -21,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
@@ -38,15 +39,15 @@ public class User implements Serializable{
     private int id;
     @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
-    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
+//    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
     @Transient
     private String confirmPassword;
-    @Column(name = "first_name")
-    @NotEmpty(message = "{user.name.emptyError}")
+    @Column(name = "first_name", nullable = true)
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
-    @Column(name = "last_name")
-    @NotEmpty(message = "{user.name.emptyError}")
+    @Column(name = "last_name", nullable = true)
+//    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
     @Column(name = "company_name", nullable = true)
     private String companyName;
@@ -89,8 +90,10 @@ public class User implements Serializable{
     private MultipartFile file;
     
     @Transient
+    @NotEmpty(message = "{user.name.emptyError}")
     private String address;
     @Transient
+    @NotNull(message = "{user.name.emptyError}")
     private Province province;
 
     public User() {

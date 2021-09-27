@@ -37,8 +37,6 @@ public class UserController {
     private UserService userDetailsService;
     @Autowired
     private WebAppValidator userValidator;
-//    @Autowired
-//    private WebAppValidator recruitmentValidator;
     @Autowired
     private ApplyService applyService;
      @Autowired
@@ -94,14 +92,14 @@ public class UserController {
                             BindingResult result){
        String errMsg = "";
        Role role = Role.RECRUITER;
-//       if(!result.hasErrors()){
+       if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){
                     return "redirect:/login";
                 }
             }else
                 errMsg = "Mật khẩu không trùng khớp";
-//       }
+       }
        
        model.addAttribute("errMsg", errMsg);
        
@@ -123,43 +121,27 @@ public class UserController {
     }
     
     @PostMapping("/user/{name}")
-    public String addRecruitment(Model model, @ModelAttribute(value = "userUpdate")
+    public String updateUser(Model model, @ModelAttribute(value = "userUpdate")
                             @Valid User user,
-                            @ModelAttribute(value = "recruitment")
-                            @Valid Recruitment recruitment,
                             BindingResult result,
                             Principal principal) {
         
         User u = this.userDetailsService.getUsers(principal.getName()).get(0);
-//        if(user != null){
-//            System.out.println("-------------------------------Post-----------------------------------");
-//            System.out.println(u.getId());
-//
-//            user.setId(u.getId());
-//            user.setUsername(u.getUsername());
-//            user.setPassword(u.getPassword());
-//
-//            Role role = u.getRole();
-//
-//            System.out.println("-------------------------------Not error-----------------------------------");
-//
-//            if(this.userDetailsService.addOrUpdate(user, role) == true)
-//                 return String.format("redirect:/user/%s", principal.getName());
-//
-//             model.addAttribute("errMsg", "Something wrong!");
-//        }
+            user.setId(u.getId());
+            user.setUsername(u.getUsername());
+            user.setPassword(u.getPassword());
+            if(user.getFile().isEmpty())
+                user.setAvatar(u.getAvatar());
+
+            Role role = u.getRole();
+
+            System.out.println("-------------------------------Not error-----------------------------------");
+            
+            if(this.userDetailsService.addOrUpdate(user, role) == true)
+                 return String.format("redirect:/user/%s", principal.getName());
+
+             model.addAttribute("errMsg", "Something wrong!");
         
-        if(!recruitment.getTitle().isEmpty()){
-            recruitment.setRecruiter(u);
-            if(!result.hasErrors()){
-                System.out.println("-------------------------------Not error-----------------------------------");
-                if(this.recruitmentService.addOrUpdate(recruitment) == true)
-                return String.format("redirect:/user/%s", principal.getName());
-             else
-                 model.addAttribute("errMsg", "Something wrong!");
-             }
-             System.out.println("-------------------------------Error-----------------------------------");
-       }
        return "userpage";
     }
     

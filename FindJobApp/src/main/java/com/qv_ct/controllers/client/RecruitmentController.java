@@ -10,6 +10,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Tag;
+import com.qv_ct.pojos.User;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.TagService;
 import com.qv_ct.service.UserService;
@@ -53,10 +54,10 @@ public class RecruitmentController {
     @Autowired
     private UserService userService;
     
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        binder.setValidator(recruitmentValidator);
-//    }
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.setValidator(recruitmentValidator);
+    }
     
     @GetMapping("/add/recruitment")
     public String list(Model model){
@@ -116,18 +117,23 @@ public class RecruitmentController {
         return "recruitmentDetail";
     }
     
-//    @PostMapping("/add")
-//    public String addTag(Model model, @ModelAttribute(value = "tag")
-//                   @Valid Tag tag,
-//                   BindingResult result){
-//        if(!result.hasErrors()){
-//          if(this.tagService.addOrUpdate(tag) == true)@
-//              return "redirect:/add";
-//          else
-//              model.addAttribute("errMsg", "Something wrong!");
-//       }
-//
-//       return "addRecruitment";
-//    }
+    @PostMapping("/addRecruitment")
+    public String addRecruitment(Model model, @ModelAttribute(value = "recruitment")
+                    @Valid Recruitment recruitment,
+                    BindingResult result,
+                    Principal principal){
+        
+        System.out.println("-----------------------Post Recruitment-----------------------");
+        User u = this.userService.getUsers(principal.getName()).get(0);
+        recruitment.setRecruiter(u);
+        if(!result.hasErrors()){
+            if(this.recruitmentService.addOrUpdate(recruitment) == true)
+            return String.format("redirect:/user/%s", principal.getName());
+        else
+            model.addAttribute("errMsg", "Something wrong!");
+        }
+       
+       return "userpage";
+    }
     
 }
