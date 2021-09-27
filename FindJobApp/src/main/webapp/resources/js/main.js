@@ -75,11 +75,6 @@ function deleteComment(userId, commentId){
         })
     }
 }
-
- function getRatePoint(point){
-        document.getElementById("ratePoint").innerText = point
-    }
-    
     
 function addRate(canId, recId){
     fetch("/FindJobApp/api/add-rate", {
@@ -96,4 +91,33 @@ function addRate(canId, recId){
     }).then(function(data){
         location.reload()
     })
+}
+
+
+function getRatePoint(point){
+    document.getElementById("ratePoint").innerText = point
+}
+
+function showAddRecruitment(){
+    let btn = document.getElementById("btn-showAddRecruitment")
+//    if(btn.style.backgroundColor == "rgb(23, 162, 184)")
+//        btn.style.backgroundColor = "#007bff"
+//    else
+//        btn.style.backgroundColor = "rgb(23, 162, 184)"
+    if(btn.style.display == "none")
+        btn.style.display = "block"
+    else
+        btn.style.display = "none"
+    
+    let hidden = document.getElementById("btn-hiddenAddRecruitment")
+    if(hidden.style.display == "none")
+        hidden.style.display = "block"
+    else
+        hidden.style.display = "none"
+    
+    let form = document.getElementById("form-showAddRecruitment")
+    if(form.style.display == "none")
+        form.style.display = "block"
+    else
+        form.style.display = "none"
 }

@@ -37,11 +37,13 @@
                         <div class="text-secondary font-weight-bold ml-2">Điện thoại: ${user[0].phone}</div>
 
                     </div>
-                    <div class="font-weight-bold text-secondary col-2">
+                    <div class="font-weight-bold text-secondary col-2 text-right">
                         <!-- Button add recruitment modal -->
                         <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
                             Chỉnh sửa thông tin
                         </button>
+                        
+                        <a href="/FindJobApp/user/${user[0].username}/apply" class="btn btn-primary mt-3 font-weight-bold">Quản lý ứng tuyển</a>
                     </div>
                 </div>
               </div>
@@ -51,15 +53,12 @@
             <div class="row mt-3" >
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
-                    <!-- COmment -->
-                    <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
-                    <div>Text</div>
-
+                    <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
                 </div>
 
                 <!-- col 2 -->
                 <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                    <h5 class="text-dark font-weight-bold">Lịch sử ứng tuyển</h5>
+                    <h5 class="text-dark font-weight-bold">LỊCH SỬ ỨNG TUYỂN</h5>
                     <c:forEach var="a" items="${applies}">
                         <div class="card bg-light mb-2">
                             <div class="text-info font-weight-bold">${a.recruitment.title}</div>
@@ -97,18 +96,17 @@
 
                         <!-- Rating -->
                         <div class="text-dark font-weight-bold mt-3">ĐÁNH GIÁ</div>
+                        <h3 class="text-info ml-2"><fmt:formatNumber maxFractionDigits="2" value="${ratePointRecruiter}" type="number" /><i class="fa fa-star text-warning" aria-hiden="true"></i></h3>
+                        <div class="text-info font-weight-normal font-italic ml-2">${rateCountRecruiter} lượt đánh giá</div>
 
                     </div>
-                    <div class="font-weight-bold text-secondary col-2">
+                    <div class="font-weight-bold text-secondary col-2 text-right">
                         <!-- Button add recruitment modal -->
                         <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
                             Chỉnh sửa thông tin
                         </button>
-
-                        <!-- Button add recruitment modal -->
-                        <button type="button" class="btn btn-primary mt-3 font-weight-bold" data-toggle="modal" data-target="#addRecruitmentModal">
-                            Thêm tin tuyển dụng
-                        </button>
+                        
+                        <a href="/FindJobApp/user/${user[0].username}/recruitment" class="btn btn-primary mt-3 font-weight-bold">Quản lý tuyển dụng</a>
                     </div>
                 </div>
               </div>
@@ -118,15 +116,12 @@
             <div class="row mt-3" >
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
-                    <!-- COmment -->
-                    <h5 class="text-dark font-weight-bold">Giới thiệu</h5>
-                    <div>Text</div>
-
+                    <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
                 </div>
 
                 <!-- col 2 -->
                 <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                    <h5 class="text-dark font-weight-bold">Các tin đang tuyển dụng</h5>
+                    <h5 class="text-dark font-weight-bold">CÁC TIN ĐANG TUYỂN DỤNG</h5>
                     <c:forEach var="rec" items="${recPost}">
                         <div class="card bg-light mb-2">
                             <div class="text-info font-weight-bold">${rec.title}</div>
@@ -148,7 +143,7 @@
         <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
     </div>
 </c:if>
-    
+
                 
                 <!-- MODAL -->           
 
@@ -156,7 +151,8 @@
 <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form:form method="post" action="/FindJobApp/user/${pageContext.request.userPrincipal.name}" modelAttribute="userUpdate" enctype="multipart/form-data">
+            <c:url value="/updateUser" var="updateUserAction" />
+            <form:form method="post" action="${updateUserAction}" modelAttribute="userUpdate" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h4 class="modal-title text-info font-weight-bold" id="exampleModalLongTitle">Chỉnh sửa thông tin người dùng</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -310,126 +306,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- Add recruitment modal -->
-<div class="modal fade" id="addRecruitmentModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <c:url value="/addRecruitment" var="addRecruitmentAction" />
-            <form:form method="post" action="${addRecruitmentAction}" modelAttribute="recruitment" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLongTitle">Thêm mới tin tuyển dụng</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="p-2">
-                        
-                        <c:if test="${errMsg != null}">
-                            <div class="alert alert-danger">${errMsg}</div>
-                        </c:if>
-                       
-                        <!-- input title -->
-                        <div class="form-group">
-                            <div class="text-primary font-weight-bold">Tiêu đề</div>
-                            <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="fa fa-file-text-o " style="width: 15px"></i> </span>
-                                     </div>
-                                    <form:input path="title" class="form-control" type="text"/>
-                            </div>
-                            <form:errors path="title" cssClass="text-danger" element="div" />
-                        </div>
-
-                             <!-- Salary --> 
-                        <div class="row mt-4">
-
-                            <!-- input salary from -->
-                            <div class="form-group col-6">
-                                <div class="text-primary font-weight-bold">Mức lương khởi đầu</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-money" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="salaryFrom" class="form-control" type="phone"/>
-                                </div>
-                                <form:errors path="salaryFrom" cssClass="text-danger" element="div" />
-                            </div>
-
-                            <!-- input salary from  -->
-                            <div class="form-group col-6">
-                                <div class="text-primary font-weight-bold">Mức lương kết thúc</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-money" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="salaryTo" class="form-control" type="phone"/>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <!-- select form  -->
-                            <div class="form-group col-6">
-                                <div class="text-primary font-weight-bold">Chức vụ</div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="fa fa-briefcase" style="width: 15px"></i> </span>
-                                     </div>
-                                    <form:select path="form" class="form-control" aria-label=".form-select-sm example">
-                                        <option value="">--Chọn chức vụ--</option>
-                                        <option value="INTERN">Thực tập sinh</option>
-                                        <option value="GRADUATED">Mới ra trường</option>
-                                        <option value="STAFF">Nhân viên</option>
-                                        <option value="LEADER">Trưởng nhóm</option>
-                                        <option value="MANAGER">Quản lý</option>
-                                        <option value="SENIOR_MANAGER">Quản lý cấp cao</option>
-                                        <option value="EXECUTIVES">Giám đốc điều hành</option>
-                                    </form:select>
-                                </div>
-                                <form:errors path="form" cssClass="text-danger" element="div" />
-                            </div>
-                            
-                            <!-- select career -->
-                            <div class="form-group col-6">
-                                <div class="text-primary font-weight-bold">Ngành nghề</div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="fa fa-cogs" style="width: 15px"></i> </span>
-                                     </div>
-                                    <form:select path="career" class="form-control" aria-label=".form-select-sm example">
-                                        <option value="">--Chọn ngành nghề--</option>
-                                        <c:forEach var="c" items="${careers}">
-                                        <option value="${c.id}">${c.name}</option>
-                                        </c:forEach>
-                                    </form:select>
-                                </div>
-                                <form:errors path="career" cssClass="text-danger" element="div" />
-                            </div>
-                        </div>
-
-                        <!-- input description -->
-                         input description 
-                        <div class="form-group">
-                            <div class="text-primary font-weight-bold">Chi tiết</div>
-                            <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="fa fa-file-text" style="width: 15px"></i> </span>
-                                     </div>
-                                    <form:input path="description" class="form-control" type="text"/>
-                            </div>
-                        </div>
-                            
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                    <input type="submit" class="btn btn-primary btn-lg" value="Thêm tin">
-                </div>
-            </form:form>
-        </div>
-    </div>
-</div>
-

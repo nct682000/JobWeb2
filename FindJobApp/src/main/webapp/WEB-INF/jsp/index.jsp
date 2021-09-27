@@ -106,7 +106,7 @@
     </div>-->
               
     <!-- List Recruitment -->
-    <h4 class="text-info font-weight-bold m-3">Tin mới nhất</h4>
+    <h4 class="text-dark font-weight-bold m-3">TIN MỚI NHẤT</h4>
     <div class="row">
         <c:forEach var="r" items="${recruitments}">
 

@@ -50,8 +50,6 @@ public class RecruitmentController {
     @Autowired
     private RecruitmentService recruitmentService;
     @Autowired
-    private TagService tagService;
-    @Autowired
     private UserService userService;
     
     @InitBinder
@@ -59,30 +57,15 @@ public class RecruitmentController {
         binder.setValidator(recruitmentValidator);
     }
     
-    @GetMapping("/add/recruitment")
-    public String list(Model model){
+    @GetMapping("/user/{name}/recruitment")
+    public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
         model.addAttribute("recruitment", new Recruitment());
-        model.addAttribute("tags", this.tagService.getTags());
-        model.addAttribute("recruiters", this.userService.getRecruiters());
-//        model.addAttribute("tag", new Tag());
-        return "addRecruitment";
+        if(principal != null)
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+        
+        return "recruitmentManager";
     }
     
-    @PostMapping("/add/recruitment")
-    public String add(Model model, @ModelAttribute(value = "recruitment")
-                    @Valid Recruitment recruitment,
-                    BindingResult result){
-        model.addAttribute("recruiters", this.userService.getRecruiters());
-        
-        if(!result.hasErrors()){
-           if(this.recruitmentService.addOrUpdate(recruitment) == true)
-               return "redirect:/";
-           else
-               model.addAttribute("errMsg", "Something wrong!");
-        }
-        
-        return "addRecruitment";
-    }
     
     @RequestMapping("/recruitments")
     public String search(Model model, 
@@ -117,13 +100,15 @@ public class RecruitmentController {
         return "recruitmentDetail";
     }
     
-    @PostMapping("/addRecruitment")
+    @PostMapping("/user/{name}/recruitment")
     public String addRecruitment(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result,
                     Principal principal){
         
-        System.out.println("-----------------------Post Recruitment-----------------------");
+        if(principal != null)
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+        
         User u = this.userService.getUsers(principal.getName()).get(0);
         recruitment.setRecruiter(u);
         if(!result.hasErrors()){
@@ -133,7 +118,7 @@ public class RecruitmentController {
             model.addAttribute("errMsg", "Something wrong!");
         }
        
-       return "userpage";
+       return "recruitmentManager";
     }
     
 }

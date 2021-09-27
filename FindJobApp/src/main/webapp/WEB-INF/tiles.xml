@@ -96,9 +96,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/userPage.jsp" />
     </definition>
     
-    <definition name="addRecruitment" extends="baseLayout">
+    <definition name="recruitmentManager" extends="baseLayout">
         <put-attribute name="title" value="Đăng tin tuyển dụng" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentManager.jsp" />
     </definition>
     
     <definition name="addTag" extends="baseLayout">
@@ -106,9 +106,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
     </definition>
     
-    <definition name="addApply" extends="baseLayout">
+    <definition name="applyManager" extends="baseLayout">
         <put-attribute name="title" value="Ứng tuyển" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addApply.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/applyManager.jsp" />
     </definition>
     
     <definition name="recruiter" extends="baseLayout">

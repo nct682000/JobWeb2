@@ -9,6 +9,7 @@ import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.service.ApplyService;
+import com.qv_ct.service.RateService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
 import com.qv_ct.validator.RecruitmentValidator;
@@ -39,8 +40,10 @@ public class UserController {
     private WebAppValidator userValidator;
     @Autowired
     private ApplyService applyService;
-     @Autowired
+    @Autowired
     private RecruitmentService recruitmentService;
+    @Autowired
+    private RateService rateService;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -110,17 +113,18 @@ public class UserController {
     public String userPage(Model model, @PathVariable String name) {
        model.addAttribute("user", this.userDetailsService.getUsers(name));
        model.addAttribute("userUpdate", new User());
-       model.addAttribute("recruitment", new Recruitment());
        User u = this.userDetailsService.getUsers(name).get(0);
-       model.addAttribute("recruiters", this.userDetailsService.getRecruiters());
+//       model.addAttribute("recruiters", this.userDetailsService.getRecruiters());
        int id = u.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
        model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
+       model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
        
        return "userpage";
     }
     
-    @PostMapping("/user/{name}")
+    @PostMapping("/updateUser")
     public String updateUser(Model model, @ModelAttribute(value = "userUpdate")
                             @Valid User user,
                             BindingResult result,
