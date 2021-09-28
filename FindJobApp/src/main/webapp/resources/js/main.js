@@ -93,6 +93,23 @@ function addRate(canId, recId){
     })
 }
 
+function hideRecruitment(recId){
+    fetch("/FindJobApp/api/hide-recruitment", {
+        method: 'post',
+        body: JSON.stringify({
+            "recId": recId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res){
+        console.info(res)
+        return res.json()
+    }).then(function(data){
+        console.info(data)
+    })
+}
+
 
 function getRatePoint(point){
     document.getElementById("ratePoint").innerText = point
@@ -116,6 +133,27 @@ function showAddRecruitment(){
         hidden.style.display = "none"
     
     let form = document.getElementById("form-showAddRecruitment")
+    if(form.style.display == "none")
+        form.style.display = "block"
+    else
+        form.style.display = "none"
+}
+
+function showUpdateRecruitment(){
+    let btn = document.getElementById("btn-showUpdateRecruitment")
+
+    if(btn.style.display == "none")
+        btn.style.display = "block"
+    else
+        btn.style.display = "none"
+    
+    let hidden = document.getElementById("btn-hiddenUpdateRecruitment")
+    if(hidden.style.display == "none")
+        hidden.style.display = "block"
+    else
+        hidden.style.display = "none"
+    
+    let form = document.getElementById("form-showUpdateRecruitment")
     if(form.style.display == "none")
         form.style.display = "block"
     else

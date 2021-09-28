@@ -11,7 +11,7 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<h2 class="text-info font-weight-bold mb-3 text-center">KẾT QUẢ TÌM KIẾM</h2>
+<h2 class="text-info font-weight-bold mb-3 text-center">TRANG TÌM KIẾM</h2>
 
 <div class="container">
     <form action="/FindJobApp/recruitments/">

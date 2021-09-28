@@ -40,7 +40,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
-        query = query.select(root);
+        query = query.where(builder.equal(root.get("active"), true));
         query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
@@ -129,7 +129,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     @Override
     public long countRecruitment() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("Select Count(*) From Recruitment");
+        Query q = session.createQuery("Select Count(*) From Recruitment R Where R.active = true");
 
         return Long.parseLong(q.getSingleResult().toString());
     }
@@ -187,5 +187,20 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         Query q = session.createQuery(query);
         
         return q.getResultList();
+    }
+
+    @Override
+    public Recruitment hideRecruitment(Recruitment r) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        try{
+            r.setActive(false);
+            session.update(r);
+            return r;
+        }catch (Exception ex){
+            System.err.println("-------------Hide Recruitment Error-----------" + ex.getMessage());
+            ex.printStackTrace();
+        }
+        
+        return null;
     }
 }

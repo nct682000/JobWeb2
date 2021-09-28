@@ -66,11 +66,6 @@ public class RecruitmentServiceImpl implements RecruitmentService{
         return this.recruitmentRepository.countRecruitment();
     }
     
-    //    -----------   admin   ------------------
-    @Override
-    public List<Recruitment> getRecruitmentsAll() {
-        return this.recruitmentRepository.getRecruitmentsAll();
-    }
 
     @Override
     public List<Object[]> getRecruitmentByApply(int num) {
@@ -81,7 +76,17 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     public List<Recruitment> getRecruitmentByUserId(int userId) {
         return this.recruitmentRepository.getRecruitmentByUserId(userId);
     }
+
+    @Override
+    public Recruitment hideRecruitment(int recruitmentId) {
+        Recruitment r = this.recruitmentRepository.getRecruitmentById(recruitmentId);
+        return this.recruitmentRepository.hideRecruitment(r);
+    }
     
-    
+    //    -----------   admin   ------------------
+    @Override
+    public List<Recruitment> getRecruitmentsAll() {
+        return this.recruitmentRepository.getRecruitmentsAll();
+    }
     
 }

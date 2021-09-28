@@ -21,7 +21,7 @@
 
                 <!-- Find job -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Tìm việc <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/FindJobApp/recruitments?kw=&provinceId=0&careerId=0&salary=0&form=-1">Tìm việc <span class="sr-only">(current)</span></a>
                 </li>
 
                 <!-- career list -->

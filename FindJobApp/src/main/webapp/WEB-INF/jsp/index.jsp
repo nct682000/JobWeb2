@@ -12,7 +12,7 @@
 <div class="container-fluid" style="width: 95%">
 
     <!-- Page name -->
-    <h1 class="text-center text-primary">My Job Website</h1>
+    <h1 class="text-center text-primary">TRANG CHỦ</h1>
 
     <a href="/FindJobApp/add/recruitment">Thêm tin</a>
     <br>

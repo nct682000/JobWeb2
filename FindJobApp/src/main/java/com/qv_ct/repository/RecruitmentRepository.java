@@ -21,6 +21,7 @@ public interface RecruitmentRepository {
     List<Recruitment> getRecruitmentByUserId(int userId);
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
+    Recruitment hideRecruitment(Recruitment r);
     
     //    -------------     admin       --------------
     List<Recruitment> getRecruitmentsAll();

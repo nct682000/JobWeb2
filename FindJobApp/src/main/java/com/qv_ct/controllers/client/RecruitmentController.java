@@ -57,15 +57,6 @@ public class RecruitmentController {
         binder.setValidator(recruitmentValidator);
     }
     
-    @GetMapping("/user/{name}/recruitment")
-    public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
-        model.addAttribute("recruitment", new Recruitment());
-        if(principal != null)
-            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
-        
-        return "recruitmentManager";
-    }
-    
     
     @RequestMapping("/recruitments")
     public String search(Model model, 
@@ -100,11 +91,26 @@ public class RecruitmentController {
         return "recruitmentDetail";
     }
     
+    @GetMapping("/user/{name}/recruitment")
+    public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
+        
+        model.addAttribute("recruitment", new Recruitment());
+        model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+        int id = this.userService.getUsers(principal.getName()).get(0).getId();
+        model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+        
+        return "recruitmentManager";
+    }
+    
+    
     @PostMapping("/user/{name}/recruitment")
     public String addRecruitment(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result,
                     Principal principal){
+        
+        int id = this.userService.getUsers(principal.getName()).get(0).getId();
+        model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
         
         if(principal != null)
             model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
@@ -113,10 +119,10 @@ public class RecruitmentController {
         recruitment.setRecruiter(u);
         if(!result.hasErrors()){
             if(this.recruitmentService.addOrUpdate(recruitment) == true)
-            return String.format("redirect:/user/%s", principal.getName());
-        else
-            model.addAttribute("errMsg", "Something wrong!");
+                return String.format("redirect:/user/%s", principal.getName());
         }
+        else
+            model.addAttribute("errMsg", "Thêm tin không thành công, kiểm tra lại nhé!");
        
        return "recruitmentManager";
     }
