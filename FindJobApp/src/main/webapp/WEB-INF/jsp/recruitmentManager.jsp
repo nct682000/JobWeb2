@@ -36,19 +36,19 @@
             <c:forEach var="r" items="${recRecruitments}" >
                 <tr>
                     <th class="align-middle" scope="row">${r.id}</th>
-                    <td class="align-middle">${r.title}</td>
+                    <td class="align-middle"><a href="/FindJobApp/recruitment/${r.id}">${r.title}</a></td>
                     <td class="align-middle">${r.career.name}</td>
                     <td class="align-middle">${r.form.toString()}</td>
                     <td class="align-middle text-center text-info font-weight-bold">apply</td>
                     <c:if test="${r.active == true}">
                         <td class="align-middle text-center"><i class="fa fa-check-square text-primary"></i></td>
-                        <td class="align-middle"><button class="btn btn-danger" onclick="hideRecruitment(${r.id})">Tắt tuyển dụng</button></td>
+                        <td class="align-middle"><button class="btn btn-danger" onclick="switchActiveRecruitment(${r.id})">Tắt tuyển dụng</button></td>
                     </c:if>
                     <c:if test="${r.active == false}">
                         <td class="align-middle text-center"><i class="fa fa-window-close text-danger"></i></td>
-                        <td class="align-middle"><button class="btn btn-primary">Bật tuyển dụng</button></td>
+                        <td class="align-middle"><button class="btn btn-primary" onclick="switchActiveRecruitment(${r.id})">Bật tuyển dụng</button></td>
                     </c:if>
-                        <td class="align-middle text-center"><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
+                    <td class="align-middle text-center"><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
                 </tr>
             </c:forEach>
         </tbody>

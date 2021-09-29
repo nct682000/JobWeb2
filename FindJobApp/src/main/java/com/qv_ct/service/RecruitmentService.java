@@ -22,7 +22,7 @@ public interface RecruitmentService {
     boolean addOrUpdate(Recruitment r);
     long countRecruitment();
     List<Recruitment> getRecruitmentByUserId(int userId);
-    Recruitment hideRecruitment(int recruitmentId);
+    Recruitment switchActiveRecruitment(int recruitmentId);
     
     //    --------------    admin   -------------------
     List<Recruitment> getRecruitmentsAll();

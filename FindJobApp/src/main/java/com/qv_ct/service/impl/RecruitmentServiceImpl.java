@@ -78,10 +78,12 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     }
 
     @Override
-    public Recruitment hideRecruitment(int recruitmentId) {
+    public Recruitment switchActiveRecruitment(int recruitmentId) {
         Recruitment r = this.recruitmentRepository.getRecruitmentById(recruitmentId);
-        return this.recruitmentRepository.hideRecruitment(r);
+        return this.recruitmentRepository.switchActiveRecruitment(r);
     }
+    
+    
     
     //    -----------   admin   ------------------
     @Override

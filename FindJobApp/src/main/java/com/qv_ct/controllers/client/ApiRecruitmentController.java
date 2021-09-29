@@ -26,16 +26,17 @@ public class ApiRecruitmentController {
     @Autowired
     private RecruitmentService recruitmentService;
     
-    @PostMapping(path = "/api/hide-recruitment", produces = {
+    
+    @PostMapping(path = "/api/switch-active-recruitment", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
-    public ResponseEntity<Recruitment> hideRecruitment(@RequestBody Map<String, String> params){
+    public ResponseEntity<Recruitment> switchActiveRecruitment(@RequestBody Map<String, String> params){
         try{
             int recId = Integer.parseInt(params.get("recId"));
-            Recruitment r = this.recruitmentService.hideRecruitment(recId);
+            Recruitment r = this.recruitmentService.switchActiveRecruitment(recId);
             return new ResponseEntity<>(r, HttpStatus.OK);
         }catch(Exception ex){
-            System.err.println("------------API HIDE RECRUITMENT ERROR------------" + ex.getMessage());
+            System.err.println("------------API SWITCH RECRUITMENT ERROR------------" + ex.getMessage());
             ex.printStackTrace();
         }
         

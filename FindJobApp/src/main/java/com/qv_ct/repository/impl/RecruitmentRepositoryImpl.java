@@ -133,15 +133,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
         return Long.parseLong(q.getSingleResult().toString());
     }
-
-    //    ------------------    admin   --------------------
-    @Override
-    public List<Recruitment> getRecruitmentsAll() {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Recruitment");
-        return q.getResultList();
-    }
-
+    
     @Override
     public List<Object[]> getRecruitmentByApply(int num) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -190,17 +182,25 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     }
 
     @Override
-    public Recruitment hideRecruitment(Recruitment r) {
+    public Recruitment switchActiveRecruitment(Recruitment r) {
         Session session = sessionFactory.getObject().getCurrentSession();
         try{
-            r.setActive(false);
+            r.setActive(!r.getActive());
             session.update(r);
             return r;
         }catch (Exception ex){
-            System.err.println("-------------Hide Recruitment Error-----------" + ex.getMessage());
+            System.err.println("-------------Active Recruitment Error-----------" + ex.getMessage());
             ex.printStackTrace();
         }
         
         return null;
+    }
+
+    //    ------------------    admin   --------------------
+    @Override
+    public List<Recruitment> getRecruitmentsAll() {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Recruitment");
+        return q.getResultList();
     }
 }

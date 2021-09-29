@@ -101,28 +101,12 @@
         <div class="col-md-8 col-xl-8">
             <!-- Benefit -->
             <h5 class="text-dark font-weight-bold">PHÚC LỢI</h5>
-            <div class="card-content m-1 bg-light row mb-2">
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">
-                    BENEFIT
-                </div>
+            <div class="card-content m-1 bg-light row mb-2 text-info font-weight-bold">
+                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 1</div>
+                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 2</div>
+                <c:forEach var="b" items="${recDetail.benefits}">
+                    <div class="col-md-4 col-xl-4 mb-2 pl-3">${b.name}</div>
+                </c:forEach>
             </div>
             
             <!-- description -->
@@ -131,8 +115,11 @@
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
             <div class="card-content">
-                <span class="ml-3 p-2">Tag</span>
-                <span class="ml-3 p-2">Tag</span>
+                <span class="ml-3 p-2 badge badge-info">Tag 1</span>
+                <span class="ml-3 p-2 badge badge-info">Tag 2</span>
+                <c:forEach var="t" items="${recDetail.tags}">
+                    <span class="ml-3 p-2 badge badge-info">${t.content}</span>
+                </c:forEach>
             </div>
             
         </div>

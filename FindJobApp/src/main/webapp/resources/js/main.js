@@ -15,10 +15,10 @@ function addComment(commenterId, commentedId){
         headers: {
             "Content-Type": "application/json"
         }
-    }).then (function(res){
+    }).then(function(res){
         console.info(res)
         return res.json()
-    }).then (function(data){
+    }).then(function(data){
         console.info(data)
         console.info(data.id)
         
@@ -93,8 +93,8 @@ function addRate(canId, recId){
     })
 }
 
-function hideRecruitment(recId){
-    fetch("/FindJobApp/api/hide-recruitment", {
+function switchActiveRecruitment(recId){
+    fetch("/FindJobApp/api/switch-active-recruitment", {
         method: 'post',
         body: JSON.stringify({
             "recId": recId
@@ -104,6 +104,7 @@ function hideRecruitment(recId){
         }
     }).then(function(res){
         console.info(res)
+//        location.reload()
         return res.json()
     }).then(function(data){
         console.info(data)
