@@ -160,8 +160,11 @@
                     <div class="text-info font-weight-bold">${rec.title}</div>
                     <div class="text-dark">Chức vụ: ${rec.form.toString()}</div>
                     <div class="text-success font-weight-bold">$Lương:
-                        <c:if test="${rec.salaryFrom != null && rec.salaryTo != null}">
+                        <c:if test="${rec.salaryFrom != null && rec.salaryTo != null && rec.salaryFrom != rec.salaryTo}">
                             <fmt:formatNumber value="${rec.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${rec.salaryTo}" type="number" />đ 
+                        </c:if>
+                        <c:if test="${rec.salaryFrom != null && rec.salaryTo != null && rec.salaryFrom == rec.salaryTo}">
+                            <fmt:formatNumber value="${rec.salaryFrom}" type="number" />đ
                         </c:if>
                         <c:if test="${rec.salaryFrom != null && rec.salaryTo == null}">
                             <fmt:formatNumber value="${rec.salaryFrom}" type="number" />đ 

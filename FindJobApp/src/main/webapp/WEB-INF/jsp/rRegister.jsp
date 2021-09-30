@@ -129,7 +129,7 @@
                             <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
                          </div>
                         <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
-                            <option selected>Tỉnh thành</option>
+                            <option selected value="${null}">Tỉnh thành</option>
                             <c:forEach var="p" items="${provinces}">
                                 <option value="${p.id}">${p.name}</option>
                             </c:forEach>

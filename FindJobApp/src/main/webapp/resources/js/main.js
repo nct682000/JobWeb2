@@ -104,10 +104,7 @@ function switchActiveRecruitment(recId){
         }
     }).then(function(res){
         console.info(res)
-//        location.reload()
-        return res.json()
-    }).then(function(data){
-        console.info(data)
+        location.reload()
     })
 }
 
@@ -155,6 +152,27 @@ function showUpdateRecruitment(){
         hidden.style.display = "none"
     
     let form = document.getElementById("form-showUpdateRecruitment")
+    if(form.style.display == "none")
+        form.style.display = "block"
+    else
+        form.style.display = "none"
+}
+
+function showUpdateUser(){
+    let btn = document.getElementById("btn-showUpdateUser")
+
+    if(btn.style.display == "none")
+        btn.style.display = "block"
+    else
+        btn.style.display = "none"
+    
+    let hide = document.getElementById("btn-hideUpdateUser")
+    if(hide.style.display == "none")
+        hide.style.display = "block"
+    else
+        hide.style.display = "none"
+    
+    let form = document.getElementById("form-showUpdateUser")
     if(form.style.display == "none")
         form.style.display = "block"
     else

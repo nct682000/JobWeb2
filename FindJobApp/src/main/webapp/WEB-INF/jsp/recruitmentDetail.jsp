@@ -49,8 +49,11 @@
                         <i class="fa fa-money mr-2" aria-hiden="true" style="width: 20px"></i>
                         <div class="" style="width: 145px">Lương: </div>
                         <div class="text-success">
-                            <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null}">
+                            <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null && recDetail.salaryFrom != recDetail.salaryTo}">
                                 <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
+                            </c:if>
+                            <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null && recDetail.salaryFrom == recDetail.salaryTo}">
+                                $Lương: <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo == null}">
                                 <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
@@ -149,8 +152,11 @@
 
                                 <!-- salary -->
                                 <div class="text-success font-weight-bold">
-                                    <c:if test="${trend[6] != null && trend[7] != null}">
+                                    <c:if test="${trend[6] != null && trend[7] != null && trend[6] != trend[7]}">
                                         $Lương: <fmt:formatNumber value="${trend[6]}" type="number" />đ - <fmt:formatNumber value="${trend[7]}" type="number" />đ 
+                                    </c:if>
+                                    <c:if test="${trend[6] != null && trend[7] != null && trend[6] == trend[7]}">
+                                        $Lương: <fmt:formatNumber value="${trend[6]}" type="number" />đ
                                     </c:if>
                                     <c:if test="${trend[6] != null && trend[7] == null}">
                                         $Lương: từ <fmt:formatNumber value="${trend[6]}" type="number" />đ 

@@ -105,6 +105,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         }
         
         query = query.where(builder.and(p1, p2, p3, p4, p5));
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -116,7 +117,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         try {
             r.setCreatedDate(Date.from(Instant.now()));
             r.setUpdatedDate(Date.from(Instant.now()));
-            session.save(r);
+            session.saveOrUpdate(r);
 
             return true;
         } catch (Exception ex) {

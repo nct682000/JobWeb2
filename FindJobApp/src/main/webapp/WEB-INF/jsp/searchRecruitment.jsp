@@ -91,18 +91,21 @@
 
                     <!-- salary -->
                     <div class="text-success font-weight-bold">
-                      <c:if test="${r.salaryFrom != null && r.salaryTo != null}">
-                          $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
-                      </c:if>
-                      <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
-                          $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
-                      </c:if>
-                      <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
-                          $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
-                      </c:if>
-                      <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
-                          $Lương: thỏa thuận
-                      </c:if>
+                        <c:if test="${r.salaryFrom != null && r.salaryTo != null && r.salaryFrom != r.salaryTo}">
+                            $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                        </c:if>
+                        <c:if test="${r.salaryFrom != null && r.salaryTo != null && r.salaryFrom == r.salaryTo}">
+                            $Lương: <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ
+                        </c:if>
+                        <c:if test="${r.salaryFrom != null && r.salaryTo == null}">
+                            $Lương: từ <fmt:formatNumber value="${r.salaryFrom}" type="number" />đ 
+                        </c:if>
+                        <c:if test="${r.salaryFrom == null && r.salaryTo != null}">
+                            $Lương: lên đến <fmt:formatNumber value="${r.salaryTo}" type="number" />đ 
+                        </c:if>
+                        <c:if test="${r.salaryFrom == null && r.salaryTo == null}">
+                            $Lương: thỏa thuận
+                        </c:if>
                     </div>
 
                     <!-- Province -->

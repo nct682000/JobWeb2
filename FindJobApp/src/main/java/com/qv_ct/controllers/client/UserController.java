@@ -114,7 +114,6 @@ public class UserController {
        model.addAttribute("user", this.userDetailsService.getUsers(name));
        model.addAttribute("userUpdate", new User());
        User u = this.userDetailsService.getUsers(name).get(0);
-//       model.addAttribute("recruiters", this.userDetailsService.getRecruiters());
        int id = u.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
        model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
@@ -124,11 +123,20 @@ public class UserController {
        return "userpage";
     }
     
-    @PostMapping("/updateUser")
-    public String updateUser(Model model, @ModelAttribute(value = "userUpdate")
+    @PostMapping("/update-user")
+    public String updateUser(Model model,
+                            @ModelAttribute(value = "userUpdate")
                             @Valid User user,
                             BindingResult result,
                             Principal principal) {
+        
+       model.addAttribute("user", this.userDetailsService.getUsers(principal.getName()));
+       User uc = this.userDetailsService.getUsers(principal.getName()).get(0);
+       int id = uc.getId();
+       model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
+       model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
+       model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
         
         User u = this.userDetailsService.getUsers(principal.getName()).get(0);
             user.setId(u.getId());
@@ -139,12 +147,11 @@ public class UserController {
 
             Role role = u.getRole();
 
-            System.out.println("-------------------------------Not error-----------------------------------");
-            
-            if(this.userDetailsService.addOrUpdate(user, role) == true)
-                 return String.format("redirect:/user/%s", principal.getName());
-
-             model.addAttribute("errMsg", "Something wrong!");
+            if(!result.hasErrors()){
+                if(this.userDetailsService.addOrUpdate(user, role) == true)
+                     return String.format("redirect:/user/%s", principal.getName());
+            }else
+                model.addAttribute("updateUserError", "Cập nhật thông tin không thành công, kiểm tra lại nhé!");
         
        return "userpage";
     }

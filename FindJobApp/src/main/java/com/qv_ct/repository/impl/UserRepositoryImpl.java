@@ -92,11 +92,8 @@ public class UserRepositoryImpl implements UserRepository{
             Location l = new Location(user.getAddress(), user.getProvince());
             user.setLocation(l);
             user.setRole(role);
-            System.out.println("-----------------------User addOrUpdate Repository-------------------------");
             session.saveOrUpdate(l);
-            System.out.println("-----------------------Save Location-------------------------");
             session.saveOrUpdate(user);
-            System.out.println("-----------------------Save User-------------------------");
             return true;
         }catch (Exception ex){
             System.err.println(ex.getMessage());

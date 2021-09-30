@@ -14,6 +14,174 @@
 
 <div class="container-fluid" style="width: 95%">
     <h2 class="text-center text-info mb-5">Trang người dùng</h2>
+    <c:if test="${updateUserError != null}">
+        <h4 class="alert alert-danger text-center font-weight-bold text-danger">${updateUserError}</h4>
+    </c:if>
+    <!-- BUTTON SHOW -->
+    <button class="btn btn-info font-weight-bold" id="btn-showUpdateUser" onclick="showUpdateUser()">
+        Chỉnh sửa thông tin
+    </button>
+    <div class="container">
+        <!-- BUTTON HIDE -->
+        <button class="btn btn-secondary font-weight-bold" id="btn-hideUpdateUser" onclick="showUpdateUser()" style="display: none">
+            Ẩn
+        </button>
+        
+        <!-- FORM UPDATE -->
+        <div class="card bg-light" id="form-showUpdateUser" style="display: none">
+            <h4 class="text-center text-info font-weight-bold">Chỉnh sửa thông tin người dùng</h4>
+            <c:url value="/update-user" var="updateUserAction" />
+            <form:form method="post" action="${updateUserAction}" modelAttribute="userUpdate" enctype="multipart/form-data">
+
+                <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                    <div class="row mt-4">
+                        <!-- input first name -->
+                        <div class="form-group col-md-6 col-xl-6">
+                            <div class="text-info font-weight-bold">Tên</div>
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                                     </div>
+                                    <form:input path="firstName" class="form-control" value="${user[0].firstName}" type="text"/>
+                            </div>
+                            <form:errors path="firstName" cssClass="text-danger" element="div" />
+                        </div>
+
+                        <!-- input last name -->
+                        <div class="form-group col-md-6 col-xl-6">
+                            <div class="text-info font-weight-bold">Họ</div>
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                                     </div>
+                                    <form:input path="lastName" class="form-control" value="${user[0].lastName}" type="text"/>
+                            </div>
+                            <form:errors path="lastName" cssClass="text-danger" element="div" />
+                        </div> 
+
+                    </div>
+                </c:if>
+
+                <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+                    <!-- input company name -->
+                    <div class="form-group">
+                        <div class="text-info font-weight-bold">Tên doanh nghiệp</div>
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-building-o" style="width: 15px"></i> </span>
+                                 </div>
+                                <form:input path="companyName" class="form-control" value="${user[0].companyName}" type="text"/>
+                        </div>
+                        <form:errors path="companyName" cssClass="text-danger" element="div" />
+                    </div>
+                </c:if>
+
+                <!-- input email -->
+                <div class="form-group">
+                    <div class="text-info font-weight-bold">Email</div>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-envelope" style="width: 15px"></i> </span>
+                             </div>
+                            <form:input path="mail" class="form-control" value="${user[0].mail}" type="email"/>
+                    </div>
+                    <form:errors path="mail" cssClass="text-danger" element="div" />
+                </div>
+
+                <div class="row mt-4">
+
+                    <!-- input phone -->
+                    <div class="form-group col-md-6 col-xl-8">
+                        <div class="text-info font-weight-bold">Số điện thoại</div>
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-phone" style="width: 15px"></i> </span>
+                                 </div>
+                                <form:input path="phone" class="form-control" value="${user[0].phone}" type="phone"/>
+                        </div>
+                        <form:errors path="phone" cssClass="text-danger" element="div" />
+                    </div>
+
+                    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                        <!-- select sex -->
+                        <div class="form-group col-md-6 col-xl-4">
+                            <div class="text-info font-weight-bold">Giới tính</div>
+                            <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-venus-mars" style="width: 15px"></i> </span>
+                                     </div>
+                                    <form:select path="sex" class="form-control" aria-label=".form-select-sm example" id="sex">
+                                        <option selected value="${null}">Giới tính</option>
+                                        <option value="MALE">Nam</option>
+                                        <option value="FEMALE">Nữ</option>
+                                        <option value="NEUTRAL">Giới tính khác</option>
+                                    </form:select>
+                            </div>
+                            <form:errors path="sex" cssClass="text-danger" element="div" />
+                        </div>
+                    </c:if>
+
+                </div>
+
+                <div class="row">
+                    <!-- input address -->
+                    <div class="form-group col-md-8 col-xl-8">
+                        <div class="text-info font-weight-bold">Địa chỉ</div>
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-location-arrow " style="width: 15px"></i> </span>
+                                 </div>
+                                <form:input path="address" class="form-control" value="${user[0].location.address}" type="text"/>
+                        </div>
+                        <form:errors path="address" cssClass="text-danger" element="div" />
+                    </div>
+
+                    <!-- select province -->
+                    <div class="form-group col-md-4 col-xl-4">
+                        <div class="text-info font-weight-bold">Tỉnh thành</div>
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
+                                 </div>
+                                <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
+                                    <option selected value="${null}">Tỉnh thành</option>
+                                <c:forEach var="p" items="${provinces}">
+                                    <option value="${p.id}">${p.name}</option>
+                                </c:forEach>
+                            </form:select>
+                        </div>
+                        <form:errors path="province" cssClass="text-danger" element="div" />
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <!-- choose avatar -->
+                    <div class="form-group col-md-7 col-xl-7">
+                        <div class="text-info font-weight-bold">Ảnh đại diện</div>
+                        <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                                 </div>
+                                <form:input path="file" class="form-control" type="file"/>
+                        </div>
+                        <form:errors path="file" cssClass="text-danger" element="div" />
+                    </div>
+
+                    <!-- avatar view -->
+                    <div class="form-group col-md-5 col-xl-5">
+                        <div>
+                            <img src="${user[0].avatar}" class="img-thumbnail rounded" />
+                        </div>
+                    </div> 
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-lg">---Cập nhật---</button>
+                </div>
+            </form:form>
+        </div>
+    </div>
+    
     <!-- CANDIDATE -->
     <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
         <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
@@ -38,10 +206,6 @@
 
                     </div>
                     <div class="font-weight-bold text-secondary col-2 text-right">
-                        <!-- Button add recruitment modal -->
-                        <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
-                            Chỉnh sửa thông tin
-                        </button>
                         
                         <a href="/FindJobApp/user/${user[0].username}/apply" class="btn btn-primary mt-3 font-weight-bold">Quản lý ứng tuyển</a>
                     </div>
@@ -101,10 +265,6 @@
 
                     </div>
                     <div class="font-weight-bold text-secondary col-2 text-right">
-                        <!-- Button add recruitment modal -->
-                        <button type="button" class="btn btn-info mt-3 font-weight-bold" data-toggle="modal" data-target="#updateUserModal">
-                            Chỉnh sửa thông tin
-                        </button>
                         
                         <a href="/FindJobApp/user/${user[0].username}/recruitment" class="btn btn-primary mt-3 font-weight-bold">Quản lý tuyển dụng</a>
                     </div>
@@ -143,166 +303,3 @@
         <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
     </div>
 </c:if>
-
-                
-                <!-- MODAL -->           
-
-<!-- Update User modal -->
-<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <c:url value="/updateUser" var="updateUserAction" />
-            <form:form method="post" action="${updateUserAction}" modelAttribute="userUpdate" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h4 class="modal-title text-info font-weight-bold" id="exampleModalLongTitle">Chỉnh sửa thông tin người dùng</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="p-2">
-                        <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
-                            <div class="row mt-4">
-                                <!-- input first name -->
-                                <div class="form-group col-md-6 col-xl-6">
-                                    <div class="text-info font-weight-bold">Tên</div>
-                                    <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
-                                             </div>
-                                            <form:input path="firstName" class="form-control" value="${user[0].firstName}" type="text"/>
-                                    </div>
-                                </div>
-
-                                <!-- input last name -->
-                                <div class="form-group col-md-6 col-xl-6">
-                                    <div class="text-info font-weight-bold">Họ</div>
-                                    <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
-                                             </div>
-                                            <form:input path="lastName" class="form-control" value="${user[0].lastName}" type="text"/>
-                                    </div>
-                                </div> 
-
-                            </div>
-                        </c:if>
-
-                        <c:if test="${user[0].role.toString() == 'RECRUITER'}">
-                            <!-- input company name -->
-                            <div class="form-group">
-                                <div class="text-info font-weight-bold">Tên doanh nghiệp</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-building-o" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="companyName" class="form-control" value="${user[0].companyName}" type="text"/>
-                                </div>
-                            </div>
-                        </c:if>
-
-                        <!-- input email -->
-                        <div class="form-group">
-                            <div class="text-info font-weight-bold">Email</div>
-                            <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="fa fa-envelope" style="width: 15px"></i> </span>
-                                     </div>
-                                    <form:input path="mail" class="form-control" value="${user[0].mail}" type="email"/>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-
-                            <!-- input phone -->
-                            <div class="form-group col-md-6 col-xl-8">
-                                <div class="text-info font-weight-bold">Số điện thoại</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-phone" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="phone" class="form-control" value="${user[0].phone}" type="phone"/>
-                                </div>
-                            </div>
-
-                            <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
-                                <!-- select sex -->
-                                <div class="form-group col-md-6 col-xl-4">
-                                    <div class="text-info font-weight-bold">Giới tính</div>
-                                    <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"> <i class="fa fa-venus-mars" style="width: 15px"></i> </span>
-                                             </div>
-                                            <form:select path="sex" class="form-control" aria-label=".form-select-sm example" id="sex">
-                                                <option selected>Giới tính</option>
-                                                <option value="0">Nam</option>
-                                                <option value="1">Nữ</option>
-                                                <option value="2">Giới tính khác</option>
-                                            </form:select>
-                                    </div>
-                                </div>
-                            </c:if>
-
-                        </div>
-
-                        <div class="row">
-                            <!-- input address -->
-                            <div class="form-group col-md-8 col-xl-8">
-                                <div class="text-info font-weight-bold">Địa chỉ</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-location-arrow " style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="address" class="form-control" value="${user[0].location.address}" type="text"/>
-                                </div>
-                            </div>
-
-                            <!-- select province -->
-                            <div class="form-group col-md-4 col-xl-4">
-                                <div class="text-info font-weight-bold">Tỉnh thành</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
-                                        <option selected>Tỉnh thành</option>
-                                        <c:forEach var="p" items="${provinces}">
-                                            <option value="${p.id}">${p.name}</option>
-                                        </c:forEach>
-                                    </form:select>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <!-- choose avatar -->
-                            <div class="form-group col-md-7 col-xl-7">
-                                <div class="text-info font-weight-bold">Ảnh đại diện</div>
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
-                                         </div>
-                                        <form:input path="file" class="form-control" type="file"/>
-                                </div>
-                            </div>
-
-                            <!-- avatar view -->
-                            <div class="form-group col-md-5 col-xl-5">
-                                <div>
-                                    <img src="${user[0].avatar}" class="img-thumbnail rounded" />
-                                </div>
-                            </div> 
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-info btn-lg">Cập nhật</button>
-                </div>
-            </form:form>
-        </div>
-    </div>
-</div>
