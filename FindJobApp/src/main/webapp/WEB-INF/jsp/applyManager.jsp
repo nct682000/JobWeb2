@@ -54,7 +54,13 @@
                             <div class="modal-body text-center">
                                 <div class="font-weight-bold text-dark">${a.title}</div>
                                 <div>${a.content}</div>
-                                <img src="${a.cv}" class="img-fluid rounded"/>
+                                <c:if test="${a.cv != null}">
+                                    <a href="${a.cv}"><img src="${a.cv}" alt="CV" class="img-fluid rounded"/></a>
+                                </c:if>
+                                <c:if test="${a.cv == null}">
+                                <div class="mt-3 font-italic">---Đơn ứng tuyển này không đính kèm CV---</div>
+                                </c:if>
+                                
                                 <div class="text-right mr-3">${a.createdDate}</div>
                             </div>
                             <div class="modal-footer">

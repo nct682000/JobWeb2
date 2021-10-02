@@ -15,10 +15,10 @@
 </head>
 
 <!-- hidden -->
-<c:if test="${currentUser.role == 'CANDIDATE'}">
+<c:if test="${currentUser.role == 'ROLE_CANDIDATE'}">
     <input type="hidden" id="cmtName" value="${currentUser.firstName} ${currentUser.lastName}">
 </c:if>
-<c:if test="${currentUser.role == 'RECRUITER'}">
+<c:if test="${currentUser.role == 'ROLE_RECRUITER'}">
     <input type="hidden" id="cmtName" value="${currentUser.companyName}">
 </c:if>
 <input type="hidden" id="cmtAvatar" value="${currentUser.avatar}">
@@ -113,20 +113,21 @@
                 <!-- COmment -->
                 <c:forEach var="cmt" items="${comments}">
                     <div class="mt-2 row bg-light" id="comment-${cmt.id}">
-                        <div class="col-md-2 text-center">
+                        <div class="col-2 text-center">
                             <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
                         </div>
-                        <div class="col-md ml-2">
+                        <div class="col-10">
                             <div class="card">
                                 <div class="font-weight-bold">
-                                    <c:if test="${cmt.commenter.role == 'CANDIDATE'}">
+                                    <c:if test="${cmt.commenter.role == 'ROLE_CANDIDATE'}">
                                         ${cmt.commenter.firstName} ${cmt.commenter.lastName}
                                     </c:if>
-                                    <c:if test="${cmt.commenter.role == 'RECRUITER'}">
+                                    <c:if test="${cmt.commenter.role == 'ROLE_RECRUITER'}">
                                         ${cmt.commenter.companyName}
                                     </c:if>
                                 </div>
-                                <div class="ml-3">${cmt.content}</div>
+                                
+                                <div class="pl-3">${cmt.content}</div>
                             </div>
                             <div>
                                 <span><a href="#">Thích</a> . </span>

@@ -33,7 +33,7 @@
             <c:url value="/update-user" var="updateUserAction" />
             <form:form method="post" action="${updateUserAction}" modelAttribute="userUpdate" enctype="multipart/form-data">
 
-                <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
                     <div class="row mt-4">
                         <!-- input first name -->
                         <div class="form-group col-md-6 col-xl-6">
@@ -62,7 +62,7 @@
                     </div>
                 </c:if>
 
-                <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+                <c:if test="${user[0].role.toString() == 'ROLE_RECRUITER'}">
                     <!-- input company name -->
                     <div class="form-group">
                         <div class="text-info font-weight-bold">Tên doanh nghiệp</div>
@@ -102,7 +102,7 @@
                         <form:errors path="phone" cssClass="text-danger" element="div" />
                     </div>
 
-                    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                    <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
                         <!-- select sex -->
                         <div class="form-group col-md-6 col-xl-4">
                             <div class="text-info font-weight-bold">Giới tính</div>
@@ -154,6 +154,17 @@
                     </div>
 
                 </div>
+                    
+                <!-- input introduce -->
+                <div class="form-group">
+                    <div class="text-info font-weight-bold">Giới thiệu bản thân</div>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                             </div>
+                            <form:input path="introduce" class="form-control" value="${user[0].introduce}"/>
+                    </div>
+                </div>
 
                 <div class="row">
                     <!-- choose avatar -->
@@ -167,7 +178,7 @@
                         </div>
                         <form:errors path="file" cssClass="text-danger" element="div" />
                     </div>
-
+                    
                     <!-- avatar view -->
                     <div class="form-group col-md-5 col-xl-5">
                         <div>
@@ -183,7 +194,7 @@
     </div>
     
     <!-- CANDIDATE -->
-    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+    <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
         <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
             <div class="card-content">
               <div class="card-body cleartfix">
@@ -218,6 +229,7 @@
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
                     <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
+                    <div class="ml-2">${user[0].introduce}</div>
                 </div>
 
                 <!-- col 2 -->
@@ -239,7 +251,7 @@
     </c:if>
 
     <!-- RECRUITER -->
-    <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+    <c:if test="${user[0].role.toString() == 'ROLE_RECRUITER'}">
         <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
             <div class="card-content">
               <div class="card-body cleartfix">
@@ -277,6 +289,7 @@
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
                     <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
+                    <div class="ml-2">${user[0].introduce}</div>
                 </div>
 
                 <!-- col 2 -->
@@ -298,7 +311,7 @@
 </div>
 
 <!-- ADMIN -->
-<c:if test="${user[0].role.toString() == 'ADMIN'}">
+<c:if test="${user[0].role.toString() == 'ROLE_ADMIN'}">
     <div class="m-4 text-center">
         <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
     </div>

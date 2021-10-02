@@ -53,13 +53,13 @@
                                 <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null && recDetail.salaryFrom == recDetail.salaryTo}">
-                                $Lương: <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
+                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo == null}">
-                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
+                                từ <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo != null}">
-                                <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
+                                lên đến <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo == null}">
                                 thỏa thuận
@@ -112,8 +112,9 @@
                 </c:forEach>
             </div>
             
+            <h5 class="text-dark font-weight-bold">CHI TIẾT CÔNG VIỆC</h5>
             <!-- description -->
-            <div>${recDetail.description}</div> 
+            <div class="pl-3">${recDetail.description}</div> 
             
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
