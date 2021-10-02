@@ -20,12 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author nct68
  */
 @Repository
+@Transactional
 public class CareerRepositoryImpl implements CareerRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    @Transactional
     public List<Career> getCareers() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Career");

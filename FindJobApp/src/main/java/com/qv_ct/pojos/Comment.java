@@ -5,6 +5,7 @@
  */
 package com.qv_ct.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -32,15 +33,17 @@ public class Comment implements Serializable{
     private String content;
     private String file;
     @Column(name = "created_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
     
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "commenter_id")
     private User commenter;
     
     @ManyToOne
     @JoinColumn(name = "commented_id")
+    @JsonIgnore
     private User commented;
     
     @OneToMany(mappedBy = "comment")

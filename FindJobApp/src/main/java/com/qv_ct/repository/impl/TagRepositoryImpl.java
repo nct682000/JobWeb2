@@ -8,6 +8,9 @@ package com.qv_ct.repository.impl;
 import com.qv_ct.pojos.Tag;
 import com.qv_ct.repository.TagRepository;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +51,5 @@ public class TagRepositoryImpl implements TagRepository{
         
         return false;
     }
-    
+
 }

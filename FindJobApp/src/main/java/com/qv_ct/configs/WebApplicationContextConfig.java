@@ -40,50 +40,48 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-    "com.qv_ct.controllers.admin", 
+    "com.qv_ct.controllers.admin",
     "com.qv_ct.controllers.client",
     "com.qv_ct.repository",
     "com.qv_ct.service",
-    "com.qv_ct.validator",
-})
+    "com.qv_ct.validator",})
 public class WebApplicationContextConfig implements WebMvcConfigurer {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-    
-    @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resource = new InternalResourceViewResolver();
-        resource.setViewClass(JstlView.class);
-        resource.setPrefix("/WEB-INF/jsp/");        
-        resource.setSuffix(".jsp");
-        return resource;
-    }
-    
+
+//    @Bean
+//    public InternalResourceViewResolver getInternalResourceViewResolver() {
+//        InternalResourceViewResolver resource = new InternalResourceViewResolver();
+//        resource.setViewClass(JstlView.class);
+//        resource.setPrefix("/WEB-INF/jsp/");        
+//        resource.setSuffix(".jsp");
+//        return resource;
+//    }
     @Override
-    public void addFormatters(FormatterRegistry registry){
+    public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CareerFormatter());
         registry.addFormatter(new UserFormatter());
         registry.addFormatter(new RecruitmentFormatter());
         registry.addFormatter(new LocationFormatter());
         registry.addFormatter(new ProvinceFormatter());
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
-    
+
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver
-            = new CommonsMultipartResolver();
+                = new CommonsMultipartResolver();
         resolver.setDefaultEncoding("UTF-8");
-        
+
         return resolver;
     }
 
@@ -91,44 +89,44 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public Validator getValidator() {
         return validator(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Bean(name = "validator")
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean bean
-            = new LocalValidatorFactoryBean();
+                = new LocalValidatorFactoryBean();
         bean.setValidationMessageSource(messageSource());
         return bean;
     }
-    
+
     @Bean
-    public WebAppValidator recruitmentValidator(){
-        Set<Validator> springValidators =new HashSet<>();
+    public WebAppValidator recruitmentValidator() {
+        Set<Validator> springValidators = new HashSet<>();
         springValidators.add(new RecruitmentValidator());
-        
-        WebAppValidator v =new WebAppValidator();
+
+        WebAppValidator v = new WebAppValidator();
         v.setSpringValidators(springValidators);
-        
+
         return v;
     }
-    
-     @Bean
-    public WebAppValidator userValidator(){
-        Set<Validator> springValidators =new HashSet<>();
+
+    @Bean
+    public WebAppValidator userValidator() {
+        Set<Validator> springValidators = new HashSet<>();
         springValidators.add(new UserValidator());
-        
-        WebAppValidator v =new WebAppValidator();
+
+        WebAppValidator v = new WebAppValidator();
         v.setSpringValidators(springValidators);
-        
+
         return v;
     }
 
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource resource
-            = new ResourceBundleMessageSource();
+                = new ResourceBundleMessageSource();
         resource.setBasename("messages");
         // resource.setBasenames("messages1", "messages2");
         return resource;
     }
-    
+
 }

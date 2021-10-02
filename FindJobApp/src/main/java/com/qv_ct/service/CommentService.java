@@ -15,4 +15,7 @@ import java.util.Set;
  */
 public interface CommentService {
     List<Comment> getCommentByRecruiterId(int id);
+    Comment getCommentById(int id);
+    Comment addComment(String content, int commenterId, int commentedId);
+    Comment deleteComment(int userId, int id);
 }

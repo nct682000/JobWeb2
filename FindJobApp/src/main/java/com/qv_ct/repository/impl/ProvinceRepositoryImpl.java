@@ -20,12 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @author nct68
  */
 @Repository
+@Transactional
 public class ProvinceRepositoryImpl implements ProvinceRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    @Transactional
     public List<Province> getProvinces() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Province");

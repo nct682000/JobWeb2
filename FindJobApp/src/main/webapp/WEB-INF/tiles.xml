@@ -12,38 +12,89 @@ and open the template in the editor.
 <tiles-definitions>
     
     
-    
-    
-    
-    <!--    admin     -->
     <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
         <put-attribute name="title"     value="..." />
         <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
         <put-attribute name="content"   value="BASE" />
-        <!--<put-attribute name="drawer"    value="/WEB-INF/layoutAdmin/drawer.jsp" />-->
         <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
     </definition>
     
-    <definition name="user" extends="baseAdmin">
-        <put-attribute name="title"     value="customers" />
+    <!--    admin Cadidates     -->
+    <definition name="getCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="cadidates active admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
     </definition>
-    <definition name="edit-user" extends="baseAdmin">
-        <put-attribute name="title"     value="edit user" />
+    
+    <definition name="getCadidates_Inactive_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="cadidates inactive admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="editCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit cadidates admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
     </definition>
     
-    <definition name="ad_recruitment" extends="baseAdmin">
-        <put-attribute name="title"     value="info_recruitment" />
+    <definition name="createCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create cadidates admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <!--    admin Recruiters     -->
+    <definition name="getRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruiters active admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="getRecruiters_Inactive_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruiters inactive admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="editRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit recruiters admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="createRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create recruiter admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="getEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="employees admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_employees.jsp" />
+    </definition>
+    
+    <definition name="createEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create employee admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_createEmployee.jsp" />
+    </definition>
+
+    <definition name="dashboard" extends="baseAdmin">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
+    </definition>
+    
+    <!--chưa cập nhập-->
+
+    
+    <definition name="getRecruiment_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruitments admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
     </definition>
     
-    
-    
-    <definition name="test" extends="baseAdmin">
-        <put-attribute name="title"     value="test view admin" />
-        <put-attribute name="content"   value="/WEB-INF/jspAdmin/test.jsp" />
+    <definition name="ad_recruitmentDetail" extends="baseAdmin">
+        <put-attribute name="title"     value="Recruitment detail" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitment_detail.jsp" />
     </definition>
+    
+    <definition name="getApply_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="applies admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_apply.jsp" />
+    </definition>
+    
+   
 
 
 
@@ -56,7 +107,7 @@ and open the template in the editor.
         <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
     </definition>
     
-     <definition name="admin" extends="baseLayout">
+    <definition name="admin" extends="baseLayout">
         <put-attribute name="title" value="Admin" />
         <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
     </definition>
@@ -72,7 +123,7 @@ and open the template in the editor.
     </definition>
     
     <definition name="recruitmentDetail" extends="baseLayout">
-        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="title" value="Chi tiết tuyển dụng" />
         <put-attribute name="content" value="/WEB-INF/jsp/recruitmentDetail.jsp" />
     </definition>
     
@@ -91,14 +142,14 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
     </definition>
     
-    <definition name="candidate" extends="baseLayout">
+    <definition name="userpage" extends="baseLayout">
         <put-attribute name="title" value="Trang cá nhân" />
-        <put-attribute name="content" value="/WEB-INF/jsp/candidate.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/userPage.jsp" />
     </definition>
     
-    <definition name="addRecruitment" extends="baseLayout">
-        <put-attribute name="title" value="Đăng tin tuyển dụng" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
+    <definition name="recruitmentManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentManager.jsp" />
     </definition>
     
     <definition name="addTag" extends="baseLayout">
@@ -106,9 +157,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
     </definition>
     
-    <definition name="addApply" extends="baseLayout">
-        <put-attribute name="title" value="Ứng tuyển" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addApply.jsp" />
+    <definition name="applyManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý ứng tuyển" />
+        <put-attribute name="content" value="/WEB-INF/jsp/applyManager.jsp" />
     </definition>
     
     <definition name="recruiter" extends="baseLayout">

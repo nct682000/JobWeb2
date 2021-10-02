@@ -21,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.ColumnDefault;
@@ -36,28 +37,28 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
+    @Size(max = 32, min = 8, message = "{user.username.sizeError}")
     private String username;
 //    @Size(max = 32, min = 8, message = "{user.password.sizeError}")
     private String password;
     @Transient
     private String confirmPassword;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = true)
 //    @NotEmpty(message = "{user.name.emptyError}")
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = true)
 //    @NotEmpty(message = "{user.name.emptyError}")
     private String lastName;
     @Column(name = "company_name", nullable = true)
     private String companyName;
     @Column(nullable = true)
     private Sex sex;
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String mail;
-//    @NotEmpty(message = "{user.name.emptyError}")
+    @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
-    private Role role = Role.CANDIDATE;
+    private Role role;			// đổi chổ này
     private boolean active = true;
     
     @OneToOne
@@ -89,8 +90,10 @@ public class User implements Serializable{
     private MultipartFile file;
     
     @Transient
+    @NotEmpty(message = "{user.name.emptyError}")
     private String address;
     @Transient
+    @NotNull(message = "{user.name.emptyError}")
     private Province province;
 
     public User() {
@@ -102,7 +105,16 @@ public class User implements Serializable{
         this.role = role;
     }
     
-    
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setActive(boolean ac) {
+        this.active = ac;
+    }
 
     /**
      * @return the id

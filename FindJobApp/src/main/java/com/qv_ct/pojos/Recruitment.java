@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +27,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.hibernate.engine.spi.IdentifierValue;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -70,7 +72,7 @@ public class Recruitment implements Serializable{
     @OneToMany(mappedBy = "recruitment")
     private Set<Apply> applies;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recruitment_tag",
             joinColumns = {
@@ -82,7 +84,7 @@ public class Recruitment implements Serializable{
     )
     private Set<Tag> tags;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recruitment_benefit",
             joinColumns = {

@@ -13,12 +13,29 @@ import java.util.List;
  * @author nct68
  */
 public interface RecruitmentRepository {
+
     List<Recruitment> getRecruitments(int page);
-    List<Recruitment> searchRecruitment(String kw);
+
+    List<Recruitment> searchRecruitment(String kw, int careerId, int provinceId, int form, int salary);
+
+    List<Object[]> getRecruitmentByApply(int num);
+
     Recruitment getRecruitmentById(int id);
+
+    List<Recruitment> getRecruitmentByUserId(int userId);
+
     boolean addOrUpdate(Recruitment r);
+
     long countRecruitment();
-    
+
+    Recruitment switchActiveRecruitment(Recruitment r);
     //    -------------     admin       --------------
-    List<Recruitment> getRecruitmentsAll();
+
+    List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active);
+
+    long countRecruitment_Admin(boolean active);
+
+    boolean enableRecruitment(int recId, boolean active);
+
+    boolean deleteRecruitment(int recId);
 }

@@ -31,7 +31,8 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -56,52 +57,93 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean addOrUpdate(User user, Role role) {
-            try {
-                if(!user.getFile().isEmpty()){
-                    Map map = this.cloudinary.uploader().upload(user.getFile().getBytes(),
-                            ObjectUtils.asMap("resource_type", "auto"));
+        try {
+            if (!user.getFile().isEmpty()) {
+                Map map = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
 
-                    user.setAvatar((String) map.get("secure_url"));
-                }
-                String pass = user.getPassword();
-                user.setPassword(this.passwordEncoder.encode(pass));
-                user.setRole(role);
-                return this.userRepository.addOrUpdate(user, role);
-                
-            } catch (IOException ex) {
-                System.err.println("-----Add Error-----" + ex.getMessage());
-                ex.printStackTrace();
+                user.setAvatar((String) map.get("secure_url"));
             }
-            
-       return false;
+            String pass = user.getPassword();
+            user.setPassword(this.passwordEncoder.encode(pass));
+            return this.userRepository.addOrUpdate(user, role);
+
+        } catch (IOException ex) {
+            System.err.println("-----Add Error-----" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override
     public User getUserById(int id) {
         return this.userRepository.getUserbyId(id);
     }
-    
-    
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.getUsers(username);
-        if(users.isEmpty())
+        if (users.isEmpty()) {
             throw new UsernameNotFoundException("Tài khoản không tồn tại");
-        
+        }
+
         User user = users.get(0);
-        
-        Set<GrantedAuthority> auth =new HashSet<>();
+
+        Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getRole().toString()));
-        
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
-                
+
     }
-    
-//    admin
+
     @Override
-    public List<User> getUserAll() {
-        return this.userRepository.getUserAll();
+    public List<Object[]> getTopRecruiter(int num) {
+        return this.userRepository.getTopRecruiter(num);
     }
-    
+
+//    ----------------  admin   --------------------
+//    danh sách người dùng theo role
+    @Override
+    public List<User> getUsers_Admin(int page, Role role, boolean active, String email) {
+        return this.userRepository.getUsers_Admin(page, role, active, email);
+    }
+
+    @Override
+    public long countUsers_Admin(Role role, boolean active) {
+        return this.userRepository.countUsers_Admin(role, active);
+
+    }
+
+    @Override
+    public boolean enableUser(int userId, boolean active) {
+        return this.userRepository.enableUser(userId, active);
+
+    }
+
+    @Override
+    public boolean deleteUser(int userId) {
+        return this.userRepository.deleteUser(userId);
+    }
+
+    @Override
+    public boolean addEmployee(User user, Role role) {
+        try {
+            if (!user.getFile().isEmpty()) {
+                Map map = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+
+                user.setAvatar((String) map.get("secure_url"));
+            }
+            String pass = user.getPassword();
+            user.setPassword(this.passwordEncoder.encode(pass));
+            return this.userRepository.addEmployee(user, role);
+
+        } catch (IOException ex) {
+            System.err.println("-----Add Error-----" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
 }
