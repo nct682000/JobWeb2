@@ -40,6 +40,7 @@ public class Apply implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
     private Boolean active = true;
+    
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private User candidate;

@@ -318,4 +318,3 @@
     </div>
 </div>
 <script src="<c:url value="/js/assets/user.js" />"></script>
-

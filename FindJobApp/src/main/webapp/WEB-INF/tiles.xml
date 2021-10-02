@@ -12,10 +12,6 @@ and open the template in the editor.
 <tiles-definitions>
     
     
-    
-    
-    
-    <!--    admin     -->
     <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
         <put-attribute name="title"     value="..." />
         <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
@@ -99,8 +95,9 @@ and open the template in the editor.
     </definition>
     
    
-    
-    
+
+
+
 
     <!--    client  -->
     <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
@@ -110,7 +107,11 @@ and open the template in the editor.
         <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
     </definition>
     
-   
+    <definition name="admin" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
+    </definition>
+    
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang Chủ" />
         <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
@@ -122,7 +123,7 @@ and open the template in the editor.
     </definition>
     
     <definition name="recruitmentDetail" extends="baseLayout">
-        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="title" value="Chi tiết tuyển dụng" />
         <put-attribute name="content" value="/WEB-INF/jsp/recruitmentDetail.jsp" />
     </definition>
     
@@ -141,14 +142,14 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
     </definition>
     
-    <definition name="candidate" extends="baseLayout">
+    <definition name="userpage" extends="baseLayout">
         <put-attribute name="title" value="Trang cá nhân" />
-        <put-attribute name="content" value="/WEB-INF/jsp/candidate.jsp" />
+        <put-attribute name="content" value="/WEB-INF/jsp/userPage.jsp" />
     </definition>
     
-    <definition name="addRecruitment" extends="baseLayout">
-        <put-attribute name="title" value="Đăng tin tuyển dụng" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addRecruitment.jsp" />
+    <definition name="recruitmentManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentManager.jsp" />
     </definition>
     
     <definition name="addTag" extends="baseLayout">
@@ -156,9 +157,9 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
     </definition>
     
-    <definition name="addApply" extends="baseLayout">
-        <put-attribute name="title" value="Ứng tuyển" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addApply.jsp" />
+    <definition name="applyManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý ứng tuyển" />
+        <put-attribute name="content" value="/WEB-INF/jsp/applyManager.jsp" />
     </definition>
     
     <definition name="recruiter" extends="baseLayout">

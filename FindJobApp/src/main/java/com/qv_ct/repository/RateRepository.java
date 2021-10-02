@@ -5,17 +5,16 @@
  */
 package com.qv_ct.repository;
 
-import com.qv_ct.pojos.Comment;
+import com.qv_ct.pojos.Rate;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author nct68
  */
-public interface CommentRepository {
-    List<Comment> getCommentByRecruiterId(int id);
-    Comment getCommentById(int id);
-    Comment addComment(Comment c);
-    Comment deleteComment(Comment c);
+public interface RateRepository {
+    Rate addOrUpdate(Rate r);
+    long rateCountRecruiter(int recId);
+    double ratePointRecruiter(int recId);
+    List<Rate> getRate(int canId, int recId);
 }

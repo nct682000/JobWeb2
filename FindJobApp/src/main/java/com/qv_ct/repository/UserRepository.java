@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface UserRepository {
 
+    List<User> getUserAll();
+
     List<User> getCadidates();
 
     List<User> getRecruiters();
@@ -23,7 +25,9 @@ public interface UserRepository {
 
     boolean addOrUpdate(User user, Role role);
 
-    User getUserById(int id);
+    User getUserbyId(int id);
+
+    List<Object[]> getTopRecruiter(int num);
 
 //    ----------------  admin   --------------------
 //    danh sách người dùng theo role

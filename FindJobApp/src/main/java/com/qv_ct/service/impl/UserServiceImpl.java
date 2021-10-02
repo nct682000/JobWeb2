@@ -66,7 +66,6 @@ public class UserServiceImpl implements UserService {
             }
             String pass = user.getPassword();
             user.setPassword(this.passwordEncoder.encode(pass));
-            user.setRole(role);
             return this.userRepository.addOrUpdate(user, role);
 
         } catch (IOException ex) {
@@ -79,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int id) {
-        return this.userRepository.getUserById(id);
+        return this.userRepository.getUserbyId(id);
     }
 
     @Override
@@ -96,6 +95,11 @@ public class UserServiceImpl implements UserService {
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
 
+    }
+
+    @Override
+    public List<Object[]> getTopRecruiter(int num) {
+        return this.userRepository.getTopRecruiter(num);
     }
 
 //    ----------------  admin   --------------------
@@ -142,5 +146,4 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
-
 }

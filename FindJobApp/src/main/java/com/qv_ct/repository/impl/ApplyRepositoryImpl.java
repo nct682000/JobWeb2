@@ -7,6 +7,8 @@ package com.qv_ct.repository.impl;
 
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.repository.ApplyRepository;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -43,11 +45,11 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Session session = sessionFactory.getObject().getCurrentSession();
 
         try {
+            a.setCreatedDate(Date.from(Instant.now()));
             session.save(a);
-
             return true;
         } catch (Exception ex) {
-            System.err.println("-- Add Tag Error --" + ex.getMessage());
+            System.err.println("-------Add Apply Error-------" + ex.getMessage());
             ex.printStackTrace();
         }
 
@@ -65,6 +67,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Predicate p = builder.equal(root.get("candidate"), id);
 
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -143,6 +146,5 @@ public class ApplyRepositoryImpl implements ApplyRepository {
 
         return Long.parseLong(q.getSingleResult().toString());
     }
-
 
 }

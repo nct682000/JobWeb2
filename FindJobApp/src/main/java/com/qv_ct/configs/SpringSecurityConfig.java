@@ -7,6 +7,7 @@ package com.qv_ct.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.qv_ct.pojos.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -77,9 +78,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/customers/cadidates/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
                 .antMatchers("/admin/customers/recruiters/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
                 .antMatchers("/admin/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
-                .antMatchers("/admin/applies/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')")
-                .antMatchers("/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_RECRUITER.name() + "')")
-                .antMatchers("/candidate/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_CANDIDATE.name() + "')");
+                .antMatchers("/admin/applies/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "','" + Role.ROLE_EMPLOYEE.name() + "')");
+//                .antMatchers("/recruitment/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_RECRUITER.name() + "')")
+//                .antMatchers("/candidate/**").access("hasAnyRole('" + Role.ROLE_ADMIN.name() + "', '" + Role.ROLE_CANDIDATE.name() + "')");
 
         http.csrf().disable();
 

@@ -45,15 +45,6 @@ public class Ad_RecruitmentController {
         return "getRecruiment_Admin";
     }
 
-//    @RequestMapping("/admin/recruitment/inactive")
-//    public String getRecruiment_Inactive_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
-//        int page = Integer.parseInt(params.getOrDefault("page", "1"));
-//        model.addAttribute("recruitments", this.recruitmentService.getRecruitmentsAll(page));
-//        
-//        model.addAttribute("counter", this.recruitmentService.countRecruitment());
-//
-//        return "ad_recruitment";
-//    }
     @RequestMapping("/admin/recruitment/{id}")
     public String getRecruitment(Model model, @PathVariable int id) {
 

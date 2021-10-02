@@ -37,6 +37,8 @@
                     <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
                  </div>
                 <form:input path="username" id="username" class="form-control" placeholder="Nhập tài khoản" type="text"/>
+            </div>
+            <div class="input-group ">
                 <form:errors path="username" cssClass="text-danger" element="div" />
             </div>
         </div> 
@@ -48,8 +50,10 @@
                         <span class="input-group-text"> <i class="fa fa-lock" style="width: 15px"></i> </span>
                      </div>
                     <form:input path="password" id="password" class="form-control" placeholder="Nhập mật khẩu" type="password"/>
-                    <form:errors path="password" cssClass="text-danger" element="div" />
             </div> 
+            <div class="input-group ">
+                <form:errors path="password" cssClass="text-danger" element="div" />
+            </div>
         </div> 
 
         <!-- input confirm password -->
@@ -70,7 +74,10 @@
                             <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
                          </div>
                         <form:input path="companyName" id="companyName" class="form-control" placeholder="Nhập tên công ty" type="text"/>
-                        <form:errors path="companyName" cssClass="text-danger" element="div" />
+                        
+                </div>
+                <div class="input-group ">
+                    <form:errors path="companyName" cssClass="text-danger" element="div" />
                 </div>
             </div>
 
@@ -81,7 +88,10 @@
                             <span class="input-group-text"> <i class="fa fa-phone" style="width: 15px"></i> </span>
                          </div>
                         <form:input path="phone" id="phone" class="form-control" placeholder="Số điện thoại" type="phone"/>
-                        <form:errors path="phone" cssClass="text-danger" element="div" />
+                        
+                </div>
+                <div class="input-group ">
+                    <form:errors path="phone" cssClass="text-danger" element="div" />
                 </div>
             </div>
 
@@ -94,7 +104,10 @@
                         <span class="input-group-text"> <i class="fa fa-envelope" style="width: 15px"></i> </span>
                      </div>
                     <form:input path="mail" id="mail" class="form-control" placeholder="Địa chỉ email" type="email"/>
-                    <form:errors path="mail" cssClass="text-danger" element="div" />
+                    
+            </div>
+            <div class="input-group ">
+                <form:errors path="mail" cssClass="text-danger" element="div" />
             </div>
         </div>
 
@@ -116,7 +129,7 @@
                             <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
                          </div>
                         <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
-                            <option selected>Tỉnh thành</option>
+                            <option selected value="${null}">Tỉnh thành</option>
                             <c:forEach var="p" items="${provinces}">
                                 <option value="${p.id}">${p.name}</option>
                             </c:forEach>

@@ -26,6 +26,8 @@ public interface UserService extends UserDetailsService {
 
     User getUserById(int id);
 
+    List<Object[]> getTopRecruiter(int num);
+
 //    ----------------  admin   --------------------
 //    danh sách người dùng theo role
     List<User> getUsers_Admin(int page, Role role, boolean active, String email);

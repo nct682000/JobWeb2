@@ -11,6 +11,7 @@ import com.qv_ct.pojos.Recruitment;
 import com.qv_ct.repository.RecruitmentRepository;
 import com.qv_ct.service.RecruitmentService;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,6 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Autowired
     private RecruitmentRepository recruitmentRepository;
-//    @Autowired
-//    private Cloudinary cloudinary;
 
     @Override
     public List<Recruitment> getRecruitments(int page) {
@@ -39,8 +38,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public List<Recruitment> searchRecruitments(String kw) {
-        return this.recruitmentRepository.searchRecruitment(kw);
+    public List<Recruitment> searchRecruitments(String kw, int careerId, int provinceId,
+            int form, int salary) {
+        return this.recruitmentRepository.searchRecruitment(kw, careerId, provinceId, form, salary);
     }
 
     @Override
@@ -65,6 +65,22 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         return this.recruitmentRepository.countRecruitment();
     }
 
+    @Override
+    public List<Object[]> getRecruitmentByApply(int num) {
+        return this.recruitmentRepository.getRecruitmentByApply(num);
+    }
+
+    @Override
+    public List<Recruitment> getRecruitmentByUserId(int userId) {
+        return this.recruitmentRepository.getRecruitmentByUserId(userId);
+    }
+
+    @Override
+    public Recruitment switchActiveRecruitment(int recruitmentId) {
+        Recruitment r = this.recruitmentRepository.getRecruitmentById(recruitmentId);
+        return this.recruitmentRepository.switchActiveRecruitment(r);
+    }
+
     //    -----------   admin   ------------------
     @Override
     public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active) {
@@ -85,5 +101,4 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     public boolean deleteRecruitment(int recId) {
         return this.recruitmentRepository.deleteRecruitment(recId);
     }
-
 }

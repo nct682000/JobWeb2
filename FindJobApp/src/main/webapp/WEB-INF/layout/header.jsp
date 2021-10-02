@@ -21,7 +21,7 @@
 
                 <!-- Find job -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Tìm việc <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/FindJobApp/recruitments?kw=&provinceId=0&careerId=0&salary=0&form=-1">Tìm việc <span class="sr-only">(current)</span></a>
                 </li>
 
                 <!-- career list -->
@@ -31,7 +31,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <c:forEach var="c" items="${careers}">
-                            <a class="dropdown-item" href="#">${c.name}</a>
+                            <a class="dropdown-item" href="/FindJobApp/recruitments/?kw=&provinceId=0&careerId=${c.id}&salary=0&form=-1">${c.name}</a>
                         </c:forEach> 
                     </div>
                 </li>
@@ -43,7 +43,7 @@
                 <a class="nav-link" href="/FindJobApp/register/candidate/">Đăng ký<span class="sr-only">(current)</span></a>
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <a class="nav-link" href="/FindJobApp/candidate/${pageContext.request.userPrincipal.name}">${pageContext.request.userPrincipal.name}<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/FindJobApp/user/${pageContext.request.userPrincipal.name}">${pageContext.request.userPrincipal.name}<span class="sr-only">(current)</span></a>
                 <a class="nav-link" href="/FindJobApp/logout">Đăng xuất<span class="sr-only">(current)</span></a>
             </c:if>
         </div>
