@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package com.qv_ct.controllers.admin;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import com.qv_ct.service.RecruitmentService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -16,13 +20,37 @@ import org.springframework.ui.Model;
  */
 @Controller
 public class Ad_RecruitmentController {
-    @Autowired 
-    private RecruitmentService recruitmentService;
-    
-    @RequestMapping("/admin/recruitment")
-    public String index(Model model) {
-        model.addAttribute("recruitments", this.recruitmentService.getRecruitmentsAll());
 
-        return "ad_recruitment";
+    @Autowired
+    private RecruitmentService recruitmentService;
+
+    @RequestMapping("/admin/recruitment")
+    public String getRecruiment_Admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
+        long salaryFrom = Long.parseLong(params.getOrDefault("salaryFrom", "1"));
+        long salaryTo = Long.parseLong(params.getOrDefault("salaryTo", "900000000"));
+
+        if (active) {
+            model.addAttribute("recruitments", this.recruitmentService.getRecruitments_Admin(page, salaryFrom, salaryTo, active));
+            model.addAttribute("counter", this.recruitmentService.countRecruitment_Admin(active));
+//            model.addAttribute("type", "cadidates");
+            model.addAttribute("status", "active");
+        } else {
+            model.addAttribute("recruitments", this.recruitmentService.getRecruitments_Admin(page, salaryFrom, salaryTo, active));
+            model.addAttribute("counter", this.recruitmentService.countRecruitment_Admin(active));
+            model.addAttribute("status", "inactive");
+        }
+
+        return "getRecruiment_Admin";
+    }
+
+    @RequestMapping("/admin/recruitment/{id}")
+    public String getRecruitment(Model model, @PathVariable int id) {
+
+        model.addAttribute("recDetail",
+                this.recruitmentService.getRecruitmentById(id));
+
+        return "ad_recruitmentDetail";
     }
 }

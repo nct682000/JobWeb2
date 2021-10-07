@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 
+window.onload = function () {
+    let dates = document.querySelectorAll(".my-date")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        moment.locale('vi')
+        d.innerText = moment(d.innerText).fromNow()
+    }
+}
+
 function addComment(commenterId, commentedId){
     fetch("/FindJobApp/api/add-comment", {
         method: 'post',

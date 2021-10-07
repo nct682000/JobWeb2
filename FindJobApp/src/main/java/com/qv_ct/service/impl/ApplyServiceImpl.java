@@ -21,10 +21,11 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class ApplyServiceImpl implements ApplyService{
+public class ApplyServiceImpl implements ApplyService {
+
     @Autowired
     private ApplyRepository applyRepository;
-    
+
     @Autowired
     private Cloudinary cloudinary;
 
@@ -36,7 +37,7 @@ public class ApplyServiceImpl implements ApplyService{
     @Override
     public boolean addOrUpdate(Apply a) {
         try {
-            if(!a.getFile().isEmpty()){
+            if (!a.getFile().isEmpty()) {
                 Map map = this.cloudinary.uploader().upload(a.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
 
@@ -48,7 +49,7 @@ public class ApplyServiceImpl implements ApplyService{
             System.err.println("-----Add Error-----" + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
         return false;
     }
 
@@ -57,4 +58,35 @@ public class ApplyServiceImpl implements ApplyService{
         return this.applyRepository.getAppliesByUserId(id);
     }
     
+    @Override
+    public List<Apply> getAppliesByRecruiter(int recId) {
+        return this.applyRepository.getAppliesByRecruiter(recId);
+    }
+
+    //    -------------     admin       --------------
+    @Override
+    public List<Apply> getApply_Admin(int page, boolean active, String title) {
+        return this.applyRepository.getApply_Admin(page, active, title);
+    }
+
+    @Override
+    public long countApply_Admin(boolean active) {
+        return this.applyRepository.countApply_Admin(active);
+    }
+
+    @Override
+    public boolean enableApply(int applyId, boolean active) {
+        return this.applyRepository.enableApply(applyId, active);
+    }
+
+    @Override
+    public boolean deleteApply(int applyId) {
+        return this.applyRepository.deleteApply(applyId);
+    }
+
+    @Override
+    public long countApply_Admin_For_Chart(boolean active, int month, int year) {
+        return this.applyRepository.countApply_Admin_For_Chart(active, month, year);
+    }
+
 }

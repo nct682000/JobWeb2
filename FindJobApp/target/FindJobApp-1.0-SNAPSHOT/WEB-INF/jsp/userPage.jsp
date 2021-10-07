@@ -294,14 +294,56 @@
 
                 <!-- col 2 -->
                 <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                    <h5 class="text-dark font-weight-bold">CÁC TIN ĐANG TUYỂN DỤNG</h5>
-                    <c:forEach var="rec" items="${recPost}">
+                    <h5 class="text-dark font-weight-bold">CÁC THƯ ỨNG TUYỂN MỚI</h5>
+                    <c:forEach var="ra" items="${recApplies}">
                         <div class="card bg-light mb-2">
-                            <div class="text-info font-weight-bold">${rec.title}</div>
+                            <div class="text-info font-weight-bold">${ra.title}</div>
+                            <div class="text-secondary my-date">${ra.createdDate}</div>
                             <div>
-                                <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
+                                <a class="text-white btn btn-secondary btn-sm " href="" data-toggle="modal" data-target="#applyInfoModal-${ra.id}">Xem chi tiết</a>
                             </div>
 
+                        </div>
+                            
+                        <!-- Apply Info Modal -->
+                        <div class="modal fade" id="applyInfoModal-${ra.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Thông tin đơn ứng tuyển</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body row">
+                                        
+                                        <!-- col 1 -->
+                                        <div class="col 5">
+                                            <div class="text-dark font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName}</div>
+                                            <div class="text-dark">Giới tính: ${ra.candidate.sex.toString()}</div>
+                                            <div class="text-dark">Địa chỉ: ${ra.candidate.location.address}, ${ra.candidate.location.province.name}</div>
+                                            <div class="text-dark">Email: ${ra.candidate.mail}</div>
+                                            <div class="text-dark">Số điện thoại: ${ra.candidate.phone}</div>
+                                        </div>
+                                        
+                                        <!-- col 2 -->
+                                        <div class="col-7">
+                                            <div class="font-weight-bold text-dark">${ra.title}</div>
+                                            <div>${ra.content}</div>
+                                            <c:if test="${ra.cv == null}">
+                                                <div>---Thư ứng tuyển này không có CV đính kèm---</div>
+                                            </c:if>
+                                            <c:if test="${ra.cv != null}">
+                                                <a href="${ra.cv}"><img src="${ra.cv}" class="img-fluid rounded"/></a>
+                                            </c:if>
+                                            <div class="text-secondary font-weight-bold">${ra.createdDate}</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>

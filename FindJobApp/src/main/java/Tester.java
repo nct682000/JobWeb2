@@ -14,11 +14,11 @@ import com.qv_ct.pojos.Role;
  */
 public class Tester{
     public static void main(String[] args) {
-        Form f = Form.INTERN;
-        System.out.println(f);
-        
-        Role r = Role.ADMIN;
-        if (r.ordinal() == 0)
-            System.out.println(1);
+//        Form f = Form.INTERN;
+//        System.out.println(f);
+//        
+//        Role r = Role.ADMIN;
+//        if (r.ordinal() == 0)
+//            System.out.println(1);
     }
 }

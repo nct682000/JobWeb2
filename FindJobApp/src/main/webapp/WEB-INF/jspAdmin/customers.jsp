@@ -4,132 +4,227 @@
     Author     : DELL
 --%>
 
-<link
-    rel="stylesheet"  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-    crossOrigin="anonymous"/>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-
-<div class="content" id="main">
+<div >
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary row">
-                        <h4 class="card-title col">Thông tin khách hàng</h4>
-
                         <!--    lọc người ứng tuyển || người tuyển chọn     -->
-                        <div class="col">
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">RECRUITER</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">CANDIDATE</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!--    tìm kiếm    -->
-                        <div class="simple-search col">
-                            <input type="email" placeholder="name . . ."/>
-                            <button class="fa fa-search"></button>
-                        </div>
-
-                        <!--    lọc theo công ty    -->
-                        <div class="col">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Công ty</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-
-                        <!--    phân trang      -->
-                        <div class="col">
+                        <div class="col-4">
                             <div class="row">
-                                <div class="col-9">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-
-                                <!--    btn add     -->
-                                <div class="col-3">
-                                    <a href="/FindJobApp/admin/customers/add-user" class="bi bi-plus btn btn-lg btn-outline-success"></a>
-                                </div>
+                                <c:if test="${typeUser == 'cadidates'}">                            
+                                    <c:if test="${status == 'active'}">
+                                        <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                        <a href="/FindJobApp/admin/customers/recruiters" 
+                                           class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <div class="col btn btn-lg btn-outline-success active">Người ứng tuyển</div>
+                                        <a href="/FindJobApp/admin/customers/recruiters/inactive" 
+                                           class="col btn btn-lg btn-outline-success">Nhà tuyển dụng</a>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${typeUser == 'recruiters'}">
+                                    <c:if test="${status == 'active'}">
+                                        <a href="/FindJobApp/admin/customers/cadidates" 
+                                           class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                        <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <a href="/FindJobApp/admin/customers/cadidates/inactive" 
+                                           class="col btn btn-lg btn-outline-success ">Người ứng tuyển</a>
+                                        <div class="col btn btn-lg btn-outline-success active">Nhà tuyển dụng</div>
+                                    </c:if>
+                                </c:if>
                             </div>
                         </div>
-                    </div>
+
+                        <!--    tìm kiếm theo mail   -->
+                        <div class="col-4 ">
+                            <div class="row justify-content-end">
+                                <c:if test="${typeUser == 'cadidates'}">
+                                    <c:if test="${status == 'active'}">
+                                        <form action="/FindJobApp/admin/customers/cadidates"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <form action="/FindJobApp/admin/customers/cadidates/inactive"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${typeUser == 'recruiters'}">
+                                    <c:if test="${status == 'active'}">
+                                        <form action="/FindJobApp/admin/customers/recruiters"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${status == 'inactive'}">
+                                        <form action="/FindJobApp/admin/customers/recruiters/inactive"  class="col-10">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" placeholder="email . . ." name="email" class="form-control"/>
+                                                <button class="btn btn-outline-success fa fa-search"></button>                                                         
+                                            </div>                                    
+                                        </form>
+                                    </c:if>
+                                </c:if>                                
+                            </div>
+                        </div>
 
 
+                        <!--    phân trang      -->
+                        <div class="col-3 ">
+                            <!--${counter}-->
+                            <!--người ứng tuyển-->
+                            <c:if test="${typeUser == 'cadidates'}">
+                                <!--    đã kích hoạt tài khoản   -->
+                                <c:if test="${status == 'active'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination ">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item" >
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
 
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="table-dark">
-                            <th>
-                                Mã 
-                            </th>
-                            <th>
-                                Tên đăng nhập
-                            </th>
-                            <th>
-                                Tên khách hàng
-                            </th>
-                            <th>
-                                Tên công ty
-                            </th>
-                            <th>
-                                Giới tính
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Số điện thoại
-                            </th>
-                            <th>
-                                Chức vụ
-                            </th>
-                            <th>
-                                Hoạt động
-                            </th>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${users}" var="u">
-                                    <c:choose>
-                                        <c:when test="${u.id % 2 == 0}">
+                                        <!--    btn add     -->
+                                        <div class="col-3">
+                                            <a href="/FindJobApp/admin/customers/cadidates/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                                <!--    chưa kích hoạt tài khoản   -->
+                                <c:if test="${status == 'inactive'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates/inactive" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:if>
+
+                            <!--nhà tuyển dụng-->
+                            <c:if test="${typeUser == 'recruiters'}">
+                                <!--    đã kích hoạt tài khoản  -->
+                                <c:if test="${status == 'active'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/recruiters" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
+
+                                        <!--    btn add     -->
+                                        <div class="col-3">
+                                            <a href="/FindJobApp/admin/customers/recruiters/new" class="bi bi-plus btn btn-lg btn-outline-success"></a>
+                                        </div>
+                                    </div>
+                                </c:if>
+
+                                <!--    chưa kích hoạt tài khoản   -->
+                                <c:if test="${status == 'inactive'}">
+                                    <div class="row justify-content-end">
+                                        <div class="col-6">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                                                        <li class="page-item">
+                                                            <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/customers/cadidates/inactive" />?page=${i}">${i}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:if>
+
+                        </div>
+
+
+                        <!--    Bảng dữ liệu      -->
+                        <div class="table-responsive">
+                            <!--    Người ứng tuyển      -->
+                            <c:if test="${typeUser == 'cadidates'}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên khách hàng
+                                    </th>
+                                    <th>
+                                        Giới tính
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Hoạt động
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${users}" var="u">                                        
                                             <tr class="table-secondary text-dark">
                                                 <td class="text-primary">
-                                                    ${u.id} 
-                                                </td>
-                                                <td>
-                                                    ${u.username}
+                                                    <a href="/FindJobApp/admin/customers/cadidates/${u.id}/edit">${u.username}</a>
                                                 </td>                                            
                                                 <td>
                                                     ${u.firstName}  ${u.lastName}  
                                                 </td>
                                                 <td>
-                                                    ${u.companyName} 
-                                                </td>
-                                                <td>
-                                                    ${u.sex} 
+                                                    <c:if test="${u.sex == 'MALE'}">
+                                                        Nam
+                                                    </c:if>
+                                                    <c:if test="${u.sex == 'FEMALE'}">
+                                                        Nữ
+                                                    </c:if>
+                                                    <c:if test="${u.sex == 'NEUTRAL'}">
+                                                        Khác
+                                                    </c:if>
                                                 </td>
                                                 <td>
                                                     ${u.mail} 
@@ -138,36 +233,54 @@
                                                     ${u.phone} 
                                                 </td>
                                                 <td>
-                                                    ${u.role} 
+                                                    ${u.location.address},  ${u.location.province.name}
                                                 </td>
                                                 <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <div class="d-flex">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                                        </div>
-                                                        <button class="bi bi-pencil-fill btn"></button>
-                                                        <button class="bi bi-trash-fill btn"></button>
-                                                    </div>
+                                                    <c:if test="${status == 'active'}">
+                                                        <a href="javascript:;" class="btn btn-secondary" onclick="enableUser(${u.id}, 'cadidates', 'active')">Disable</a>
+                                                    </c:if>
+                                                    <c:if test="${status == 'inactive'}">
+                                                        <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'cadidates', 'inactive')">Enable</a>
+                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
+                                                    </c:if>
                                                 </td>
-                                            </tr>
-                                        </c:when>
-                                        <c:when test="${u.id % 2 != 0}">
-                                            <tr class="">
+                                            </tr>                                                                                                                   
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+
+                            </c:if>
+                            <!--    Nhà tuyển dụng      -->
+                            <c:if test="${typeUser == 'recruiters'}">
+                                <table class="table  table-striped table-hover">
+                                    <thead class="table-dark">
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên công ty
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Hoạt động
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${users}" var="u">                                        
+                                            <tr class="table-secondary text-dark">
                                                 <td class="text-primary">
-                                                    ${u.id} 
-                                                </td>
-                                                <td>
-                                                    ${u.username}
-                                                </td>                                            
-                                                <td>
-                                                    ${u.firstName}  ${u.lastName}  
-                                                </td>
+                                                    <a href="/FindJobApp/admin/customers/recruiters/${u.id}/edit" >${u.username}</a>
+                                                </td> 
                                                 <td>
                                                     ${u.companyName} 
-                                                </td>
-                                                <td>
-                                                    ${u.sex} 
                                                 </td>
                                                 <td>
                                                     ${u.mail} 
@@ -176,24 +289,32 @@
                                                     ${u.phone} 
                                                 </td>
                                                 <td>
-                                                    ${u.role} 
+                                                    ${u.location.address},  ${u.location.province.name}
                                                 </td>
                                                 <td>
-                                                    <!--<button class="bi bi-trash-fill" onclick="deleteTinTuc(${u.id})"></button>-->
-                                                    <button class="btn btn-success">Enable</button>
-                                                    <button class="bi bi-pencil-fill btn"></button>
-                                                    <button class="bi bi-trash-fill btn"></button>
+                                                    <c:if test="${status == 'active'}">
+                                                        <a href="javascript:;" class="btn btn-secondary" onclick="enableUser(${u.id}, 'recruiters', 'active')">Disable</a>
+                                                    </c:if>
+                                                    <c:if test="${status == 'inactive'}">
+                                                        <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'recruiters', 'inactive')">Enable</a>
+                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
+                                                    </c:if>
                                                 </td>
-                                            </tr>
-                                        </c:when>
-                                    </c:choose>
-                                </c:forEach>
-                            </tbody>
-                        </table>
+                                            </tr>                                                                                                                   
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
+
+
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script src="<c:url value="/js/assets/user.js" />"></script>

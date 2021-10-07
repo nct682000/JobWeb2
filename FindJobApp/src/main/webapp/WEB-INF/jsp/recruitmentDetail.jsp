@@ -53,13 +53,13 @@
                                 <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null && recDetail.salaryFrom == recDetail.salaryTo}">
-                                $Lương: <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
+                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo == null}">
-                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
+                                từ <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo != null}">
-                                <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
+                                lên đến <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo == null}">
                                 thỏa thuận
@@ -90,9 +90,16 @@
                     
               </div>
                     <div class="font-weight-bold text-secondary col-2">
-                        <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
-                            Ứng tuyển công việc này
-                        </button>                 
+                        <c:if test="${currentUser != null && currentUser.role == ROLE_CANDIDATE}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
+                                Ứng tuyển công việc này
+                            </button>
+                        </c:if>
+                        <c:if test="${currentUser == null}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#requireLoginModal">
+                                Ứng tuyển công việc này
+                            </button>
+                        </c:if>            
                     </div>
             </div>
           </div>
@@ -112,8 +119,9 @@
                 </c:forEach>
             </div>
             
+            <h5 class="text-dark font-weight-bold">CHI TIẾT CÔNG VIỆC</h5>
             <!-- description -->
-            <div>${recDetail.description}</div> 
+            <div class="pl-3">${recDetail.description}</div> 
             
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
@@ -239,4 +247,23 @@
             </form:form>
         </div>
     </div>
+</div>
+            
+<!-- Require Login modal -->
+<div class="modal fade" id="requireLoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">Bạn chưa đăng nhập!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
+        <a href="/FindJobApp/login" class="btn btn-primary btn-lg">Đi đến trang đăng nhập</a>
+      </div>
+    </div>
+  </div>
 </div>

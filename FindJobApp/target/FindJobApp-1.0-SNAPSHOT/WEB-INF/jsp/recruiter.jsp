@@ -258,16 +258,3 @@
     </div>
 </div>
 
-
-<!-- Script -->
-
-<script>
-    window.onload = function () {
-        let dates = document.querySelectorAll(".my-date")
-        for (let i = 0; i < dates.length; i++) {
-            let d = dates[i]
-            moment.locale('vi')
-            d.innerText = moment(d.innerText).fromNow()
-        }
-    }
-</script>

@@ -67,7 +67,7 @@ public class UserController {
                             @Valid User user,
                             BindingResult result){
        String errMsg = "";
-       Role role = Role.CANDIDATE;
+       Role role = Role.ROLE_CANDIDATE;
        if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){
@@ -94,7 +94,7 @@ public class UserController {
                             @Valid User user,
                             BindingResult result){
        String errMsg = "";
-       Role role = Role.RECRUITER;
+       Role role = Role.ROLE_RECRUITER;
        if(!result.hasErrors()){
             if(user.getPassword().trim().equals(user.getConfirmPassword().trim())){
                 if (this.userDetailsService.addOrUpdate(user, role) == true){
@@ -116,7 +116,7 @@ public class UserController {
        User u = this.userDetailsService.getUsers(name).get(0);
        int id = u.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-       model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("recApplies", this.applyService.getAppliesByRecruiter(id));
        model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
        
@@ -134,7 +134,7 @@ public class UserController {
        User uc = this.userDetailsService.getUsers(principal.getName()).get(0);
        int id = uc.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-       model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("recApplies", this.applyService.getAppliesByRecruiter(id));
        model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
         

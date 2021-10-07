@@ -33,7 +33,7 @@
             <c:url value="/update-user" var="updateUserAction" />
             <form:form method="post" action="${updateUserAction}" modelAttribute="userUpdate" enctype="multipart/form-data">
 
-                <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
                     <div class="row mt-4">
                         <!-- input first name -->
                         <div class="form-group col-md-6 col-xl-6">
@@ -62,7 +62,7 @@
                     </div>
                 </c:if>
 
-                <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+                <c:if test="${user[0].role.toString() == 'ROLE_RECRUITER'}">
                     <!-- input company name -->
                     <div class="form-group">
                         <div class="text-info font-weight-bold">Tên doanh nghiệp</div>
@@ -102,7 +102,7 @@
                         <form:errors path="phone" cssClass="text-danger" element="div" />
                     </div>
 
-                    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+                    <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
                         <!-- select sex -->
                         <div class="form-group col-md-6 col-xl-4">
                             <div class="text-info font-weight-bold">Giới tính</div>
@@ -154,6 +154,17 @@
                     </div>
 
                 </div>
+                    
+                <!-- input introduce -->
+                <div class="form-group">
+                    <div class="text-info font-weight-bold">Giới thiệu bản thân</div>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-user" style="width: 15px"></i> </span>
+                             </div>
+                            <form:input path="introduce" class="form-control" value="${user[0].introduce}"/>
+                    </div>
+                </div>
 
                 <div class="row">
                     <!-- choose avatar -->
@@ -167,7 +178,7 @@
                         </div>
                         <form:errors path="file" cssClass="text-danger" element="div" />
                     </div>
-
+                    
                     <!-- avatar view -->
                     <div class="form-group col-md-5 col-xl-5">
                         <div>
@@ -183,7 +194,7 @@
     </div>
     
     <!-- CANDIDATE -->
-    <c:if test="${user[0].role.toString() == 'CANDIDATE'}">
+    <c:if test="${user[0].role.toString() == 'ROLE_CANDIDATE'}">
         <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
             <div class="card-content">
               <div class="card-body cleartfix">
@@ -218,6 +229,7 @@
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
                     <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
+                    <div class="ml-2">${user[0].introduce}</div>
                 </div>
 
                 <!-- col 2 -->
@@ -239,7 +251,7 @@
     </c:if>
 
     <!-- RECRUITER -->
-    <c:if test="${user[0].role.toString() == 'RECRUITER'}">
+    <c:if test="${user[0].role.toString() == 'ROLE_RECRUITER'}">
         <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
             <div class="card-content">
               <div class="card-body cleartfix">
@@ -277,18 +289,61 @@
                 <!-- col 1 -->
                 <div class="col-md-9 col-xl-9">
                     <h5 class="font-weight-bold text-dark">GIỚI THIỆU</h5>
+                    <div class="ml-2">${user[0].introduce}</div>
                 </div>
 
                 <!-- col 2 -->
                 <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
-                    <h5 class="text-dark font-weight-bold">CÁC TIN ĐANG TUYỂN DỤNG</h5>
-                    <c:forEach var="rec" items="${recPost}">
+                    <h5 class="text-dark font-weight-bold">CÁC THƯ ỨNG TUYỂN MỚI</h5>
+                    <c:forEach var="ra" items="${recApplies}">
                         <div class="card bg-light mb-2">
-                            <div class="text-info font-weight-bold">${rec.title}</div>
+                            <div class="text-info font-weight-bold">${ra.title}</div>
+                            <div class="text-secondary my-date">${ra.createdDate}</div>
                             <div>
-                                <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
+                                <a class="text-white btn btn-secondary btn-sm " href="" data-toggle="modal" data-target="#applyInfoModal-${ra.id}">Xem chi tiết</a>
                             </div>
 
+                        </div>
+                            
+                        <!-- Apply Info Modal -->
+                        <div class="modal fade" id="applyInfoModal-${ra.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Thông tin đơn ứng tuyển</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body row">
+                                        
+                                        <!-- col 1 -->
+                                        <div class="col 5">
+                                            <div class="text-dark font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName}</div>
+                                            <div class="text-dark">Giới tính: ${ra.candidate.sex.toString()}</div>
+                                            <div class="text-dark">Địa chỉ: ${ra.candidate.location.address}, ${ra.candidate.location.province.name}</div>
+                                            <div class="text-dark">Email: ${ra.candidate.mail}</div>
+                                            <div class="text-dark">Số điện thoại: ${ra.candidate.phone}</div>
+                                        </div>
+                                        
+                                        <!-- col 2 -->
+                                        <div class="col-7">
+                                            <div class="font-weight-bold text-dark">${ra.title}</div>
+                                            <div>${ra.content}</div>
+                                            <c:if test="${ra.cv == null}">
+                                                <div>---Thư ứng tuyển này không có CV đính kèm---</div>
+                                            </c:if>
+                                            <c:if test="${ra.cv != null}">
+                                                <a href="${ra.cv}"><img src="${ra.cv}" class="img-fluid rounded"/></a>
+                                            </c:if>
+                                            <div class="text-secondary font-weight-bold">${ra.createdDate}</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
@@ -298,7 +353,7 @@
 </div>
 
 <!-- ADMIN -->
-<c:if test="${user[0].role.toString() == 'ADMIN'}">
+<c:if test="${user[0].role.toString() == 'ROLE_ADMIN'}">
     <div class="m-4 text-center">
         <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
     </div>
