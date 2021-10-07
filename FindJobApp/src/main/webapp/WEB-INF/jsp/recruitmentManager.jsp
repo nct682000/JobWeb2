@@ -41,12 +41,12 @@
                     <td class="align-middle">${r.form.toString()}</td>
                     <td class="align-middle text-center text-info font-weight-bold">apply</td>
                     <c:if test="${r.active == true}">
-                        <td class="align-middle text-center"><i class="fa fa-check-square text-primary"></i></td>
-                        <td class="align-middle"><button class="btn btn-danger" onclick="switchActiveRecruitment(${r.id})">Tắt tuyển dụng</button></td>
+                        <td class="align-middle text-center" id="icon-active-show-${r.id}"><i class="fa fa-check-square text-primary"></i></td>
+                        <td class="align-middle"><button class="btn text-white" onclick="switchActiveRecruitment(${r.id})" id="btn-active-show-${r.id}" style="background-color: rgb(220, 53, 69)">Tắt tuyển dụng</button></td>
                     </c:if>
                     <c:if test="${r.active == false}">
-                        <td class="align-middle text-center"><i class="fa fa-window-close text-danger"></i></td>
-                        <td class="align-middle"><button class="btn btn-primary" onclick="switchActiveRecruitment(${r.id})">Bật tuyển dụng</button></td>
+                        <td class="align-middle text-center" id="icon-active-hide-${r.id}"><i class="fa fa-window-close text-danger"></i></td>
+                        <td class="align-middle"><button class="btn text-white" onclick="switchActiveRecruitment(${r.id})" id="btn-active-hide-${r.id}"  style="background-color: rgb(0, 123, 255)">Bật tuyển dụng</button></td>
                     </c:if>
                     <td class="align-middle text-center"><button class="btn btn-info"><i class="fa fa-edit"></i></button></td>
                 </tr>
