@@ -69,7 +69,7 @@ public class Recruitment implements Serializable{
     @JoinColumn(name = "recruiter_id")
     private User recruiter;
     
-    @OneToMany(mappedBy = "recruitment")
+    @OneToMany(mappedBy = "recruitment", fetch = FetchType.EAGER)
     private Set<Apply> applies;
     
     @ManyToMany(fetch = FetchType.EAGER)

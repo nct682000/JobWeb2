@@ -46,7 +46,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Thông tin đơn ứng tuyển</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Thông tin thư ứng tuyển</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
