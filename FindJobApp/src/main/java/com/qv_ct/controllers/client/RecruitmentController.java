@@ -119,7 +119,7 @@ public class RecruitmentController {
         recruitment.setRecruiter(u);
         if(!result.hasErrors()){
             if(this.recruitmentService.addOrUpdate(recruitment) == true)
-                return String.format("redirect:/user/%s", principal.getName());
+                return String.format("redirect:/user/%s/recruitment", principal.getName());
         }
         else
             model.addAttribute("errMsg", "Thêm tin không thành công, kiểm tra lại nhé!");

@@ -13,12 +13,12 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <div class="container-fluid" style="width: 95%">
-    <h2 class="text-center text-primary mb-4">TRANG QUẢN LÝ TUYỂN DỤNG</h2>
+    <h2 class="text-center text-primary mb-4 font-weight-bold">TRANG QUẢN LÝ TUYỂN DỤNG</h2>
     <c:if test="${errMsg != null}">
         <h3 class="alert alert-danger text-center font-weight-bold text-danger">${errMsg}</h3>
     </c:if>
     
-    <h4 class="text-info ml-3 ">CÁC TIN ĐÃ ĐĂNG</h4>
+    <h4 class="text-info ml-3 font-weight-bold ">CÁC TIN ĐÃ ĐĂNG</h4>
     <table class="table align-middle">
         <thead>
             <tr>
@@ -36,7 +36,7 @@
             <c:forEach var="r" items="${recRecruitments}" >
                 <tr>
                     <th class="align-middle" scope="row">${r.id}</th>
-                    <td class="align-middle"><a href="/FindJobApp/recruitment/${r.id}">${r.title}</a></td>
+                    <td class="align-middle"><a href="<c:url value="/recruitment/${r.id}" />">${r.title}</a></td>
                     <td class="align-middle">${r.career.name}</td>
                     <td class="align-middle">${r.form.toString()}</td>
                     <td class="align-middle text-center text-info font-weight-bold">${r.applies.size()}</td>
@@ -58,7 +58,7 @@
                             <c:url value="/user/${currentUser.username}/recruitment" var="addRecruitmentAction" />
                             <form:form method="post" action="${addRecruitmentAction}" modelAttribute="recruitment" enctype="multipart/form-data">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-info font-weight-bold" id="exampleModalLongTitle">Cập nhật tin tuyển dụng</h5>
+                                    <h5 class="modal-title text-info font-weight-bold" id="exampleModalLongTitle">CẬP NHẬT TIN TUYỂN DỤNG</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -158,13 +158,14 @@
                                         <!-- ID -->
                                         <form:input path="id" type="hidden" value="${r.id}" />
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                                    <input type="submit" class="btn btn-info btn-lg" value="Cập nhật">
+                                    <button type="button" class="btn btn-secondary btn-lg font-weight-bold" data-dismiss="modal">HỦY</button>
+                                    <input type="submit" class="btn btn-info btn-lg font-weight-bold" value="CẬP NHẬT">
                                 </div>
                             </form:form>
                         </div>
                     </div>
                 </div>
+                
             </c:forEach>
         </tbody>
     </table>
@@ -173,11 +174,11 @@
         
         <!-- col 1 -->
         <div class="col-6">
-            <button class="btn btn-lg btn-primary m-3" id="btn-showAddRecruitment" onclick="showAddRecruitment()">
-                Thêm tin tuyển dụng mới
+            <button class="btn btn-lg btn-primary font-weight-bold m-3" id="btn-showAddRecruitment" onclick="showAddRecruitment()">
+                THÊM TIN TUYỂN DỤNG MỚI
             </button>
-            <button class="btn btn-lg btn-secondary m-3" id="btn-hiddenAddRecruitment" onclick="showAddRecruitment()" style="display: none">
-                Ẩn
+            <button class="btn btn-lg btn-secondary m-3 font-weight-bold" id="btn-hiddenAddRecruitment" onclick="showAddRecruitment()" style="display: none">
+                ẨN
             </button>
             
             <c:if test="${errMsg != null}">
@@ -185,7 +186,7 @@
             </c:if>
                 
             <div id="form-showAddRecruitment" style="display: none" class="bg-light p-3">
-                <h4 class="text-info text-center">Thêm tin tuyển dụng mới</h4>
+                <h4 class="text-info text-center font-weight-bold">THÊM TIN TUYỂN DỤNG MỚI</h4>
                 <c:url value="/user/${currentUser.username}/recruitment" var="addRecruitmentAction" />
                 <form:form method="post" action="${addRecruitmentAction}" modelAttribute="recruitment" enctype="multipart/form-data">
 
@@ -281,7 +282,7 @@
                     </div>
 
                     <div class="text-center">
-                        <input type="submit" class="btn btn-primary btn-block btn-lg" value="Thêm tin">
+                        <input type="submit" class="btn btn-primary font-weight-bold btn-block btn-lg" value="THÊM TIN">
                     </div>
                 </form:form>
             </div>

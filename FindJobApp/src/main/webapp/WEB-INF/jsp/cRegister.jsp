@@ -18,9 +18,9 @@
 <article class="card-body">
 
     <!-- Text -->
-    <h2 class="card-title text-center mb-2 text-info font-weight-bold">Tạo tài khoản mới</h2>
+    <h2 class="card-title text-center mb-2 text-info font-weight-bold">TẠO TÀI KHOẢN MỚI</h2>
     <hr>
-    <div><a href="/FindJobApp/register/recruiter" class="btn btn-lg text-success">Tạo tài khoản tuyển dụng</a></div>
+    <div><a href="<c:url value="/register/recruiter" />" class="btn btn-lg text-success font-weight-bold">TẠO TÀI KHOẢN TUYỂN DỤNG</a></div>
 
     <!-- Notification -->
     <c:if test="${errMsg != null}" >
@@ -195,13 +195,13 @@
 
         <!-- register button -->
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg"> Đăng ký  </button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg font-weight-bold"> ĐĂNG KÝ  </button>
         </div> 
 
     </form:form>
         
         <!-- link login -->
-        <p class="text-center"><a href="/FindJobApp/login" class="btn btn-lg text-primary">Trở về đăng nhập</a></p>
+        <p class="text-center"><a href="<c:url value="/login" />" class="btn btn-lg text-primary font-weight-bold">TRỞ VỀ ĐĂNG NHẬP</a></p>
         
 </article>
 </div>

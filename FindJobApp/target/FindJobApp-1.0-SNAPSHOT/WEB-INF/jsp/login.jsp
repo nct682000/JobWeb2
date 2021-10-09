@@ -57,14 +57,14 @@
 
         <!-- login button -->
         <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block btn-lg"> ĐĂNG NHẬP  </button>
+        <button type="submit" class="btn btn-primary btn-block btn-lg font-weight-bold"> ĐĂNG NHẬP  </button>
         </div>
 
         <!-- forgot password -->
         <p class="text-center"><a href="#" class="btn btn-lg text-secondary">Quên mật khẩu?</a></p>
 
         <!-- link register -->
-        <p class="text-center"><a href="/FindJobApp/register/candidate" class="btn btn-lg text-info font-weight-bold">Đăng ký mới</a></p>
+        <p class="text-center"><a href="<c:url value="/register/candidate" />" class="btn btn-lg text-info font-weight-bold">Đăng ký mới</a></p>
         </form>
     </article>
     </div>

@@ -10,9 +10,6 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<head>
-    <script src="../resources/js/main.js"></script>
-</head>
 
 <!-- hidden -->
 <c:if test="${currentUser.role == 'ROLE_CANDIDATE'}">
@@ -24,7 +21,7 @@
 <input type="hidden" id="cmtAvatar" value="${currentUser.avatar}">
 
 <div class="container-fluid" style="width: 90%">
-    <h2 class="text-center text-success mb-5">${ru.companyName}</h2>
+    <h2 class="text-center text-success mb-5 font-weight-bold">${ru.companyName}</h2>
 
     <!-- Card -->
     <div class="card overflow-hidden my-3" style="background-color: windowframe">
@@ -96,13 +93,13 @@
                 <textarea id="commentId" type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2 col" ></textarea>
             </div>
 
-            <div class="text-right mr-3">
+            <div class="text-right mr-3 ">
                 <c:if test="${currentUser != null}">
-                    <input type="button" value="Bình luận" class="btn btn-info "
+                    <input type="button" value="BÌNH LUẬN" class="btn btn-info font-weight-bold"
                            onclick="addComment(${currentUser.id}, ${ru.id})" />
                 </c:if>
                 <c:if test="${currentUser == null}">
-                    <input type="button" value="Bình luận" class="btn btn-info "
+                    <input type="button" value="BÌNH LUẬN" class="btn btn-info font-weight-bold"
                            data-toggle="modal" data-target="#requireLoginModal" />
                 </c:if>
             </div>
@@ -179,7 +176,7 @@
                     </div>
 
                     <div>
-                        <a class="text-white btn btn-secondary btn-sm " href="/FindJobApp/recruitment/${rec.id}">Xem chi tiết</a>
+                        <a class="text-white btn btn-secondary btn-sm " href="<c:url value="/recruitment/${rec.id}" />">Xem chi tiết</a>
                     </div>
 
                 </div>
@@ -195,9 +192,9 @@
 <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form:form method="post" action="/FindJobApp/user/${pageContext.request.userPrincipal.name}" modelAttribute="recruitment" enctype="multipart/form-data">
+            <form:form method="post" action="<c:url value="/user/${pageContext.request.userPrincipal.name}" />" modelAttribute="recruitment" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLongTitle">Đánh giá về doanh nghiệp</h4>
+                    <h4 class="modal-title text-primary font-weight-bold" id="exampleModalLongTitle">ĐÁNH GIÁ VỀ DOANH NGHIỆP</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -230,8 +227,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                    <input type="submit" class="btn btn-primary btn-lg" value="Đánh giá" onclick="addRate(${currentUser.id}, ${ru.id})">
+                    <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">HỦY</button>
+                    <input type="submit" class="btn btn-primary btn-lg" value="ĐÁNH GIÁ" onclick="addRate(${currentUser.id}, ${ru.id})">
 
                 </div>
             </form:form>
@@ -244,15 +241,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">Bạn chưa đăng nhập!</h4>
+                <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">BẠN CHƯA ĐĂNG NHẬP!</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
-                <a href="/FindJobApp/login" class="btn btn-primary btn-lg">Đi đến trang đăng nhập</a>
+                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">HỦY</button>
+                <a href="<c:url value="/login" />" class="btn btn-primary btn-lg">ĐI ĐẾN TRANG ĐĂNG NHẬP</a>
             </div>
         </div>
     </div>

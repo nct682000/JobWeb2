@@ -167,6 +167,13 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/recruiter.jsp" />
     </definition>
     
+    <definition name="handbook" extends="baseLayout">
+        <put-attribute name="title" value="Cẩm nang" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook.jsp" />
+    </definition>
+    
+    <!-- HANDBOOK PAGES -->
+    
     
 </tiles-definitions>
 

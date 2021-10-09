@@ -169,7 +169,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
         return q.getResultList();
     }
-
+    
     @Override
     public List<Recruitment> getRecruitmentByUserId(int userId) {
         Session session = sessionFactory.getObject().getCurrentSession();

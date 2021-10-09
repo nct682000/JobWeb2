@@ -13,13 +13,13 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <div class="container-fluid" style="width: 95%">
-    <h2 class="text-center text-info mb-5">Trang người dùng</h2>
+    <h2 class="text-center text-info font-weight-bold mb-5">TRANG NGƯỜI DÙNG</h2>
     <c:if test="${updateUserError != null}">
         <h4 class="alert alert-danger text-center font-weight-bold text-danger">${updateUserError}</h4>
     </c:if>
     <!-- BUTTON SHOW -->
     <button class="btn btn-info font-weight-bold" id="btn-showUpdateUser" onclick="showUpdateUser()">
-        Chỉnh sửa thông tin
+        CHỈNH SỬA THÔNG TIN
     </button>
     <div class="container">
         <!-- BUTTON HIDE -->
@@ -218,7 +218,7 @@
                     </div>
                     <div class="font-weight-bold text-secondary col-2 text-right">
                         
-                        <a href="/FindJobApp/user/${user[0].username}/apply" class="btn btn-primary mt-3 font-weight-bold">Quản lý ứng tuyển</a>
+                        <a href="<c:url value="/user/${user[0].username}/apply"/>" class="btn btn-primary mt-3 font-weight-bold">QUẢN LÝ ỨNG TUYỂN</a>
                     </div>
                 </div>
               </div>
@@ -278,7 +278,7 @@
                     </div>
                     <div class="font-weight-bold text-secondary col-2 text-right">
                         
-                        <a href="/FindJobApp/user/${user[0].username}/recruitment" class="btn btn-primary mt-3 font-weight-bold">Quản lý tuyển dụng</a>
+                        <a href="<c:url value="/user/${user[0].username}/recruitment"/>" class="btn btn-primary mt-3 font-weight-bold">QUẢN LÝ TUYỂN DỤNG</a>
                     </div>
                 </div>
               </div>
@@ -355,6 +355,6 @@
 <!-- ADMIN -->
 <c:if test="${user[0].role.toString() == 'ROLE_ADMIN'}">
     <div class="m-4 text-center">
-        <a href="/FindJobApp/admin" class="btn btn-danger font-weight-bold">Đi đến trang quản trị</a>
+        <a href="<c:url value="/admin"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
     </div>
 </c:if>

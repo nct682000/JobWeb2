@@ -19,10 +19,10 @@
 <article class="card-body">
     
     <!-- Text -->
-    <h2 class="card-title text-center mb-2 text-success font-weight-bold">Tạo tài khoản mới</h2>
-    <h5 class="text-center mb-2 text-success">--NHÀ TUYỂN DỤNG--</h5>
+    <h2 class="card-title text-center mb-2 text-success font-weight-bold">TẠO TÀI KHOẢN MỚI</h2>
+    <h5 class="text-center mb-2 text-success font-weight-bold">--NHÀ TUYỂN DỤNG--</h5>
     <hr>
-    <div><a href="/FindJobApp/register/candidate" class="btn btn-lg text-info">Tạo tài khoản thường</a></div>
+    <div><a href="<c:url value="/register/candidate" />" class="btn btn-lg text-info font-weight-bold">TẠO TÀI KHOẢN THƯỜNG</a></div>
 
     <!-- Notification -->
     <c:if test="${errMsg != null}" >
@@ -161,12 +161,12 @@
 
         <!-- register button -->
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block btn-lg">Gửi yêu cầu đăng ký </button>
+            <button type="submit" class="btn btn-success btn-block btn-lg font-weight-bold">GỬI YÊU CẦU ĐĂNG KÝ </button>
         </div> 
 
         <!-- link login -->
-        <p class="text-center"><a href="/FindJobApp/login" class="btn btn-lg text-success">Trở về đăng nhập</a></p>
-    </form:form>>
+        <p class="text-center"><a href="<c:url value="/login" />" class="btn btn-lg text-success font-weight-bold">TRỞ VỀ ĐĂNG NHẬP</a></p>
+    </form:form>
                         
 </article>
 </div>

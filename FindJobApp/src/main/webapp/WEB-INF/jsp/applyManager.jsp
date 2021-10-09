@@ -13,12 +13,12 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <div class="container-fluid" style="width: 95%">
-    <h2 class="text-info text-center">TRANG QUẢN LÝ ỨNG TUYỂN</h2>
+    <h2 class="text-info text-center font-weight-bold">TRANG QUẢN LÝ ỨNG TUYỂN</h2>
     <c:if test="${errMsg != null}">
         <h3 class="alert alert-danger text-center font-weight-bold text-danger">${errMsg}</h3>
     </c:if>
     
-    <h4 class="text-info ml-3 ">CÁC TIN ĐÃ ĐĂNG</h4>
+    <h4 class="text-info ml-3 font-weight-bold">CÁC TIN ĐÃ ĐĂNG</h4>
     <table class="table align-middle">
         <thead>
             <tr>
@@ -35,8 +35,8 @@
                 <tr>
                     <th class="align-middle" scope="row">${a.id}</th>
                     <td class="align-middle"><a class="text-info font-weight-bold" href="#" data-toggle="modal" data-target="#applyInfoModal-${a.id}">${a.title}</a></td>
-                    <td class="align-middle"><a href="/FindJobApp/recruitment/${a.recruitment.id}">${a.recruitment.title}</a></td>
-                    <td class="align-middle"><a href="/FindJobApp/recruiter/${a.recruitment.recruiter.id}">${a.recruitment.recruiter.companyName}</a></td>
+                    <td class="align-middle"><a href="<c:url value="/recruitment/${a.recruitment.id}" />">${a.recruitment.title}</a></td>
+                    <td class="align-middle"><a href="<c:url value="/recruiter/${a.recruitment.recruiter.id}" />">${a.recruitment.recruiter.companyName}</a></td>
                     <td class="align-middle text-center">${a.createdDate}</td>
                     <td class="align-middle"><button class="btn btn-danger">Xóa</button></td>
                 </tr>
@@ -46,7 +46,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Thông tin thư ứng tuyển</h5>
+                                <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">THÔNG TIN THƯ ỨNG TUYỂN</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
