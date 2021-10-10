@@ -78,16 +78,20 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner" >
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel1.png" />" alt="carousel1" style="height: 320px" >
+                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel1" style="height: 320px" >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel2.png" />" alt="carousel2" style="height: 320px">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel4.jpg" />" alt="carousel2" style="height: 320px" >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel3"style="height: 320px">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel5.jpg" />" alt="carousel3" style="height: 320px">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel6.png" />" alt="carousel4"style="height: 320px">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -8,10 +8,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-light bg-light">
 
         <!-- Page name -->
-        <a class="navbar-brand font-weight-bold text-secondary" href="<c:url value="/"/>">TRANG CHỦ</a>
+        <a class="navbar-brand font-weight-bold text-dark" href="<c:url value="/"/>">TRANG CHỦ</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <!-- Find job -->
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="<c:url value="/recruitments?kw=&provinceId=0&careerId=0&salary=0&form=-1"/>">TÌM VIỆC <span class="sr-only">(current)</span></a>
                 </li>
 
@@ -38,8 +38,13 @@
                 </li>
                 
                 <!-- Handbook -->
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link font-weight-bold" href="<c:url value="/handbook"/>">CẨM NANG<span class="sr-only">(current)</span></a>
+                </li>
+                
+                <!-- CV TEMPLATE -->
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="<c:url value="/cv"/>">CV HAY<span class="sr-only">(current)</span></a>
                 </li>
 
                 <!-- right item -->

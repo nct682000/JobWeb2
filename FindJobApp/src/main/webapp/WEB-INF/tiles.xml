@@ -171,8 +171,36 @@ and open the template in the editor.
         <put-attribute name="title" value="Cẩm nang" />
         <put-attribute name="content" value="/WEB-INF/jsp/handbook.jsp" />
     </definition>
+    <definition name="cv" extends="baseLayout">
+        <put-attribute name="title" value="CV hay" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cv.jsp" />
+    </definition>
     
     <!-- HANDBOOK PAGES -->
+    <definition name="bqtv1" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-1.jsp" />
+    </definition>
+    <definition name="bqtv2" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-2.jsp" />
+    </definition>
+    <definition name="bqtv3" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-3.jsp" />
+    </definition>
+    <definition name="ttcv1" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-1.jsp" />
+    </definition>
+    <definition name="ttcv2" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-2.jsp" />
+    </definition>
+    <definition name="ttcv3" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-3.jsp" />
+    </definition>
     
     
 </tiles-definitions>

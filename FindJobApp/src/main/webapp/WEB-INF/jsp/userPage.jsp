@@ -111,7 +111,7 @@
                                         <span class="input-group-text"> <i class="fa fa-venus-mars" style="width: 15px"></i> </span>
                                      </div>
                                     <form:select path="sex" class="form-control" aria-label=".form-select-sm example" id="sex">
-                                        <option selected value="${null}">Giới tính</option>
+                                        <option selected value="${user[0].sex}">Giới tính</option>
                                         <option value="MALE">Nam</option>
                                         <option value="FEMALE">Nữ</option>
                                         <option value="NEUTRAL">Giới tính khác</option>
@@ -144,7 +144,7 @@
                                     <span class="input-group-text"> <i class="fa fa-map-marker" style="width: 15px"></i> </span>
                                  </div>
                                 <form:select path="province" class="form-control" aria-label=".form-select-sm example" id="province">
-                                    <option selected value="${null}">Tỉnh thành</option>
+                                    <option selected value="${user[0].location.province.id}">Tỉnh thành</option>
                                 <c:forEach var="p" items="${provinces}">
                                     <option value="${p.id}">${p.name}</option>
                                 </c:forEach>
@@ -200,9 +200,16 @@
               <div class="card-body cleartfix">
                 <div class="media align-items-stretch row">
                     <!-- Image -->
-                    <div class="align-self-center col-3">
-                        <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
-                    </div>
+                    <c:if test="${user[0].avatar == null}">
+                        <div class="align-self-center col-3">
+                            <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                        </div>
+                    </c:if>
+                    <c:if test="${user[0].avatar != null}">
+                        <div class="align-self-center col-3">
+                            <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                        </div>
+                    </c:if>
                     <div class="media-body mt-3 col-7">
                         <!-- name -->
                         <h5 class="text-info font-weight-bold">${user[0].firstName} ${user[0].lastName}</h5>
@@ -257,9 +264,16 @@
               <div class="card-body cleartfix">
                 <div class="media align-items-stretch row">
                     <!-- Image -->
-                    <div class="align-self-center col-3">
-                        <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
-                    </div>
+                    <c:if test="${user[0].avatar == null}">
+                        <div class="align-self-center col-3">
+                            <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                        </div>
+                    </c:if>
+                    <c:if test="${user[0].avatar != null}">
+                        <div class="align-self-center col-3">
+                            <image src="${user[0].avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                        </div>
+                    </c:if>
                     <div class="media-body mt-3 col-7">
                         <!-- name -->
                         <h5 class="text-info font-weight-bold">${user[0].companyName}</h5>
