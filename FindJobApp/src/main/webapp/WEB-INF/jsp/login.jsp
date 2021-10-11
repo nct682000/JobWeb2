@@ -17,7 +17,7 @@
     <article class="card-body">
 
         <!-- Text -->
-        <h2 class="card-title text-center mb-2 text-info font-weight-bold">Đăng nhập</h2>
+        <h2 class="card-title text-center mb-2 text-info font-weight-bold">ĐĂNG NHẬP</h2>
         <hr>
 
         <!-- Notification -->

@@ -39,7 +39,19 @@
                     <td class="align-middle"><a href="<c:url value="/recruitment/${r.id}" />">${r.title}</a></td>
                     <td class="align-middle">${r.career.name}</td>
                     <td class="align-middle">${r.form.toString()}</td>
-                    <td class="align-middle text-center text-info font-weight-bold">${r.applies.size()}</td>
+                    <td class="align-middle text-center">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle text-info font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${r.applies.size()}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <c:forEach var="ra" items="${r.applies}">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#applyInfoModal-${ra.id}">từ ${ra.candidate.firstName} ${ra.candidate.lastName}</a>
+                                    
+                                </c:forEach>
+                            </div>
+                          </div>
+                    </td>
                     <c:if test="${r.active == true}">
                         <td class="align-middle text-center" id="icon-active-show-${r.id}"><i class="fa fa-check-square text-primary"></i></td>
                         <td class="align-middle"><button class="btn text-white" onclick="switchActiveRecruitment(${r.id})" id="btn-active-show-${r.id}" style="background-color: rgb(220, 53, 69)">Tắt tuyển dụng</button></td>
@@ -294,3 +306,49 @@
         </div>
     </div>
 </div>
+
+<!-- MODAL -->
+<!-- Apply Info Modals -->
+<c:forEach var="r" items="${recRecruitments}">
+    <c:forEach var="ra" items="${r.applies}">
+        <div class="modal fade" id="applyInfoModal-${ra.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">THÔNG TIN THƯ ỨNG TUYỂN</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body row">
+
+                        <!-- col 1 -->
+                        <div class="col 5">
+                            <div class="text-dark font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName}</div>
+                            <div class="text-dark">Giới tính: ${ra.candidate.sex.toString()}</div>
+                            <div class="text-dark">Địa chỉ: ${ra.candidate.location.address}, ${ra.candidate.location.province.name}</div>
+                            <div class="text-dark">Email: ${ra.candidate.mail}</div>
+                            <div class="text-dark">Số điện thoại: ${ra.candidate.phone}</div>
+                        </div>
+
+                        <!-- col 2 -->
+                        <div class="col-7">
+                            <div class="font-weight-bold text-dark">${ra.title}</div>
+                            <div>${ra.content}</div>
+                            <c:if test="${ra.cv == null}">
+                                <div>---Thư ứng tuyển này không có CV đính kèm---</div>
+                            </c:if>
+                            <c:if test="${ra.cv != null}">
+                                <a href="${ra.cv}"><img src="${ra.cv}" class="img-fluid rounded"/></a>
+                            </c:if>
+                            <div class="text-secondary font-weight-bold">${ra.createdDate}</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:forEach>
+</c:forEach>
