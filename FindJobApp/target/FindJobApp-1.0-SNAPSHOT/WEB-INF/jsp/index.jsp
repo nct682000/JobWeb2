@@ -106,18 +106,26 @@
 
     </div>
               
-<!--    <div class="mt-3 mb-3">
-        <c:forEach var="top" items="${topRecruiter}">
-            <div>${top[0]}</div>
-            <div>${top[1]}</div>
-            
-            <div>${top[3]}</div>
-        </c:forEach>
-        
-    </div>-->
+    <div class="container text-center mt-4">
+        <hr>
+        <h4 class="font-weight-bold text-info">-----DOANH NGHIỆP HÀNG ĐẦU-----</h4>
+        <div class="row">
+            <c:forEach var="r" items="${topRecruiter}">
+                <div class="col m-2">
+                    <a href="<c:url value="/recruiter/${r[0]}" />" class="text-dark">
+                        <div class="card">
+                            <img class="card-img-top img-fluid" src="${r[2]}" alt="avatar">
+                            <div class=" font-weight-bold">${r[1]}</div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+        <hr>
+    </div>
               
     <!-- List Recruitment -->
-    <h4 class="text-dark font-weight-bold m-3">TIN MỚI NHẤT</h4>
+    <h4 class="text-dark font-weight-bold mt-4">TIN MỚI NHẤT</h4>
     <div class="row">
         <c:forEach var="r" items="${recruitments}">
 

@@ -19,7 +19,7 @@
     </c:if>
     
     <h4 class="text-info ml-3 font-weight-bold ">CÁC TIN ĐÃ ĐĂNG</h4>
-    <table class="table align-middle">
+    <table class="table align-middle bg-light">
         <thead>
             <tr>
                 <th scope="col">STT</th>

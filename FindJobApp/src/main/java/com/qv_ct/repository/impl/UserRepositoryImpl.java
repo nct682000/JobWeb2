@@ -12,6 +12,7 @@ import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.UserRepository;
 import com.qv_ct.service.RecruitmentService;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.query.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -121,14 +122,17 @@ public class UserRepositoryImpl implements UserRepository {
         Root rootR = query.from(Recruitment.class);
         Root rootA = query.from(Apply.class);
 
-        query = query.where(builder.equal(rootA.get("recruitment"), rootR.get("id")));
-        query = query.where(builder.equal(rootR.get("recruiter"), rootU.get("id")));
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        predicates.add(builder.equal(rootR.get("recruiter"), rootU.get("id")));
 
         query.multiselect(rootU.get("id"),
                 rootU.get("companyName"),
                 rootU.get("avatar"),
                 builder.count(rootU.get("id")));
-
+        
+        query.where(predicates.toArray(new Predicate[] {}));
+        
         query = query.groupBy(rootU.get("id"));
         query = query.orderBy(builder.desc(builder.count(rootU.get("id"))));
 
