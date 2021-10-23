@@ -14,7 +14,8 @@
 <h2 class="text-info font-weight-bold mb-3 text-center">TRANG TÌM KIẾM</h2>
 
 <div class="container">
-    <form action="/FindJobApp/recruitments/">
+    
+    <form action="<c:url value="/recruitments" />">
         <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh"  name="kw">
         <div class="row m-2 mb-3">
 
@@ -61,7 +62,7 @@
         </div> 
 
         <!-- search button -->
-        <button type="submit" class="btn btn-info btn-block btn-lg mb-3">Tìm kiếm</button>
+        <button type="submit" class="btn btn-info font-weight-bold btn-block btn-lg mb-3">TÌM KIẾM</button>
     </form>
 </div>
 
@@ -81,10 +82,10 @@
                 <div class="media-body">
 
                     <!-- title -->
-                    <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
+                    <h5><a href="<c:url value="/recruitment/${r.id}"/>" class="text-dark">${r.title}</a></h5> 
 
                     <!-- company_name -->
-                    <div><a href="/FindJobApp/recruiter/${r.recruiter.id}">${r.recruiter.companyName}</a></div>
+                    <div><a href="<c:url value="/recruiter/${r.recruiter.id}"/>">${r.recruiter.companyName}</a></div>
 
                     <!-- form -->
                     <div>Chức vụ: ${r.form.toString()}</div>

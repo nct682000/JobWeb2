@@ -57,6 +57,11 @@ public class ApplyServiceImpl implements ApplyService {
     public List<Apply> getAppliesByUserId(int id) {
         return this.applyRepository.getAppliesByUserId(id);
     }
+    
+    @Override
+    public List<Apply> getAppliesByRecruiter(int recId) {
+        return this.applyRepository.getAppliesByRecruiter(recId);
+    }
 
     //    -------------     admin       --------------
     @Override

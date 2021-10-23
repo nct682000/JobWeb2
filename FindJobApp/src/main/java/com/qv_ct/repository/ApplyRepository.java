@@ -17,6 +17,7 @@ public interface ApplyRepository {
     List<Apply> getApplies();
 
     List<Apply> getAppliesByUserId(int id);
+    List<Apply> getAppliesByRecruiter(int recId);
 
     boolean addOrUpdate(Apply a);
 

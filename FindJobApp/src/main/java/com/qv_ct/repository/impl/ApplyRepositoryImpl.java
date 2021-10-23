@@ -7,6 +7,7 @@ package com.qv_ct.repository.impl;
 
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.repository.ApplyRepository;
+import java.sql.Time;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Session session = sessionFactory.getObject().getCurrentSession();
 
         try {
-            a.setCreatedDate(Date.from(Instant.now()));
+            a.setCreatedDate(Time.from(Instant.now()));
             session.save(a);
             return true;
         } catch (Exception ex) {
@@ -72,6 +73,25 @@ public class ApplyRepositoryImpl implements ApplyRepository {
 
         return q.getResultList();
     }
+    
+    @Override
+    public List<Apply> getAppliesByRecruiter(int recId) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
+        Root root = query.from(Apply.class);
+        query = query.select(root);
+        
+        Predicate p =builder.equal(root.get("recruitment").get("recruiter"), recId);
+        
+        query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("id")));
+        Query q = session.createQuery(query);
+        q.setMaxResults(10);
+        
+        return q.getResultList();
+    }
+    
 
     //    -------------     admin       --------------
     int maxList = 6;

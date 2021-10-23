@@ -13,10 +13,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<h1 class="text-primary text-center">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
+<h1 class="text-primary text-center font-weight-bold">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
 <div class="container-fluid" style="width: 95%">
     <h3 class="text-info font-weight-bold">${recDetail.title}</h3>
-    <h4><a href="/FindJobApp/recruiter/${recDetail.recruiter.id}" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
+    <h4><a href="<c:url value="/recruiter/${recDetail.recruiter.id}" />" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
     <!-- Card info -->
     <div class="card overflow-hidden bg-light my-3">
         <div class="card-content">
@@ -53,13 +53,13 @@
                                 <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ - <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo != null && recDetail.salaryFrom == recDetail.salaryTo}">
-                                $Lương: <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
+                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ
                             </c:if>
                             <c:if test="${recDetail.salaryFrom != null && recDetail.salaryTo == null}">
-                                <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
+                                từ <fmt:formatNumber value="${recDetail.salaryFrom}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo != null}">
-                                <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
+                                lên đến <fmt:formatNumber value="${recDetail.salaryTo}" type="number" />đ 
                             </c:if>
                             <c:if test="${recDetail.salaryFrom == null && recDetail.salaryTo == null}">
                                 thỏa thuận
@@ -90,9 +90,21 @@
                     
               </div>
                     <div class="font-weight-bold text-secondary col-2">
-                        <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
-                            Ứng tuyển công việc này
-                        </button>                 
+                        <c:if test="${currentUser != null && currentUser.role == ROLE_CANDIDATE}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
+                                ỨNG TUYỂN CÔNG VIỆC NÀY
+                            </button>
+                        </c:if>
+                        <c:if test="${currentUser == null}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#requireLoginModal">
+                                ỨNG TUYỂN CÔNG VIỆC NÀY
+                            </button>
+                        </c:if>
+                        <c:if test="${currentUser.id == recDetail.recruiter.id}">
+                            <a href="<c:url value="/user/${currentUser.username}/recruitment" />"><button type="button" class="btn btn-info btn-lg font-weight-bold">
+                                ĐI ĐẾN TRANG QUẢN LÝ
+                                </button></a>
+                        </c:if>
                     </div>
             </div>
           </div>
@@ -112,8 +124,9 @@
                 </c:forEach>
             </div>
             
+            <h5 class="text-dark font-weight-bold">CHI TIẾT CÔNG VIỆC</h5>
             <!-- description -->
-            <div>${recDetail.description}</div> 
+            <div class="pl-3">${recDetail.description}</div> 
             
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
@@ -142,10 +155,10 @@
                             <div class="col-9">
 
                                 <!-- title -->
-                                <h5><a href="/FindJobApp/recruitment/${trend[0]}" class="text-dark">${trend[1]}</a></h5> 
+                                <h5><a href="<c:url value="/recruitment/${trend[0]}" />" class="text-dark">${trend[1]}</a></h5> 
 
                                 <!-- company_name -->
-                                <div><a href="/FindJobApp/recruiter/${trend[10]}">${trend[2]}</a></div>
+                                <div><a href="<c:url value="/recruiter/${trend[10]}" />">${trend[2]}</a></div>
 
                                 <!-- form -->
                                 <div>Chức vụ: ${trend[5].toString()}</div>
@@ -239,4 +252,23 @@
             </form:form>
         </div>
     </div>
+</div>
+            
+<!-- Require Login modal -->
+<div class="modal fade" id="requireLoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">BẠN CHƯA ĐĂNG NHẬP!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
+        <a href="<c:url value="/login" />" class="btn btn-primary btn-lg">ĐI ĐẾN TRANG ĐĂNG NHẬP</a>
+      </div>
+    </div>
+  </div>
 </div>

@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 
+window.onload = function () {
+    let dates = document.querySelectorAll(".my-date")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        moment.locale('vi')
+        d.innerText = moment(d.innerText).fromNow()
+    }
+}
+
 function addComment(commenterId, commentedId){
     fetch("/FindJobApp/api/add-comment", {
         method: 'post',
@@ -104,7 +113,35 @@ function switchActiveRecruitment(recId){
         }
     }).then(function(res){
         console.info(res)
-        location.reload()
+        let iconShow = document.getElementById(`icon-active-show-${recId}`)
+        let iconHide = document.getElementById(`icon-active-hide-${recId}`)
+        let btnShow = document.getElementById(`btn-active-show-${recId}`)
+        let btnHide = document.getElementById(`btn-active-hide-${recId}`)
+        
+        if(btnHide != null){
+            if(btnHide.style.backgroundColor == "rgb(220, 53, 69)"){
+                btnHide.style.backgroundColor = "rgb(0, 123, 255)"
+                btnHide.innerText = "Bật tuyển dụng"
+                iconHide.innerHTML = `<i class="fa fa-window-close text-danger"></i>`
+            }else{
+                btnHide.style.backgroundColor = "rgb(220, 53, 69)"
+                btnHide.innerText = "Tắt tuyển dụng"
+                iconHide.innerHTML = `<i class="fa fa-check-square text-primary"></i>`
+            }
+        }
+            
+        if(btnShow != null){
+            if(btnShow.style.backgroundColor == "rgb(0, 123, 255)"){
+                btnShow.style.backgroundColor = "rgb(220, 53, 69)"
+                btnShow.innerText = "Tắt tuyển dụng"
+                iconShow.innerHTML = `<i class="fa fa-check-square text-primary"></i>`
+            }else{
+                btnShow.style.backgroundColor = "rgb(0, 123, 255)"
+                btnShow.innerText = "Bật tuyển dụng"
+                iconShow.innerHTML = `<i class="fa fa-window-close text-danger"></i>`
+            }
+        }
+            
     })
 }
 

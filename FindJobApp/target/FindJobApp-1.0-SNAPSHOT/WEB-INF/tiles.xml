@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+            Software Foundation//DTD Tiles Configuration 3.0//EN"
+            "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    
+    
+    <definition name="baseAdmin" template="/WEB-INF/layoutAdmin/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layoutAdmin/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <put-attribute name="footer"    value="/WEB-INF/layoutAdmin/footer.jsp" />
+    </definition>
+    
+    <!--    admin Cadidates     -->
+    <definition name="getCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="cadidates active admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="getCadidates_Inactive_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="cadidates inactive admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="editCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit cadidates admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="createCadidates_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create cadidates admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <!--    admin Recruiters     -->
+    <definition name="getRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruiters active admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="getRecruiters_Inactive_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruiters inactive admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/customers.jsp" />
+    </definition>
+    
+    <definition name="editRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="edit recruiters admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="createRecruiters_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create recruiter admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_edit_user.jsp" />
+    </definition>
+    
+    <definition name="getEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="employees admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_employees.jsp" />
+    </definition>
+    
+    <definition name="createEmployees_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="create employee admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_createEmployee.jsp" />
+    </definition>
+
+    <definition name="dashboard" extends="baseAdmin">
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
+    </definition>
+    
+    <!--chưa cập nhập-->
+
+    
+    <definition name="getRecruiment_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="recruitments admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
+    </definition>
+    
+    <definition name="ad_recruitmentDetail" extends="baseAdmin">
+        <put-attribute name="title"     value="Recruitment detail" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitment_detail.jsp" />
+    </definition>
+    
+    <definition name="getApply_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="applies admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_apply.jsp" />
+    </definition>
+    <!--    client  -->
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title"     value="..." />
+        <put-attribute name="header"    value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content"   value="BASE" />
+        <put-attribute name="footer"    value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="admin" extends="baseLayout">
+        <put-attribute name="title" value="Admin" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp" />
+    </definition>
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang Chủ" />
+        <put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
+    </definition>
+    
+    <definition name="searchRecruitment" extends="baseLayout">
+        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/searchRecruitment.jsp" />
+    </definition>
+    
+    <definition name="recruitmentDetail" extends="baseLayout">
+        <put-attribute name="title" value="Chi tiết tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentDetail.jsp" />
+    </definition>
+    
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />
+    </definition>
+    
+    <definition name="cRegister" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cRegister.jsp" />
+    </definition>
+    
+    <definition name="rRegister" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/rRegister.jsp" />
+    </definition>
+    
+    <definition name="userpage" extends="baseLayout">
+        <put-attribute name="title" value="Trang cá nhân" />
+        <put-attribute name="content" value="/WEB-INF/jsp/userPage.jsp" />
+    </definition>
+    
+    <definition name="recruitmentManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruitmentManager.jsp" />
+    </definition>
+    
+    <definition name="addTag" extends="baseLayout">
+        <put-attribute name="title" value="Thêm nhãn dán" />
+        <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
+    </definition>
+    
+    <definition name="applyManager" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý ứng tuyển" />
+        <put-attribute name="content" value="/WEB-INF/jsp/applyManager.jsp" />
+    </definition>
+    
+    <definition name="recruiter" extends="baseLayout">
+        <put-attribute name="title" value="Nhà tuyển dụng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/recruiter.jsp" />
+    </definition>
+    
+    <definition name="handbook" extends="baseLayout">
+        <put-attribute name="title" value="Cẩm nang" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook.jsp" />
+    </definition>
+    <definition name="cv" extends="baseLayout">
+        <put-attribute name="title" value="CV hay" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cv.jsp" />
+    </definition>
+    
+    <!-- HANDBOOK PAGES -->
+    <definition name="bqtv1" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-1.jsp" />
+    </definition>
+    <definition name="bqtv2" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-2.jsp" />
+    </definition>
+    <definition name="bqtv3" extends="baseLayout">
+        <put-attribute name="title" value="Bí quyết tìm việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/bqtv-3.jsp" />
+    </definition>
+    <definition name="ttcv1" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-1.jsp" />
+    </definition>
+    <definition name="ttcv2" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-2.jsp" />
+    </definition>
+    <definition name="ttcv3" extends="baseLayout">
+        <put-attribute name="title" value="Thăng tiến công việc" />
+        <put-attribute name="content" value="/WEB-INF/jsp/handbook/ttcv-3.jsp" />
+    </definition>
+    
+    
+</tiles-definitions>
+
+

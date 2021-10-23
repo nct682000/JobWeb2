@@ -7,15 +7,12 @@ package com.qv_ct.pojos;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,8 +20,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlElement;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -58,7 +53,9 @@ public class User implements Serializable{
     @NotEmpty(message = "{user.name.emptyError}")
     private String phone;
     private String avatar;
-    private Role role;			// đổi chổ này
+    @Column(nullable = true)
+    private String introduce;
+    private Role role;
     private boolean active = true;
     
     @OneToOne
@@ -104,17 +101,6 @@ public class User implements Serializable{
         this.password = password;
         this.role = role;
     }
-    
-    public boolean isActive() {
-        return active;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setActive(boolean ac) {
-        this.active = ac;
-    }
 
     /**
      * @return the id
@@ -156,6 +142,20 @@ public class User implements Serializable{
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     /**
@@ -257,6 +257,20 @@ public class User implements Serializable{
     }
 
     /**
+     * @return the introduce
+     */
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    /**
+     * @param introduce the introduce to set
+     */
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    /**
      * @return the role
      */
     public Role getRole() {
@@ -268,6 +282,20 @@ public class User implements Serializable{
      */
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     /**
@@ -296,20 +324,6 @@ public class User implements Serializable{
      */
     public void setRecruitments(Set<Recruitment> recruitments) {
         this.recruitments = recruitments;
-    }
-
-    /**
-     * @return the candidateApplys
-     */
-    public Set<Apply> getCandidateApplys() {
-        return getApplys();
-    }
-
-    /**
-     * @param candidateApplys the candidateApplys to set
-     */
-    public void setCandidateApplys(Set<Apply> candidateApplys) {
-        this.setApplys(candidateApplys);
     }
 
     /**
@@ -402,27 +416,12 @@ public class User implements Serializable{
     public MultipartFile getFile() {
         return file;
     }
-    
 
     /**
      * @param file the file to set
      */
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
-
-    /**
-     * @return the confirmPassword
-     */
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    /**
-     * @param confirmPassword the confirmPassword to set
-     */
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     /**
@@ -452,6 +451,5 @@ public class User implements Serializable{
     public void setProvince(Province province) {
         this.province = province;
     }
-    
     
 }
