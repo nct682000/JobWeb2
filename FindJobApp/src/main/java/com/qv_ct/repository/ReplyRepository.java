@@ -13,5 +13,8 @@ import java.util.List;
  * @author nct68
  */
 public interface ReplyRepository {
+    Reply getReplyById(int id);
     List<Reply> getReplyByCommentId(int id);
+    Reply addReply(Reply r);
+    Reply deleteReply(Reply r);
 }

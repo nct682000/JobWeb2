@@ -35,8 +35,14 @@ public class ApplyController {
     
     @GetMapping("/user/{name}/apply")
     public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
-        int id = this.userService.getUsers(principal.getName()).get(0).getId();
-        model.addAttribute("myApplies", this.applyService.getAppliesByUserId(id));
+        
+        model.addAttribute("user", this.userService.getUsers(name).get(0));
+        if(principal != null){
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+            int id = this.userService.getUsers(principal.getName()).get(0).getId();
+            model.addAttribute("myApplies", this.applyService.getAppliesByUserId(id));
+        }
+        
         return "applyManager";
     }
     

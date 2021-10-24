@@ -6,6 +6,7 @@
 package com.qv_ct.repository;
 
 import com.qv_ct.pojos.Recruitment;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public interface RecruitmentRepository {
     Recruitment getRecruitmentById(int id);
 
     List<Recruitment> getRecruitmentByUserId(int userId);
+    List<Object[]> recruitmentStats(int userId, Date from, Date to);
 
     boolean addOrUpdate(Recruitment r);
 

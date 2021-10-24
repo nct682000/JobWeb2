@@ -19,6 +19,8 @@ import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,12 +94,30 @@ public class RecruitmentController {
     }
     
     @GetMapping("/user/{name}/recruitment")
-    public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
+    public String recruitmentManager(Model model, @PathVariable String name, Principal principal,
+                                            @RequestParam(required = false) Map<String, String> params){
+        
+        Date fromDate = null, toDate = null;
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            String from = params.getOrDefault("from", "from");
+            if(from != null)
+                fromDate = f.parse(from);
+            String to = params.getOrDefault("to", "to");
+            if(to != null)
+                toDate = f.parse(to);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         
         model.addAttribute("recruitment", new Recruitment());
-        model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
-        int id = this.userService.getUsers(principal.getName()).get(0).getId();
-        model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+        model.addAttribute("user", this.userService.getUsers(name).get(0));
+        if(principal != null){
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+            int id = this.userService.getUsers(principal.getName()).get(0).getId();
+            model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+            model.addAttribute("recruitmentStats", this.recruitmentService.recruitmentStats(id, fromDate, toDate));
+        }
         
         return "recruitmentManager";
     }
@@ -107,10 +127,25 @@ public class RecruitmentController {
     public String addRecruitment(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
                     BindingResult result,
-                    Principal principal){
+                    Principal principal,
+                    @RequestParam(required = false) Map<String, String> params){
+        
+        Date fromDate = null, toDate = null;
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            String from = params.getOrDefault("from", "from");
+            if(from != null)
+                fromDate = f.parse(from);
+            String to = params.getOrDefault("to", "to");
+            if(to != null)
+                toDate = f.parse(to);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         
         int id = this.userService.getUsers(principal.getName()).get(0).getId();
         model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+        model.addAttribute("recruitmentStats", this.recruitmentService.recruitmentStats(id, fromDate, toDate));
         
         if(principal != null)
             model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));

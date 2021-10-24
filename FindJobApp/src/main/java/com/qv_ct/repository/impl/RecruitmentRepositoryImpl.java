@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -200,6 +201,42 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
         return null;
     }
+
+    @Override
+    public List<Object[]> recruitmentStats(int userId, Date from, Date to) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootR = query.from(Recruitment.class);
+        Root rootA = query.from(Apply.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootR.get("recruiter"), userId));
+        predicates.add(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        
+        if(from != null)
+            predicates.add(builder.greaterThanOrEqualTo(rootA.get("createdDate"), from));
+        if(to != null)
+            predicates.add(builder.lessThanOrEqualTo(rootA.get("createdDate"), to));
+        
+        query.multiselect(rootR.get("id"), // 0
+                rootR.get("title"), // 1
+                builder.count(rootR.get("id")), // 2
+                rootR.get("updatedDate")); // 3
+
+        
+        query.where(predicates.toArray(new Predicate[] {}));
+        
+        query = query.groupBy(rootR.get("id"));
+        query = query.orderBy(builder.desc(rootR.get("id")));
+
+        Query q = session.createQuery(query);
+
+        return q.getResultList();
+    }
+    
+    
 
     //    ------------------    admin   --------------------
     int maxList = 6;

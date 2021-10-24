@@ -13,5 +13,8 @@ import java.util.List;
  * @author nct68
  */
 public interface ReplyService {
+    Reply getReplyById(int id);
     List<Reply> getReplyByCommentId(int id);
+    Reply addReply(String content, int commenterId, int commentId);
+    Reply deleteReply(int userId, int id);
 }

@@ -26,10 +26,8 @@ public class RateServiceImpl implements RateService{
         User can = this.userService.getUserById(canId);
         User rec = this.userService.getUserById(recId);
         if (!this.rateRepository.getRate(canId, recId).isEmpty()){
-            System.out.println(this.rateRepository.getRate(canId, recId));
             Rate r = this.rateRepository.getRate(canId, recId).get(0);
             r.setPoint(Integer.parseInt(point));
-            System.out.println("-------------Update-----------------");
             return this.rateRepository.addOrUpdate(r);
         }
 
@@ -37,7 +35,6 @@ public class RateServiceImpl implements RateService{
         r.setPoint(Integer.parseInt(point));
         r.setCandidate(can);
         r.setRecruiter(rec);
-        System.out.println("-------------Create-----------------");
         return this.rateRepository.addOrUpdate(r);
     }
 

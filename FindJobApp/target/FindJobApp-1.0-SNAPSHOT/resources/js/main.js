@@ -102,6 +102,23 @@ function addRate(canId, recId){
     })
 }
 
+function addInteraction(type, userId, commentId){
+    fetch("/FindJobApp/api/add-interaction", {
+        method: 'post',
+        body: JSON.stringify({
+            "type": type,
+            "userId": userId,
+            "commentId": commentId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    
+    }).then(function(data){
+        location.reload()
+    })
+}
+
 function switchActiveRecruitment(recId){
     fetch("/FindJobApp/api/switch-active-recruitment", {
         method: 'post',
@@ -144,6 +161,8 @@ function switchActiveRecruitment(recId){
             
     })
 }
+
+//
 
 
 function getRatePoint(point){

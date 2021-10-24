@@ -11,4 +11,11 @@ package com.qv_ct.pojos;
  */
 public enum Type {
     LIKE, DISLIKE;
+    
+    private static Type[] list = Type.values();
+    
+    public static Type getType(int i ){
+        return list[i];
+    }
+    
 }

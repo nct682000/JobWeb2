@@ -34,12 +34,8 @@ public class Reply implements Serializable{
     private Date createdDate;
     
     @ManyToOne
-    @JoinColumn(name = "commenter_id")
-    private User commenter;
-    
-    @ManyToOne
-    @JoinColumn(name = "commented_id")
-    private User commented;
+    @JoinColumn(name = "replyer_id")
+    private User replyer;
     
     @ManyToOne
     @JoinColumn(name = "comment_id", nullable = true)
@@ -110,30 +106,17 @@ public class Reply implements Serializable{
     }
 
     /**
-     * @return the commenter
+     * @return the replyer
      */
-    public User getCommenter() {
-        return commenter;
+    public User getReplyer() {
+        return replyer;
     }
 
     /**
-     * @param commenter the commenter to set
+     * @param replyer the replyer to set
      */
-    public void setCommenter(User commenter) {
-        this.commenter = commenter;
+    public void setReplyer(User replyer) {
+        this.replyer = replyer;
     }
-
-    /**
-     * @return the commented
-     */
-    public User getCommented() {
-        return commented;
-    }
-
-    /**
-     * @param commented the commented to set
-     */
-    public void setCommented(User commented) {
-        this.commented = commented;
-    }
+    
 }

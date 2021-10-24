@@ -1,5 +1,6 @@
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\CommentRepository.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\admin\Ad_RecruitmentController.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\HandbookController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Interaction.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\ReplyRepository.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\ApiCommentController.java
@@ -16,6 +17,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Form.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Apply.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\ProvinceRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\Tester.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\ApiReplyController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\ApplyServiceImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\UserService.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\validator\RecruitmentSalaryFromValidator.java
@@ -36,8 +38,10 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\ProvinceRep
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\DispatcherServletInitializer.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Reply.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\SpringSecurityConfig.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\InteractionRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\validator\WebAppValidator.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\TilesConfig.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\InteractionServiceImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\TagService.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\ReplyRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\ApplyRepositoryImpl.java
@@ -48,6 +52,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\admin\Ad_A
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Tag.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\RateRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Location.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\InteractionService.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\WebApplicationContextConfig.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\formatter\UserFormatter.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\CareerService.java
@@ -55,6 +60,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\validator\UserValidato
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\admin\Ad_UserController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\ApiRateController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\BenefitService.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\InteractionRepository.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\RateService.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\BenefitRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\UserRepositoryImpl.java
@@ -82,6 +88,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\CareerRepos
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\IndexController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Role.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\BenefitRepository.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\client\ApiInteractionController.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\UserServiceImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\TagRepository.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\formatter\CareerFormatter.java

@@ -54,6 +54,7 @@ public class CommentServiceImpl implements CommentService{
     public Comment deleteComment(int userId, int id) {
         User u = this.userService.getUserById(userId);
         Comment c = this.commentRepository.getCommentById(id);
+        
         if(u.getId() == c.getCommenter().getId())
             return this.commentRepository.deleteComment(c);
         

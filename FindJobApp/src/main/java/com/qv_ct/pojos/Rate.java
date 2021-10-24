@@ -38,7 +38,7 @@ public class Rate implements Serializable{
     @Column(name = "created_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date createdDate;
-
+    
     public Rate() {
     }
 

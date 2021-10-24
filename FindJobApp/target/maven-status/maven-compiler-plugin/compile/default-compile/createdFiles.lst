@@ -1,4 +1,5 @@
 com\qv_ct\controllers\admin\Ad_ApplyController.class
+com\qv_ct\controllers\client\ApiReplyController.class
 com\qv_ct\validator\RecruitmentValidator.class
 com\qv_ct\repository\RecruitmentRepository.class
 com\qv_ct\configs\WebApplicationContextConfig.class
@@ -11,6 +12,7 @@ com\qv_ct\service\ReplyService.class
 com\qv_ct\repository\BenefitRepository.class
 com\qv_ct\validator\WebAppValidator.class
 com\qv_ct\controllers\client\ApiCommentController.class
+com\qv_ct\controllers\client\ApiInteractionController.class
 com\qv_ct\pojos\Sex.class
 com\qv_ct\formatter\RecruitmentFormatter.class
 com\qv_ct\repository\RateRepository.class
@@ -20,6 +22,7 @@ com\qv_ct\service\impl\RateServiceImpl.class
 com\qv_ct\pojos\Interaction.class
 com\qv_ct\pojos\Form$2.class
 com\qv_ct\repository\impl\RateRepositoryImpl.class
+com\qv_ct\repository\InteractionRepository.class
 com\qv_ct\repository\ApplyRepository.class
 com\qv_ct\controllers\client\ApplyController.class
 com\qv_ct\repository\UserRepository.class
@@ -34,6 +37,7 @@ com\qv_ct\repository\impl\ReplyRepositoryImpl.class
 com\qv_ct\validator\UserValidator.class
 com\qv_ct\service\UserService.class
 com\qv_ct\service\impl\CommentServiceImpl.class
+com\qv_ct\service\InteractionService.class
 com\qv_ct\formatter\ProvinceFormatter.class
 com\qv_ct\service\impl\UserServiceImpl.class
 com\qv_ct\repository\impl\CommentRepositoryImpl.class
@@ -51,6 +55,7 @@ com\qv_ct\pojos\Role.class
 com\qv_ct\pojos\Form$6.class
 com\qv_ct\service\impl\ProvinceServiceImpl.class
 com\qv_ct\controllers\admin\AdminHome.class
+com\qv_ct\controllers\client\HandbookController.class
 com\qv_ct\formatter\UserFormatter.class
 com\qv_ct\controllers\admin\Ad_RecruitmentController.class
 com\qv_ct\pojos\Sex$1.class
@@ -72,6 +77,7 @@ com\qv_ct\controllers\client\ApiRecruitmentController.class
 com\qv_ct\pojos\Type.class
 com\qv_ct\pojos\User.class
 com\qv_ct\pojos\Form.class
+com\qv_ct\service\impl\InteractionServiceImpl.class
 com\qv_ct\service\BenefitService.class
 com\qv_ct\pojos\Benefit.class
 com\qv_ct\service\CommentService.class
@@ -94,4 +100,5 @@ com\qv_ct\service\impl\ApplyServiceImpl.class
 com\qv_ct\repository\impl\ProvinceRepositoryImpl.class
 com\qv_ct\pojos\Form$3.class
 com\qv_ct\pojos\Career.class
+com\qv_ct\repository\impl\InteractionRepositoryImpl.class
 com\qv_ct\controllers\client\IndexController.class

@@ -66,10 +66,7 @@ public class CommentRepositoryImpl implements CommentRepository{
         Root root = query.from(Comment.class);
         query = query.select(root);
         
-        Predicate p =builder.equal(root.get("id"), id);
-        
-        query = query.where(p);
-        query = query.orderBy(builder.desc(root.get("id")));
+        query = query.where(builder.equal(root.get("id"), id));
         Query q = session.createQuery(query);
         
         return (Comment) q.getSingleResult();

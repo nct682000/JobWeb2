@@ -20,8 +20,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/diemmanh2.jpg" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/bqtv-1" />" class="text-dark">Các thể hiện điểm mạnh trong cuộc phỏng vấn</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-1" />" class="text-dark">Các thể hiện điểm mạnh trong cuộc phỏng vấn</a></h5>
+                        <div class="card-text truncated-content">texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</div>
                         <a href="<c:url value="/handbook/bqtv-1" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/1-chienluoctimhieucongty.jpg" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/bqtv-2" />" class="text-dark">Chiến lược tìm hiểu công ty mơ ước</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-2" />" class="text-dark">Chiến lược tìm hiểu công ty mơ ước</a></h5>
+                        <div class="card-text truncated-content">text</div>
                         <a href="<c:url value="/handbook/bqtv-2" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -44,8 +44,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/Picture1_m%E1%BA%B7c%20g%C3%AC%20lu%C3%B4n%20chu%E1%BA%A9n%20khi%20%C4%91i%20ph%E1%BB%8Fng%20v%E1%BA%A5n%20CareerBuilderVN%202(1).png" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/bqtv-3" />" class="text-dark">Mặc gì luôn chuẩn khi đi phỏng vấn</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-3" />" class="text-dark">Mặc gì luôn chuẩn khi đi phỏng vấn</a></h5>
+                        <div class="card-text truncated-content">text</div>
                         <a href="<c:url value="/handbook/bqtv-3" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/chi-trich-trong-cong-viec.jpg" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/ttcv-1" />" class="text-dark">Đối mặt với sự chỉ trích trong công việc</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-1" />" class="text-dark">Đối mặt với sự chỉ trích trong công việc</a></h5>
+                        <div class="card-text truncated-content">text</div>
                         <a href="<c:url value="/handbook/ttcv-1" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -76,8 +76,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/cp1.jpg" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/ttcv-2" />" class="text-dark">'Vượt lười' khi làm việc tại nhà? Không khó!</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-2" />" class="text-dark">'Vượt lười' khi làm việc tại nhà? Không khó!</a></h5>
+                        <div class="card-text truncated-content">text</div>
                         <a href="<c:url value="/handbook/ttcv-2" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -88,8 +88,8 @@
                         <img class="card-img-top" src="https://images.careerbuilder.vn/content/images/pp2.jpg" alt="image-1">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="<c:url value="/handbook/ttcv-3" />" class="text-dark">Xem ngay trước khi nhảy việc "mùa dịch"</a></h5>
-                        <div class="card-text">text</div>
+                        <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-3" />" class="text-dark">Xem ngay trước khi nhảy việc "mùa dịch"</a></h5>
+                        <div class="card-text truncated-content">text</div>
                         <a href="<c:url value="/handbook/ttcv-3" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>

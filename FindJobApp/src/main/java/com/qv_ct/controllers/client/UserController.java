@@ -110,8 +110,11 @@ public class UserController {
     }
     
     @GetMapping("/user/{name}")
-    public String userPage(Model model, @PathVariable String name) {
-       model.addAttribute("user", this.userDetailsService.getUsers(name));
+    public String userPage(Model model, @PathVariable String name, Principal principal) {
+       model.addAttribute("user", this.userDetailsService.getUsers(name).get(0));
+       if(principal != null)
+            model.addAttribute("currentUser", this.userDetailsService.getUsers(principal.getName()).get(0));
+       
        model.addAttribute("userUpdate", new User());
        User u = this.userDetailsService.getUsers(name).get(0);
        int id = u.getId();
@@ -130,7 +133,7 @@ public class UserController {
                             BindingResult result,
                             Principal principal) {
         
-       model.addAttribute("user", this.userDetailsService.getUsers(principal.getName()));
+       model.addAttribute("user", this.userDetailsService.getUsers(principal.getName()).get(0));
        User uc = this.userDetailsService.getUsers(principal.getName()).get(0);
        int id = uc.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
