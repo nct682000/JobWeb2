@@ -17,6 +17,7 @@ public interface ApplyRepository {
     List<Apply> getApplies();
 
     List<Apply> getAppliesByUserId(int id);
+
     List<Apply> getAppliesByRecruiter(int recId);
 
     boolean addOrUpdate(Apply a);
@@ -31,5 +32,17 @@ public interface ApplyRepository {
     boolean deleteApply(int applyId);
 
     long countApply_Admin_For_Chart(boolean active, int month, int year);
+
+    List<Object[]> countApply_ByCompany_ForChart(int year);
+
+    List<Object[]> countApply_ByCompany2_ForChart(int year, int month);
+
+    List<Object[]> countApply_ByJob_ForChart(int year);
+    
+    List<Object[]> countApply_ByJob2_ForChart(int year, int month);
+
+    List<Object[]> countApply_ByCity_ForChart(int year);
+    
+    List<Object[]> countApply_ByCity2_ForChart(int year, int month);
 
 }

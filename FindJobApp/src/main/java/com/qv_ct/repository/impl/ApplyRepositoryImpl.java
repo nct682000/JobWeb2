@@ -73,7 +73,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
 
         return q.getResultList();
     }
-    
+
     @Override
     public List<Apply> getAppliesByRecruiter(int recId) {
         Session session = sessionFactory.getObject().getCurrentSession();
@@ -81,17 +81,16 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
         Root root = query.from(Apply.class);
         query = query.select(root);
-        
-        Predicate p =builder.equal(root.get("recruitment").get("recruiter"), recId);
-        
+
+        Predicate p = builder.equal(root.get("recruitment").get("recruiter"), recId);
+
         query = query.where(p);
         query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
         q.setMaxResults(10);
-        
+
         return q.getResultList();
     }
-    
 
     //    -------------     admin       --------------
     int maxList = 6;
@@ -156,6 +155,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         return false;
     }
 
+//  thống kê hoạt động ứng tuyển trong năm
     @Override
     public long countApply_Admin_For_Chart(boolean active, int month, int year) {
         Session s = sessionFactory.getObject().getCurrentSession();
@@ -165,6 +165,116 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         q.setParameter("active", active);
 
         return Long.parseLong(q.getSingleResult().toString());
+    }
+
+//  thống kê top nhà tuyển dụng được ứng tuyển nhiều trong năm
+    int maxTop = 5;
+
+    @Override
+    public List<Object[]> countApply_ByCompany_ForChart(int year) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, u.companyName\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "INNER JOIN User u ON u.id = r.recruiter\n"
+                + "WHERE YEAR(a.createdDate) =:year\n"
+                + "GROUP BY a.recruitment ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+//        results.forEach(obj -> System.out.printf("sl: %d; companyName: %s\n", obj[0], obj[1]));
+
+        return results;
+    }
+
+    @Override
+    public List<Object[]> countApply_ByCompany2_ForChart(int year, int month) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, u.companyName\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "INNER JOIN User u ON u.id = r.recruiter\n"
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
+                + "GROUP BY a.recruitment ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setParameter("month", month);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+//        results.forEach(obj -> System.out.printf("sl: %d; companyName: %s\n", obj[0], obj[1]));
+
+        return results;
+    }
+
+    //  thống kê top việc làm được ứng tuyển nhiều trong năm
+    @Override
+    public List<Object[]> countApply_ByJob_ForChart(int year) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, r.title\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "WHERE YEAR(a.createdDate) =:year\n"
+                + "GROUP BY a.recruitment ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+//        results.forEach(obj -> System.out.printf("sl: %d; title: %s\n", obj[0], obj[1]));
+
+        return results;
+    }
+
+    @Override
+    public List<Object[]> countApply_ByJob2_ForChart(int year, int month) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, r.title\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
+                + "GROUP BY a.recruitment ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setParameter("month", month);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+//        results.forEach(obj -> System.out.printf("sl: %d; title: %s\n", obj[0], obj[1]));
+
+        return results;
+    }
+
+    //  thống kê top thành phố có lượng ứng tuyển nhiều trong năm
+    @Override
+    public List<Object[]> countApply_ByCity_ForChart(int year) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, p.name\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN User u ON u.id = a.recruitment\n"
+                + "INNER JOIN Location l ON l.id = u.location\n"
+                + "INNER JOIN Province p ON p.id = l.province\n"
+                + "WHERE YEAR(a.createdDate) =:year\n"
+                + "GROUP BY p.name ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+        results.forEach(obj -> System.out.printf("sl: %d; city: %s\n", obj[0], obj[1]));
+
+        return results;
+    }
+
+    @Override
+    public List<Object[]> countApply_ByCity2_ForChart(int year, int month) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT Count(a.id) AS sl, p.name\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN User u ON u.id = a.recruitment\n"
+                + "INNER JOIN Location l ON l.id = u.location\n"
+                + "INNER JOIN Province p ON p.id = l.province\n"
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
+                + "GROUP BY p.name ORDER BY sl DESC");
+        q.setParameter("year", year);
+        q.setParameter("month", month);
+        q.setMaxResults(maxTop);
+        List<Object[]> results = q.getResultList();
+//        results.forEach(obj -> System.out.printf("sl: %d; city: %s\n", obj[0], obj[1]));
+
+        return results;
     }
 
 }

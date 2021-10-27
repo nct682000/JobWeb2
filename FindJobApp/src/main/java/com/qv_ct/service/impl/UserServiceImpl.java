@@ -146,4 +146,10 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
+    
+    @Override
+    public boolean addOrUpdate2(User user) {
+        return this.userRepository.addOrUpdate2(user);
+    }
+    
 }

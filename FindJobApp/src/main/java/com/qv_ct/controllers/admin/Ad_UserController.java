@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import java.security.Principal;
 
 /**
  *
@@ -191,9 +192,11 @@ public class Ad_UserController {
         return "getEmployees_Admin";
     }
 
+//    tạo nhân viên mới
     @GetMapping("/admin/employees/new")
     public String createEmployee_Admin_View(Model model, @RequestParam(required = false) Map<String, String> params) {
         model.addAttribute("user", new User());
+        model.addAttribute("typeUser", "create-employee");
 
         return "createEmployees_Admin";
     }
@@ -208,7 +211,39 @@ public class Ad_UserController {
                 return "redirect:/admin/employees";
             }
         }
+        model.addAttribute("typeUser", "create-employee");
 
         return "createEmployees_Admin";
+    }
+
+//   cập nhập thông tin nhân viên - lỗi
+    @GetMapping("/admin/employees/{userId}/edit")
+    public String editEmployee_Admin_View(Model model,
+            @PathVariable(value = "userId") int userId,
+            Principal principal) {
+        model.addAttribute("user", this.userService.getUserById(userId));
+//        model.addAttribute("userUpdate", new User());
+        model.addAttribute("typeUser", "edit-employee");
+
+        return "editEmployees_Admin";
+    }
+
+    @PostMapping("/admin/employees/{userId}/edit")
+    public String editEmployee_Admin_Process(Model model,
+            @ModelAttribute(value = "user") User user,
+            @PathVariable(value = "userId") int userId) {
+//        user.setUsername(principal.getName());
+//        User userRoot = this.userService.getUsers(principal.getName()).get(0);
+//        user.setMail(userRoot.getMail());
+//        user.setRole(userRoot.getRole());
+//        user.setPassword(userRoot.getPassword());
+//        if (user.getFile().isEmpty()) {
+//            user.setAvatar(u.getAvatar());
+//        }
+        user.setId(userId);
+//        Role role = Role.ROLE_EMPLOYEE;
+        this.userService.addOrUpdate2(user);
+
+        return "redirect:/admin/employees";
     }
 }

@@ -224,4 +224,16 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return false;
     }
+    
+    @Override
+    public boolean addOrUpdate2(User user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.saveOrUpdate(user);
+            return true;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
+    }
 }

@@ -137,7 +137,7 @@
         <form:form method="patch" action="${action}" modelAttribute="user" enctype="multipart/form-data"
                    cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
 
-            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Tạo mới người ứng tuyển</h3>
+            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin người ứng tuyển</h3>
             <div class="row" style="padding: 20px;">
                 <!--    tài khoản   -->
                 <div class="col-md-5  " style="padding: 20px 20px 0;" >
@@ -321,7 +321,7 @@
         <form:form method="patch" action="${action}" modelAttribute="user" enctype="multipart/form-data"
                    cssClass="container bg-secondary col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px;">
 
-            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Tạo mới nhà tuyển dụng</h3>
+            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin nhà tuyển dụng</h3>
             <div class="row" style="padding: 20px;">
                 <!--    tài khoản   -->
                 <div class="col-md-5  " style="padding: 20px 20px 0;" >

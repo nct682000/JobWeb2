@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.qv_ct.service.ApplyService;
-import java.util.Map;
+import com.qv_ct.service.RateService;
+import java.time.LocalDate;
 
 /**
  *
@@ -25,15 +26,38 @@ public class AdminHome {
 
     @Autowired
     private ApplyService applyService;
+    @Autowired
+    private RateService rateService;
 
     @RequestMapping("/admin")
     public String dashboard(Model model, @RequestParam(required = false) Map<String, String> params) {
         boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
         int year = Integer.parseInt(params.getOrDefault("year", "2021"));
         String sort = params.getOrDefault("sort", "thang");
+
+        LocalDate current = java.time.LocalDate.now();
+        int month = Integer.parseInt(current.toString().substring(5, 7));
+        int sortMonth = Integer.parseInt(params.getOrDefault("sortMonth", String.valueOf(month)));
+        String sort2 = params.getOrDefault("sort2", "nam");
+
+        if (sort2.equals("nam")) {
+            model.addAttribute("rateChart", this.rateService.rateForChart(year));
+            model.addAttribute("countApplyByCompany", this.applyService.countApply_ByCompany_ForChart(year));
+            model.addAttribute("countApplyByJob", this.applyService.countApply_ByJob_ForChart(year));
+            model.addAttribute("countApplyByCity", this.applyService.countApply_ByCity_ForChart(year));
+            model.addAttribute("sortBy2", "nam");
+        } else {
+            model.addAttribute("rateChart", this.rateService.rateForChart2(year, sortMonth));
+            model.addAttribute("countApplyByCompany", this.applyService.countApply_ByCompany2_ForChart(year, sortMonth));
+            model.addAttribute("countApplyByJob", this.applyService.countApply_ByJob2_ForChart(year, sortMonth));
+            model.addAttribute("countApplyByCity", this.applyService.countApply_ByCity2_ForChart(year, sortMonth));
+            model.addAttribute("sortBy2", "thang");
+            model.addAttribute("month", sortMonth);
+            
+        }
+
         double avg = 0;
         int total = 0;
-
         if (sort.equals("thang")) {
             long[] data = new long[12];
             for (int i = 1; i <= 12; i++) {
@@ -62,6 +86,7 @@ public class AdminHome {
             model.addAttribute("total", total);
             model.addAttribute("avg", avg);
         }
+
         return "dashboard";
     }
 

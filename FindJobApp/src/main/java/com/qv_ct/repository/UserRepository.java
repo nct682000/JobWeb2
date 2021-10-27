@@ -40,4 +40,6 @@ public interface UserRepository {
     boolean deleteUser(int userId);
 
     boolean addEmployee(User user, Role role);
+    
+    boolean addOrUpdate2(User user);
 }

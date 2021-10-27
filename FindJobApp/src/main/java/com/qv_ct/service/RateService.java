@@ -13,8 +13,18 @@ import java.util.List;
  * @author nct68
  */
 public interface RateService {
+
     Rate addOrUpdate(String point, int canId, int recId);
+
     long rateCountRecruiter(int recId);
+
     double ratePointRecruiter(int recId);
+
     List<Rate> getRate(int canId, int recId);
+
+//    chart
+    List<Object[]> rateForChart(int year);
+
+    List<Object[]> rateForChart2(int year, int month);
+
 }
