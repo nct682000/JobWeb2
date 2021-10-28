@@ -96,7 +96,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
     int maxList = 6;
 
     @Override
-    public List<Apply> getApply_Admin(int page, boolean active, String title) {
+    public List<Apply> getApply_Admin(int page, boolean active, String title, String dateFilter) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = s.getCriteriaBuilder();
         CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
@@ -106,7 +106,10 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Predicate p2 = builder.equal(root.get("active"), active);
         String kw = "%" + title + "%";
         Predicate p1 = builder.like(root.get("title").as(String.class), kw);
-        query.where(builder.and(p1, p2));
+        String kw2 = "%" + dateFilter + "%";
+        Predicate p3 = builder.like(root.get("createdDate").as(String.class), kw2);
+
+        query.where(builder.and(p1, p2, p3));
 
         query = query.orderBy(builder.desc(root.get("id")));
 
@@ -118,14 +121,36 @@ public class ApplyRepositoryImpl implements ApplyRepository {
     }
 
     @Override
-    public long countApply_Admin(boolean active) {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) FROM Apply a WHERE a.active =:active");
-        q.setParameter("active", active);
+    public int countApply_Admin(boolean active, String title, String dateFilter) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
+        Root root = query.from(Apply.class);
+        query = query.select(root);
 
-        return Long.parseLong(q.getSingleResult().toString());
+        Predicate p2 = builder.equal(root.get("active"), active);
+        String kw = "%" + title + "%";
+        Predicate p1 = builder.like(root.get("title").as(String.class), kw);
+        String kw2 = "%" + dateFilter + "%";
+        Predicate p3 = builder.like(root.get("createdDate").as(String.class), kw2);
+
+        query.where(builder.and(p1, p2, p3));
+
+        query = query.orderBy(builder.desc(root.get("id")));
+
+        Query q = s.createQuery(query);
+
+        return q.getResultList().size();
     }
 
+//    @Override
+//    public long countApply_Admin(boolean active) {
+//        Session s = sessionFactory.getObject().getCurrentSession();
+//        Query q = s.createQuery("SELECT Count(*) FROM Apply a WHERE a.active =:active");
+//        q.setParameter("active", active);
+//
+//        return Long.parseLong(q.getSingleResult().toString());
+//    }
     @Override
     public boolean enableApply(int applyId, boolean active) {
         try {
@@ -253,7 +278,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         q.setParameter("year", year);
         q.setMaxResults(maxTop);
         List<Object[]> results = q.getResultList();
-        results.forEach(obj -> System.out.printf("sl: %d; city: %s\n", obj[0], obj[1]));
+//        results.forEach(obj -> System.out.printf("sl: %d; city: %s\n", obj[0], obj[1]));
 
         return results;
     }
@@ -274,6 +299,19 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         List<Object[]> results = q.getResultList();
 //        results.forEach(obj -> System.out.printf("sl: %d; city: %s\n", obj[0], obj[1]));
 
+        return results;
+    }
+
+    @Override
+    public List<Object[]> getApplyById(int applyId) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT a.title, a.content, a.cv, a.createdDate, a.active, r.title AS congviec, u.username, u.id AS userId, r.id AS congviecId\n"
+                + "FROM Apply a\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "INNER JOIN User u ON u.id = a.candidate\n"
+                + "WHERE a.id =:applyId");
+        q.setParameter("applyId", applyId);
+        List<Object[]> results = q.getResultList();
         return results;
     }
 

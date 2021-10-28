@@ -65,13 +65,17 @@ public class ApplyServiceImpl implements ApplyService {
 
     //    -------------     admin       --------------
     @Override
-    public List<Apply> getApply_Admin(int page, boolean active, String title) {
-        return this.applyRepository.getApply_Admin(page, active, title);
+    public List<Apply> getApply_Admin(int page, boolean active, String title, String dateFilter) {
+        return this.applyRepository.getApply_Admin(page, active, title, dateFilter);
     }
 
+//    @Override
+//    public long countApply_Admin(boolean active) {
+//        return this.applyRepository.countApply_Admin(active);
+//    }
     @Override
-    public long countApply_Admin(boolean active) {
-        return this.applyRepository.countApply_Admin(active);
+    public int countApply_Admin(boolean active, String title, String dateFilter) {
+        return this.applyRepository.countApply_Admin(active, title, dateFilter);
     }
 
     @Override
@@ -118,5 +122,11 @@ public class ApplyServiceImpl implements ApplyService {
     public List<Object[]> countApply_ByCity2_ForChart(int year, int month) {
         return this.applyRepository.countApply_ByCity2_ForChart(year, month);
     }
+    
+    @Override
+    public List<Object[]> getApplyById(int applyId) {
+        return this.applyRepository.getApplyById(applyId);
+    }
+    
 
 }

@@ -23,9 +23,10 @@ public interface ApplyRepository {
     boolean addOrUpdate(Apply a);
 
     //    -------------     admin       --------------
-    List<Apply> getApply_Admin(int page, boolean active, String title);
+    List<Apply> getApply_Admin(int page, boolean active, String title, String dateFilter);
 
-    long countApply_Admin(boolean active);
+//    long countApply_Admin(boolean active);
+    int countApply_Admin(boolean active, String title, String dateFilter);
 
     boolean enableApply(int applyId, boolean active);
 
@@ -38,11 +39,13 @@ public interface ApplyRepository {
     List<Object[]> countApply_ByCompany2_ForChart(int year, int month);
 
     List<Object[]> countApply_ByJob_ForChart(int year);
-    
+
     List<Object[]> countApply_ByJob2_ForChart(int year, int month);
 
     List<Object[]> countApply_ByCity_ForChart(int year);
-    
+
     List<Object[]> countApply_ByCity2_ForChart(int year, int month);
+
+    List<Object[]> getApplyById(int applyId);
 
 }
