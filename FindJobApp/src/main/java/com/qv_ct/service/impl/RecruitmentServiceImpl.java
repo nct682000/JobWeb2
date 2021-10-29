@@ -83,13 +83,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     //    -----------   admin   ------------------
     @Override
-    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active) {
-        return this.recruitmentRepository.getRecruitments_Admin(page, salaryFrom, salaryTo, active);
+    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active, String title, int caseSearch) {
+        return this.recruitmentRepository.getRecruitments_Admin(page, salaryFrom, salaryTo, active, title, caseSearch);
     }
 
     @Override
-    public long countRecruitment_Admin(boolean active) {
-        return this.recruitmentRepository.countRecruitment_Admin(active);
+    public int countRecruitment_Admin(long salaryFrom, long salaryTo, boolean active, String title, int caseSearch) {
+        return this.recruitmentRepository.countRecruitment_Admin(salaryFrom, salaryTo, active, title, caseSearch);
     }
 
     @Override

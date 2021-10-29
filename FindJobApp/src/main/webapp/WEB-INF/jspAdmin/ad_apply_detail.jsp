@@ -27,7 +27,7 @@
         <div class="col-md-5">
             <div class="col-md-12">Tạo ngày ${apply[0][3].toString().substring(0, 10)}</div>
             <div class="col-md-12">Người thực hiện: ${apply[0][6]}</div>
-            <div class="col-md-12">Công việc: ${apply[0][5]}</div>
+            <div class="col-md-12">Công việc: <a href="/FindJobApp/recruitment/${apply[0][8]}">${apply[0][5]}</a></div>
             <div style="text-align: center; margin: 20px">
                 <a href="${apply[0][2]}"><img src="${apply[0][2]}" class="img-fluid rounded" alt="cv" /></a>
             </div>

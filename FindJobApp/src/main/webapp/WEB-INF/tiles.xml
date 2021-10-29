@@ -82,17 +82,12 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jspAdmin/admin.jsp" />
     </definition>
     
-    <!--chưa cập nhập-->
+    <!--    recruiment     -->
 
     
     <definition name="getRecruiment_Admin" extends="baseAdmin">
         <put-attribute name="title"     value="recruitments admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitments.jsp" />
-    </definition>
-    
-    <definition name="ad_recruitmentDetail" extends="baseAdmin">
-        <put-attribute name="title"     value="Recruitment detail" />
-        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_recruitment_detail.jsp" />
     </definition>
     
     <!--    apply   -->
