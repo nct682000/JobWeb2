@@ -38,7 +38,4 @@ public interface UserService extends UserDetailsService {
 
     boolean deleteUser(int userId);
 
-    boolean addEmployee(User user, Role role);
-    
-    boolean addOrUpdate2(User user);
 }

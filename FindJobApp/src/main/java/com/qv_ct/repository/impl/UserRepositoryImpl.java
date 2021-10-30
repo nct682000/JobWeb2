@@ -130,9 +130,9 @@ public class UserRepositoryImpl implements UserRepository {
                 rootU.get("companyName"),
                 rootU.get("avatar"),
                 builder.count(rootU.get("id")));
-        
-        query.where(predicates.toArray(new Predicate[] {}));
-        
+
+        query.where(predicates.toArray(new Predicate[]{}));
+
         query = query.groupBy(rootU.get("id"));
         query = query.orderBy(builder.desc(builder.count(rootU.get("id"))));
 
@@ -212,28 +212,4 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
-    @Override
-    public boolean addEmployee(User user, Role role) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            user.setRole(role);
-            session.save(user);
-            return true;
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean addOrUpdate2(User user) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            session.saveOrUpdate(user);
-            return true;
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
-    }
 }

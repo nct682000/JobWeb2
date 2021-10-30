@@ -270,7 +270,8 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Session session = sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("SELECT Count(a.id) AS sl, p.name\n"
                 + "FROM Apply a\n"
-                + "INNER JOIN User u ON u.id = a.recruitment\n"
+                + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
+                + "INNER JOIN User u ON u.id = r.recruiter\n"
                 + "INNER JOIN Location l ON l.id = u.location\n"
                 + "INNER JOIN Province p ON p.id = l.province\n"
                 + "WHERE YEAR(a.createdDate) =:year\n"
