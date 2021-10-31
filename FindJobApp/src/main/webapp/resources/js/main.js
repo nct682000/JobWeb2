@@ -51,8 +51,24 @@ function addComment(commenterId, commentedId){
                     <div class="ml-3">${data.content}</div>
                 </div>
                 <div>
-                    <span><a href="#">Thích</a> . </span>
-                    <span><a href="#">Trả lời</a> . </span>
+                    <span class="dropdown">
+                        <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Thích
+                        </button>
+                        <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                                <div><a href="#" class="text-primary" onclick="addInteraction(0, ${commenterId}, ${data.id})"><i class="fa fa-thumbs-up"></i> Thích</a></div>
+                                <div><a href="#" class="text-danger" onclick="addInteraction(1, ${commenterId}, ${data.id})"><i class="fa fa-thumbs-down"></i> Không thích</a></div>
+                        </div>
+                    </span>
+                    <span class="dropdown">
+                        <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Trả lời
+                        </button>
+                        <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                            <textarea id="replyContent-${data.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
+                            <div><a href="#" class="text-info" onclick="addReply(${commenterId}, ${data.id})"><button>Trả lời</button></a></div>
+                        </div>
+                    </span>
                     <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
                     <span class="btn btn-danger" onclick="deleteComment(${commenterId}, ${data.id})">Xóa</span>
                 </div>
@@ -83,6 +99,58 @@ function deleteComment(userId, commentId){
             c.style.display = "none"
         })
     }
+}
+
+function addReply(replyerId, commentId){
+    fetch("/FindJobApp/api/add-reply", {
+        method: 'post',
+        body: JSON.stringify({
+            "content": document.getElementById(`replyContent-${commentId}`).value,
+            "replyerId": replyerId,
+            "commentId": commentId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res){
+        console.info(res)
+        return res.json()
+    }).then(function(data){
+        console.info(data)
+        console.info(data.id)
+        
+        let area =  document.getElementById(`replyArea-${commentId}`)
+        let name = document.getElementById("cmtName").value
+        let avatar = document.getElementById("cmtAvatar").value
+        console.info(name)
+        console.info(avatar)
+        
+        moment.locale('vi')
+        area.innerHTML = `
+        <div class="ml-5 mt-2 row bg-light" id="reply-${data.id}">
+            <div class="col-2 text-center">
+                <img alt="Avatar" src="${avatar}" class="img-fluid rounded"/>
+            </div>
+            <div class="col-10">
+                <div class="card">
+                    <div class="font-weight-bold">
+                        ${name}
+                    </div>
+
+                    <div class="pl-3">${data.content}</div>
+                </div>
+                <div>
+                    <span><a href="#">Thích</a> . </span>
+                    <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
+                    <span class="btn btn-danger">Xóa</span>
+                </div>
+            </div>
+        </div>
+        ` + area.innerHTML
+    }).then(function(empty){
+        document.getElementById(`replyContent-${commentId}`).value = ""
+//        location.reload()
+    })
 }
     
 function addRate(canId, recId){

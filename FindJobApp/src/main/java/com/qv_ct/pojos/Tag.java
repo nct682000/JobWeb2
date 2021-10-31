@@ -8,6 +8,7 @@ package com.qv_ct.pojos;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Tag implements Serializable{
     @Size(min = 2, max = 20, message = "{tag.content.sizeError}")
     private String content;
     
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private Set<Recruitment> recruitments;
 
     public Tag() {

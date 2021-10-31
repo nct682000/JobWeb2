@@ -142,20 +142,20 @@ public class UserController {
        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
         
         User u = this.userDetailsService.getUsers(principal.getName()).get(0);
-            user.setId(u.getId());
-            user.setUsername(u.getUsername());
-            user.setPassword(u.getPassword());
-            if(user.getFile().isEmpty())
-                user.setAvatar(u.getAvatar());
+        user.setId(u.getId());
+        user.setUsername(u.getUsername());
+        user.setPassword(u.getPassword());
+        if(user.getFile().isEmpty())
+            user.setAvatar(u.getAvatar());
 
-            Role role = u.getRole();
+        Role role = u.getRole();
 
-            if(!result.hasErrors()){
-                if(this.userDetailsService.addOrUpdate(user, role) == true)
-                     return String.format("redirect:/user/%s", principal.getName());
-            }else
-                model.addAttribute("updateUserError", "Cập nhật thông tin không thành công, kiểm tra lại nhé!");
-        
+        if(!result.hasErrors()){
+            if(this.userDetailsService.addOrUpdate(user, role) == true)
+                 return String.format("redirect:/user/%s", principal.getName());
+        }else
+            model.addAttribute("updateUserError", "Cập nhật thông tin không thành công, kiểm tra lại nhé!");
+
        return "userpage";
     }
     

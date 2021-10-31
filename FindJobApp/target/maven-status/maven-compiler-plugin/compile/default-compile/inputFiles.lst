@@ -13,6 +13,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\BenefitSe
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\ReplyService.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\HibernateConfig.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\TagRepositoryImpl.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\formatter\TagFormatter.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Form.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Apply.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\ProvinceRepositoryImpl.java
@@ -77,6 +78,7 @@ D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Career.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\configs\SecurityWebAppInitializer.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\ProvinceServiceImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\pojos\Province.java
+D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\formatter\BenefitFormatter.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\repository\impl\CareerRepositoryImpl.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\controllers\admin\AdminHome.java
 D:\Java\JobWeb\JobWeb2\FindJobApp\src\main\java\com\qv_ct\service\impl\CommentServiceImpl.java

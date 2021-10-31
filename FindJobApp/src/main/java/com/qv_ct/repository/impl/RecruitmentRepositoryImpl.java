@@ -182,6 +182,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         Predicate p = builder.equal(root.get("recruiter"), userId);
 
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
         return q.getResultList();

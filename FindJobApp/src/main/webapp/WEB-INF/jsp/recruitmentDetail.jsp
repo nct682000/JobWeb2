@@ -90,7 +90,7 @@
                     
               </div>
                     <div class="font-weight-bold text-secondary col-2">
-                        <c:if test="${currentUser != null && currentUser.role == ROLE_CANDIDATE}">
+                        <c:if test="${currentUser != null && currentUser.role.toString() == 'ROLE_CANDIDATE'}">
                             <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
                                 ỨNG TUYỂN CÔNG VIỆC NÀY
                             </button>
@@ -117,8 +117,9 @@
             <!-- Benefit -->
             <h5 class="text-dark font-weight-bold">PHÚC LỢI</h5>
             <div class="card-content m-1 bg-light row mb-2 text-info font-weight-bold">
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 1</div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 2</div>
+                <c:if test="${recDetail.benefits.isEmpty()}">
+                    <div class=" mb-2 pl-3">Tin tuyển dụng này chưa thêm phúc lợi</div>
+                </c:if>
                 <c:forEach var="b" items="${recDetail.benefits}">
                     <div class="col-md-4 col-xl-4 mb-2 pl-3">${b.name}</div>
                 </c:forEach>
@@ -131,8 +132,9 @@
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
             <div class="card-content">
-                <span class="ml-3 p-2 badge badge-info">Tag 1</span>
-                <span class="ml-3 p-2 badge badge-info">Tag 2</span>
+                <c:if test="${recDetail.tags.isEmpty()}">
+                    <div class=" mb-2 pl-3 text-info">Tin tuyển dụng này chưa thêm nhãn</div>
+                </c:if>
                 <c:forEach var="t" items="${recDetail.tags}">
                     <span class="ml-3 p-2 badge badge-info">${t.content}</span>
                 </c:forEach>

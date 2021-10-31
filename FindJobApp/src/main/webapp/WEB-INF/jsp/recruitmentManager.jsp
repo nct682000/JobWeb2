@@ -11,6 +11,18 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
+
+<<header>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+</header>
+
 <c:if test="${currentUser == null}">
     <h2 class="text-center text-danger font-weight-bold mb-4">BẠN CHƯA ĐĂNG NHẬP</h2>
     <div class="text-center">
@@ -136,16 +148,31 @@
                                     <form:textarea path="description" class="form-control" type="text"/>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="text-primary font-weight-bold">Thêm nhãn</div>
-                            <div class="input-group">
-                                <select  multiple data-live-search="true">
-                                    <option>Mustard</option>
-                                    <option>Ketchup</option>
-                                    <option>Relish</option>
-                                </select>
+                              
+                        <div class="row">
+                            <!-- TAG -->
+                            <div class="form-group col-6">
+                                <div class="text-primary font-weight-bold">Thêm Phúc lợi</div>
+                                <div class="input-group">
+                                    <form:select path="benefits" id="dropdownTag" title="Thêm phúc lợi" data-max-options="10"  multiple="true" class="form-control selectpicker">
+                                        <c:forEach items="${benefits}" var="b">
+                                            <form:option value="${b.id}">${b.name}</form:option>
+                                        </c:forEach>
+                                    </form:select>
+                                </div>
                             </div>
+                            <!-- BENEFIT -->
+                            <div class="form-group col-6">
+                                <div class="text-primary font-weight-bold">Thêm nhãn</div>
+                                <div class="input-group">
+                                    <form:select path="tags" id="dropdownTag" title="Thêm nhãn" data-max-options="5"  multiple="true" class="form-control selectpicker">
+                                        <c:forEach items="${tags}" var="t">
+                                            <form:option value="${t.id}">${t.content}</form:option>
+                                        </c:forEach>
+                                    </form:select>
+                                </div>
+                            </div>
+                            
                         </div>
 
 
@@ -330,6 +357,33 @@
                                                     <form:input path="description" class="form-control" type="textarea" value="${r.description}"/>
                                             </div>
                                         </div>
+                                            
+                                        <div class="row">
+                                            <!-- TAG -->
+                                            <div class="form-group col-6">
+                                                <div class="text-primary font-weight-bold">Thêm Phúc lợi</div>
+                                                <div class="input-group">
+                                                    <form:select path="benefits" id="dropdownTag" title="Thêm phúc lợi" data-max-options="10"  multiple="true" class="form-control selectpicker">
+                                                        <c:forEach items="${benefits}" var="b">
+                                                            <option value="${b.id}">${b.name}</option>
+                                                        </c:forEach>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                            <!-- BENEFIT -->
+                                            <div class="form-group col-6">
+                                                <div class="text-primary font-weight-bold">Thêm nhãn</div>
+                                                <div class="input-group">
+                                                    <form:select path="tags" id="dropdownTag" title="Thêm nhãn" data-max-options="5"  multiple="true" class="form-control selectpicker">
+                                                        <c:forEach items="${tags}" var="t">
+                                                            <option value="${t.id}">${t.content}</option>
+                                                        </c:forEach>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                            
                                     </div>
                                             <!-- ID -->
                                             <form:input path="id" type="hidden" value="${r.id}" />

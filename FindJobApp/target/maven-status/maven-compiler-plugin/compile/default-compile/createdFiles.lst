@@ -1,8 +1,10 @@
+com\qv_ct\formatter\TagFormatter.class
 com\qv_ct\controllers\admin\Ad_ApplyController.class
 com\qv_ct\controllers\client\ApiReplyController.class
 com\qv_ct\validator\RecruitmentValidator.class
 com\qv_ct\repository\RecruitmentRepository.class
 com\qv_ct\configs\WebApplicationContextConfig.class
+com\qv_ct\formatter\BenefitFormatter.class
 com\qv_ct\repository\impl\RecruitmentRepositoryImpl.class
 com\qv_ct\configs\SpringSecurityConfig.class
 com\qv_ct\repository\impl\ApplyRepositoryImpl.class

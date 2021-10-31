@@ -8,6 +8,7 @@ package com.qv_ct.pojos;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Benefit implements Serializable{
     @Size(min = 5, max = 30, message = "{benefit.name.sizeError}")
     private String name;
     
-    @ManyToMany(mappedBy = "benefits")
+    @ManyToMany(mappedBy = "benefits", fetch = FetchType.EAGER)
     private Set<Recruitment> recruitments;
 
     public Benefit() {
