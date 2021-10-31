@@ -44,6 +44,7 @@
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/customers/cadidates"             >Người dùng</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/recruitment"                     >Tin Tuyển dụng</a>
             <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/applies"                         >Thư ứng tuyển</a>
+            <a class="navbar-brand btn btn-outline-secondary col-12" style="border: none" href="/FindJobApp/admin/others"                         >Các mục khác</a>
 
         </div>
     </div>

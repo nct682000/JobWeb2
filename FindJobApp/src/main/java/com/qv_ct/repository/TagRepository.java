@@ -13,6 +13,10 @@ import java.util.List;
  * @author nct68
  */
 public interface TagRepository {
+
     List<Tag> getTags();
+
     boolean addOrUpdate(Tag t);
+
+    boolean deleteTag(int id);
 }

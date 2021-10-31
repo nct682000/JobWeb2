@@ -143,7 +143,7 @@
         <form:form method="patch" action="${action}" modelAttribute="user" enctype="multipart/form-data"
                    cssClass="container col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px; background-color: #dbedce">
 
-            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin người dùng ${user.username}</h3>
+            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin người dùng <a href="/FindJobApp/user/${user.username}">${user.username}</a></h3>
             <c:if test="${errorText != null}">
                 <div class="alert alert-warning">
                     ${errorText}
@@ -325,7 +325,7 @@
         <form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data"
                    cssClass="container col-md-8" cssStyle="margin-bottom: 30px;margin-top: 30px; background-color: #dbedce">
 
-            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin người dùng ${user.username}</h3>
+            <h3 style="text-align: center; padding-top: 20px; margin: 0;">Thông tin người dùng <a href="/FindJobApp/user/${user.username}">${user.username}</a></h3>
             <c:if test="${errorText != null}">
                 <div class="alert alert-warning">
                     ${errorText}

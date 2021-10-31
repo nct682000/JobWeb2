@@ -8,6 +8,9 @@ package com.qv_ct.controllers.admin;
 import com.qv_ct.service.UserService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.ApplyService;
+import com.qv_ct.service.BenefitService;
+import com.qv_ct.service.CareerService;
+import com.qv_ct.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,12 @@ public class Ad_API_Controller {
     private RecruitmentService recruitmentService;
     @Autowired
     private ApplyService applyService;
+    @Autowired
+    private BenefitService benefitService;
+    @Autowired
+    private CareerService careerService;
+    @Autowired
+    private TagService tagService;
 
 //    ------------------ user -------------------------------
     @GetMapping("/admin/customers/cadidates/{userId}")
@@ -99,5 +108,24 @@ public class Ad_API_Controller {
     @ResponseStatus(HttpStatus.OK)
     public void deleteApply(@PathVariable(name = "applyId") int applyId) {
         this.applyService.deleteApply(applyId);
+    }
+
+    //    ------------------ others -------------------------------
+    @DeleteMapping("/admin/tag/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteTag(@PathVariable(name = "id") int id) {
+        this.tagService.deleteTag(id);
+    }
+
+    @DeleteMapping("/admin/benefit/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBenefit(@PathVariable(name = "id") int id) {
+        this.benefitService.deleteBenefit(id);
+    }
+
+    @DeleteMapping("/admin/career/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCareer(@PathVariable(name = "id") int id) {
+        this.careerService.deleteCareer(id);
     }
 }

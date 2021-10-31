@@ -96,11 +96,16 @@ and open the template in the editor.
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_apply.jsp" />
     </definition>
     
-     <definition name="getApplyById_Admin" extends="baseAdmin">
+    <definition name="getApplyById_Admin" extends="baseAdmin">
         <put-attribute name="title"     value="apply detail admin" />
         <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_apply_detail.jsp" />
     </definition>
     
+    <!--    tag     --> 
+    <definition name="getOthers_Admin" extends="baseAdmin">
+        <put-attribute name="title"     value="tag admin" />
+        <put-attribute name="content"   value="/WEB-INF/jspAdmin/ad_others.jsp" />
+    </definition>
     
     <!--    client  -->
     <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">

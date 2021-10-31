@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.RateService;
+import com.qv_ct.service.BenefitService;
+import com.qv_ct.service.CareerService;
+import com.qv_ct.service.TagService;
 import java.time.LocalDate;
 
 /**
@@ -28,6 +31,12 @@ public class AdminHome {
     private ApplyService applyService;
     @Autowired
     private RateService rateService;
+    @Autowired
+    private BenefitService benefitService;
+    @Autowired
+    private CareerService careerService;
+    @Autowired
+    private TagService tagService;
 
     @RequestMapping("/admin")
     public String dashboard(Model model, @RequestParam(required = false) Map<String, String> params) {
@@ -53,7 +62,7 @@ public class AdminHome {
             model.addAttribute("countApplyByCity", this.applyService.countApply_ByCity2_ForChart(year, sortMonth));
             model.addAttribute("sortBy2", "thang");
             model.addAttribute("month", sortMonth);
-            
+
         }
 
         double avg = 0;
@@ -90,4 +99,13 @@ public class AdminHome {
         return "dashboard";
     }
 
+    @RequestMapping("/admin/others")
+    public String getOthers_Admin(Model model) {
+
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("tags", this.tagService.getTags());
+
+        return "getOthers_Admin";
+    }
 }
