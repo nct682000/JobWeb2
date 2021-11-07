@@ -152,6 +152,25 @@ function addReply(replyerId, commentId){
 //        location.reload()
     })
 }
+
+function deleteReply(userId, replyId){
+    if(confirm("Xác nhận xóa trả lời này") == true){
+        fetch("/FindJobApp/api/delete-reply", {
+            method: 'delete',
+            body: JSON.stringify({
+                "userId": userId,
+                "replyId": replyId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function(hidden){
+            console.info(hidden)
+            let r = document.getElementById(`reply-${replyId}`)
+            r.style.display = "none"
+        })
+    }
+}
     
 function addRate(canId, recId){
     fetch("/FindJobApp/api/add-rate", {

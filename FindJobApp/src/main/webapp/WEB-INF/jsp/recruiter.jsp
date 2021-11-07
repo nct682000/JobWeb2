@@ -69,7 +69,8 @@
         <!-- col 1 -->
         <div class="col-md-7 col-xl-7 col-7">
             <!-- COmment title -->
-            <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
+            <h5 class="text-dark font-weight-bold">GIỚI THIỆU</h5>
+            <div class="ml-2 mb-3">${ru.introduce}</div>
         </div>
 
         <!-- blank -->
@@ -86,6 +87,7 @@
     <div class="row" >
         <!-- col 1 -->
         <div class="col-md-7 col-xl-7 col-7">
+            <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <div class="row">
                 <div class="col-2 ">
                     <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
@@ -154,7 +156,7 @@
                                                 <div><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button>Trả lời</button></a></div> 
                                             </c:if>
                                             <c:if test="${currentUser == null}">
-                                                <textarea id="reply-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
+                                                <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
                                                 <div><a href="#" class="text-info" data-toggle="modal" data-target="#requireLoginModal"><button>Trả lời</button></a></div>
                                             </c:if>
                                         </div>
@@ -199,10 +201,10 @@
                                             <div class="pl-3">${r.content}</div>
                                         </div>
                                         <div>
-                                            <span><a href="#">Thích</a> . </span>
+<!--                                            <span><a href="#">Thích</a> . </span>-->
                                             <span class="text-secondary my-date">Lúc: ${r.createdDate}</span>
                                             <c:if test="${currentUser.id == r.replyer.id}">
-                                                <span class="btn btn-danger">Xóa</span>
+                                                <span class="btn btn-danger" onclick="deleteReply(${currentUser.id},${r.id})">Xóa</span>
                                             </c:if>
                                         </div>
                                     </div>
