@@ -8,9 +8,11 @@ package com.qv_ct.pojos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,10 +48,10 @@ public class Comment implements Serializable{
     @JsonIgnore
     private User commented;
     
-    @OneToMany(mappedBy = "comment")
-    private Set<Reply> replys;
+    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
+    private Set<Reply> replies;
     
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
     private Set<Interaction> interactions;
 
     public Comment() {
@@ -60,13 +62,26 @@ public class Comment implements Serializable{
         this.commenter = commenter;
         this.commented = commented;
     }
-
-    public Set<Reply> getReplys() {
-        return replys;
+    
+    public int countInteractions(int type){
+        Type t = Type.getType(type);
+        Set<Interaction> interactions = this.getInteractions();
+        Set<Interaction> in = new HashSet<>();
+        
+        interactions.forEach(i ->{
+            if(i.getType() == t)
+                in.add(i);
+        });
+        
+        return in.size();
     }
 
-    public void setReplys(Set<Reply> replys) {
-        this.replys = replys;
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
     }
 
     /**

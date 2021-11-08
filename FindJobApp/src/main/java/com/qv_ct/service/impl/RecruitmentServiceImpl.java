@@ -12,6 +12,7 @@ import com.qv_ct.repository.RecruitmentRepository;
 import com.qv_ct.service.RecruitmentService;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         Recruitment r = this.recruitmentRepository.getRecruitmentById(recruitmentId);
         return this.recruitmentRepository.switchActiveRecruitment(r);
     }
+
+    @Override
+    public List<Object[]> recruitmentStats(int userId, Date from, Date to) {
+        return this.recruitmentRepository.recruitmentStats(userId, from, to);
+    }
+    
+    
 
     //    -----------   admin   ------------------
     @Override

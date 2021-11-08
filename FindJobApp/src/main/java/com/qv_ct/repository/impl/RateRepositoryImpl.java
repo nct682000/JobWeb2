@@ -39,9 +39,8 @@ public class RateRepositoryImpl implements RateRepository {
         Session session = sessionFactory.getObject().getCurrentSession();
 
         try {
-            session.delete(r);
             r.setCreatedDate(Date.from(Instant.now()));
-            session.save(r);
+            session.saveOrUpdate(r);
             return r;
         } catch (HibernateException ex) {
             ex.printStackTrace();

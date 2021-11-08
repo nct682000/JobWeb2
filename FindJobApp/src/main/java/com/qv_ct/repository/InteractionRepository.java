@@ -5,16 +5,15 @@
  */
 package com.qv_ct.repository;
 
-import com.qv_ct.pojos.Reply;
+import com.qv_ct.pojos.Interaction;
 import java.util.List;
 
 /**
  *
  * @author nct68
  */
-public interface ReplyRepository {
-    Reply getReplyById(int id);
-    List<Reply> getReplyByCommentId(int id);
-    Reply addReply(Reply r);
-    Reply deleteReply(Reply r);
+public interface InteractionRepository {
+    List<Interaction> getInteraction(int userId, int commentId);
+    Interaction addOrUpdate(Interaction i);
+    Interaction deleteInteraction(Interaction i);
 }

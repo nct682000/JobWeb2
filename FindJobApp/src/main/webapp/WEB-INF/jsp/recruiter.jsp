@@ -69,7 +69,8 @@
         <!-- col 1 -->
         <div class="col-md-7 col-xl-7 col-7">
             <!-- COmment title -->
-            <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
+            <h5 class="text-dark font-weight-bold">GIỚI THIỆU</h5>
+            <div class="ml-2 mb-3">${ru.introduce}</div>
         </div>
 
         <!-- blank -->
@@ -86,6 +87,7 @@
     <div class="row" >
         <!-- col 1 -->
         <div class="col-md-7 col-xl-7 col-7">
+            <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <div class="row">
                 <div class="col-2 ">
                     <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
@@ -106,10 +108,10 @@
 
             <br>
 
-            <div id="commentArea">
+            <div id="commentArea" class="bg-light">
                 <!-- COmment -->
                 <c:forEach var="cmt" items="${comments}">
-                    <div class="mt-2 row bg-light" id="comment-${cmt.id}">
+                    <div class="mt-2 row" id="comment-${cmt.id}">
                         <div class="col-2 text-center">
                             <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
                         </div>
@@ -127,8 +129,50 @@
                                 <div class="pl-3">${cmt.content}</div>
                             </div>
                             <div>
-                                <span><a href="#">Thích</a> . </span>
-                                <span><a href="#">Trả lời</a> . </span>
+                                <span class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Thích
+                                    </button>
+                                    <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                                        <c:if test="${currentUser != null}">
+                                            <div><a href="#" class="text-primary" onclick="addInteraction(0, ${currentUser.id}, ${cmt.id})"><i class="fa fa-thumbs-up"></i> Thích</a></div>
+                                            <div><a href="#" class="text-danger" onclick="addInteraction(1, ${currentUser.id}, ${cmt.id})"><i class="fa fa-thumbs-down"></i> Không thích</a></div> 
+                                        </c:if>
+                                        <c:if test="${currentUser == null}">
+                                            <div><a href="#" class="text-primary" data-toggle="modal" data-target="#requireLoginModal"><i class="fa fa-thumbs-up"></i> Thích</a></div>
+                                            <div><a href="#" class="text-danger" data-toggle="modal" data-target="#requireLoginModal"><i class="fa fa-thumbs-down"></i> Không thích</a></div>
+                                        </c:if>
+                                    </div>
+                                </span>   
+                                
+                                <c:if test="${currentUser != null}">
+                                    <span class="dropdown">
+                                        <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Trả lời
+                                        </button>
+                                        <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                                            <c:if test="${currentUser != null}">
+                                                <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
+                                                <div><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button>Trả lời</button></a></div> 
+                                            </c:if>
+                                            <c:if test="${currentUser == null}">
+                                                <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
+                                                <div><a href="#" class="text-info" data-toggle="modal" data-target="#requireLoginModal"><button>Trả lời</button></a></div>
+                                            </c:if>
+                                        </div>
+                                    </span>   
+                                </c:if>
+                                <c:if test="${currentUser == null}">
+                                    <span><a href="#" data-toggle="modal" data-target="#requireLoginModal">Trả lời</a> . </span>
+                                </c:if>
+                                
+                                <c:if test="${cmt.countInteractions(0) > 0}">
+                                    <span><div class="badge badge-info font-weight-normal">${cmt.countInteractions(0)} <i class="fa fa-thumbs-up"></i></div> . </span>
+                                </c:if>
+                                <c:if test="${cmt.countInteractions(1) > 0}">
+                                    <span><div class="badge badge-warning font-weight-normal">${cmt.countInteractions(1)} <i class="fa fa-thumbs-down"></i></div> . </span>
+                                </c:if>
+                                    
                                 <span class="text-secondary my-date">Lúc: ${cmt.createdDate}</span>
                                 <c:if test="${currentUser.id == cmt.commenter.id}">
                                     <span class="btn btn-danger" onclick="deleteComment(${currentUser.id}, ${cmt.id})">Xóa</span>
@@ -137,9 +181,36 @@
                         </div>
 
                         <!-- replies -->
-                        <c:if test="${!replies.isEmpty()}">
-                            <div>${relies.content}</div>
-                        </c:if>
+                        <div id="replyArea-${cmt.id}">
+                            <c:forEach var="r" items="${cmt.replies}">
+                                <div class="ml-5 mt-2 row bg-light" id="reply-${r.id}">
+                                    <div class="col-2 text-center">
+                                        <img alt="Avatar" src="${r.replyer.avatar}" class="img-fluid rounded"/>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="card">
+                                            <div class="font-weight-bold">
+                                                <c:if test="${r.replyer.role == 'ROLE_CANDIDATE'}">
+                                                    ${r.replyer.firstName} ${r.replyer.lastName}
+                                                </c:if>
+                                                <c:if test="${r.replyer.role == 'ROLE_RECRUITER'}">
+                                                    ${r.replyer.companyName}
+                                                </c:if>
+                                            </div>
+
+                                            <div class="pl-3">${r.content}</div>
+                                        </div>
+                                        <div>
+<!--                                            <span><a href="#">Thích</a> . </span>-->
+                                            <span class="text-secondary my-date">Lúc: ${r.createdDate}</span>
+                                            <c:if test="${currentUser.id == r.replyer.id}">
+                                                <span class="btn btn-danger" onclick="deleteReply(${currentUser.id},${r.id})">Xóa</span>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
 
                     </div>
                 </c:forEach>

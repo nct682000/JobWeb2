@@ -9,8 +9,10 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.qv_ct.pojos.Apply;
 import com.qv_ct.pojos.Recruitment;
+import com.qv_ct.pojos.Role;
 import com.qv_ct.pojos.Tag;
 import com.qv_ct.pojos.User;
+import com.qv_ct.service.BenefitService;
 import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.TagService;
 import com.qv_ct.service.UserService;
@@ -19,6 +21,8 @@ import com.qv_ct.validator.WebAppValidator;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +55,10 @@ public class RecruitmentController {
     private RecruitmentService recruitmentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TagService tagService;
+    @Autowired
+    private BenefitService benefitService;
     
     @InitBinder
     public void initBinder(WebDataBinder binder){
@@ -92,12 +100,32 @@ public class RecruitmentController {
     }
     
     @GetMapping("/user/{name}/recruitment")
-    public String recruitmentManager(Model model, @PathVariable String name, Principal principal){
+    public String recruitmentManager(Model model, @PathVariable String name, Principal principal,
+                                            @RequestParam(required = false) Map<String, String> params){
+        
+        Date fromDate = null, toDate = null;
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            String from = params.getOrDefault("from", "from");
+            if(from != null)
+                fromDate = f.parse(from);
+            String to = params.getOrDefault("to", "to");
+            if(to != null)
+                toDate = f.parse(to);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         
         model.addAttribute("recruitment", new Recruitment());
-        model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
-        int id = this.userService.getUsers(principal.getName()).get(0).getId();
-        model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+        model.addAttribute("user", this.userService.getUsers(name).get(0));
+        model.addAttribute("tags", this.tagService.getTags());
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        if(principal != null){
+            model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
+            int id = this.userService.getUsers(principal.getName()).get(0).getId();
+            model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+            model.addAttribute("recruitmentStats", this.recruitmentService.recruitmentStats(id, fromDate, toDate));
+        }
         
         return "recruitmentManager";
     }
@@ -106,20 +134,44 @@ public class RecruitmentController {
     @PostMapping("/user/{name}/recruitment")
     public String addRecruitment(Model model, @ModelAttribute(value = "recruitment")
                     @Valid Recruitment recruitment,
+                    @PathVariable String name,
                     BindingResult result,
-                    Principal principal){
+                    Principal principal,
+                    @RequestParam(required = false) Map<String, String> params){
+        
+        Date fromDate = null, toDate = null;
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            String from = params.getOrDefault("from", "from");
+            if(from != null)
+                fromDate = f.parse(from);
+            String to = params.getOrDefault("to", "to");
+            if(to != null)
+                toDate = f.parse(to);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
         
         int id = this.userService.getUsers(principal.getName()).get(0).getId();
         model.addAttribute("recRecruitments", this.recruitmentService.getRecruitmentByUserId(id));
+        model.addAttribute("recruitmentStats", this.recruitmentService.recruitmentStats(id, fromDate, toDate));
+        model.addAttribute("user", this.userService.getUsers(name).get(0));
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        model.addAttribute("tags", this.tagService.getTags());
         
         if(principal != null)
             model.addAttribute("currentUser", this.userService.getUsers(principal.getName()).get(0));
         
         User u = this.userService.getUsers(principal.getName()).get(0);
         recruitment.setRecruiter(u);
+        System.out.println(recruitment.getId());
+        recruitment.getBenefits().forEach(b -> System.out.println(b.getName()));
         if(!result.hasErrors()){
-            if(this.recruitmentService.addOrUpdate(recruitment) == true)
+            if(this.recruitmentService.addOrUpdate(recruitment) == true){
+                System.out.println(recruitment.getId());
+                recruitment.getBenefits().forEach(b -> System.out.println(b.getName()));
                 return String.format("redirect:/user/%s/recruitment", principal.getName());
+            }
         }
         else
             model.addAttribute("errMsg", "Thêm tin không thành công, kiểm tra lại nhé!");

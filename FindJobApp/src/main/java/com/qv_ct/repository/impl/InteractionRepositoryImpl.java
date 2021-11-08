@@ -5,10 +5,9 @@
  */
 package com.qv_ct.repository.impl;
 
-import com.qv_ct.pojos.Reply;
-import com.qv_ct.repository.ReplyRepository;
-import java.sql.Time;
-import java.time.Instant;
+import com.qv_ct.pojos.Comment;
+import com.qv_ct.pojos.Interaction;
+import com.qv_ct.repository.InteractionRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -28,49 +27,33 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ReplyRepositoryImpl implements ReplyRepository{
+public class InteractionRepositoryImpl implements InteractionRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public Reply getReplyById(int id) {
+    public List<Interaction> getInteraction(int userId, int commentId) {
         Session session = sessionFactory.getObject().getCurrentSession();
-        
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Reply> query = builder.createQuery(Reply.class);
-        Root root = query.from(Reply.class);
-        query = query.select(root);
+        CriteriaQuery<Interaction> query = builder.createQuery(Interaction.class);
+        Root root = query.from(Interaction.class);
         
-        query = query.where(builder.equal(root.get("id"), id));
-        Query q = session.createQuery(query);
+        Predicate p1 = builder.equal(root.get("user").get("id"), userId);
+        Predicate p2 = builder.equal(root.get("comment").get("id"), commentId);
         
-        return (Reply) q.getSingleResult();
-    }
-    
-    @Override
-    public List<Reply> getReplyByCommentId(int id) {
-        Session session = sessionFactory.getObject().getCurrentSession();
-        
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Reply> query = builder.createQuery(Reply.class);
-        Root root = query.from(Reply.class);
-        query = query.select(root);
-        
-        Predicate p = builder.equal(root.get("comment"), id);
-        query = query.where(p);
+        query = query.where(builder.and(p1, p2));
         Query q = session.createQuery(query);
         
         return q.getResultList();
     }
-
+    
     @Override
-    public Reply addReply(Reply r) {
+    public Interaction addOrUpdate(Interaction i) {
         Session session = sessionFactory.getObject().getCurrentSession();
         
         try{
-            r.setCreatedDate(Time.from(Instant.now()));
-            session.save(r);
-            return r;
+            session.saveOrUpdate(i);
+            return i;
         }catch (HibernateException ex){
             ex.printStackTrace();
         }
@@ -79,13 +62,12 @@ public class ReplyRepositoryImpl implements ReplyRepository{
     }
 
     @Override
-    public Reply deleteReply(Reply r) {
+    public Interaction deleteInteraction(Interaction i) {
         Session session = sessionFactory.getObject().getCurrentSession();
         
         try{
-            r.setCreatedDate(Time.from(Instant.now()));
-            session.delete(r);
-            return r;
+            session.delete(i);
+            return i;
         }catch (HibernateException ex){
             ex.printStackTrace();
         }
