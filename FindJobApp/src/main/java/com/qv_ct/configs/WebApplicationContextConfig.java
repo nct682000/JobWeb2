@@ -5,11 +5,13 @@
  */
 package com.qv_ct.configs;
 
+import com.qv_ct.formatter.BenefitFormatter;
 import com.qv_ct.formatter.CareerFormatter;
 import com.qv_ct.formatter.LocationFormatter;
 import com.qv_ct.formatter.ProvinceFormatter;
 import com.qv_ct.formatter.UserFormatter;
 import com.qv_ct.formatter.RecruitmentFormatter;
+import com.qv_ct.formatter.TagFormatter;
 import com.qv_ct.validator.RecruitmentValidator;
 import com.qv_ct.validator.UserValidator;
 import com.qv_ct.validator.WebAppValidator;
@@ -67,6 +69,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new RecruitmentFormatter());
         registry.addFormatter(new LocationFormatter());
         registry.addFormatter(new ProvinceFormatter());
+        registry.addFormatter(new TagFormatter());
+        registry.addFormatter(new BenefitFormatter());
     }
 
     @Override

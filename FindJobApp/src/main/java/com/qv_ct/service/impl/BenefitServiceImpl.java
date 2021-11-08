@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class BenefitServiceImpl implements BenefitService{
+public class BenefitServiceImpl implements BenefitService {
+
     @Autowired
     private BenefitRepository benefitRepository;
 
@@ -30,5 +31,10 @@ public class BenefitServiceImpl implements BenefitService{
     public boolean addOrUpdate(Benefit b) {
         return this.benefitRepository.addOrUpdate(b);
     }
-    
+
+    @Override
+    public boolean deleteBenefit(int id) {
+        return this.benefitRepository.deleteBenefit(id);
+    }
+
 }

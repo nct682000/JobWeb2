@@ -37,7 +37,7 @@ public class Apply implements Serializable{
     private String content;
     private String cv;
     @Column(name = "created_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createdDate;
     private Boolean active = true;
     

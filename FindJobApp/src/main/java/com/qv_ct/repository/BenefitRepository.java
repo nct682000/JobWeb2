@@ -15,4 +15,5 @@ import java.util.List;
 public interface BenefitRepository {
     List<Benefit>  getBenefits();
     boolean addOrUpdate(Benefit b);
+    boolean deleteBenefit(int id);
 }

@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -22,6 +23,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import java.math.BigDecimal;
 
 /**
  *
@@ -181,6 +183,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         Predicate p = builder.equal(root.get("recruiter"), userId);
 
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -201,38 +204,257 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         return null;
     }
 
+    @Override
+    public List<Object[]> recruitmentStats(int userId, Date from, Date to) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root rootR = query.from(Recruitment.class);
+        Root rootA = query.from(Apply.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootR.get("recruiter"), userId));
+        predicates.add(builder.equal(rootA.get("recruitment"), rootR.get("id")));
+        
+        if(from != null)
+            predicates.add(builder.greaterThanOrEqualTo(rootA.get("createdDate"), from));
+        if(to != null)
+            predicates.add(builder.lessThanOrEqualTo(rootA.get("createdDate"), to));
+        
+        query.multiselect(rootR.get("id"), // 0
+                rootR.get("title"), // 1
+                builder.count(rootR.get("id")), // 2
+                rootR.get("updatedDate")); // 3
+
+        
+        query.where(predicates.toArray(new Predicate[] {}));
+        
+        query = query.groupBy(rootR.get("id"));
+        query = query.orderBy(builder.desc(rootR.get("id")));
+
+        Query q = session.createQuery(query);
+
+        return q.getResultList();
+    }
+    
+    
+
     //    ------------------    admin   --------------------
     int maxList = 6;
 
+//    @Override
+//    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active) {
+//        Session s = this.sessionFactory.getObject().getCurrentSession();
+//        CriteriaBuilder builder = s.getCriteriaBuilder();
+//        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
+//        Root root = query.from(Recruitment.class);
+//        query = query.select(root);
+//
+//        Predicate p1 = builder.greaterThanOrEqualTo(root.get("salaryFrom").as(BigDecimal.class), new BigDecimal(salaryFrom));
+//        Predicate p2 = builder.lessThanOrEqualTo(root.get("salaryTo").as(BigDecimal.class), new BigDecimal(salaryTo));
+//        Predicate p3 = builder.equal(root.get("active"), active);
+//        query.where(builder.and(p1, p2, p3));
+//
+//        query = query.orderBy(builder.desc(root.get("id")));
+//
+//        Query q = s.createQuery(query);
+//
+//        q.setMaxResults(maxList);
+//        q.setFirstResult((page - 1) * maxList);
+//        return q.getResultList();
+//    }
     @Override
-    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active) {
-        Session s = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = s.getCriteriaBuilder();
-        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
-        Root root = query.from(Recruitment.class);
-        query = query.select(root);
+    public List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active, String title, int caseSearch) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String kw = "'%" + title + "%'";
 
-        Predicate p1 = builder.greaterThanOrEqualTo(root.get("salaryFrom").as(BigDecimal.class), new BigDecimal(salaryFrom));
-        Predicate p2 = builder.lessThanOrEqualTo(root.get("salaryTo").as(BigDecimal.class), new BigDecimal(salaryTo));
-        Predicate p3 = builder.equal(root.get("active"), active);
-        query.where(builder.and(p1, p2, p3));
+//        tìm kiếm mặc định
+        if (caseSearch == -1) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
 
-        query = query.orderBy(builder.desc(root.get("id")));
+//        lương thỏa thuận
+        if (caseSearch == 4) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND r.salaryFrom is null AND r.salaryTo is null\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
 
-        Query q = s.createQuery(query);
+//        bài viết bị khóa
+        if (caseSearch == 5) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
 
-        q.setMaxResults(maxList);
-        q.setFirstResult((page - 1) * maxList);
-        return q.getResultList();
+//        lương từ - đến
+        if (caseSearch == 0) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom >=:salaryFrom AND r.salaryTo <=:salaryTo)\n"
+                    + "AND (r.salaryFrom IS NOT NULL OR r.salaryTo IS NOT NULL)"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryFrom", new BigDecimal(salaryFrom));
+            q.setParameter("salaryTo", new BigDecimal(salaryTo));
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
+
+//        lương từ
+        if (caseSearch == 1) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom >=:salaryFrom)\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryFrom", new BigDecimal(salaryFrom));
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
+
+//        lương đến
+        if (caseSearch == 2) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryTo <=:salaryTo)\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryTo", new BigDecimal(salaryTo));
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
+
+//        không tìm theo lương
+        if (caseSearch == 3) {
+            Query q = session.createQuery("FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom IS NOT NULL OR r.salaryTo IS NOT NULL)"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setMaxResults(maxList);
+            q.setFirstResult((page - 1) * maxList);
+            return q.getResultList();
+        }
+        return null;
     }
 
     @Override
-    public long countRecruitment_Admin(boolean active) {
-        Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT Count(*) FROM Recruitment r WHERE r.active =:active");
-        q.setParameter("active", active);
+    public int countRecruitment_Admin(long salaryFrom, long salaryTo, boolean active, String title, int caseSearch) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        String kw = "'%" + title + "%'";
 
-        return Long.parseLong(q.getSingleResult().toString());
+//        tìm kiếm mặc định
+        if (caseSearch == -1) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        lương thỏa thuận
+        if (caseSearch == 4) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND r.salaryFrom is null AND r.salaryTo is null\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        bài viết bị khóa
+        if (caseSearch == 5) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        lương từ - đến
+        if (caseSearch == 0) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom >=:salaryFrom AND r.salaryTo <=:salaryTo)\n"
+                    + "AND (r.salaryFrom IS NOT NULL OR r.salaryTo IS NOT NULL)"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryFrom", new BigDecimal(salaryFrom));
+            q.setParameter("salaryTo", new BigDecimal(salaryTo));
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        lương từ
+        if (caseSearch == 1) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom >=:salaryFrom)\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryFrom", new BigDecimal(salaryFrom));
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        lương đến
+        if (caseSearch == 2) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryTo <=:salaryTo)\n"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+            q.setParameter("salaryTo", new BigDecimal(salaryTo));
+
+            System.out.printf("-------- result -----------:", q.getSingleResult().toString());
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+
+//        không tìm theo lương
+        if (caseSearch == 3) {
+            Query q = session.createQuery("SELECT COUNT(*) FROM Recruitment r\n"
+                    + "WHERE r.active =:active "
+                    + "AND r.title like " + kw + "\n"
+                    + "AND (r.salaryFrom IS NOT NULL OR r.salaryTo IS NOT NULL)"
+                    + "ORDER BY r.updatedDate DESC");
+            q.setParameter("active", active);
+
+            return Integer.parseInt(q.getSingleResult().toString());
+        }
+        return 1;
     }
 
     @Override

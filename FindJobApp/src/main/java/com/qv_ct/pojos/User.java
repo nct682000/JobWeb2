@@ -80,6 +80,9 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "commented")
     private Set<Comment> commentedComments;
     
+    @OneToMany(mappedBy = "replyer")
+    private Set<Reply> replies;
+    
     @OneToMany(mappedBy = "user")
     private Set<Interaction> interactions;
     
@@ -450,6 +453,20 @@ public class User implements Serializable{
      */
     public void setProvince(Province province) {
         this.province = province;
+    }
+
+    /**
+     * @return the replies
+     */
+    public Set<Reply> getReplies() {
+        return replies;
+    }
+
+    /**
+     * @param replies the replies to set
+     */
+    public void setReplies(Set<Reply> replies) {
+        this.replies = replies;
     }
     
 }

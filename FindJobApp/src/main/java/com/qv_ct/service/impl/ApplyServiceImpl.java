@@ -58,15 +58,24 @@ public class ApplyServiceImpl implements ApplyService {
         return this.applyRepository.getAppliesByUserId(id);
     }
 
-    //    -------------     admin       --------------
     @Override
-    public List<Apply> getApply_Admin(int page, boolean active, String title) {
-        return this.applyRepository.getApply_Admin(page, active, title);
+    public List<Apply> getAppliesByRecruiter(int recId) {
+        return this.applyRepository.getAppliesByRecruiter(recId);
     }
 
+    //    -------------     admin       --------------
     @Override
-    public long countApply_Admin(boolean active) {
-        return this.applyRepository.countApply_Admin(active);
+    public List<Apply> getApply_Admin(int page, boolean active, String title, String dateFilter) {
+        return this.applyRepository.getApply_Admin(page, active, title, dateFilter);
+    }
+
+//    @Override
+//    public long countApply_Admin(boolean active) {
+//        return this.applyRepository.countApply_Admin(active);
+//    }
+    @Override
+    public int countApply_Admin(boolean active, String title, String dateFilter) {
+        return this.applyRepository.countApply_Admin(active, title, dateFilter);
     }
 
     @Override
@@ -83,5 +92,41 @@ public class ApplyServiceImpl implements ApplyService {
     public long countApply_Admin_For_Chart(boolean active, int month, int year) {
         return this.applyRepository.countApply_Admin_For_Chart(active, month, year);
     }
+
+    @Override
+    public List<Object[]> countApply_ByCompany_ForChart(int year) {
+        return this.applyRepository.countApply_ByCompany_ForChart(year);
+    }
+
+    @Override
+    public List<Object[]> countApply_ByCompany2_ForChart(int year, int month) {
+        return this.applyRepository.countApply_ByCompany2_ForChart(year, month);
+    }
+
+    @Override
+    public List<Object[]> countApply_ByJob_ForChart(int year) {
+        return this.applyRepository.countApply_ByJob_ForChart(year);
+    }
+
+    @Override
+    public List<Object[]> countApply_ByJob2_ForChart(int year, int month) {
+        return this.applyRepository.countApply_ByJob2_ForChart(year, month);
+    }
+
+    @Override
+    public List<Object[]> countApply_ByCity_ForChart(int year) {
+        return this.applyRepository.countApply_ByCity_ForChart(year);
+    }
+
+    @Override
+    public List<Object[]> countApply_ByCity2_ForChart(int year, int month) {
+        return this.applyRepository.countApply_ByCity2_ForChart(year, month);
+    }
+    
+    @Override
+    public List<Object[]> getApplyById(int applyId) {
+        return this.applyRepository.getApplyById(applyId);
+    }
+    
 
 }

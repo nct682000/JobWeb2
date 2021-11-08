@@ -12,15 +12,15 @@
 <div class="container-fluid" style="width: 95%">
 
     <!-- Page name -->
-    <h2 class="text-center text-primary mb-3">TRANG CHỦ</h2>
+    <h2 class="text-center text-primary font-weight-bold mb-3">TRANG CHỦ</h2>
 
     <div class="row m-2">
 
         <!-- Find Job card -->
         <div class="col-xl-5 col-md-12 card bg-light">
             <div class="container">
-                <h2 class="text-info">Tìm kiếm</h2>
-                <form action="/FindJobApp/recruitments/">
+                <h2 class="text-info">TÌM KIẾM</h2>
+                <form action="<c:url value="/recruitments" />">
                     <input type="text" class="form-control m-2 mb-3 " placeholder="Tên công ty, ngành nghề, công việc, chức danh"  name="kw">
                     <div class="row m-2 mb-3">
 
@@ -67,7 +67,7 @@
                     </div> 
 
                     <!-- search button -->
-                    <button type="submit" class="btn btn-info btn-block btn-lg mb-3">Tìm việc ngay</button>
+                    <button type="submit" class="btn btn-info btn-block btn-lg font-weight-bold mb-3">TÌM VIỆC NGAY</button>
                 </form>
             </div>
         </div>
@@ -78,16 +78,20 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner" >
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel1.png" />" alt="carousel1" style="height: 320px" >
+                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel1" style="height: 320px" >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel2.png" />" alt="carousel2" style="height: 320px">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel4.jpg" />" alt="carousel2" style="height: 320px" >
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel3"style="height: 320px">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel5.jpg" />" alt="carousel3" style="height: 320px">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel6.png" />" alt="carousel4"style="height: 320px">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -102,18 +106,26 @@
 
     </div>
               
-<!--    <div class="mt-3 mb-3">
-        <c:forEach var="top" items="${topRecruiter}">
-            <div>${top[0]}</div>
-            <div>${top[1]}</div>
-            
-            <div>${top[3]}</div>
-        </c:forEach>
-        
-    </div>-->
+    <div class="container text-center mt-4">
+        <hr>
+        <h4 class="font-weight-bold text-info">-----DOANH NGHIỆP HÀNG ĐẦU-----</h4>
+        <div class="row">
+            <c:forEach var="r" items="${topRecruiter}">
+                <div class="col m-2">
+                    <a href="<c:url value="/recruiter/${r[0]}" />" class="text-dark">
+                        <div class="card">
+                            <img class="card-img-top img-fluid" src="${r[2]}" alt="avatar">
+                            <div class=" font-weight-bold">${r[1]}</div>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </div>
+        <hr>
+    </div>
               
     <!-- List Recruitment -->
-    <h4 class="text-dark font-weight-bold m-3">TIN MỚI NHẤT</h4>
+    <h4 class="text-dark font-weight-bold mt-4">TIN MỚI NHẤT</h4>
     <div class="row">
         <c:forEach var="r" items="${recruitments}">
 
@@ -122,16 +134,16 @@
                     <div class="row">
                         <!-- image -->
                         <div class="col-3">
-                            <a href="/FindJobApp/recruitment/${r.id}"><image src="${r.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/></a>
+                            <a href="<c:url value="/recruitment/${r.id}" />"><image src="${r.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/></a>
                         </div>
 
                         <div class="col-6">
 
                             <!-- title -->
-                            <h5><a href="/FindJobApp/recruitment/${r.id}" class="text-dark">${r.title}</a></h5> 
+                            <h5><a href="<c:url value="/recruitment/${r.id}" />" class="text-dark">${r.title}</a></h5> 
 
                             <!-- company_name -->
-                            <div><a href="/FindJobApp/recruiter/${r.recruiter.id}">${r.recruiter.companyName}</a></div> 
+                            <div><a href="<c:url value="/recruiter/${r.recruiter.id}" />">${r.recruiter.companyName}</a></div> 
 
                             <!-- form -->
                             <div>Chức vụ: ${r.form.toString()}</div>
@@ -173,7 +185,7 @@
 
     </div>
 
-    <ul class="pagination">
+    <ul class="pagination font-weight-bold">
         <c:forEach begin="1" end="${Math.ceil(countR / 10)}" var="i">
             <li class="page-item"><a class="page-link" href="<c:url value="/" />?page=${i}">${i}</a></li>
         </c:forEach>

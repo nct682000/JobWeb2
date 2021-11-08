@@ -110,13 +110,16 @@ public class UserController {
     }
     
     @GetMapping("/user/{name}")
-    public String userPage(Model model, @PathVariable String name) {
-       model.addAttribute("user", this.userDetailsService.getUsers(name));
+    public String userPage(Model model, @PathVariable String name, Principal principal) {
+       model.addAttribute("user", this.userDetailsService.getUsers(name).get(0));
+       if(principal != null)
+            model.addAttribute("currentUser", this.userDetailsService.getUsers(principal.getName()).get(0));
+       
        model.addAttribute("userUpdate", new User());
        User u = this.userDetailsService.getUsers(name).get(0);
        int id = u.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-       model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("recApplies", this.applyService.getAppliesByRecruiter(id));
        model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
        
@@ -130,29 +133,29 @@ public class UserController {
                             BindingResult result,
                             Principal principal) {
         
-       model.addAttribute("user", this.userDetailsService.getUsers(principal.getName()));
+       model.addAttribute("user", this.userDetailsService.getUsers(principal.getName()).get(0));
        User uc = this.userDetailsService.getUsers(principal.getName()).get(0);
        int id = uc.getId();
        model.addAttribute("applies", this.applyService.getAppliesByUserId(id));
-       model.addAttribute("recPost", this.recruitmentService.getRecruitmentByUserId(id));
+       model.addAttribute("recApplies", this.applyService.getAppliesByRecruiter(id));
        model.addAttribute("rateCountRecruiter", this.rateService.rateCountRecruiter(id));
        model.addAttribute("ratePointRecruiter", this.rateService.ratePointRecruiter(id));
         
         User u = this.userDetailsService.getUsers(principal.getName()).get(0);
-            user.setId(u.getId());
-            user.setUsername(u.getUsername());
-            user.setPassword(u.getPassword());
-            if(user.getFile().isEmpty())
-                user.setAvatar(u.getAvatar());
+        user.setId(u.getId());
+        user.setUsername(u.getUsername());
+        user.setPassword(u.getPassword());
+        if(user.getFile().isEmpty())
+            user.setAvatar(u.getAvatar());
 
-            Role role = u.getRole();
+        Role role = u.getRole();
 
-            if(!result.hasErrors()){
-                if(this.userDetailsService.addOrUpdate(user, role) == true)
-                     return String.format("redirect:/user/%s", principal.getName());
-            }else
-                model.addAttribute("updateUserError", "Cập nhật thông tin không thành công, kiểm tra lại nhé!");
-        
+        if(!result.hasErrors()){
+            if(this.userDetailsService.addOrUpdate(user, role) == true)
+                 return String.format("redirect:/user/%s", principal.getName());
+        }else
+            model.addAttribute("updateUserError", "Cập nhật thông tin không thành công, kiểm tra lại nhé!");
+
        return "userpage";
     }
     

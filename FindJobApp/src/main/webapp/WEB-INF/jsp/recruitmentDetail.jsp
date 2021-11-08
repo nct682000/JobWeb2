@@ -13,10 +13,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<h1 class="text-primary text-center">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
+<h1 class="text-primary text-center font-weight-bold">CHI TIẾT VỀ TIN TUYỂN DỤNG</h1>
 <div class="container-fluid" style="width: 95%">
     <h3 class="text-info font-weight-bold">${recDetail.title}</h3>
-    <h4><a href="/FindJobApp/recruiter/${recDetail.recruiter.id}" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
+    <h4><a href="<c:url value="/recruiter/${recDetail.recruiter.id}" />" class="text-dark">${recDetail.recruiter.companyName}</a></h4>
     <!-- Card info -->
     <div class="card overflow-hidden bg-light my-3">
         <div class="card-content">
@@ -90,9 +90,21 @@
                     
               </div>
                     <div class="font-weight-bold text-secondary col-2">
-                        <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
-                            Ứng tuyển công việc này
-                        </button>                 
+                        <c:if test="${currentUser != null && currentUser.role.toString() == 'ROLE_CANDIDATE'}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#addApplyModal">
+                                ỨNG TUYỂN CÔNG VIỆC NÀY
+                            </button>
+                        </c:if>
+                        <c:if test="${currentUser == null}">
+                            <button type="button" class="btn btn-info btn-lg font-weight-bold" data-toggle="modal" data-target="#requireLoginModal">
+                                ỨNG TUYỂN CÔNG VIỆC NÀY
+                            </button>
+                        </c:if>
+                        <c:if test="${currentUser.id == recDetail.recruiter.id}">
+                            <a href="<c:url value="/user/${currentUser.username}/recruitment" />"><button type="button" class="btn btn-info btn-lg font-weight-bold">
+                                ĐI ĐẾN TRANG QUẢN LÝ
+                                </button></a>
+                        </c:if>
                     </div>
             </div>
           </div>
@@ -105,8 +117,9 @@
             <!-- Benefit -->
             <h5 class="text-dark font-weight-bold">PHÚC LỢI</h5>
             <div class="card-content m-1 bg-light row mb-2 text-info font-weight-bold">
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 1</div>
-                <div class="col-md-4 col-xl-4 mb-2 pl-3">BENEFIT 2</div>
+                <c:if test="${recDetail.benefits.isEmpty()}">
+                    <div class=" mb-2 pl-3">Tin tuyển dụng này chưa thêm phúc lợi</div>
+                </c:if>
                 <c:forEach var="b" items="${recDetail.benefits}">
                     <div class="col-md-4 col-xl-4 mb-2 pl-3">${b.name}</div>
                 </c:forEach>
@@ -119,8 +132,9 @@
             <!-- Tag -->
             <h6 class="text-dark font-weight-bold mt-3">Tìm kiếm</h6>
             <div class="card-content">
-                <span class="ml-3 p-2 badge badge-info">Tag 1</span>
-                <span class="ml-3 p-2 badge badge-info">Tag 2</span>
+                <c:if test="${recDetail.tags.isEmpty()}">
+                    <div class=" mb-2 pl-3 text-info">Tin tuyển dụng này chưa thêm nhãn</div>
+                </c:if>
                 <c:forEach var="t" items="${recDetail.tags}">
                     <span class="ml-3 p-2 badge badge-info">${t.content}</span>
                 </c:forEach>
@@ -143,10 +157,10 @@
                             <div class="col-9">
 
                                 <!-- title -->
-                                <h5><a href="/FindJobApp/recruitment/${trend[0]}" class="text-dark">${trend[1]}</a></h5> 
+                                <h5><a href="<c:url value="/recruitment/${trend[0]}" />" class="text-dark">${trend[1]}</a></h5> 
 
                                 <!-- company_name -->
-                                <div><a href="/FindJobApp/recruiter/${trend[10]}">${trend[2]}</a></div>
+                                <div><a href="<c:url value="/recruiter/${trend[10]}" />">${trend[2]}</a></div>
 
                                 <!-- form -->
                                 <div>Chức vụ: ${trend[5].toString()}</div>
@@ -240,4 +254,23 @@
             </form:form>
         </div>
     </div>
+</div>
+            
+<!-- Require Login modal -->
+<div class="modal fade" id="requireLoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-danger font-weight-bold" id="exampleModalLongTitle">BẠN CHƯA ĐĂNG NHẬP!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Hủy</button>
+        <a href="<c:url value="/login" />" class="btn btn-primary btn-lg">ĐI ĐẾN TRANG ĐĂNG NHẬP</a>
+      </div>
+    </div>
+  </div>
 </div>

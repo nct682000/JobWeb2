@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 
+window.onload = function () {
+    let dates = document.querySelectorAll(".my-date")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        moment.locale('vi')
+        d.innerText = moment(d.innerText).fromNow()
+    }
+}
+
 function addComment(commenterId, commentedId){
     fetch("/FindJobApp/api/add-comment", {
         method: 'post',
@@ -42,8 +51,24 @@ function addComment(commenterId, commentedId){
                     <div class="ml-3">${data.content}</div>
                 </div>
                 <div>
-                    <span><a href="#">Thích</a> . </span>
-                    <span><a href="#">Trả lời</a> . </span>
+                    <span class="dropdown">
+                        <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Thích
+                        </button>
+                        <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                                <div><a href="#" class="text-primary" onclick="addInteraction(0, ${commenterId}, ${data.id})"><i class="fa fa-thumbs-up"></i> Thích</a></div>
+                                <div><a href="#" class="text-danger" onclick="addInteraction(1, ${commenterId}, ${data.id})"><i class="fa fa-thumbs-down"></i> Không thích</a></div>
+                        </div>
+                    </span>
+                    <span class="dropdown">
+                        <button class="btn btn-sm dropdown-toggle text-primary font-weight-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Trả lời
+                        </button>
+                        <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
+                            <textarea id="replyContent-${data.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
+                            <div><a href="#" class="text-info" onclick="addReply(${commenterId}, ${data.id})"><button>Trả lời</button></a></div>
+                        </div>
+                    </span>
                     <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
                     <span class="btn btn-danger" onclick="deleteComment(${commenterId}, ${data.id})">Xóa</span>
                 </div>
@@ -75,6 +100,77 @@ function deleteComment(userId, commentId){
         })
     }
 }
+
+function addReply(replyerId, commentId){
+    fetch("/FindJobApp/api/add-reply", {
+        method: 'post',
+        body: JSON.stringify({
+            "content": document.getElementById(`replyContent-${commentId}`).value,
+            "replyerId": replyerId,
+            "commentId": commentId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function(res){
+        console.info(res)
+        return res.json()
+    }).then(function(data){
+        console.info(data)
+        console.info(data.id)
+        
+        let area =  document.getElementById(`replyArea-${commentId}`)
+        let name = document.getElementById("cmtName").value
+        let avatar = document.getElementById("cmtAvatar").value
+        console.info(name)
+        console.info(avatar)
+        
+        moment.locale('vi')
+        area.innerHTML = `
+        <div class="ml-5 mt-2 row bg-light" id="reply-${data.id}">
+            <div class="col-2 text-center">
+                <img alt="Avatar" src="${avatar}" class="img-fluid rounded"/>
+            </div>
+            <div class="col-10">
+                <div class="card">
+                    <div class="font-weight-bold">
+                        ${name}
+                    </div>
+
+                    <div class="pl-3">${data.content}</div>
+                </div>
+                <div>
+                    <span><a href="#">Thích</a> . </span>
+                    <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
+                    <span class="btn btn-danger">Xóa</span>
+                </div>
+            </div>
+        </div>
+        ` + area.innerHTML
+    }).then(function(empty){
+        document.getElementById(`replyContent-${commentId}`).value = ""
+//        location.reload()
+    })
+}
+
+function deleteReply(userId, replyId){
+    if(confirm("Xác nhận xóa trả lời này") == true){
+        fetch("/FindJobApp/api/delete-reply", {
+            method: 'delete',
+            body: JSON.stringify({
+                "userId": userId,
+                "replyId": replyId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function(hidden){
+            console.info(hidden)
+            let r = document.getElementById(`reply-${replyId}`)
+            r.style.display = "none"
+        })
+    }
+}
     
 function addRate(canId, recId){
     fetch("/FindJobApp/api/add-rate", {
@@ -83,6 +179,23 @@ function addRate(canId, recId){
             "point": document.getElementById("ratePoint").innerText,
             "canId": canId,
             "recId": recId
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    
+    }).then(function(data){
+        location.reload()
+    })
+}
+
+function addInteraction(type, userId, commentId){
+    fetch("/FindJobApp/api/add-interaction", {
+        method: 'post',
+        body: JSON.stringify({
+            "type": type,
+            "userId": userId,
+            "commentId": commentId
         }),
         headers: {
             "Content-Type": "application/json"
@@ -104,9 +217,39 @@ function switchActiveRecruitment(recId){
         }
     }).then(function(res){
         console.info(res)
-        location.reload()
+        let iconShow = document.getElementById(`icon-active-show-${recId}`)
+        let iconHide = document.getElementById(`icon-active-hide-${recId}`)
+        let btnShow = document.getElementById(`btn-active-show-${recId}`)
+        let btnHide = document.getElementById(`btn-active-hide-${recId}`)
+        
+        if(btnHide != null){
+            if(btnHide.style.backgroundColor == "rgb(220, 53, 69)"){
+                btnHide.style.backgroundColor = "rgb(0, 123, 255)"
+                btnHide.innerText = "Bật tuyển dụng"
+                iconHide.innerHTML = `<i class="fa fa-window-close text-danger"></i>`
+            }else{
+                btnHide.style.backgroundColor = "rgb(220, 53, 69)"
+                btnHide.innerText = "Tắt tuyển dụng"
+                iconHide.innerHTML = `<i class="fa fa-check-square text-primary"></i>`
+            }
+        }
+            
+        if(btnShow != null){
+            if(btnShow.style.backgroundColor == "rgb(0, 123, 255)"){
+                btnShow.style.backgroundColor = "rgb(220, 53, 69)"
+                btnShow.innerText = "Tắt tuyển dụng"
+                iconShow.innerHTML = `<i class="fa fa-check-square text-primary"></i>`
+            }else{
+                btnShow.style.backgroundColor = "rgb(0, 123, 255)"
+                btnShow.innerText = "Bật tuyển dụng"
+                iconShow.innerHTML = `<i class="fa fa-window-close text-danger"></i>`
+            }
+        }
+            
     })
 }
+
+//
 
 
 function getRatePoint(point){

@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
  * @author nct68
  */
 @Service
-public class TagServiceImpl implements TagService{
+public class TagServiceImpl implements TagService {
+
     @Autowired
     private TagRepository tagRepository;
 
@@ -30,5 +31,10 @@ public class TagServiceImpl implements TagService{
     public boolean addOrUpdate(Tag t) {
         return this.tagRepository.addOrUpdate(t);
     }
-    
+
+    @Override
+    public boolean deleteTag(int id) {
+        return this.tagRepository.deleteTag(id);
+    }
+
 }

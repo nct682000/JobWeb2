@@ -7,6 +7,7 @@ package com.qv_ct.service;
 
 import com.qv_ct.pojos.Recruitment;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,11 +32,12 @@ public interface RecruitmentService {
     List<Recruitment> getRecruitmentByUserId(int userId);
 
     Recruitment switchActiveRecruitment(int recruitmentId);
+    List<Object[]> recruitmentStats(int userId, Date from, Date to);
 
     //    --------------    admin   -------------------
-    List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active);
+    List<Recruitment> getRecruitments_Admin(int page, long salaryFrom, long salaryTo, boolean active, String title, int caseSearch);
 
-    long countRecruitment_Admin(boolean active);
+    int countRecruitment_Admin(long salaryFrom, long salaryTo, boolean active, String title, int caseSearch);
 
     boolean enableRecruitment(int recId, boolean active);
 

@@ -51,5 +51,19 @@ public class TagRepositoryImpl implements TagRepository{
         
         return false;
     }
+    
+    @Override
+    public boolean deleteTag(int id) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            Tag a = s.get(Tag.class, id);
+//            s.getTransaction().begin();
+            s.delete(a);
+//            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
 
 }

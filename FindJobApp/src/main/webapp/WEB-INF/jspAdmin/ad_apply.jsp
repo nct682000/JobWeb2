@@ -49,6 +49,11 @@
                                         </div>                                
                                     </c:if>
                                 </div>
+                                <div class="col-3">
+                                    <div class="input-group input-group-lg col-10">
+                                        <input placeholder="Select date" type="date" name="dateFilter" id="example" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                         </form>
 
@@ -76,7 +81,6 @@
                         </div>
                     </div>
 
-
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="table-dark">
@@ -103,16 +107,16 @@
                                 <c:forEach items="${applys}" var="a" >
                                     <tr class="">
                                         <td class="text-primary">
-                                            ${a.title} 
+                                            <a href="/FindJobApp/admin/applies/${a.id}/detail">${a.title} </a>
                                         </td>
                                         <td>
-                                            ${a.content}
+                                            ${a.content.substring(0, 10)}. . .
                                         </td>                                            
                                         <td>
-                                            file cv  
+                                            <a href="${a.cv}">CV</a>
                                         </td>
                                         <td>
-                                            ${a.createdDate} 
+                                            ${a.createdDate.toString().substring(0, 10)} 
                                         </td>
                                         <td>
                                             ${a.candidate.lastName} ${a.candidate.firstName}

@@ -17,4 +17,9 @@ public interface RateRepository {
     long rateCountRecruiter(int recId);
     double ratePointRecruiter(int recId);
     List<Rate> getRate(int canId, int recId);
+    
+//    chart
+    List<Object[]> rateForChart(int year);
+        List<Object[]> rateForChart2(int year, int month);
+
 }

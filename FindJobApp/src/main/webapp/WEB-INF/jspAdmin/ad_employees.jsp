@@ -15,7 +15,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-primary row">
-                        <!--    lọc người ứng tuyển || người tuyển chọn     -->
                         <div class="col-4">
                             <div class="row">
                                 <h3>Thông tin nhân viên</h3>
@@ -79,8 +78,8 @@
                                     <c:forEach items="${users}" var="u">                                        
                                         <tr class="table-secondary text-dark">
                                             <td class="text-primary">
-                                                <!--<a href="/FindJobApp/admin/customers/cadidates/${u.id}/edit">${u.username}</a>-->
-                                                ${u.username}
+                                                <a href="/FindJobApp/admin/employees/${u.id}/edit">${u.username}</a>
+                                                <!--${u.username}-->
                                             </td>                                            
                                             <td>
                                                 ${u.mail} 
