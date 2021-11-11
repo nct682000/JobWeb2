@@ -65,7 +65,9 @@ public class UserServiceImpl implements UserService {
                 user.setAvatar((String) map.get("secure_url"));
             }
             String pass = user.getPassword();
-            user.setPassword(this.passwordEncoder.encode(pass));
+            if(pass.length() <= 32)
+                user.setPassword(this.passwordEncoder.encode(pass));
+            
             return this.userRepository.addOrUpdate(user, role);
 
         } catch (IOException ex) {
@@ -125,25 +127,5 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(int userId) {
         return this.userRepository.deleteUser(userId);
     }
-
-    @Override
-    public boolean addEmployee(User user, Role role) {
-        try {
-            if (!user.getFile().isEmpty()) {
-                Map map = this.cloudinary.uploader().upload(user.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-
-                user.setAvatar((String) map.get("secure_url"));
-            }
-            String pass = user.getPassword();
-            user.setPassword(this.passwordEncoder.encode(pass));
-            return this.userRepository.addEmployee(user, role);
-
-        } catch (IOException ex) {
-            System.err.println("-----Add Error-----" + ex.getMessage());
-            ex.printStackTrace();
-        }
-
-        return false;
-    }
+   
 }

@@ -249,6 +249,26 @@ function switchActiveRecruitment(recId){
     })
 }
 
+function hiddenApply(applyId){
+    if(confirm("Xác nhận xóa đơn ứng tuyển này") == true){
+        fetch("/FindJobApp/api/hidden-apply", {
+           method: 'post',
+           body: JSON.stringify({
+               "applyId": applyId
+           }),
+           headers: {
+               "Content-Type": "application/json"
+           }
+       }).then(function(res){
+           let a = document.getElementById(`apply-${applyId}`)
+           a.innerHTML = `
+                <td class="align-middle text-center text-success font-weight-bold" colspan="6">Đã xóa thành công đơn ứng tuyển này</td>
+            `
+   //        location.reload()
+       })
+   }
+}
+
 //
 
 

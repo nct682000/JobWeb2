@@ -13,5 +13,8 @@ import java.util.List;
  * @author nct68
  */
 public interface CareerService {
+
     List<Career> getCareers();
+
+    boolean deleteCareer(int id);
 }

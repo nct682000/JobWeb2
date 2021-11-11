@@ -214,7 +214,7 @@
                         <!-- Image -->
                         <c:if test="${user.avatar == null}">
                             <div class="align-self-center col-3">
-                                <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                                <image src="<c:url value="/images/userDefault.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
                             </div>
                         </c:if>
                         <c:if test="${user.avatar != null}">
@@ -259,7 +259,7 @@
                                 <div class="text-info font-weight-bold">${a.recruitment.title}</div>
                                 <div class="text-success">${a.title}</div>
                                 <div>
-                                    <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
+                                    <a class="text-white btn btn-secondary btn-sm " href="<c:url value="/user/${user.username}/apply"/>">Xem chi tiết</a>
                                 </div>
 
                             </div>
@@ -278,7 +278,7 @@
                         <!-- Image -->
                         <c:if test="${user.avatar == null}">
                             <div class="align-self-center col-3">
-                                <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                                <image src="<c:url value="/images/userDefault.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
                             </div>
                         </c:if>
                         <c:if test="${user.avatar != null}">

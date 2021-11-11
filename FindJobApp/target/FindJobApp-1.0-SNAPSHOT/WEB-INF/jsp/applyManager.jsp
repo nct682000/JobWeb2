@@ -43,13 +43,13 @@
             </thead>
             <tbody>
                 <c:forEach var="a" items="${myApplies}" >
-                    <tr>
+                    <tr id="apply-${a.id}">
                         <th class="align-middle" scope="row">${a.id}</th>
                         <td class="align-middle"><a class="text-info font-weight-bold" href="#" data-toggle="modal" data-target="#applyInfoModal-${a.id}">${a.title}</a></td>
                         <td class="align-middle"><a href="<c:url value="/recruitment/${a.recruitment.id}" />">${a.recruitment.title}</a></td>
                         <td class="align-middle"><a href="<c:url value="/recruiter/${a.recruitment.recruiter.id}" />">${a.recruitment.recruiter.companyName}</a></td>
                         <td class="align-middle text-center">${a.createdDate}</td>
-                        <td class="align-middle"><button class="btn btn-danger">Xóa</button></td>
+                        <td class="align-middle"><button class="btn btn-danger" onclick="hiddenApply(${a.id})">Xóa</button></td>
                     </tr>
 
                     <!-- Apply Info Modal -->

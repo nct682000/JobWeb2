@@ -21,16 +21,31 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class CareerRepositoryImpl implements CareerRepository{
+public class CareerRepositoryImpl implements CareerRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
     public List<Career> getCareers() {
         Session s = sessionFactory.getObject().getCurrentSession();
         Query q = s.createQuery("From Career");
-        
+
         return q.getResultList();
     }
-    
+
+    @Override
+    public boolean deleteCareer(int id) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            Career a = s.get(Career.class, id);
+//            s.getTransaction().begin();
+            s.delete(a);
+//            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
 }

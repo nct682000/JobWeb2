@@ -9,69 +9,104 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
+<c:if test="${status2 == 'number'}">
+    <c:url value="/admin/recruitment/search-salary" var="action" />
+</c:if>
+<c:if test="${status2 == 'text'}">
+    <c:url value="/admin/recruitment/search-title" var="action" />
+</c:if>
+<c:if test="${status == 'inactive'}">
+    <c:url value="/admin/recruitment/inactive" var="action" />
+</c:if>
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-
                     <div class="card-header card-header-primary row">
-                        <form action="/FindJobApp/admin/recruitment"  class="col-9">
+                        <form action="${action}"  class="col-10">
                             <div class="row" style="justify-content: space-around">
                                 <!--    lọc tin tuyển dụng theo active     -->
-                                <div class="col-4">
-                                    <div class="row ">
-                                        <c:if test="${status == 'active'}">
-                                            <input type="type" checked id="true" name="active" value="true" class="form-control" style="display: none"/>                                          
+                                <c:if test="${status == 'active'}">
+                                    <div class="col-3">
+                                        <div class="row ">
+                                            <!--<input type="type" checked id="true" name="active" value="true" class="form-control" style="display: none"/>-->                                          
                                             <div class="col btn btn-lg btn-outline-success active">Đăng tuyển</div>    
-                                            <a class="col btn btn-lg btn-outline-secondary" href="<c:url value="/admin/recruitment" />?active=false">Hết hiệu lực</a>                                                   
+                                            <a class="col btn btn-lg btn-outline-secondary" href="<c:url value="/admin/recruitment/inactive" />">Hết hiệu lực</a>                                                   
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="row ">
+                                            <c:if test="${status2 == 'number'}">
+                                                <!--<input type="type" checked id="true" name="salary" value="true" class="form-control" style="display: none"/>-->                                          
+                                                <div class="col btn btn-lg btn-outline-success active">Lương thường</div>    
+                                                <a style="padding-left: 0; padding-right: 0" class="col btn btn-lg btn-outline-secondary" href="<c:url value="/admin/recruitment/search-title" />">Thỏa thuận</a>                                                   
+                                            </c:if>
+                                            <c:if test="${status2 == 'text'}">
+                                                <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/recruitment/search-salary" />">Lương thường</a>                                                            
+                                                <!--<input type="type" checked id="true" name="salary" value="false" class="form-control" style="display: none"/>-->
+                                                <div style="padding-left: 0; padding-right: 0" class="col btn btn-lg btn-outline-secondary active">Thỏa thuận</div>                                                         
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                    <!--    lọc tin tuyển dụng theo salary     -->
+                                    <div class="col-6">
+                                        <c:if test="${status2 == 'number'}">
+                                            <div class="input-group input-group-lg col-10">
+                                                <input type="text" name="title"  placeholder="Tiêu đề bài viết . . ." class="form-control" >
+                                                <input type="number" name="salaryFrom"  placeholder="lương từ . . ." class="form-control" style="max-width: 150px">
+                                                <input type="number" name="salaryTo" placeholder="lương đến . . ."    class="form-control" style="max-width: 150px">
+                                                <button class="btn btn-outline-success fa fa-search"></button>         
+                                            </div>       
                                         </c:if>
-                                        <c:if test="${status == 'inactive'}">
-                                            <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/recruitment" />?active=true">Đăng tuyển</a>                                                            
-                                            <input type="type" checked id="true" name="active" value="false" class="form-control" style="display: none"/>
-                                            <div class="col btn btn-lg btn-outline-secondary active">Hết hiệu lực</div>                                                         
+                                        <c:if test="${status2 == 'text'}">
+                                            <div class="input-group input-group-lg col-10">
+                                                <input type="text" name="title"  placeholder="Tiêu đề bài viết . . ." class="form-control" >
+                                                <button class="btn btn-outline-success fa fa-search"></button>         
+                                            </div>       
                                         </c:if>
                                     </div>
-                                </div>
+                                </c:if>
 
-                                <!--    lọc tin tuyển dụng theo salary     -->
-                                <div class="col-6">
-                                    <c:if test="${status == 'active'}">
+                                <!--    lọc tin tuyển dụng theo inactive     -->
+                                <c:if test="${status == 'inactive'}">
+                                    <div class="col-3">
+                                        <div class="row ">
+                                            <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/recruitment" />">Đăng tuyển</a>                                                            
+                                            <!--<input type="type" checked id="true" name="active" value="false" class="form-control" style="display: none"/>-->
+                                            <div class="col btn btn-lg btn-outline-secondary active">Hết hiệu lực</div>                                                         
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
                                         <div class="input-group input-group-lg col-10">
-                                            <input type="number" name="salaryFrom"  placeholder="lương từ . . ." class="form-control">
-                                            <input type="number" name="salaryTo" placeholder="lương đến . . ."    class="form-control">
+                                            <input type="text" name="title"  placeholder="Tiêu đề bài viết . . ." class="form-control" >
                                             <button class="btn btn-outline-success fa fa-search"></button>         
-                                        </div>                                
-                                    </c:if>
-                                    <c:if test="${status == 'inactive'}">
-                                        <div class="input-group input-group-lg col-10">
-                                            <input type="number" name="salaryFrom"  placeholder="lương từ . . ." class="form-control">
-                                            <input type="number" name="salaryTo" placeholder="lương đến . . ."    class="form-control">
-                                            <button class="btn btn-outline-success fa fa-search"></button>         
-                                        </div>                                
-                                    </c:if>
-                                </div>
+                                        </div>       
+                                    </div>
+                                </c:if>
+
+
                             </div>
                         </form>
 
-
-
-
-
                         <!--    phân trang      -->
-                        <div class="col-3">
+                        <div class="col-2">
                             <!--${counter}-->
-                            <div class="row justify-content-end">
+                            <div class="row justify-content-center">
                                 <div class="col-6">
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination ">
                                             <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
                                                 <li class="page-item" >
-                                                    <c:if test="${status == 'active'}">
-                                                        <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/recruitment" />?page=${i}">${i}</a>
+                                                    <c:if test="${status2 == 'text'}">
+                                                        <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/recruitment/search-title" />?page=${i}">${i}</a>
+                                                    </c:if>
+                                                    <c:if test="${status2 == 'number'}">
+                                                        <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/recruitment/search-salary" />?page=${i}">${i}</a>
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
-                                                        <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/recruitment?active=false" />?page=${i}">${i}</a>
+                                                        <a class="page-link" style="padding: 10px 15px;" href="<c:url value="/admin/recruitment/inactive" />?page=${i}">${i}</a>
                                                     </c:if>
                                                 </li>
                                             </c:forEach>
@@ -110,13 +145,18 @@
                                 <c:forEach items="${recruitments}" var="u">
                                     <tr class="table-secondary text-dark">
                                         <td class="text-primary">                                              
-                                            <a href="/FindJobApp/admin/recruitment/${u.id}">${u.title}</a>
+                                            <a href="/FindJobApp/recruitment/${u.id}">${u.title}</a>
                                         </td>                                            
                                         <td>
-                                            ${u.salaryFrom} - ${u.salaryTo}  
+                                            <c:if test="${status2 == 'number'}">
+                                                ${u.salaryFrom} ~ ${u.salaryTo}  
+                                            </c:if>
+                                            <c:if test="${status2 == 'text'}">
+                                                thỏa thuận
+                                            </c:if>
                                         </td>
                                         <td>
-                                            ${u.description} 
+                                            ${u.description.substring(0, 15)}. . . 
                                         </td>
                                         <td>
                                             ${u.updatedDate} 

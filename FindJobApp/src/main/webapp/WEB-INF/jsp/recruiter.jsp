@@ -90,7 +90,12 @@
             <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <div class="row">
                 <div class="col-2 ">
-                    <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
+                    <c:if test="${currentUser == null}">
+                        <img alt="Avatar" src="<c:url value="/images/userDefault.jpg" />" class="img-fluid rounded"/>
+                    </c:if>
+                    <c:if test="${currentUser != null}">
+                        <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
+                    </c:if>
                 </div>
                 <textarea id="commentId" type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2 col" ></textarea>
             </div>
@@ -325,4 +330,3 @@
         </div>
     </div>
 </div>
-

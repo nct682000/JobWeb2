@@ -53,6 +53,7 @@ com\qv_ct\pojos\Rate.class
 com\qv_ct\controllers\client\UserController.class
 com\qv_ct\repository\impl\BenefitRepositoryImpl.class
 com\qv_ct\repository\ReplyRepository.class
+com\qv_ct\controllers\client\ApiApplyController.class
 com\qv_ct\pojos\Role.class
 com\qv_ct\pojos\Form$6.class
 com\qv_ct\service\impl\ProvinceServiceImpl.class

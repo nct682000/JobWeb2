@@ -39,5 +39,4 @@ public interface UserRepository {
 
     boolean deleteUser(int userId);
 
-    boolean addEmployee(User user, Role role);
 }

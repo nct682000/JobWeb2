@@ -9,9 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.qv_ct.service.ApplyService;
 import com.qv_ct.pojos.User;
-import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 /**
@@ -29,17 +30,25 @@ public class Ad_ApplyController {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
         boolean active = Boolean.parseBoolean(params.getOrDefault("active", "true"));
         String title = params.getOrDefault("title", "");
+        String dateFilter = params.getOrDefault("dateFilter", "");
 
         if (active) {
-            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title));
-            model.addAttribute("counter", this.applyService.countApply_Admin(active));
+            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title, dateFilter));
+            model.addAttribute("counter", this.applyService.countApply_Admin(active, title, dateFilter));
             model.addAttribute("status", "active");
         } else {
-            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title));
-            model.addAttribute("counter", this.applyService.countApply_Admin(active));
+            model.addAttribute("applys", this.applyService.getApply_Admin(page, active, title, dateFilter));
+            model.addAttribute("counter", this.applyService.countApply_Admin(active, title, dateFilter));
             model.addAttribute("status", "inactive");
         }
 
         return "getApply_Admin";
+    }
+
+    @RequestMapping("/admin/applies/{applyId}/detail")
+    public String getApplyById_Admin(Model model, @PathVariable(value = "applyId") int applyId) {
+        model.addAttribute("apply", this.applyService.getApplyById(applyId));
+
+        return "getApplyById_Admin";
     }
 }

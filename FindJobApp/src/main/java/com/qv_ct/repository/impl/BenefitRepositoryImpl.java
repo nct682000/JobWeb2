@@ -21,7 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class BenefitRepositoryImpl implements BenefitRepository{
+public class BenefitRepositoryImpl implements BenefitRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
@@ -35,17 +36,31 @@ public class BenefitRepositoryImpl implements BenefitRepository{
     @Override
     public boolean addOrUpdate(Benefit b) {
         Session session = sessionFactory.getObject().getCurrentSession();
-        
-        try{
+
+        try {
             session.save(b);
-            
+
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.err.println("-- Add Tag Error --" + ex.getMessage());
             ex.printStackTrace();
         }
-        
+
         return false;
     }
-    
+
+    @Override
+    public boolean deleteBenefit(int id) {
+        try {
+            Session s = sessionFactory.getObject().getCurrentSession();
+            Benefit a = s.get(Benefit.class, id);
+//            s.getTransaction().begin();
+            s.delete(a);
+//            s.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
 }
