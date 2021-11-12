@@ -397,4 +397,11 @@
             <a href="<c:url value="/admin"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
         </div>
     </c:if>
+    
+    <!-- EMPLOYEE -->
+    <c:if test="${user.role.toString() == 'ROLE_EMPLOYEE'}">
+        <div class="m-4 text-center">
+            <a href="<c:url value="/admin/"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
+        </div>
+    </c:if>
 </c:if>
