@@ -12,24 +12,24 @@
 
 
 <div>
-    <div class="container">
+    <div class="container-fluid">
         <h1 style="text-align: center; padding: 30px">Thống kê số liệu trong năm ${year}</h1>
-        <div class="row">
+        <div class="row col-md-12">
             <!--    biểu đồ vòng cung    -->
-            <div class="col-md-3 " >
-                <div class="col-md-12 ">
+            <div class="col-md-5 " >
+                <div class="col-md-12 " style="margin-bottom: 50px">
                     <canvas id="Apply_City"  style="background-color: #d9fab6; margin-bottom: 10px"></canvas>
                 </div >
-                <div class="col-md-12 ">
+                <div class="col-md-12 " style="margin-bottom: 5 0px">
                     <canvas id="Apply_Company"  style="background-color: #d9fab6; margin-bottom: 10px"></canvas>
                 </div >
                 <div class="col-md-12 ">
-                    <canvas id="Apply_Job"  style="background-color: #d9fab6; margin-bottom: 50px"></canvas>
+                    <canvas id="rateChart" style="background-color: #dff5cc; margin-bottom: 20px"></canvas>
                 </div >
             </div>
 
             <!--    các biểu đồ còn lại    -->
-            <div class="col-md-9 " >
+            <div class="col-md-7 " >
                 <div class="row" style="margin-bottom: 50px">
                     <!--    form nhập request     -->
                     <form action="/FindJobApp/admin"  class="col-md-12" style="text-align: center">
@@ -60,16 +60,16 @@
                             <div class="container " style="padding: 0 45px 0 45px">
                                 <c:if test="${sortBy == 'thang'}">
                                     <div class="row" style="justify-content: center; text-align-last: center; margin-top: 20px; margin-bottom: 50px">
-                                        <div class="col-4">
-                                        <div class="input-group input-group-lg ">
-                                            <input type="text" readonly value="Trong năm tổng có: ${total}" class="form-control col-5"/>
+                                        <div class="col-5">
+                                            <div class="input-group input-group-lg ">
+                                                <input type="text" readonly value="Trong năm tổng có: ${total}" class="form-control col-5"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-5">
-                                        <div class="input-group input-group-lg ">
-                                            <input type="text" readonly value="Trung bình mỗi tháng: ${Math.ceil(avg * 100) / 100}" class="form-control col-5"/>
+                                        <div class="col-5">
+                                            <div class="input-group input-group-lg ">
+                                                <input type="text" readonly value="Trung bình mỗi tháng: ${Math.ceil(avg * 100) / 100}" class="form-control col-5"/>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
 
                                 </c:if>
@@ -122,7 +122,7 @@
                 </form>
 
                 <div class="col-md-12 ">
-                    <canvas id="rateChart" style="background-color: #dff5cc; margin-bottom: 20px"></canvas>
+                    <canvas id="Apply_Job"  style="background-color: #d9fab6; margin-bottom: 50px"></canvas>
                 </div >
             </div>
         </div>
@@ -241,7 +241,7 @@
             datasets: [
                 {
                     label: 'rating',
-                    backgroundColor: 'rgba(255, 206, 86, 0.7)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
                     borderColor: 'rgba(255, 206, 86, 1)',
                     borderWidth: 5,
                     data: rateDatas
@@ -313,21 +313,15 @@
     </c:forEach>
 
     new Chart("Apply_Company", {
-        type: "doughnut",
+        type: "bar",
         data: {
             labels: Apply_Company_Labels,
             datasets: [
                 {
                     label: 'số lượng ứng tuyển',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(63, 169, 33, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    ],
-//                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 0,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 5,
                     data: Apply_Company_Sl
                 },
             ]
@@ -340,7 +334,7 @@
             },
             plugins: {
                 legend: {
-                    position: 'bottom',
+//                    position: 'bottom',
                 },
                 title: {
                     display: true,
@@ -359,8 +353,16 @@
 
 //  biểu đồ top công việc được ứng tuyển nhiều nhất
     var Apply_Job_Labels = [];
+    var Apply_Job_Labels2 = [];
+
     <c:forEach items="${countApplyByJob}" var="r">
+        <c:if test="${r[1].length() >= 20}">
+    Apply_Job_Labels.push(`${r[1].substring(0, 20)}...`);
+        </c:if>
+        <c:if test="${r[1].length() < 20}">
     Apply_Job_Labels.push(`${r[1]}`);
+        </c:if>
+    Apply_Job_Labels2.push(`${r[1]}`);
     </c:forEach>
 
     var Apply_Job_Sl = [];
@@ -369,20 +371,15 @@
     </c:forEach>
 
     new Chart("Apply_Job", {
-        type: "doughnut",
+        type: "bar",
         data: {
             labels: Apply_Job_Labels,
             datasets: [
                 {
                     label: 'số lượng ứng tuyển',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(63, 169, 33, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    ],
-                    borderWidth: 0,
+                    backgroundColor:  'rgba(75, 192, 192, 0.2)',
+                    borderColor:  'rgba(75, 192, 192, 1)',
+                    borderWidth: 5,
                     data: Apply_Job_Sl,
                 },
             ],
@@ -396,7 +393,7 @@
             },
             plugins: {
                 legend: {
-                    position: 'bottom',
+//                    position: 'bottom',
                 },
                 title: {
                     display: true,
@@ -426,20 +423,15 @@
     </c:forEach>
 
     new Chart("Apply_City", {
-        type: "doughnut",
+        type: "bar",
         data: {
             labels: Apply_City_Labels,
             datasets: [
                 {
                     label: 'số lượng ứng tuyển',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(63, 169, 33, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    ],
-                    borderWidth: 0,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor:   'rgba(255, 99, 132, 1)',
+borderWidth: 5,
                     data: Apply_City_Sl,
                 },
             ],
@@ -453,7 +445,7 @@
             },
             plugins: {
                 legend: {
-                    position: 'bottom',
+//                    position: 'bottom',
                 },
                 title: {
                     display: true,

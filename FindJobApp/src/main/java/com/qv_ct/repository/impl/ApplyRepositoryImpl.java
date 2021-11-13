@@ -111,7 +111,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
 
         query.where(builder.and(p1, p2, p3));
 
-        query = query.orderBy(builder.desc(root.get("id")));
+        query = query.orderBy(builder.desc(root.get("createdDate")));
 
         Query q = s.createQuery(query);
 
@@ -136,7 +136,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
 
         query.where(builder.and(p1, p2, p3));
 
-        query = query.orderBy(builder.desc(root.get("id")));
+        query = query.orderBy(builder.desc(root.get("createdDate")));
 
         Query q = s.createQuery(query);
 
@@ -202,8 +202,8 @@ public class ApplyRepositoryImpl implements ApplyRepository {
                 + "FROM Apply a\n"
                 + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
                 + "INNER JOIN User u ON u.id = r.recruiter\n"
-                + "WHERE YEAR(a.createdDate) =:year\n"
-                + "GROUP BY a.recruitment ORDER BY sl DESC");
+                + "WHERE YEAR(a.createdDate) =:year AND a.active=true\n"
+                + "GROUP BY u.companyName ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setMaxResults(maxTop);
         List<Object[]> results = q.getResultList();
@@ -219,8 +219,8 @@ public class ApplyRepositoryImpl implements ApplyRepository {
                 + "FROM Apply a\n"
                 + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
                 + "INNER JOIN User u ON u.id = r.recruiter\n"
-                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
-                + "GROUP BY a.recruitment ORDER BY sl DESC");
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month AND a.active=true\n"
+                + "GROUP BY u.companyName ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setParameter("month", month);
         q.setMaxResults(maxTop);
@@ -237,7 +237,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Query q = session.createQuery("SELECT Count(a.id) AS sl, r.title\n"
                 + "FROM Apply a\n"
                 + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
-                + "WHERE YEAR(a.createdDate) =:year\n"
+                + "WHERE YEAR(a.createdDate) =:year AND a.active=true\n"
                 + "GROUP BY a.recruitment ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setMaxResults(maxTop);
@@ -253,7 +253,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         Query q = session.createQuery("SELECT Count(a.id) AS sl, r.title\n"
                 + "FROM Apply a\n"
                 + "INNER JOIN Recruitment r ON r.id = a.recruitment\n"
-                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month AND a.active=true\n"
                 + "GROUP BY a.recruitment ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setParameter("month", month);
@@ -274,7 +274,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
                 + "INNER JOIN User u ON u.id = r.recruiter\n"
                 + "INNER JOIN Location l ON l.id = u.location\n"
                 + "INNER JOIN Province p ON p.id = l.province\n"
-                + "WHERE YEAR(a.createdDate) =:year\n"
+                + "WHERE YEAR(a.createdDate) =:year AND a.active=true\n"
                 + "GROUP BY p.name ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setMaxResults(maxTop);
@@ -292,7 +292,7 @@ public class ApplyRepositoryImpl implements ApplyRepository {
                 + "INNER JOIN User u ON u.id = a.recruitment\n"
                 + "INNER JOIN Location l ON l.id = u.location\n"
                 + "INNER JOIN Province p ON p.id = l.province\n"
-                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month\n"
+                + "WHERE YEAR(a.createdDate) =:year AND MONTH(a.createdDate) =:month AND a.active=true\n"
                 + "GROUP BY p.name ORDER BY sl DESC");
         q.setParameter("year", year);
         q.setParameter("month", month);

@@ -12,13 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import com.qv_ct.service.ApplyService;
 import com.qv_ct.service.RateService;
 import com.qv_ct.service.BenefitService;
 import com.qv_ct.service.CareerService;
 import com.qv_ct.service.TagService;
 import java.time.LocalDate;
+import com.qv_ct.pojos.Benefit;
+import com.qv_ct.pojos.Career;
+import com.qv_ct.pojos.Tag;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import java.text.ParseException;
 
 /**
  *
@@ -101,10 +109,122 @@ public class AdminHome {
 
     @RequestMapping("/admin/others")
     public String getOthers_Admin(Model model) {
+//        model.addAttribute("benefit", new Benefit());
+//        model.addAttribute("career", new Career());
+//        model.addAttribute("tag", new Tag());
 
         model.addAttribute("benefits", this.benefitService.getBenefits());
         model.addAttribute("careers", this.careerService.getCareers());
         model.addAttribute("tags", this.tagService.getTags());
+
+        return "getOthers_Admin";
+    }
+
+    @GetMapping("/admin/others/benefit/new")
+    public String createBenefit_Admin_View(Model model) {
+        model.addAttribute("benefit", new Benefit());
+
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("tags", this.tagService.getTags());
+        model.addAttribute("type", "createBenefit");
+
+        return "getOthers_Admin";
+    }
+
+    @GetMapping("/admin/others/career/new")
+    public String createCareer_Admin_View(Model model) {
+        model.addAttribute("career", new Career());
+
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("tags", this.tagService.getTags());
+        model.addAttribute("type", "createCareer");
+
+        return "getOthers_Admin";
+    }
+
+    @GetMapping("/admin/others/tag/new")
+    public String createTag_Admin_View(Model model) {
+        model.addAttribute("tag", new Tag());
+
+        model.addAttribute("benefits", this.benefitService.getBenefits());
+        model.addAttribute("careers", this.careerService.getCareers());
+        model.addAttribute("tags", this.tagService.getTags());
+        model.addAttribute("type", "createTag");
+
+        return "getOthers_Admin";
+    }
+
+    @PostMapping("/admin/others/benefit/new")
+    public String createBenefit_Admin_Process(Model model,
+            @ModelAttribute(value = "benefit") @Valid Benefit benefit,
+            BindingResult result) throws ParseException {
+        String errorBenefit = "";
+
+        if (!result.hasErrors()) {
+            if (this.benefitService.addOrUpdate(benefit) == true) {
+                return "redirect:/admin/others";
+            } else {
+                errorBenefit = "Xảy ra lỗi, vui lòng thực hiện lại!";
+            }
+
+        } else {
+            errorBenefit = "Tên phúc lợi phải có độ dài từ 5 - 30 kí tự";
+        }
+
+        model.addAttribute("type", "createBenefit");
+        model.addAttribute("errorBenefit", errorBenefit);
+
+        return "getOthers_Admin";
+    }
+
+    @PostMapping("/admin/others/career/new")
+    public String createCareer_Admin_Process(Model model,
+            @ModelAttribute(value = "career") @Valid Career career,
+            BindingResult result) throws ParseException {
+        String errorCareer = "";
+
+        if (career.getName().length() < 5 || career.getName().length() > 30) {
+            errorCareer = "Tên nghề nghiệp phải có độ dài từ 5 - 30 kí tự";
+        } else {
+            if (!result.hasErrors()) {
+                if (this.careerService.addOrUpdate(career) == true) {
+                    return "redirect:/admin/others";
+                } else {
+                    errorCareer = "Xảy ra lỗi, vui lòng thực hiện lại!";
+                }
+
+            } else {
+                errorCareer = "Tên nghề nghiệp có độ dài không hợp lệ";
+            }
+        }
+
+        model.addAttribute("type", "createCareer");
+        model.addAttribute("errorCareer", errorCareer);
+
+        return "getOthers_Admin";
+    }
+
+    @PostMapping("/admin/others/tag/new")
+    public String createTag_Admin_Process(Model model,
+            @ModelAttribute(value = "tag") @Valid Tag tag,
+            BindingResult result) throws ParseException {
+        String errorTag = "";
+
+        if (!result.hasErrors()) {
+            if (this.tagService.addOrUpdate(tag) == true) {
+                return "redirect:/admin/others";
+            } else {
+                errorTag = "Xảy ra lỗi, vui lòng thực hiện lại!";
+            }
+
+        } else {
+            errorTag = "Tên tài khoản có độ dài từ 2 - 20 kí tự";
+        }
+
+        model.addAttribute("type", "createTag");
+        model.addAttribute("errorTag", errorTag);
 
         return "getOthers_Admin";
     }

@@ -59,8 +59,9 @@
 
                         <!--    Bảng dữ liệu      -->
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover stt">
                                 <thead class="table-dark">
+                                <th>Stt</th>
                                 <th>
                                     Tên đăng nhập
                                 </th>
@@ -77,6 +78,7 @@
                                 <tbody>
                                     <c:forEach items="${users}" var="u">                                        
                                         <tr class="table-secondary text-dark">
+                                            <td></td>
                                             <td class="text-primary">
                                                 <a href="/FindJobApp/admin/employees/${u.id}/edit">${u.username}</a>
                                                 <!--${u.username}-->
