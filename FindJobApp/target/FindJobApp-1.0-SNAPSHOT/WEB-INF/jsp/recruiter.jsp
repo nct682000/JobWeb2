@@ -158,7 +158,7 @@
                                         <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
                                             <c:if test="${currentUser != null}">
                                                 <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
-                                                <div><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button>Trả lời</button></a></div> 
+                                                <div class="text-right mr-2"><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button class="btn btn-primary">Trả lời</button></a></div> 
                                             </c:if>
                                             <c:if test="${currentUser == null}">
                                                 <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>

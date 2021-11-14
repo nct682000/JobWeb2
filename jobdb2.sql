@@ -117,7 +117,7 @@ CREATE TABLE `comment` (
   KEY `fk_comment_user_id2_idx` (`commented_id`),
   CONSTRAINT `fk_comment_user_id1` FOREIGN KEY (`commenter_id`) REFERENCES `user` (`id`),
   CONSTRAINT `fk_comment_user_id2` FOREIGN KEY (`commented_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (103,'comment',NULL,'2021-10-02 14:32:42',47,45),(104,'Hello',NULL,'2021-10-02 20:59:55',44,49),(105,'Good',NULL,'2021-10-02 21:21:28',56,47),(106,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',NULL,'2021-10-02 21:57:48',58,45),(107,'cmt',NULL,'2021-10-03 20:33:16',44,49),(112,'test',NULL,'2021-10-29 12:18:19',49,49),(113,'testtt',NULL,'2021-10-29 12:24:00',49,49),(114,'testt 5',NULL,'2021-10-29 12:26:35',49,49);
+INSERT INTO `comment` VALUES (103,'comment',NULL,'2021-10-02 14:32:42',47,45),(104,'Hello',NULL,'2021-10-02 20:59:55',44,49),(105,'Good',NULL,'2021-10-02 21:21:28',56,47),(106,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',NULL,'2021-10-02 21:57:48',58,45),(112,'test',NULL,'2021-10-29 12:18:19',49,49),(113,'testtt',NULL,'2021-10-29 12:24:00',49,49),(114,'testt 5',NULL,'2021-10-29 12:26:35',49,49);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ CREATE TABLE `interaction` (
 
 LOCK TABLES `interaction` WRITE;
 /*!40000 ALTER TABLE `interaction` DISABLE KEYS */;
-INSERT INTO `interaction` VALUES (44,103,'0'),(44,104,'0'),(44,105,'1'),(44,106,'1'),(44,107,'1'),(47,107,'1'),(49,104,'0'),(49,107,'0'),(49,114,'0');
+INSERT INTO `interaction` VALUES (44,103,'0'),(44,104,'1'),(44,105,'1'),(44,106,'1'),(49,104,'0'),(49,114,'0');
 /*!40000 ALTER TABLE `interaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +263,7 @@ CREATE TABLE `recruitment` (
   KEY `fk_recruitment_user_id_idx` (`recruiter_id`),
   CONSTRAINT `fk_recruitment_career_id` FOREIGN KEY (`career_id`) REFERENCES `career` (`id`),
   CONSTRAINT `fk_recruitment_user_id` FOREIGN KEY (`recruiter_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `recruitment` (
 
 LOCK TABLES `recruitment` WRITE;
 /*!40000 ALTER TABLE `recruitment` DISABLE KEYS */;
-INSERT INTO `recruitment` VALUES (35,'Tuyển 2 bảo vệ cổng',8000000,10000000,'2','Bảo vệ tại công ra vào, làm việc 24/7','2020-10-02 00:00:00','2020-10-02 00:00:00',1,3,45),(36,'Tuyển 2 bảo vệ sảnh chờ',5000000,6000000,'2','Bảo vệ trong sảnh, làm việc 6 ngày 1 tuần, giờ hành chính','2021-11-02 00:00:00','2021-11-02 00:00:00',1,3,45),(37,'Tuyển 10 gia sư cấp 3 khu vực Thảo Điền',NULL,NULL,'1','Giảng dậy tại nhà giờ giấc linh hoạt','2021-12-02 00:00:00','2021-12-02 00:00:00',1,13,46),(38,'Tuyển 5 thực tập sinh điều dưỡng',2000000,2000000,'0','Hỗ trợ điều dưỡng tại các bệnh viện khu vực Bình Thạnh, Gò Vấp, Phú Nhuận','2021-01-02 00:00:00','2021-01-02 00:00:00',1,14,47),(39,'Tuyển 1 giám đốc sản xuất âm nhạc',NULL,30000000,'6','Phụ trách về các sản phẩm âm nhạc của công ty','2021-02-02 00:00:00','2021-02-02 00:00:00',0,6,48),(40,'Tuyển 2 quản lý dự án phần mềm',2000000,3000000,'4','Quản lý các dự án phần mềm và tiến độ làm việc của các lập trình viên','2021-03-27 00:00:00','2021-03-27 00:00:00',1,1,49),(41,'Tuyển 1 quản lý phần mềm cấp cao',NULL,NULL,'5','Quản lý, tiếp nhận các đơn đặt hàng và kiểm duyệt, điểu chỉnh sản phẩm để giao cho khách hàng','2021-04-02 00:00:00','2021-04-02 00:00:00',0,1,49),(42,'Nhân viên giao Pizza',10000000,NULL,'2','Vận chuyển pizza từ cửa hàng giao cho khách','2021-05-02 00:00:00','2021-05-02 00:00:00',1,9,50),(43,'Ca sĩ phòng trà',10000000,15000000,'2','Hát tại các phòng trà, tuần 3-4 buổi tối','2021-05-02 00:00:00','2021-05-02 00:00:00',0,5,48),(44,'Tuyển 1 nhân viên kĩ thuật',8000000,12000000,'2','Chỉnh sửa, bảo trì máy móc','2021-05-02 00:00:00','2021-05-02 00:00:00',1,2,49),(45,'Kế toán trưởng',15000000,15000000,'3','Quản lý thu ngân, tính toán lợi nhuận, tính lương nhân viên','2021-08-02 00:00:00','2021-08-02 00:00:00',0,8,50),(46,'Chế biến pizza',10000000,NULL,'2','Chế biến các món pizza theo công thức có sẵn của nhà hàng','2021-10-02 00:00:00','2021-10-02 00:00:00',1,15,50),(47,'Tuyển 10 thực tập sinh lập trình',NULL,3500000,'0','Hỗ trợ lập trình các dự án, có thể nghỉ 2 buổi 1 tuần','2021-10-02 00:00:00','2021-10-02 00:00:00',1,1,49);
+INSERT INTO `recruitment` VALUES (35,'Tuyển 2 bảo vệ cổng',8000000,10000000,'2','Bảo vệ tại công ra vào, làm việc 24/7','2020-10-02 00:00:00','2020-10-02 00:00:00',1,3,45),(36,'Tuyển 2 bảo vệ sảnh chờ',5000000,6000000,'2','Bảo vệ trong sảnh, làm việc 6 ngày 1 tuần, giờ hành chính','2021-11-02 00:00:00','2021-11-02 00:00:00',1,3,45),(37,'Tuyển 10 gia sư cấp 3 khu vực Thảo Điền',NULL,NULL,'1','Giảng dậy tại nhà giờ giấc linh hoạt','2021-12-02 00:00:00','2021-12-02 00:00:00',1,13,46),(38,'Tuyển 5 thực tập sinh điều dưỡng',2000000,2000000,'0','Hỗ trợ điều dưỡng tại các bệnh viện khu vực Bình Thạnh, Gò Vấp, Phú Nhuận','2021-01-02 00:00:00','2021-01-02 00:00:00',1,14,47),(39,'Tuyển 1 giám đốc sản xuất âm nhạc',NULL,30000000,'6','Phụ trách về các sản phẩm âm nhạc của công ty','2021-02-02 00:00:00','2021-02-02 00:00:00',1,6,48),(40,'Tuyển 2 quản lý dự án phần mềm',2000000,3000000,'4','Quản lý các dự án phần mềm và tiến độ làm việc của các lập trình viên','2021-03-27 00:00:00','2021-03-27 00:00:00',1,1,49),(41,'Tuyển 1 quản lý phần mềm cấp cao',NULL,NULL,'5','Quản lý, tiếp nhận các đơn đặt hàng và kiểm duyệt, điểu chỉnh sản phẩm để giao cho khách hàng','2021-04-02 00:00:00','2021-04-02 00:00:00',0,1,49),(42,'Nhân viên giao Pizza',10000000,NULL,'2','Vận chuyển pizza từ cửa hàng giao cho khách','2021-05-02 00:00:00','2021-05-02 00:00:00',1,9,50),(43,'Ca sĩ phòng trà',10000000,15000000,'2','Hát tại các phòng trà, tuần 3-4 buổi tối','2021-05-02 00:00:00','2021-05-02 00:00:00',1,5,48),(44,'Tuyển 1 nhân viên kĩ thuật',8000000,12000000,'2','Chỉnh sửa, bảo trì máy móc','2021-05-02 00:00:00','2021-05-02 00:00:00',1,2,49),(45,'Kế toán trưởng',15000000,15000000,'3','Quản lý thu ngân, tính toán lợi nhuận, tính lương nhân viên','2021-08-02 00:00:00','2021-08-02 00:00:00',0,8,50),(46,'Chế biến pizza',10000000,NULL,'2','Chế biến các món pizza theo công thức có sẵn của nhà hàng','2021-10-02 00:00:00','2021-10-02 00:00:00',1,15,50),(47,'Tuyển 10 thực tập sinh lập trình',NULL,3500000,'0','Hỗ trợ lập trình các dự án, có thể nghỉ 2 buổi 1 tuần','2021-10-02 00:00:00','2021-10-02 00:00:00',1,1,49),(60,'Tuyển 5 JAVA DEVELOPER INTERN',3500000,5000000,'0','Thực tập phát triển ứng dụng bằng ngôn ngữ Java','2021-11-14 00:00:00','2021-11-14 00:00:00',1,1,49);
 /*!40000 ALTER TABLE `recruitment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -299,6 +299,7 @@ CREATE TABLE `recruitment_benefit` (
 
 LOCK TABLES `recruitment_benefit` WRITE;
 /*!40000 ALTER TABLE `recruitment_benefit` DISABLE KEYS */;
+INSERT INTO `recruitment_benefit` VALUES (60,1),(60,2),(60,3),(60,4),(60,5);
 /*!40000 ALTER TABLE `recruitment_benefit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,6 +326,7 @@ CREATE TABLE `recruitment_tag` (
 
 LOCK TABLES `recruitment_tag` WRITE;
 /*!40000 ALTER TABLE `recruitment_tag` DISABLE KEYS */;
+INSERT INTO `recruitment_tag` VALUES (60,2),(60,3),(60,5);
 /*!40000 ALTER TABLE `recruitment_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +349,7 @@ CREATE TABLE `reply` (
   KEY `fk_reply_comment_id_idx` (`comment_id`),
   CONSTRAINT `fk_reply_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `fk_reply_user_id1` FOREIGN KEY (`replyer_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -433,4 +435,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-12 13:28:14
+-- Dump completed on 2021-11-14 14:28:05

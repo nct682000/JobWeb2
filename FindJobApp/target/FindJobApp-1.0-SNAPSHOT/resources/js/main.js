@@ -66,7 +66,7 @@ function addComment(commenterId, commentedId){
                         </button>
                         <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
                             <textarea id="replyContent-${data.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
-                            <div><a href="#" class="text-info" onclick="addReply(${commenterId}, ${data.id})"><button>Trả lời</button></a></div>
+                            <div class="text-right mr-2"><a href="#" class="text-info" onclick="addReply(${commenterId}, ${data.id})"><button class="btn btn-primary">Trả lời</button></a></div>
                         </div>
                     </span>
                     <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
@@ -113,43 +113,43 @@ function addReply(replyerId, commentId){
             "Content-Type": "application/json"
         }
     }).then(function(res){
-        console.info(res)
-        return res.json()
+        location.reload()
+//        console.info(res)
+//        return res.json()
     }).then(function(data){
-        console.info(data)
-        console.info(data.id)
-        
-        let area =  document.getElementById(`replyArea-${commentId}`)
-        let name = document.getElementById("cmtName").value
-        let avatar = document.getElementById("cmtAvatar").value
-        console.info(name)
-        console.info(avatar)
-        
-        moment.locale('vi')
-        area.innerHTML = `
-        <div class="ml-5 mt-2 row bg-light" id="reply-${data.id}">
-            <div class="col-2 text-center">
-                <img alt="Avatar" src="${avatar}" class="img-fluid rounded"/>
-            </div>
-            <div class="col-10">
-                <div class="card">
-                    <div class="font-weight-bold">
-                        ${name}
-                    </div>
-
-                    <div class="pl-3">${data.content}</div>
-                </div>
-                <div>
-                    <span><a href="#">Thích</a> . </span>
-                    <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
-                    <span class="btn btn-danger">Xóa</span>
-                </div>
-            </div>
-        </div>
-        ` + area.innerHTML
+//        console.info(data)
+//        console.info(data.id)
+//        
+//        let area =  document.getElementById(`replyArea-${commentId}`)
+//        let name = document.getElementById("cmtName").value
+//        let avatar = document.getElementById("cmtAvatar").value
+//        console.info(name)
+//        console.info(avatar)
+//        
+//        moment.locale('vi')
+//        area.innerHTML = `
+//        <div class="ml-5 mt-2 row bg-light" id="reply-${data.id}">
+//            <div class="col-2 text-center">
+//                <img alt="Avatar" src="${avatar}" class="img-fluid rounded"/>
+//            </div>
+//            <div class="col-10">
+//                <div class="card">
+//                    <div class="font-weight-bold">
+//                        ${name}
+//                    </div>
+//
+//                    <div class="pl-3">${data.content}</div>
+//                </div>
+//                <div>
+//                    <span><a href="#">Thích</a> . </span>
+//                    <span class="text-secondary my-date">Lúc: ${moment(data.createdDate).fromNow()}</span>
+//                    <span class="btn btn-danger">Xóa</span>
+//                </div>
+//            </div>
+//        </div>
+//        ` + area.innerHTML
     }).then(function(empty){
-        document.getElementById(`replyContent-${commentId}`).value = ""
-//        location.reload()
+//        document.getElementById(`replyContent-${commentId}`).value = ""
     })
 }
 
