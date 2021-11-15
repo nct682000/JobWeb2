@@ -21,7 +21,9 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-1" />" class="text-dark">Các thể hiện điểm mạnh trong cuộc phỏng vấn</a></h5>
-                        <div class="card-text truncated-content">texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</div>
+                        <div class="card-text truncated-content">Phỏng vấn là cơ hội để thể hiện bạn là ứng viên tốt nhất cho vị trí ứng tuyển.
+                Nhưng để làm được điều đó, bản thân bạn cần nắm rõ những điểm mạnh cá nhân. 
+                CareerBuilder sẽ giúp bạn xác định điểm mạnh cũng như cách thể hiện chúng hiệu quả khi trả lời phỏng vấn.</div>
                         <a href="<c:url value="/handbook/bqtv-1" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -33,7 +35,9 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-2" />" class="text-dark">Chiến lược tìm hiểu công ty mơ ước</a></h5>
-                        <div class="card-text truncated-content">text</div>
+                        <div class="card-text truncated-content">Bạn đã lọc được một vài công ty mơ ước từ vô số doanh nghiệp có trên CareerBuilder. 
+                Nhưng làm sao để biết công ty đó có thực sự phù hợp với mình? Hoặc công ty nào là sự 
+                lựa chọn tuyệt vời nhất trong giai đoạn này? Chúng tôi đã có công thức để bạn ứng dụng.</div>
                         <a href="<c:url value="/handbook/bqtv-2" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -45,7 +49,10 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/bqtv-3" />" class="text-dark">Mặc gì luôn chuẩn khi đi phỏng vấn</a></h5>
-                        <div class="card-text truncated-content">text</div>
+                        <div class="card-text truncated-content">Mặc gì đi phỏng vấn cũng khá là quan trọng. Một ngoại hình "thông minh", "vừa vặn"
+                cũng có tính thuyết phục không kém cách bạn trả lời các câu hỏi tuyển dụng. 
+                CareerBuilder xin chia sẻ các dạng trang phục nên và không nên mặc cho một cuộc 
+                phỏng vấn xin việc bình thường trong môi trường kinh doanh.</div>
                         <a href="<c:url value="/handbook/bqtv-3" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -65,7 +72,10 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-1" />" class="text-dark">Đối mặt với sự chỉ trích trong công việc</a></h5>
-                        <div class="card-text truncated-content">text</div>
+                        <div class="card-text truncated-content">Làm việc tại nhà nghe có vẻ giống như một giấc mơ: ngủ muộn hơn, mặc trang phục
+                thoải mái, ăn uống bất cứ lúc nào... Nhưng bạn cũng dễ dàng rơi vào trạng thái
+                lười biếng, kết quả công việc bị đình trệ. Để ''vượt lười'' khi WFH, bước đầu
+                tiên là tìm ra gốc rễ của vấn đề.</div>
                         <a href="<c:url value="/handbook/ttcv-1" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -77,7 +87,10 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-2" />" class="text-dark">'Vượt lười' khi làm việc tại nhà? Không khó!</a></h5>
-                        <div class="card-text truncated-content">text</div>
+                        <div class="card-text truncated-content">Dù đã là một người trưởng thành, đi làm lâu năm, thì việc bạn phải nhận lời chỉ
+                trích vẫn không hề dễ dàng. Nhận lời chỉ trích từ một cá nhân đã khó chịu và càng
+                khó khăn hơn nếu nhận nhiều lời chỉ trích cùng lúc. Tuy nhiên, khi rơi vào trường
+                hợp này, bạn vẫn có thể biến chúng thành nguồn sức mạnh và thành công.</div>
                         <a href="<c:url value="/handbook/ttcv-2" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>
@@ -89,7 +102,9 @@
                     </a>
                     <div class="card-body">
                         <h5 class="card-title truncated-title"><a href="<c:url value="/handbook/ttcv-3" />" class="text-dark">Xem ngay trước khi nhảy việc "mùa dịch"</a></h5>
-                        <div class="card-text truncated-content">text</div>
+                        <div class="card-text truncated-content">Nhảy việc có thể là bước tiến trong sự nghiệp của bạn nhưng cũng đi kèm nhiều rủi
+                ro. Trong mùa dịch COVID-19, cụm từ ''nhảy việc'' còn khiến người ta lo lắng hơn.
+                Vậy làm thế nào để biết thay đổi công việc lúc này có phải quyết định đúng đắn hay không?</div>
                         <a href="<c:url value="/handbook/ttcv-3" />" type="button" class="btn btn-primary">Xem chi tiết</a>
                     </div>
                 </div>

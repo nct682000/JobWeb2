@@ -83,7 +83,6 @@ public class ReplyRepositoryImpl implements ReplyRepository{
         Session session = sessionFactory.getObject().getCurrentSession();
         
         try{
-            r.setCreatedDate(Time.from(Instant.now()));
             session.delete(r);
             return r;
         }catch (HibernateException ex){

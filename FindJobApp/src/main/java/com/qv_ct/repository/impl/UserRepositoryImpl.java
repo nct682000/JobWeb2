@@ -189,9 +189,11 @@ public class UserRepositoryImpl implements UserRepository {
             Session s = sessionFactory.getObject().getCurrentSession();
             User u = s.get(User.class, userId);
             u.setActive(active);
-            s.getTransaction().begin();
-            s.save(u);
-            s.getTransaction().commit();
+            u.setAddress(u.getLocation().getAddress());
+            u.setProvince(u.getLocation().getProvince());
+//            s.getTransaction().begin();
+            s.saveOrUpdate(u);
+//            s.getTransaction().commit();
             return true;
         } catch (Exception e) {
         }

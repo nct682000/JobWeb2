@@ -90,7 +90,12 @@
             <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <div class="row">
                 <div class="col-2 ">
-                    <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
+                    <c:if test="${currentUser == null}">
+                        <img alt="Avatar" src="<c:url value="/images/userDefault.jpg" />" class="img-fluid rounded"/>
+                    </c:if>
+                    <c:if test="${currentUser != null}">
+                        <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
+                    </c:if>
                 </div>
                 <textarea id="commentId" type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2 col" ></textarea>
             </div>
@@ -153,7 +158,7 @@
                                         <div class="dropdown-menu font-weight-bold font-italic" aria-labelledby="dropdownMenuButton">
                                             <c:if test="${currentUser != null}">
                                                 <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>
-                                                <div><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button>Trả lời</button></a></div> 
+                                                <div class="text-right mr-2"><a class="text-info" onclick="addReply(${currentUser.id}, ${cmt.id})"><button class="btn btn-primary">Trả lời</button></a></div> 
                                             </c:if>
                                             <c:if test="${currentUser == null}">
                                                 <textarea id="replyContent-${cmt.id}" type="text" placeholder="Nhập trả lời..." class="form-control p-2 mt-2 col" ></textarea>

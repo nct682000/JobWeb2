@@ -214,7 +214,7 @@
                         <!-- Image -->
                         <c:if test="${user.avatar == null}">
                             <div class="align-self-center col-3">
-                                <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                                <image src="<c:url value="/images/userDefault.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
                             </div>
                         </c:if>
                         <c:if test="${user.avatar != null}">
@@ -259,7 +259,7 @@
                                 <div class="text-info font-weight-bold">${a.recruitment.title}</div>
                                 <div class="text-success">${a.title}</div>
                                 <div>
-                                    <a class="text-white btn btn-secondary btn-sm " href="#">Xem chi tiết</a>
+                                    <a class="text-white btn btn-secondary btn-sm " href="<c:url value="/user/${user.username}/apply"/>">Xem chi tiết</a>
                                 </div>
 
                             </div>
@@ -278,7 +278,7 @@
                         <!-- Image -->
                         <c:if test="${user.avatar == null}">
                             <div class="align-self-center col-3">
-                                <image src="<c:url value="/images/userDefaul.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
+                                <image src="<c:url value="/images/userDefault.jpg" />" alt="Ảnh" class="img-fluid rounded"/>
                             </div>
                         </c:if>
                         <c:if test="${user.avatar != null}">
@@ -341,10 +341,23 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+                                        <c:if test="${ra.active == false}">
+                                            <div class="text-center text-danger font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName} đã thu hồi đơn ứng tuyển này</div>
+                                        </c:if>
                                         <div class="modal-body row">
-
                                             <!-- col 1 -->
                                             <div class="col 5">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <c:if test="${ra.candidate.avatar != null}">
+                                                            <img src="${ra.candidate.avatar}" alt="avatar" class="img-fluid"/>
+                                                        </c:if>
+                                                        <c:if test="${ra.candidate.avatar == null}">
+                                                            <img src="<c:url value="/images/userDefault.jpg" />" alt="avatar" class="img-fluid"/>
+                                                        </c:if>
+                                                    </div>
+                                                </div>
+                                                
                                                 <div class="text-dark font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName}</div>
                                                 <div class="text-dark">Giới tính: ${ra.candidate.sex.toString()}</div>
                                                 <div class="text-dark">Địa chỉ: ${ra.candidate.location.address}, ${ra.candidate.location.province.name}</div>
@@ -382,6 +395,13 @@
     <c:if test="${user.role.toString() == 'ROLE_ADMIN'}">
         <div class="m-4 text-center">
             <a href="<c:url value="/admin"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
+        </div>
+    </c:if>
+    
+    <!-- EMPLOYEE -->
+    <c:if test="${user.role.toString() == 'ROLE_EMPLOYEE'}">
+        <div class="m-4 text-center">
+            <a href="<c:url value="/admin/"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
         </div>
     </c:if>
 </c:if>

@@ -42,6 +42,37 @@ public class ApplyRepositoryImpl implements ApplyRepository {
     }
 
     @Override
+    public Apply getApplyByApplyId(int id) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
+        Root root = query.from(Apply.class);
+        query = query.select(root);
+
+        Predicate p = builder.equal(root.get("id"), id);
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        return (Apply) q.getSingleResult();
+    }
+    
+    @Override
+    public Apply hiddenApply(Apply a) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+        try {
+            a.setActive(false);
+            System.out.println("---------------------Repository--------------------");
+            System.out.println(a.getActive());
+            session.update(a);
+            return a;
+        } catch (Exception ex) {
+            System.err.println("-------------Hidden Apply Error-----------" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public boolean addOrUpdate(Apply a) {
         Session session = sessionFactory.getObject().getCurrentSession();
 
@@ -64,9 +95,10 @@ public class ApplyRepositoryImpl implements ApplyRepository {
         CriteriaQuery<Apply> query = builder.createQuery(Apply.class);
         Root root = query.from(Apply.class);
         query = query.select(root);
-
-        Predicate p = builder.equal(root.get("candidate"), id);
-
+        
+        Predicate p1 = builder.equal(root.get("active"), true);
+        Predicate p2 = builder.equal(root.get("candidate"), id);
+        Predicate p = builder.and(p1, p2);
         query = query.where(p);
         query = query.orderBy(builder.desc(root.get("id")));
         Query q = session.createQuery(query);
