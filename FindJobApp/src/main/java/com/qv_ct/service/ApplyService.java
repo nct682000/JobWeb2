@@ -15,6 +15,10 @@ import java.util.List;
 public interface ApplyService {
 
     List<Apply> getApplies();
+    
+    Apply getApplyByApplyId(int id);
+    
+    Apply hiddenApply(int applyId);
 
     List<Apply> getAppliesByUserId(int id);
 

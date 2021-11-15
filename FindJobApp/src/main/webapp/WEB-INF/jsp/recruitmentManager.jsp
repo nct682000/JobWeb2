@@ -12,7 +12,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<<header>
+<header>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
@@ -417,10 +417,26 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    
+                    <c:if test="${ra.active == false}">
+                        <div class="text-center text-danger font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName} đã thu hồi đơn ứng tuyển này</div>
+                    </c:if>
+                    
                     <div class="modal-body row">
 
                         <!-- col 1 -->
                         <div class="col 5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <c:if test="${ra.candidate.avatar != null}">
+                                        <img src="${ra.candidate.avatar}" alt="avatar" class="img-fluid"/>
+                                    </c:if>
+                                    <c:if test="${ra.candidate.avatar == null}">
+                                        <img src="<c:url value="/images/userDefault.jpg" />" alt="avatar" class="img-fluid"/>
+                                    </c:if>
+                                </div>
+                            </div>
+                            
                             <div class="text-dark font-weight-bold">${ra.candidate.firstName} ${ra.candidate.lastName}</div>
                             <div class="text-dark">Giới tính: ${ra.candidate.sex.toString()}</div>
                             <div class="text-dark">Địa chỉ: ${ra.candidate.location.address}, ${ra.candidate.location.province.name}</div>

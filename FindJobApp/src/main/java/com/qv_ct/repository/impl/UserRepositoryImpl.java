@@ -194,6 +194,7 @@ public class UserRepositoryImpl implements UserRepository {
             s.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            System.out.printf("------------" + e);
         }
         return false;
     }

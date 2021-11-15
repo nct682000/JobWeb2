@@ -160,11 +160,6 @@ and open the template in the editor.
         <put-attribute name="content" value="/WEB-INF/jsp/recruitmentManager.jsp" />
     </definition>
     
-    <definition name="addTag" extends="baseLayout">
-        <put-attribute name="title" value="Thêm nhãn dán" />
-        <put-attribute name="content" value="/WEB-INF/jsp/addTag.jsp" />
-    </definition>
-    
     <definition name="applyManager" extends="baseLayout">
         <put-attribute name="title" value="Quản lý ứng tuyển" />
         <put-attribute name="content" value="/WEB-INF/jsp/applyManager.jsp" />

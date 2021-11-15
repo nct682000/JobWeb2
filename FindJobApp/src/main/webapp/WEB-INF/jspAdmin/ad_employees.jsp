@@ -72,7 +72,6 @@
                                     Số điện thoại
                                 </th>
                                 <th>
-                                    Hoạt động
                                 </th>
                                 </thead>
                                 <tbody>

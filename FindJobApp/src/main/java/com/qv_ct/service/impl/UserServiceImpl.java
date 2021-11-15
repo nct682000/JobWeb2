@@ -65,7 +65,9 @@ public class UserServiceImpl implements UserService {
                 user.setAvatar((String) map.get("secure_url"));
             }
             String pass = user.getPassword();
-            user.setPassword(this.passwordEncoder.encode(pass));
+            if(pass.length() <= 32)
+                user.setPassword(this.passwordEncoder.encode(pass));
+            
             return this.userRepository.addOrUpdate(user, role);
 
         } catch (IOException ex) {

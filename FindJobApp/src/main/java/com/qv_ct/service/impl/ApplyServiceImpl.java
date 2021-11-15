@@ -54,6 +54,18 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
+    public Apply getApplyByApplyId(int id) {
+        return this.applyRepository.getApplyByApplyId(id);
+    }
+    
+    @Override
+    public Apply hiddenApply(int applyId) {
+        System.out.println("---------------------Service--------------------");
+        Apply a = this.applyRepository.getApplyByApplyId(applyId);
+        return this.applyRepository.hiddenApply(a);
+    }
+    
+    @Override
     public List<Apply> getAppliesByUserId(int id) {
         return this.applyRepository.getAppliesByUserId(id);
     }

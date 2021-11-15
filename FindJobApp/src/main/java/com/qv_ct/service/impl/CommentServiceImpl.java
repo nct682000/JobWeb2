@@ -6,10 +6,13 @@
 package com.qv_ct.service.impl;
 
 import com.qv_ct.pojos.Comment;
+import com.qv_ct.pojos.Interaction;
+import com.qv_ct.pojos.Reply;
 import com.qv_ct.pojos.User;
 import com.qv_ct.repository.CommentRepository;
+import com.qv_ct.repository.InteractionRepository;
+import com.qv_ct.repository.ReplyRepository;
 import com.qv_ct.service.CommentService;
-import com.qv_ct.service.RecruitmentService;
 import com.qv_ct.service.UserService;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +29,10 @@ public class CommentServiceImpl implements CommentService{
     private CommentRepository commentRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReplyRepository replyRepository;
+    @Autowired
+    private InteractionRepository interactionRepository;
 
     @Override
     public List<Comment> getCommentByRecruiterId(int id) {
@@ -55,9 +62,13 @@ public class CommentServiceImpl implements CommentService{
         User u = this.userService.getUserById(userId);
         Comment c = this.commentRepository.getCommentById(id);
         
-        if(u.getId() == c.getCommenter().getId())
+        if(u.getId() == c.getCommenter().getId()){
+            Set<Reply> replies = c.getReplies();
+            replies.forEach(r -> this.replyRepository.deleteReply(r));
+            Set<Interaction> interactions = c.getInteractions();
+            interactions.forEach(i -> this.interactionRepository.deleteInteraction(i));
             return this.commentRepository.deleteComment(c);
-        
+        }
         return null;
     }
     
