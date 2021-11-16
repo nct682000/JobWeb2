@@ -17,12 +17,12 @@
         <a href="<c:url value="/login" />" class="btn btn-primary btn-lg">ĐI ĐẾN TRANG ĐĂNG NHẬP</a>
     </div>
 </c:if>
-<c:if test="${currentUser.id != user.id && currentUser != null}">
+<c:if test="${currentUser.id != user.id && currentUser != null && (currentUser.role == 'ROLE_ADMIN' || currentUser.role == 'ROLE_EMPLOYEE')} ">
     <h2 class="text-center text-danger font-weight-bold mb-4">BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY</h2>
     
 </c:if>
     
-<c:if test="${currentUser.id == user.id}">
+<c:if test="${currentUser.id == user.id || currentUser.role == 'ROLE_ADMIN' || currentUser.role == 'ROLE_EMPLOYEE'}">
 
     <div class="container-fluid" style="width: 95%">
         <h2 class="text-center text-info font-weight-bold mb-5">TRANG NGƯỜI DÙNG</h2>
@@ -401,7 +401,7 @@
     <!-- EMPLOYEE -->
     <c:if test="${user.role.toString() == 'ROLE_EMPLOYEE'}">
         <div class="m-4 text-center">
-            <a href="<c:url value="/admin/"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
+            <a href="<c:url value="/admin/customers/cadidates"/>" class="btn btn-danger font-weight-bold">ĐI ĐẾN TRANG QUẢN TRỊ</a>
         </div>
     </c:if>
 </c:if>

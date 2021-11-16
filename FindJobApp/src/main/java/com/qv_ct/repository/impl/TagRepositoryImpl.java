@@ -31,7 +31,7 @@ public class TagRepositoryImpl implements TagRepository{
     @Override
     public List<Tag> getTags() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From Tag");
+        Query q = session.createQuery("From Tag t ORDER BY t.content");
         
         return q.getResultList();
     }

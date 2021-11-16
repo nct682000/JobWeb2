@@ -13,7 +13,10 @@ import java.util.List;
  * @author nct68
  */
 public interface BenefitRepository {
-    List<Benefit>  getBenefits();
+
+    List<Benefit> getBenefits();
+
     boolean addOrUpdate(Benefit b);
+
     boolean deleteBenefit(int id);
 }

@@ -31,7 +31,7 @@
     <div class="offcanvas offcanvas-start bg-info bg-opacity-75" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 15%">
         <div class="offcanvas-header" style="align-self: center">
             <div>
-                <img class="d-block w-100" src="<c:url value="/images/userDefaul.jpg" />" alt="carousel1" style="border-radius: 50%; max-width: 120px; margin-top: 35px" >
+                <img class="d-block w-100" src="<c:url value="/images/userDefault.jpg" />" alt="carousel1" style="border-radius: 50%; max-width: 120px; margin-top: 35px" >
                 <div class="navbar-brand col-12" style="text-align: center; margin-top: 10px">${pageContext.request.userPrincipal.name}<span class="sr-only">(current)</span></div>
             </div>
         </div>

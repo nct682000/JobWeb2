@@ -1,18 +1,31 @@
-.abc {
-    margin-left: 30px!important;
-    background-color: red;
+/*tbody.stt tr.stt td:first-child:before
+{
+    counter-increment: Count-Value;
+    content: counter(Count-Value);
+}*/
+
+table.stt {
+    /*width: 50%;*/
+    counter-reset: row-num -1;
+}
+table.stt tr {
+    counter-increment: row-num;
+}
+table.stt tr td:first-child::before {
+    /*content: counter(row-num) ". ";*/
+    content: counter(row-num);
 }
 
 .truncated-content {
-  line-height: 1.5em;
-  height: 3em;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .truncated-title {
-  line-height: 1.5em;
-  height: 2em;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    line-height: 1.5em;
+    height: 2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
