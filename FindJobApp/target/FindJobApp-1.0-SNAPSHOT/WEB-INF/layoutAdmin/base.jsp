@@ -28,6 +28,7 @@
         <link
             rel="stylesheet"  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
             crossOrigin="anonymous"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     </head>
     <body class="bg-secondary bg-opacity-25">
         <div >

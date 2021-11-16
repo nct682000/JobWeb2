@@ -157,7 +157,7 @@ public class Ad_UserController {
                 errorText = "Xác nhận mật khẩu sai!";
             }
         } else {
-            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản > 8 ký tự";
+            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản có độ dài từ 8 - 32 kí tự";
         }
 
         model.addAttribute("typeUser", "create-cadidates");
@@ -269,7 +269,7 @@ public class Ad_UserController {
                 errorText = "Xác nhận mật khẩu sai!";
             }
         } else {
-            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản > 8 ký tự";
+            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản có độ dài từ 8 - 32 kí tự";
         }
         model.addAttribute("typeUser", "create-recruiters");
         model.addAttribute("errorText", errorText);
@@ -317,7 +317,7 @@ public class Ad_UserController {
                 errorText = "Xác nhận mật khẩu sai!";
             }
         } else {
-            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản > 8 ký tự";
+            errorText = "Bạn phải nhập thông tin đầy đủ các trường,\nTên tài khoản có độ dài từ 8 - 32 kí tự";
         }
 
         model.addAttribute("typeUser", "create-employee");

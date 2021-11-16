@@ -123,8 +123,9 @@
 
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover stt">
                             <thead class="table-dark">
+                            <th>Stt</th>
                             <th>
                                 Tiêu đề
                             </th>
@@ -144,6 +145,7 @@
                             <tbody>
                                 <c:forEach items="${recruitments}" var="u">
                                     <tr class="table-secondary text-dark">
+                                        <td></td>
                                         <td class="text-primary">                                              
                                             <a href="/FindJobApp/recruitment/${u.id}">${u.title}</a>
                                         </td>                                            

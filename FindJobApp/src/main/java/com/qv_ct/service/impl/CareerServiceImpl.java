@@ -5,7 +5,6 @@ package com.qv_ct.service.impl;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.qv_ct.pojos.Career;
 import com.qv_ct.repository.CareerRepository;
 import com.qv_ct.service.CareerService;
@@ -26,6 +25,11 @@ public class CareerServiceImpl implements CareerService {
     @Override
     public List<Career> getCareers() {
         return this.careerRepository.getCareers();
+    }
+
+    @Override
+    public boolean addOrUpdate(Career c) {
+        return this.careerRepository.addOrUpdate(c);
     }
 
     @Override

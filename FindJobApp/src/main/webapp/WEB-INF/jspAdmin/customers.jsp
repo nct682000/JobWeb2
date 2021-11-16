@@ -182,8 +182,9 @@
                         <div class="table-responsive">
                             <!--    Người ứng tuyển      -->
                             <c:if test="${typeUser == 'cadidates'}">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover stt">
                                     <thead class="table-dark">
+                                    <th>Stt</th>
                                     <th>
                                         Tên đăng nhập
                                     </th>
@@ -209,6 +210,7 @@
                                     <tbody>
                                         <c:forEach items="${users}" var="u">                                        
                                             <tr class="table-secondary text-dark">
+                                                <td></td>
                                                 <td class="text-primary">
                                                     <a href="/FindJobApp/admin/customers/cadidates/${u.id}/edit">${u.username}</a>
                                                 </td>                                            
@@ -241,7 +243,7 @@
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
                                                         <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'cadidates', 'inactive')">Enable</a>
-                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
+                                                        <!--<a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>-->
                                                     </c:if>
                                                 </td>
                                             </tr>                                                                                                                   
@@ -252,8 +254,9 @@
                             </c:if>
                             <!--    Nhà tuyển dụng      -->
                             <c:if test="${typeUser == 'recruiters'}">
-                                <table class="table  table-striped table-hover">
+                                <table class="table  table-striped table-hover stt">
                                     <thead class="table-dark">
+                                    <th>Stt</th>
                                     <th>
                                         Tên đăng nhập
                                     </th>
@@ -276,6 +279,7 @@
                                     <tbody>
                                         <c:forEach items="${users}" var="u">                                        
                                             <tr class="table-secondary text-dark">
+                                                <td></td>
                                                 <td class="text-primary">
                                                     <a href="/FindJobApp/admin/customers/recruiters/${u.id}/edit" >${u.username}</a>
                                                 </td> 
@@ -297,7 +301,7 @@
                                                     </c:if>
                                                     <c:if test="${status == 'inactive'}">
                                                         <a href="javascript:;" class="btn btn-success" onclick="enableUser(${u.id}, 'recruiters', 'inactive')">Enable</a>
-                                                        <a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>
+                                                        <!--<a href="javascript:;" class="btn btn-secondary bi bi-trash-fill btn" onclick="deleteUser(${u.id})" style="font-size: 22px;"></a>-->
                                                     </c:if>
                                                 </td>
                                             </tr>                                                                                                                   

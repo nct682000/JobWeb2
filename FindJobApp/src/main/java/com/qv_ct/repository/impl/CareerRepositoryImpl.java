@@ -29,9 +29,25 @@ public class CareerRepositoryImpl implements CareerRepository {
     @Override
     public List<Career> getCareers() {
         Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Career");
+        Query q = s.createQuery("From Career c ORDER BY c.name");
 
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addOrUpdate(Career c) {
+        Session session = sessionFactory.getObject().getCurrentSession();
+
+        try {
+            session.save(c);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("-- Add Career Error --" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
     }
 
     @Override

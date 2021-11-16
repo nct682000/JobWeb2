@@ -16,5 +16,7 @@ public interface CareerRepository {
 
     List<Career> getCareers();
 
+    boolean addOrUpdate(Career c);
+
     boolean deleteCareer(int id);
 }

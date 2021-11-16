@@ -29,7 +29,7 @@ public class BenefitRepositoryImpl implements BenefitRepository {
     @Override
     public List<Benefit> getBenefits() {
         Session session = sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("From Benefit");
+        Query q = session.createQuery("From Benefit b ORDER BY b.name");
         return q.getResultList();
     }
 
@@ -42,7 +42,7 @@ public class BenefitRepositoryImpl implements BenefitRepository {
 
             return true;
         } catch (Exception ex) {
-            System.err.println("-- Add Tag Error --" + ex.getMessage());
+            System.err.println("-- Add Benefit Error --" + ex.getMessage());
             ex.printStackTrace();
         }
 

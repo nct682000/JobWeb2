@@ -24,12 +24,12 @@
                                         <c:if test="${status == 'active'}">
                                             <input type="type" checked id="true" name="active" value="true" class="form-control" style="display: none"/>                                          
                                             <div class="col btn btn-lg btn-outline-success active">Đăng tuyển</div>    
-                                            <a class="col btn btn-lg btn-outline-secondary" href="<c:url value="/admin/applies" />?active=false">Hết hiệu lực</a>                                                   
+                                            <a class="col btn btn-lg btn-outline-secondary" href="<c:url value="/admin/applies" />?active=false">Đã ẩn đi</a>                                                   
                                         </c:if>
                                         <c:if test="${status == 'inactive'}">
                                             <a class="col btn btn-lg btn-outline-success" href="<c:url value="/admin/applies" />?active=true">Đăng tuyển</a>                                                            
                                             <input type="type" checked id="true" name="active" value="false" class="form-control" style="display: none"/>
-                                            <div class="col btn btn-lg btn-outline-secondary active">Hết hiệu lực</div>                                                         
+                                            <div class="col btn btn-lg btn-outline-secondary active">Đã ẩn đi</div>                                                         
                                         </c:if>
                                     </div>
                                 </div>
@@ -82,35 +82,30 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover stt">
                             <thead class="table-dark">
-                            <th>
-                                Tiêu đề
-                            </th>
-                            <th>
-                                Nội dung
-                            </th>
-                            <th>
-                                CV
-                            </th>
-                            <th>
-                                Ngày đăng
-                            </th>
-                            <th>
-                                Đăng bởi
-                            </th>
-                            <th>
-
-                            </th>                            
+                            <th>Stt</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>CV</th>
+                            <th>Ngày đăng</th>
+                            <th>Đăng bởi</th>
+                            <th></th>                            
                             </thead>
                             <tbody>
                                 <c:forEach items="${applys}" var="a" >
                                     <tr class="">
+                                        <td></td>
                                         <td class="text-primary">
                                             <a href="/FindJobApp/admin/applies/${a.id}/detail">${a.title} </a>
                                         </td>
                                         <td>
-                                            ${a.content.substring(0, 10)}. . .
+                                            <c:if test="${a.content.length() > 50}">
+                                                ${a.content.substring(0, 50)}. . .
+                                            </c:if>
+                                            <c:if test="${a.content.length() <= 50}">
+                                                ${a.content}
+                                            </c:if>
                                         </td>                                            
                                         <td>
                                             <a href="${a.cv}">CV</a>
