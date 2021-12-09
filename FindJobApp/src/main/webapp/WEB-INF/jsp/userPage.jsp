@@ -207,7 +207,7 @@
 
         <!-- CANDIDATE -->
         <c:if test="${user.role.toString() == 'ROLE_CANDIDATE'}">
-            <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
+            <div class="card overflow-hidden my-3 container-fluid my-card">
                 <div class="card-content">
                   <div class="card-body cleartfix">
                     <div class="media align-items-stretch row">
@@ -255,11 +255,11 @@
                     <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
                         <h5 class="text-dark font-weight-bold">LỊCH SỬ ỨNG TUYỂN</h5>
                         <c:forEach var="a" items="${applies}">
-                            <div class="card bg-light mb-2">
+                            <div class="card bg-light mb-2 my-card px-3">
                                 <div class="text-info font-weight-bold">${a.recruitment.title}</div>
                                 <div class="text-success">${a.title}</div>
                                 <div>
-                                    <a class="text-white btn btn-secondary btn-sm " href="<c:url value="/user/${user.username}/apply"/>">Xem chi tiết</a>
+                                    <a class="text-white btn btn-secondary btn-sm my-2" href="<c:url value="/user/${user.username}/apply"/>">Xem chi tiết</a>
                                 </div>
 
                             </div>
@@ -271,7 +271,7 @@
 
         <!-- RECRUITER -->
         <c:if test="${user.role.toString() == 'ROLE_RECRUITER'}">
-            <div class="card overflow-hidden my-3 container-fluid" style="background-color: windowframe">
+            <div class="card overflow-hidden my-3 container-fluid my-card">
                 <div class="card-content">
                   <div class="card-body cleartfix">
                     <div class="media align-items-stretch row">
@@ -322,11 +322,11 @@
                     <div class="col-md-3 col-xl-3" style="border-left: 1px solid">
                         <h5 class="text-dark font-weight-bold">CÁC THƯ ỨNG TUYỂN MỚI</h5>
                         <c:forEach var="ra" items="${recApplies}">
-                            <div class="card bg-light mb-2">
+                            <div class="card bg-light mb-3 my-card px-3">
                                 <div class="text-info font-weight-bold">${ra.title}</div>
                                 <div class="text-secondary my-date">${ra.createdDate}</div>
                                 <div>
-                                    <a class="text-white btn btn-secondary btn-sm " href="" data-toggle="modal" data-target="#applyInfoModal-${ra.id}">Xem chi tiết</a>
+                                    <a class="text-white btn btn-secondary btn-sm my-2" href="" data-toggle="modal" data-target="#applyInfoModal-${ra.id}">Xem chi tiết</a>
                                 </div>
 
                             </div>

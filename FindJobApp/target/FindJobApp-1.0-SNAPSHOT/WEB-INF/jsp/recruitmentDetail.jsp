@@ -23,10 +23,10 @@
           <div class="card-body cleartfix">
             <div class="media align-items-stretch row">
                 <!-- Image -->
-              <div class="align-self-center col-3">
-                  <image src="${recDetail.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/>
+              <div class="align-self-center col-2 py-3 my-img-container">
+                  <image src="${recDetail.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded my-img"/>
               </div>
-              <div class="media-body mt-3 col-7">
+              <div class="media-body mt-3 col-8 ml-4">
                     <!-- text -->
                     <h5 class="text-info font-weight-bold">THÔNG TIN TUYỂN DỤNG</h5>
                     
@@ -150,8 +150,8 @@
                     <div class="mb-3 card bg-light">
                         <div class="row">
                             <!-- image -->
-                            <div class="col-3">
-                              <image src="${trend[3]}" alt="Ảnh" class="img-fluid rounded"/>
+                            <div class="col-3 my-img-container p-2">
+                              <image src="${trend[3]}" alt="Ảnh" class="img-fluid rounded my-img"/>
                             </div>
 
                             <div class="col-9">

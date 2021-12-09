@@ -38,10 +38,10 @@
     <div class="container-fluid" style="width: 95%">
         <h2 class="text-center text-primary font-weight-bold">TRANG QUẢN LÝ TUYỂN DỤNG</h2>
 
-        <div class="row">
+        <div class="row mt-4">
 
             <!-- col 1 -->
-            <div class="col-5 mt-3">
+            <div class="col-5">
                 <!--<button class="btn btn-lg btn-primary font-weight-bold m-3" id="btn-showAddRecruitment" onclick="showAddRecruitment()">
                     THÊM TIN TUYỂN DỤNG MỚI
                 </button>
@@ -185,7 +185,7 @@
             </div>
 
             <!-- col 2 -->
-            <div class="col-7 mt-3">
+            <div class="col-7">
                 <h4 class="font-weight-bold">THỐNG KÊ ỨNG TUYỂN</h4>
                 <div class="bg-light">
                     <form class="form-group font-weight-bold">
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        <h4 class="font-weight-bold ">CÁC TIN ĐÃ ĐĂNG</h4>
+        <h4 class="font-weight-bold mt-4">CÁC TIN ĐÃ ĐĂNG</h4>
         <table class="table align-middle bg-light">
             <thead>
                 <tr>

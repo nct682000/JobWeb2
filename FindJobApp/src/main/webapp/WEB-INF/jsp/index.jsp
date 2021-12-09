@@ -82,16 +82,16 @@
             </ol>
             <div class="carousel-inner" >
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel1" style="height: 320px" >
+                    <img class="d-block w-100" src="<c:url value="/images/carousel3.jpg" />" alt="carousel1" style="height: 320px">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel4.jpg" />" alt="carousel2" style="height: 320px" >
+                    <img class="d-block w-100" src="<c:url value="/images/carousel4.jpg" />" alt="carousel2" style="height: 320px">
                 </div>
                 <div class="carousel-item">
                     <img class="d-block w-100" src="<c:url value="/images/carousel5.jpg" />" alt="carousel3" style="height: 320px">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="<c:url value="/images/carousel6.png" />" alt="carousel4"style="height: 320px">
+                    <img class="d-block w-100" src="<c:url value="/images/carousel6.png" />" alt="carousel4" style="height: 320px">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -114,7 +114,9 @@
                 <div class="col m-2">
                     <a href="<c:url value="/recruiter/${r[0]}" />" class="text-dark">
                         <div class="card">
-                            <img class="card-img-top img-fluid" src="${r[2]}" alt="avatar">
+                            <div class="my-img-container">
+                                <img class="card-img-top img-fluid my-img" src="${r[2]}" alt="avatar">
+                            </div>
                             <div class=" font-weight-bold">${r[1]}</div>
                         </div>
                     </a>
@@ -134,7 +136,9 @@
                     <div class="row">
                         <!-- image -->
                         <div class="col-3">
-                            <a href="<c:url value="/recruitment/${r.id}" />"><image src="${r.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/></a>
+                            <a href="<c:url value="/recruitment/${r.id}" />">
+                                <div class="my-img-container"><image class="my-img" src="${r.recruiter.avatar}" alt="Ảnh" class="img-fluid rounded"/></div>
+                            </a>
                         </div>
 
                         <div class="col-6">

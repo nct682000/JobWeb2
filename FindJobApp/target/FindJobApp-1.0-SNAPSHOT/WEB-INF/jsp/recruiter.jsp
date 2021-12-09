@@ -24,16 +24,16 @@
     <h2 class="text-center text-success mb-5 font-weight-bold">${ru.companyName}</h2>
 
     <!-- Card -->
-    <div class="card overflow-hidden my-3" style="background-color: windowframe">
+    <div class="card overflow-hidden my-3 my-card">
         <div class="card-content">
             <div class="card-body cleartfix">
                 <div class="media align-items-stretch row">
                     <!-- Image -->
-                    <div class="col-3 align-self-center">
-                        <image src="${ru.avatar}" alt="Ảnh" class="img-fluid rounded"/>
+                    <div class="col-2 align-self-center my-img-container py-3">
+                        <image src="${ru.avatar}" alt="Ảnh" class="img-fluid rounded my-img"/>
                     </div>
 
-                    <div class="media-body mt-3 col-7">
+                    <div class="media-body ml-4 mt-3 col-8">
                         <!-- company name -->
                         <h5 class="text-info font-weight-bold">${ru.companyName}</h5>
 
@@ -89,12 +89,12 @@
         <div class="col-md-7 col-xl-7 col-7">
             <h5 class="text-dark font-weight-bold">BÌNH LUẬN</h5>
             <div class="row">
-                <div class="col-2 ">
+                <div class="col-2 my-img-container py-2">
                     <c:if test="${currentUser == null}">
-                        <img alt="Avatar" src="<c:url value="/images/userDefault.jpg" />" class="img-fluid rounded"/>
+                        <img alt="Avatar" src="<c:url value="/images/userDefault.jpg" />" class="img-fluid rounded my-img"/>
                     </c:if>
                     <c:if test="${currentUser != null}">
-                        <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded"/>
+                        <img alt="Avatar" src="${currentUser.avatar}" class="img-fluid rounded my-img"/>
                     </c:if>
                 </div>
                 <textarea id="commentId" type="text" placeholder="Nhập bình luận..." class="form-control p-2 mt-2 col" ></textarea>
@@ -117,8 +117,8 @@
                 <!-- COmment -->
                 <c:forEach var="cmt" items="${comments}">
                     <div class="mt-2 row" id="comment-${cmt.id}">
-                        <div class="col-2 text-center">
-                            <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded"/>
+                        <div class="col-2 py-2 text-center my-img-container">
+                            <img alt="Avatar" src="${cmt.commenter.avatar}" class="img-fluid rounded my-img"/>
                         </div>
                         <div class="col-10">
                             <div class="card">
@@ -230,7 +230,7 @@
         <!-- col 2 -->
         <div class="col-md-4 col-xl-4 col-4 px-3">
             <c:forEach var="rec" items="${recRecruitments}">
-                <div class="card bg-light mb-3">
+                <div class="card bg-light mb-3 p-3 my-card">
                     <div class="text-info font-weight-bold">${rec.title}</div>
                     <div class="text-dark">Chức vụ: ${rec.form.toString()}</div>
                     <div class="text-success font-weight-bold">$Lương:
@@ -252,7 +252,7 @@
                     </div>
 
                     <div>
-                        <a class="text-white btn btn-secondary btn-sm " href="<c:url value="/recruitment/${rec.id}" />">Xem chi tiết</a>
+                        <a class="text-white btn btn-secondary btn-sm mt-2 " href="<c:url value="/recruitment/${rec.id}" />">Xem chi tiết</a>
                     </div>
 
                 </div>
